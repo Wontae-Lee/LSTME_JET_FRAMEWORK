@@ -59,6 +59,6 @@ class ListQueryEngine2 final : public IntersectionQueryEngine2<T>,
 
 }  // namespace lstme
 
-#include "detail/list_query_engine2-inl.hpp"
+
 
 #endif  // INCLUDE_LSTME_LIST_QUERY_ENGINE2_H_

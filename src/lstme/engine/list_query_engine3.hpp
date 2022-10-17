@@ -59,6 +59,5 @@ class ListQueryEngine3 final : public IntersectionQueryEngine3<T>,
 
 }  // namespace lstme
 
-#include "detail/list_query_engine3-inl.hpp"
 
 #endif  // INCLUDE_LSTME_LIST_QUERY_ENGINE3_H_
