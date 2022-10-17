@@ -28,4 +28,4 @@ if (CMAKE_BUILD_TYPE MATCHES Debug AND CMAKE_COMPILER_IS_GNUCXX AND BUILD_COVERA
 endif()
 
 # Project modules
-add_subdirectory(src)
+add_subdirectory(src/lstme)
