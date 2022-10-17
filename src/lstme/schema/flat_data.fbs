@@ -1,0 +1,7 @@
+namespace lstme.fbs;
+
+table FlatData {
+    data:[ubyte];
+}
+
+root_type FlatData;
