@@ -5,15 +5,17 @@
 #ifndef LSTME_COLLOCATED_VECTOR_GRID2_HPP
 #define LSTME_COLLOCATED_VECTOR_GRID2_HPP
 
-#include <array_samplers2.hpp>
 #include <array2.hpp>
+#include <array_samplers2.hpp>
 #include <vector>
 #include <vector_grid2.hpp>
+
 
 namespace lstme {
 
 //! \brief Abstract base class for 2-D collocated vector grid structure.
-class CollocatedVectorGrid2 : public VectorGrid2 {
+class CollocatedVectorGrid2 : public VectorGrid2
+{
 public:
   //! Constructs an empty grid.
   CollocatedVectorGrid2();
@@ -112,11 +114,10 @@ private:
   LinearArraySampler2<Vector2D, double> _linearSampler;
   std::function<Vector2D(const Vector2D&)> _sampler;
 
-  void onResize(
-    const Size2& resolution,
-    const Vector2D& gridSpacing,
-    const Vector2D& origin,
-    const Vector2D& initialValue) final;
+  void onResize(const Size2& resolution,
+                const Vector2D& gridSpacing,
+                const Vector2D& origin,
+                const Vector2D& initialValue) final;
 
   void resetSampler();
 };
@@ -124,7 +125,6 @@ private:
 //! Shared pointer for the CollocatedVectorGrid2 type.
 typedef std::shared_ptr<CollocatedVectorGrid2> CollocatedVectorGrid2Ptr;
 
-}  // namespace lstme
-
+} // namespace lstme
 
 #endif // LSTME_COLLOCATED_VECTOR_GRID2_HPP

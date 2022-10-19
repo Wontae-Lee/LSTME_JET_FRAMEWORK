@@ -6,10 +6,12 @@
 
 namespace lstme {
 
-template <typename T>
-void FdmMgUtils2::resizeArrayWithCoarsest(const Size2& coarsestResolution,
+template<typename T>
+void
+FdmMgUtils2::resizeArrayWithCoarsest(const Size2& coarsestResolution,
                                      size_t numberOfLevels,
-                                     std::vector<Array2<T>>* levels) {
+                                     std::vector<Array2<T>>* levels)
+{
   numberOfLevels = std::max(numberOfLevels, kOneSize);
 
   levels->resize(numberOfLevels);
@@ -25,10 +27,12 @@ void FdmMgUtils2::resizeArrayWithCoarsest(const Size2& coarsestResolution,
   }
 }
 
-template <typename T>
-void FdmMgUtils2::resizeArrayWithFinest(const Size2& finestResolution,
+template<typename T>
+void
+FdmMgUtils2::resizeArrayWithFinest(const Size2& finestResolution,
                                    size_t maxNumberOfLevels,
-                                   std::vector<Array2<T>>* levels) {
+                                   std::vector<Array2<T>>* levels)
+{
   Size2 res = finestResolution;
   size_t i = 1;
   for (; i < maxNumberOfLevels; ++i) {
@@ -42,4 +46,4 @@ void FdmMgUtils2::resizeArrayWithFinest(const Size2& finestResolution,
   resizeArrayWithCoarsest(res, i, levels);
 }
 
-}  // namespace lstme
+} // namespace lstme

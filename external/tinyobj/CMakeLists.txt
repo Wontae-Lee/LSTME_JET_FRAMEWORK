@@ -23,7 +23,7 @@ set(TINYOBJLOADEREXAMPLES_DIR ${CMAKE_CURRENT_SOURCE_DIR}/examples)
 set(tinyobjloader-Source
   ${CMAKE_CURRENT_SOURCE_DIR}/tiny_obj_loader.h
   ${CMAKE_CURRENT_SOURCE_DIR}/tiny_obj_loader.cc
-  )
+        )
 
 set(tinyobjloader-Example-Source
   ${CMAKE_CURRENT_SOURCE_DIR}/loader_example.cc

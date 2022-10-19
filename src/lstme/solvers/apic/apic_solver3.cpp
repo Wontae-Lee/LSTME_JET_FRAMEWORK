@@ -2,28 +2,31 @@
 // Created by LSTME on 2022-10-15.
 //
 
-#include <pch.hpp>
 #include <apic_solver3.hpp>
 #include <math_utils.hpp>
 #include <parallel.hpp>
+#include <pch.hpp>
+
 
 using namespace lstme;
 
 ApicSolver3::ApicSolver3()
-  : ApicSolver3({1, 1, 1}, {1, 1, 1}, {0, 0, 0}) {
+  : ApicSolver3({ 1, 1, 1 }, { 1, 1, 1 }, { 0, 0, 0 })
+{
 }
 
-ApicSolver3::ApicSolver3(
-  const Size3& resolution,
-  const Vector3D& gridSpacing,
-  const Vector3D& gridOrigin)
-  : PicSolver3(resolution, gridSpacing, gridOrigin) {
+ApicSolver3::ApicSolver3(const Size3& resolution,
+                         const Vector3D& gridSpacing,
+                         const Vector3D& gridOrigin)
+  : PicSolver3(resolution, gridSpacing, gridOrigin)
+{
 }
 
-ApicSolver3::~ApicSolver3() {
-}
+ApicSolver3::~ApicSolver3() {}
 
-void ApicSolver3::transferFromParticlesToGrids() {
+void
+ApicSolver3::transferFromParticlesToGrids()
+{
   auto flow = gridSystemData()->velocity();
   const auto particles = particleSystemData();
   const auto positions = particles->positions();
@@ -57,17 +60,11 @@ void ApicSolver3::transferFromParticlesToGrids() {
   _vMarkers.set(0);
   _wMarkers.set(0);
   LinearArraySampler3<double, double> uSampler(
-    flow->uConstAccessor(),
-    flow->gridSpacing(),
-    flow->uOrigin());
+    flow->uConstAccessor(), flow->gridSpacing(), flow->uOrigin());
   LinearArraySampler3<double, double> vSampler(
-    flow->vConstAccessor(),
-    flow->gridSpacing(),
-    flow->vOrigin());
+    flow->vConstAccessor(), flow->gridSpacing(), flow->vOrigin());
   LinearArraySampler3<double, double> wSampler(
-    flow->wConstAccessor(),
-    flow->gridSpacing(),
-    flow->wOrigin());
+    flow->wConstAccessor(), flow->gridSpacing(), flow->wOrigin());
 
   for (size_t i = 0; i < numberOfParticles; ++i) {
     std::array<Point3UI, 8> indices;
@@ -75,13 +72,9 @@ void ApicSolver3::transferFromParticlesToGrids() {
 
     auto uPosClamped = positions[i];
     uPosClamped.y = clamp(
-      uPosClamped.y,
-      bbox.lowerCorner.y + hh.y,
-      bbox.upperCorner.y - hh.y);
+      uPosClamped.y, bbox.lowerCorner.y + hh.y, bbox.upperCorner.y - hh.y);
     uPosClamped.z = clamp(
-      uPosClamped.z,
-      bbox.lowerCorner.z + hh.z,
-      bbox.upperCorner.z - hh.z);
+      uPosClamped.z, bbox.lowerCorner.z + hh.z, bbox.upperCorner.z - hh.z);
     uSampler.getCoordinatesAndWeights(uPosClamped, &indices, &weights);
     for (int j = 0; j < 8; ++j) {
       Vector3D gridPos = uPos(indices[j].x, indices[j].y, indices[j].z);
@@ -93,13 +86,9 @@ void ApicSolver3::transferFromParticlesToGrids() {
 
     auto vPosClamped = positions[i];
     vPosClamped.x = clamp(
-      vPosClamped.x,
-      bbox.lowerCorner.x + hh.x,
-      bbox.upperCorner.x - hh.x);
+      vPosClamped.x, bbox.lowerCorner.x + hh.x, bbox.upperCorner.x - hh.x);
     vPosClamped.z = clamp(
-      vPosClamped.z,
-      bbox.lowerCorner.z + hh.z,
-      bbox.upperCorner.z - hh.z);
+      vPosClamped.z, bbox.lowerCorner.z + hh.z, bbox.upperCorner.z - hh.z);
     vSampler.getCoordinatesAndWeights(vPosClamped, &indices, &weights);
     for (int j = 0; j < 8; ++j) {
       Vector3D gridPos = vPos(indices[j].x, indices[j].y, indices[j].z);
@@ -111,13 +100,9 @@ void ApicSolver3::transferFromParticlesToGrids() {
 
     auto wPosClamped = positions[i];
     wPosClamped.x = clamp(
-      wPosClamped.x,
-      bbox.lowerCorner.x + hh.x,
-      bbox.upperCorner.x - hh.x);
+      wPosClamped.x, bbox.lowerCorner.x + hh.x, bbox.upperCorner.x - hh.x);
     wPosClamped.y = clamp(
-      wPosClamped.y,
-      bbox.lowerCorner.y + hh.y,
-      bbox.upperCorner.y - hh.y);
+      wPosClamped.y, bbox.lowerCorner.y + hh.y, bbox.upperCorner.y - hh.y);
     wSampler.getCoordinatesAndWeights(wPosClamped, &indices, &weights);
     for (int j = 0; j < 8; ++j) {
       Vector3D gridPos = wPos(indices[j].x, indices[j].y, indices[j].z);
@@ -145,7 +130,9 @@ void ApicSolver3::transferFromParticlesToGrids() {
   });
 }
 
-void ApicSolver3::transferFromGridsToParticles() {
+void
+ApicSolver3::transferFromGridsToParticles()
+{
   const auto flow = gridSystemData()->velocity();
   const auto particles = particleSystemData();
   auto positions = particles->positions();
@@ -181,13 +168,9 @@ void ApicSolver3::transferFromGridsToParticles() {
     // x
     auto uPosClamped = positions[i];
     uPosClamped.y = clamp(
-      uPosClamped.y,
-      bbox.lowerCorner.y + hh.y,
-      bbox.upperCorner.y - hh.y);
+      uPosClamped.y, bbox.lowerCorner.y + hh.y, bbox.upperCorner.y - hh.y);
     uPosClamped.z = clamp(
-      uPosClamped.z,
-      bbox.lowerCorner.z + hh.z,
-      bbox.upperCorner.z - hh.z);
+      uPosClamped.z, bbox.lowerCorner.z + hh.z, bbox.upperCorner.z - hh.z);
     uSampler.getCoordinatesAndGradientWeights(
       uPosClamped, &indices, &gradWeights);
     for (int j = 0; j < 8; ++j) {
@@ -197,13 +180,9 @@ void ApicSolver3::transferFromGridsToParticles() {
     // y
     auto vPosClamped = positions[i];
     vPosClamped.x = clamp(
-      vPosClamped.x,
-      bbox.lowerCorner.x + hh.x,
-      bbox.upperCorner.x - hh.x);
+      vPosClamped.x, bbox.lowerCorner.x + hh.x, bbox.upperCorner.x - hh.x);
     vPosClamped.z = clamp(
-      vPosClamped.z,
-      bbox.lowerCorner.z + hh.z,
-      bbox.upperCorner.z - hh.z);
+      vPosClamped.z, bbox.lowerCorner.z + hh.z, bbox.upperCorner.z - hh.z);
     vSampler.getCoordinatesAndGradientWeights(
       vPosClamped, &indices, &gradWeights);
     for (int j = 0; j < 8; ++j) {
@@ -213,13 +192,9 @@ void ApicSolver3::transferFromGridsToParticles() {
     // z
     auto wPosClamped = positions[i];
     wPosClamped.x = clamp(
-      wPosClamped.x,
-      bbox.lowerCorner.x + hh.x,
-      bbox.upperCorner.x - hh.x);
+      wPosClamped.x, bbox.lowerCorner.x + hh.x, bbox.upperCorner.x - hh.x);
     wPosClamped.y = clamp(
-      wPosClamped.y,
-      bbox.lowerCorner.y + hh.y,
-      bbox.upperCorner.y - hh.y);
+      wPosClamped.y, bbox.lowerCorner.y + hh.y, bbox.upperCorner.y - hh.y);
     wSampler.getCoordinatesAndGradientWeights(
       wPosClamped, &indices, &gradWeights);
     for (int j = 0; j < 8; ++j) {
@@ -228,22 +203,22 @@ void ApicSolver3::transferFromGridsToParticles() {
   });
 }
 
-ApicSolver3::Builder ApicSolver3::builder() {
+ApicSolver3::Builder
+ApicSolver3::builder()
+{
   return Builder();
 }
 
-
-ApicSolver3 ApicSolver3::Builder::build() const {
+ApicSolver3
+ApicSolver3::Builder::build() const
+{
   return ApicSolver3(_resolution, getGridSpacing(), _gridOrigin);
 }
 
-ApicSolver3Ptr ApicSolver3::Builder::makeShared() const {
+ApicSolver3Ptr
+ApicSolver3::Builder::makeShared() const
+{
   return std::shared_ptr<ApicSolver3>(
-    new ApicSolver3(
-      _resolution,
-      getGridSpacing(),
-      _gridOrigin),
-    [] (ApicSolver3* obj) {
-      delete obj;
-    });
+    new ApicSolver3(_resolution, getGridSpacing(), _gridOrigin),
+    [](ApicSolver3* obj) { delete obj; });
 }

@@ -14,8 +14,12 @@ Collider2::Collider2() {}
 
 Collider2::~Collider2() {}
 
-void Collider2::resolveCollision(double radius, double restitutionCoefficient,
-                            Vector2D* newPosition, Vector2D* newVelocity) {
+void
+Collider2::resolveCollision(double radius,
+                            double restitutionCoefficient,
+                            Vector2D* newPosition,
+                            Vector2D* newVelocity)
+{
   LSTME_ASSERT(_surface);
 
   if (!_surface->isValidGeometry()) {
@@ -54,16 +58,15 @@ void Collider2::resolveCollision(double radius, double restitutionCoefficient,
       // Friction for Cloth Animation, 2002
       // http://graphics.stanford.edu/papers/cloth-sig02/cloth.pdf
       if (relativeVelT.lengthSquared() > 0.0) {
-        double frictionScale = std::max(
-          1.0 - _frictionCoeffient * deltaRelativeVelN.length() /
-                  relativeVelT.length(),
-          0.0);
+        double frictionScale =
+          std::max(1.0 - _frictionCoeffient * deltaRelativeVelN.length() /
+                           relativeVelT.length(),
+                   0.0);
         relativeVelT *= frictionScale;
       }
 
       // Reassemble the components
-      *newVelocity =
-        relativeVelN + relativeVelT + colliderVelAtTargetPoint;
+      *newVelocity = relativeVelN + relativeVelT + colliderVelAtTargetPoint;
     }
 
     // Geometric fix
@@ -71,37 +74,55 @@ void Collider2::resolveCollision(double radius, double restitutionCoefficient,
   }
 }
 
-double Collider2::frictionCoefficient() const { return _frictionCoeffient; }
+double
+Collider2::frictionCoefficient() const
+{
+  return _frictionCoeffient;
+}
 
-void Collider2::setFrictionCoefficient(double newFrictionCoeffient) {
+void
+Collider2::setFrictionCoefficient(double newFrictionCoeffient)
+{
   _frictionCoeffient = std::max(newFrictionCoeffient, 0.0);
 }
 
-const Surface2Ptr& Collider2::surface() const { return _surface; }
+const Surface2Ptr&
+Collider2::surface() const
+{
+  return _surface;
+}
 
-void Collider2::setSurface(const Surface2Ptr& newSurface) {
+void
+Collider2::setSurface(const Surface2Ptr& newSurface)
+{
   _surface = newSurface;
 }
 
-void Collider2::getClosestPoint(const Surface2Ptr& surface,
+void
+Collider2::getClosestPoint(const Surface2Ptr& surface,
                            const Vector2D& queryPoint,
-                           ColliderQueryResult* result) const {
+                           ColliderQueryResult* result) const
+{
   result->distance = surface->closestDistance(queryPoint);
   result->point = surface->closestPoint(queryPoint);
   result->normal = surface->closestNormal(queryPoint);
   result->velocity = velocityAt(queryPoint);
 }
 
-bool Collider2::isPenetrating(const ColliderQueryResult& colliderPoint,
-                         const Vector2D& position, double radius) {
+bool
+Collider2::isPenetrating(const ColliderQueryResult& colliderPoint,
+                         const Vector2D& position,
+                         double radius)
+{
   // If the new candidate position of the particle is inside
   // the volume defined by the surface OR the new distance to the surface is
   // less than the particle's radius, this particle is in colliding state.
   return _surface->isInside(position) || colliderPoint.distance < radius;
 }
 
-void Collider2::update(double currentTimeInSeconds,
-                  double timeIntervalInSeconds) {
+void
+Collider2::update(double currentTimeInSeconds, double timeIntervalInSeconds)
+{
   LSTME_ASSERT(_surface);
 
   if (!_surface->isValidGeometry()) {
@@ -115,7 +136,8 @@ void Collider2::update(double currentTimeInSeconds,
   }
 }
 
-void Collider2::setOnBeginUpdateCallback(
-  const OnBeginUpdateCallback& callback) {
+void
+Collider2::setOnBeginUpdateCallback(const OnBeginUpdateCallback& callback)
+{
   _onUpdateCallback = callback;
 }

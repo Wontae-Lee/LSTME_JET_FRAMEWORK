@@ -2,24 +2,27 @@
 // Created by LSTME on 2022-10-16.
 //
 
+#include <algorithm>
+#include <eno_level_set_solver2.hpp>
 #include <pch.hpp>
 #include <pde.hpp>
-#include <eno_level_set_solver2.hpp>
-#include <algorithm>
+
 
 using namespace lstme;
 
-EnoLevelSetSolver2::EnoLevelSetSolver2() {
+EnoLevelSetSolver2::EnoLevelSetSolver2()
+{
   setMaxCfl(0.25);
 }
 
-void EnoLevelSetSolver2::getDerivatives(
-  ConstArrayAccessor2<double> grid,
-  const Vector2D& gridSpacing,
-  size_t i,
-  size_t j,
-  std::array<double, 2>* dx,
-  std::array<double, 2>* dy) const {
+void
+EnoLevelSetSolver2::getDerivatives(ConstArrayAccessor2<double> grid,
+                                   const Vector2D& gridSpacing,
+                                   size_t i,
+                                   size_t j,
+                                   std::array<double, 2>* dx,
+                                   std::array<double, 2>* dy) const
+{
   double D0[7];
   Size2 size = grid.size();
 

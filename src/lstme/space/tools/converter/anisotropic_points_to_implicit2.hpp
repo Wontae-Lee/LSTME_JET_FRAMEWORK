@@ -5,7 +5,6 @@
 #ifndef LSTME_ANISOTROPIC_POINTS_TO_IMPLICIT2_HPP
 #define LSTME_ANISOTROPIC_POINTS_TO_IMPLICIT2_HPP
 
-
 #include <points_to_implicit2.hpp>
 
 namespace lstme {
@@ -22,7 +21,8 @@ namespace lstme {
 //!      fluids using anisotropic kernels." ACM Transactions on Graphics (TOG)
 //!      32.1 (2013): 5.
 //!
-class AnisotropicPointsToImplicit2 final : public PointsToImplicit2 {
+class AnisotropicPointsToImplicit2 final : public PointsToImplicit2
+{
 public:
   //!
   //! \brief Constructs the converter with given parameters.
@@ -55,6 +55,6 @@ private:
 typedef std::shared_ptr<AnisotropicPointsToImplicit2>
   AnisotropicPointsToImplicit2Ptr;
 
-}  // namespace jet
+} // namespace jet
 
 #endif // LSTME_ANISOTROPIC_POINTS_TO_IMPLICIT2_HPP

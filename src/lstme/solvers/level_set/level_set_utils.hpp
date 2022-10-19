@@ -20,8 +20,9 @@ namespace lstme {
 //!
 //! \return     True if inside the implicit surface, false otherwise.
 //!
-template <typename T>
-bool isInsideSdf(T phi);
+template<typename T>
+bool
+isInsideSdf(T phi);
 
 //!
 //! \brief      Returns smeared Heaviside function.
@@ -38,8 +39,9 @@ bool isInsideSdf(T phi);
 //!
 //! \return     Smeared Heaviside function.
 //!
-template <typename T>
-T smearedHeavisideSdf(T phi);
+template<typename T>
+T
+smearedHeavisideSdf(T phi);
 
 //!
 //! \brief      Returns smeared delta function.
@@ -55,8 +57,9 @@ T smearedHeavisideSdf(T phi);
 //!
 //! \return     Smeared delta function.
 //!
-template <typename T>
-T smearedDeltaSdf(T phi);
+template<typename T>
+T
+smearedDeltaSdf(T phi);
 
 //!
 //! \brief      Returns the fraction occupied by the implicit surface.
@@ -77,8 +80,9 @@ T smearedDeltaSdf(T phi);
 //!
 //! \return     The fraction occupied by the implicit surface.
 //!
-template <typename T>
-T fractionInsideSdf(T phi0, T phi1);
+template<typename T>
+T
+fractionInsideSdf(T phi0, T phi1);
 
 //!
 //! \brief      Returns the fraction occupied by the implicit surface.
@@ -97,11 +101,10 @@ T fractionInsideSdf(T phi0, T phi1);
 //!
 //! \return                 The fraction occupied by the implicit surface.
 //!
-template <typename T>
-T fractionInside(T phiBottomLeft, T phiBottomRight, T phiTopLeft,
-                 T phiTopRight);
+template<typename T>
+T
+fractionInside(T phiBottomLeft, T phiBottomRight, T phiTopLeft, T phiTopRight);
 
-}  // namespace lstme
+} // namespace lstme
 
-
-#endif  // INCLUDE_LSTME_LEVEL_SET_UTILS_H_
+#endif // INCLUDE_LSTME_LEVEL_SET_UTILS_H_

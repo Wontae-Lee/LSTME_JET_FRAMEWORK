@@ -5,11 +5,12 @@
 #ifndef LSTME_MATH_UTILS_HPP
 #define LSTME_MATH_UTILS_HPP
 
-#include <macros.hpp>
 #include <cstddef>
 #include <limits>
+#include <macros.hpp>
 
-namespace lstme{
+
+namespace lstme {
 
 //!
 //! \brief      Returns true if \p x and \p y are similar.
@@ -22,8 +23,9 @@ namespace lstme{
 //!
 //! \return     True if similar.
 //!
-template <typename T>
-inline bool similar(T x, T y, T eps = std::numeric_limits<T>::epsilon());
+template<typename T>
+ bool
+similar(T x, T y, T eps = std::numeric_limits<T>::epsilon());
 
 //!
 //! \brief      Returns the sign of the value.
@@ -34,8 +36,9 @@ inline bool similar(T x, T y, T eps = std::numeric_limits<T>::epsilon());
 //!
 //! \return     The sign.
 //!
-template <typename T>
-inline T sign(T x);
+template<typename T>
+ T
+sign(T x);
 
 //!
 //! \brief      Returns the minimum value among three inputs.
@@ -48,8 +51,9 @@ inline T sign(T x);
 //!
 //! \return     The minimum value.
 //!
-template <typename T>
-inline T min3(T x, T y, T z);
+template<typename T>
+ T
+min3(T x, T y, T z);
 
 //!
 //! \brief      Returns the maximum value among three inputs.
@@ -62,16 +66,19 @@ inline T min3(T x, T y, T z);
 //!
 //! \return     The maximum value.
 //!
-template <typename T>
-inline T max3(T x, T y, T z);
+template<typename T>
+ T
+max3(T x, T y, T z);
 
 //! Returns minimum among n-elements.
-template <typename T>
-inline T minn(const T* x, size_t n);
+template<typename T>
+ T
+minn(const T* x, size_t n);
 
 //! Returns maximum among n-elements.
-template <typename T>
-inline T maxn(const T* x, size_t n);
+template<typename T>
+ T
+maxn(const T* x, size_t n);
 
 //!
 //! \brief      Returns the absolute minimum value among the two inputs.
@@ -83,8 +90,9 @@ inline T maxn(const T* x, size_t n);
 //!
 //! \return     The absolute minimum.
 //!
-template <typename T>
-inline T absmin(T x, T y);
+template<typename T>
+ T
+absmin(T x, T y);
 
 //!
 //! \brief      Returns the absolute maximum value among the two inputs.
@@ -96,28 +104,35 @@ inline T absmin(T x, T y);
 //!
 //! \return     The absolute maximum.
 //!
-template <typename T>
-inline T absmax(T x, T y);
+template<typename T>
+ T
+absmax(T x, T y);
 
 //! Returns absolute minimum among n-elements.
-template <typename T>
-inline T absminn(const T* x, size_t n);
+template<typename T>
+ T
+absminn(const T* x, size_t n);
 
 //! Returns absolute maximum among n-elements.
-template <typename T>
-inline T absmaxn(const T* x, size_t n);
+template<typename T>
+ T
+absmaxn(const T* x, size_t n);
 
-template <typename T>
-inline size_t argmin2(T x, T y);
+template<typename T>
+ size_t
+argmin2(T x, T y);
 
-template <typename T>
-inline size_t argmax2(T x, T y);
+template<typename T>
+ size_t
+argmax2(T x, T y);
 
-template <typename T>
-inline size_t argmin3(T x, T y, T z);
+template<typename T>
+ size_t
+argmin3(T x, T y, T z);
 
-template <typename T>
-inline size_t argmax3(T x, T y, T z);
+template<typename T>
+ size_t
+argmax3(T x, T y, T z);
 
 //!
 //! \brief      Returns the square of \p x.
@@ -128,8 +143,9 @@ inline size_t argmax3(T x, T y, T z);
 //!
 //! \return     The squared value.
 //!
-template <typename T>
-inline T square(T x);
+template<typename T>
+ T
+square(T x);
 
 //!
 //! \brief      Returns the cubic of \p x.
@@ -140,8 +156,9 @@ inline T square(T x);
 //!
 //! \return     The cubic of \p x.
 //!
-template <typename T>
-inline T cubic(T x);
+template<typename T>
+ T
+cubic(T x);
 
 //!
 //! \brief      Returns the clamped value.
@@ -154,8 +171,9 @@ inline T cubic(T x);
 //!
 //! \return     The clamped value.
 //!
-template <typename T>
-inline T clamp(T val, T low, T high);
+template<typename T>
+ T
+clamp(T val, T low, T high);
 
 //!
 //! \brief      Converts degrees to radians.
@@ -166,8 +184,9 @@ inline T clamp(T val, T low, T high);
 //!
 //! \return     Angle in radians.
 //!
-template <typename T>
-inline T degreesToRadians(T angleInDegrees);
+template<typename T>
+ T
+degreesToRadians(T angleInDegrees);
 
 //!
 //! \brief      Converts radians to degrees.
@@ -178,8 +197,9 @@ inline T degreesToRadians(T angleInDegrees);
 //!
 //! \return     Angle in degrees.
 //!
-template <typename T>
-inline T radiansToDegrees(T angleInRadians);
+template<typename T>
+ T
+radiansToDegrees(T angleInRadians);
 
 //!
 //! \brief      Gets the barycentric coordinate.
@@ -192,8 +212,9 @@ inline T radiansToDegrees(T angleInRadians);
 //!
 //! \tparam     T     Value type.
 //!
-template <class T>
-inline void getBarycentric(T x, ssize_t iLow, ssize_t iHigh, ssize_t* i, T* t);
+template<class T>
+ void
+getBarycentric(T x, ssize_t iLow, ssize_t iHigh, ssize_t* i, T* t);
 
 //!
 //! \brief      Computes linear interpolation.
@@ -207,31 +228,40 @@ inline void getBarycentric(T x, ssize_t iLow, ssize_t iHigh, ssize_t* i, T* t);
 //!
 //! \return     The interpolated value.
 //!
-template <typename S, typename T>
-inline S lerp(const S& f0, const S& f1, T t);
+template<typename S, typename T>
+ S
+lerp(const S& f0, const S& f1, T t);
 
 //! \brief      Computes bilinear interpolation.
-template <typename S, typename T>
-inline S bilerp(const S& f00, const S& f10, const S& f01, const S& f11, T tx,
-       T ty);
+template<typename S, typename T>
+ S
+bilerp(const S& f00, const S& f10, const S& f01, const S& f11, T tx, T ty);
 
 //! \brief      Computes trilinear interpolation.
-template <typename S, typename T>
-inline S trilerp(const S& f000, const S& f100, const S& f010, const S& f110,
-        const S& f001, const S& f101, const S& f011, const S& f111,
-        T tx, T ty, T tz);
+template<typename S, typename T>
+ S
+trilerp(const S& f000,
+        const S& f100,
+        const S& f010,
+        const S& f110,
+        const S& f001,
+        const S& f101,
+        const S& f011,
+        const S& f111,
+        T tx,
+        T ty,
+        T tz);
 
 //! \brief      Computes Catmull-Rom interpolation.
-template <typename S, typename T>
-inline S catmullRom(const S& f0, const S& f1, const S& f2, const S& f3, T t);
+template<typename S, typename T>
+ S
+catmullRom(const S& f0, const S& f1, const S& f2, const S& f3, T t);
 
 //! \brief      Computes monotonic Catmull-Rom interpolation.
-template <typename T>
-inline T monotonicCatmullRom(const T& f0, const T& f1, const T& f2, const T& f3,
-                    T t);
-
+template<typename T>
+ T
+monotonicCatmullRom(const T& f0, const T& f1, const T& f2, const T& f3, T t);
 
 }
-
 
 #endif // LSTME_MATH_UTILS_HPP

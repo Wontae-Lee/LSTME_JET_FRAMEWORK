@@ -5,18 +5,19 @@
 #ifndef LSTME_FACTORY_HPP
 #define LSTME_FACTORY_HPP
 
-
-#include <scalar_grid2.hpp>
-#include <scalar_grid3.hpp>
-#include <vector_grid2.hpp>
-#include <vector_grid3.hpp>
 #include <point_neighbor_searcher2.hpp>
 #include <point_neighbor_searcher3.hpp>
+#include <scalar_grid2.hpp>
+#include <scalar_grid3.hpp>
 #include <string>
+#include <vector_grid2.hpp>
+#include <vector_grid3.hpp>
+
 
 namespace lstme {
 
-class Factory {
+class Factory
+{
 public:
   static ScalarGrid2Ptr buildScalarGrid2(const std::string& name);
 
@@ -33,6 +34,6 @@ public:
     const std::string& name);
 };
 
-}  // namespace lstme
+} // namespace lstme
 
 #endif // LSTME_FACTORY_HPP

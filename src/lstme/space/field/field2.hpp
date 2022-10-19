@@ -12,15 +12,16 @@
 namespace lstme {
 
 //! Abstract base class for 2-D fields.
-class Field2 {
- public:
-    Field2();
+class Field2
+{
+public:
+  Field2();
 
-    virtual ~Field2();
+  virtual ~Field2();
 };
 
 typedef std::shared_ptr<Field2> Field2Ptr;
 
-}  // namespace lstme
+} // namespace lstme
 
-#endif  // INCLUDE_LSTME_FIELD2_H_
+#endif // INCLUDE_LSTME_FIELD2_H_

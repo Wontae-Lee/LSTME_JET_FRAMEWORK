@@ -15,7 +15,7 @@
 #include <fstream>
 #include <functional>
 #include <iostream>
-#include <utility>  // just make cpplint happy..
+#include <utility> // just make cpplint happy..
 #include <vector>
 
 namespace lstme {
@@ -39,8 +39,9 @@ namespace lstme {
 //!
 //! \tparam T - Type to store in the array.
 //!
-template <typename T>
-class Array<T, 2> final {
+template<typename T>
+class Array<T, 2> final
+{
 public:
   typedef std::vector<T> ContainerType;
   typedef typename ContainerType::iterator Iterator;
@@ -215,7 +216,7 @@ public:
   //! });
   //! \endcode
   //!
-  template <typename Callback>
+  template<typename Callback>
   void forEach(Callback func) const;
 
   //!
@@ -244,7 +245,7 @@ public:
   //! });
   //! \endcode
   //!
-  template <typename Callback>
+  template<typename Callback>
   void forEachIndex(Callback func) const;
 
   //!
@@ -266,7 +267,7 @@ public:
   //! The parameter type of the callback function doesn't have to be T&, but
   //! const T& or T can be used as well.
   //!
-  template <typename Callback>
+  template<typename Callback>
   void parallelForEach(Callback func);
 
   //!
@@ -286,7 +287,7 @@ public:
   //! });
   //! \endcode
   //!
-  template <typename Callback>
+  template<typename Callback>
   void parallelForEachIndex(Callback func) const;
 
   //!
@@ -350,8 +351,7 @@ public:
   //!
   //! \param lst Initializer list that should be copy to the new array.
   //!
-  Array& operator=(
-    const std::initializer_list<std::initializer_list<T>>& lst);
+  Array& operator=(const std::initializer_list<std::initializer_list<T>>& lst);
 
   //! Casts to array accessor.
   operator ArrayAccessor2<T>();
@@ -365,9 +365,9 @@ private:
 };
 
 //! Type alias for 2-D array.
-template <typename T>
+template<typename T>
 using Array2 = Array<T, 2>;
 
-}  // namespace lstme
+} // namespace lstme
 
 #endif // LSTME_ARRAY2_HPP

@@ -5,13 +5,15 @@
 #ifndef LSTME_CONSTANT_VECTOR_FIELD3_HPP
 #define LSTME_CONSTANT_VECTOR_FIELD3_HPP
 
-#include <vector_field3.hpp>
 #include <memory>
+#include <vector_field3.hpp>
+
 
 namespace lstme {
 
 //! 3-D constant vector field.
-class ConstantVectorField3 final : public VectorField3 {
+class ConstantVectorField3 final : public VectorField3
+{
 public:
   class Builder;
 
@@ -34,11 +36,11 @@ private:
 //! Shared pointer for the ConstantVectorField3 type.
 typedef std::shared_ptr<ConstantVectorField3> ConstantVectorField3Ptr;
 
-
 //!
 //! \brief Front-end to create ConstantVectorField3 objects step by step.
 //!
-class ConstantVectorField3::Builder final {
+class ConstantVectorField3::Builder final
+{
 public:
   //! Returns builder with value.
   Builder& withValue(const Vector3D& value);
@@ -50,10 +52,9 @@ public:
   ConstantVectorField3Ptr makeShared() const;
 
 private:
-  Vector3D _value{0, 0, 0};
+  Vector3D _value{ 0, 0, 0 };
 };
 
-}  // namespace lstme
-
+} // namespace lstme
 
 #endif // LSTME_CONSTANT_VECTOR_FIELD3_HPP

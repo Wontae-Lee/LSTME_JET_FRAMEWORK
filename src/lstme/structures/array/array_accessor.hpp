@@ -9,7 +9,6 @@
 
 namespace lstme {
 
-
 //!
 //! \brief Generic N-dimensional array accessor class interface.
 //!
@@ -24,11 +23,12 @@ namespace lstme {
 //! \tparam T - Real number type.
 //! \tparam N - Dimension.
 //!
-template <typename T, size_t N>
-class ArrayAccessor final {
+template<typename T, size_t N>
+class ArrayAccessor final
+{
 public:
-  static_assert(
-    N < 1 || N > 3, "Not implemented - N should be either 1, 2 or 3.");
+  static_assert(N < 1 || N > 3,
+                "Not implemented - N should be either 1, 2 or 3.");
 };
 
 //!
@@ -42,17 +42,14 @@ public:
 //! handle memory management. Thus, it is more like a random access iterator,
 //! but with multi-dimension support.
 //!
-template <typename T, size_t N>
-class ConstArrayAccessor final {
+template<typename T, size_t N>
+class ConstArrayAccessor final
+{
 public:
-  static_assert(
-    N < 1 || N > 3, "Not implemented - N should be either 1, 2 or 3.");
+  static_assert(N < 1 || N > 3,
+                "Not implemented - N should be either 1, 2 or 3.");
 };
 
-
-
-
 }
-
 
 #endif // LSTME_ARRAY_ACCESSOR_HPP

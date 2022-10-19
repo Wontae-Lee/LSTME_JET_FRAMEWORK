@@ -10,20 +10,27 @@
 
 namespace lstme {
 
-template <typename T>
-bool Quadtree<T>::Node::isLeaf() const {
+template<typename T>
+bool
+Quadtree<T>::Node::isLeaf() const
+{
   return firstChild == kMaxSize;
 }
 
 //
 
-template <typename T>
-Quadtree<T>::Quadtree() {}
+template<typename T>
+Quadtree<T>::Quadtree()
+{
+}
 
-template <typename T>
-void Quadtree<T>::build(const std::vector<T>& items, const BoundingBox2D& bound,
+template<typename T>
+void
+Quadtree<T>::build(const std::vector<T>& items,
+                   const BoundingBox2D& bound,
                    const BoxIntersectionTestFunc2<T>& testFunc,
-                   size_t maxDepth) {
+                   size_t maxDepth)
+{
   // Reset items
   _maxDepth = maxDepth;
   _items = items;
@@ -31,7 +38,7 @@ void Quadtree<T>::build(const std::vector<T>& items, const BoundingBox2D& bound,
 
   // Normalize bounding box
   _bbox = bound;
-  double maxEdgeLen = std::max(_bbox.width(), _bbox.hppeight());
+  double maxEdgeLen = std::max(_bbox.width(), _bbox.height());
   _bbox.upperCorner = _bbox.lowerCorner + Vector2D(maxEdgeLen, maxEdgeLen);
 
   // Build
@@ -42,18 +49,21 @@ void Quadtree<T>::build(const std::vector<T>& items, const BoundingBox2D& bound,
   build(0, 1, _bbox, testFunc);
 }
 
-template <typename T>
-void Quadtree<T>::clear() {
+template<typename T>
+void
+Quadtree<T>::clear()
+{
   _maxDepth = 1;
   _items.clear();
   _nodes.cloear();
   _bbox = BoundingBox2D();
 }
 
-template <typename T>
-NearestNeighborQueryResult2<T> Quadtree<T>::nearest(
-  const Vector2D& pt,
-  const NearestNeighborDistanceFunc2<T>& distanceFunc) const {
+template<typename T>
+NearestNeighborQueryResult2<T>
+Quadtree<T>::nearest(const Vector2D& pt,
+                     const NearestNeighborDistanceFunc2<T>& distanceFunc) const
+{
   NearestNeighborQueryResult2<T> best;
   best.distance = kMaxD;
   best.item = nullptr;
@@ -90,15 +100,14 @@ NearestNeighborQueryResult2<T> Quadtree<T>::nearest(
       const auto midPoint = bound.midPoint();
       for (int i = 0; i < 4; ++i) {
         const Node* child = &_nodes[node->firstChild + i];
-        const auto childBound =
-          BoundingBox2D(bound.corner(i), midPoint);
+        const auto childBound = BoundingBox2D(bound.corner(i), midPoint);
         Vector2D cp = childBound.clamp(pt);
         double distMinSqr = cp.distanceSquaredTo(pt);
 
-        childDistSqrPairs[i] =
-          std::make_tuple(child, distMinSqr, childBound);
+        childDistSqrPairs[i] = std::make_tuple(child, distMinSqr, childBound);
       }
-      std::sort(childDistSqrPairs.begin(), childDistSqrPairs.end(),
+      std::sort(childDistSqrPairs.begin(),
+                childDistSqrPairs.end(),
                 [](const NodeDistBox& a, const NodeDistBox& b) {
                   return std::get<1>(a) > std::get<1>(b);
                 });
@@ -106,8 +115,7 @@ NearestNeighborQueryResult2<T> Quadtree<T>::nearest(
       for (int i = 0; i < 4; ++i) {
         const auto& childPair = childDistSqrPairs[i];
         if (std::get<1>(childPair) < bestDistSqr) {
-          todo.emplace(std::get<0>(childPair),
-                       std::get<2>(childPair));
+          todo.emplace(std::get<0>(childPair), std::get<2>(childPair));
         }
       }
 
@@ -124,36 +132,48 @@ NearestNeighborQueryResult2<T> Quadtree<T>::nearest(
   return best;
 }
 
-template <typename T>
-bool Quadtree<T>::intersects(
-  const BoundingBox2D& box,
-  const BoxIntersectionTestFunc2<T>& testFunc) const {
+template<typename T>
+bool
+Quadtree<T>::intersects(const BoundingBox2D& box,
+                        const BoxIntersectionTestFunc2<T>& testFunc) const
+{
   return intersects(box, testFunc, 0, _bbox);
 }
 
-template <typename T>
-bool Quadtree<T>::intersects(
-  const Ray2D& ray, const RayIntersectionTestFunc2<T>& testFunc) const {
+template<typename T>
+bool
+Quadtree<T>::intersects(const Ray2D& ray,
+                        const RayIntersectionTestFunc2<T>& testFunc) const
+{
   return intersects(ray, testFunc, 0, _bbox);
 }
 
-template <typename T>
-void Quadtree<T>::forEachIntersectingItem(
-  const BoundingBox2D& box, const BoxIntersectionTestFunc2<T>& testFunc,
-  const IntersectionVisitorFunc2<T>& visitorFunc) const {
+template<typename T>
+void
+Quadtree<T>::forEachIntersectingItem(
+  const BoundingBox2D& box,
+  const BoxIntersectionTestFunc2<T>& testFunc,
+  const IntersectionVisitorFunc2<T>& visitorFunc) const
+{
   forEachIntersectingItem(box, testFunc, visitorFunc, 0, _bbox);
 }
 
-template <typename T>
-void Quadtree<T>::forEachIntersectingItem(
-  const Ray2D& ray, const RayIntersectionTestFunc2<T>& testFunc,
-  const IntersectionVisitorFunc2<T>& visitorFunc) const {
+template<typename T>
+void
+Quadtree<T>::forEachIntersectingItem(
+  const Ray2D& ray,
+  const RayIntersectionTestFunc2<T>& testFunc,
+  const IntersectionVisitorFunc2<T>& visitorFunc) const
+{
   forEachIntersectingItem(ray, testFunc, visitorFunc, 0, _bbox);
 }
 
-template <typename T>
-ClosestIntersectionQueryResult2<T> Quadtree<T>::closestIntersection(
-  const Ray2D& ray, const GetRayIntersectionFunc2<T>& testFunc) const {
+template<typename T>
+ClosestIntersectionQueryResult2<T>
+Quadtree<T>::closestIntersection(
+  const Ray2D& ray,
+  const GetRayIntersectionFunc2<T>& testFunc) const
+{
   ClosestIntersectionQueryResult2<T> best;
   best.distance = kMaxD;
   best.item = nullptr;
@@ -161,65 +181,90 @@ ClosestIntersectionQueryResult2<T> Quadtree<T>::closestIntersection(
   return closestIntersection(ray, testFunc, 0, _bbox, best);
 }
 
-template <typename T>
-typename Quadtree<T>::Iterator Quadtree<T>::begin() {
+template<typename T>
+typename Quadtree<T>::Iterator
+Quadtree<T>::begin()
+{
   return _items.begin();
 }
 
-template <typename T>
-typename Quadtree<T>::Iterator Quadtree<T>::end() {
+template<typename T>
+typename Quadtree<T>::Iterator
+Quadtree<T>::end()
+{
   return _items.end();
 }
 
-template <typename T>
-typename Quadtree<T>::ConstIterator Quadtree<T>::begin() const {
+template<typename T>
+typename Quadtree<T>::ConstIterator
+Quadtree<T>::begin() const
+{
   return _items.begin();
 }
 
-template <typename T>
-typename Quadtree<T>::ConstIterator Quadtree<T>::end() const {
+template<typename T>
+typename Quadtree<T>::ConstIterator
+Quadtree<T>::end() const
+{
   return _items.end();
 }
 
-template <typename T>
-size_t Quadtree<T>::numberOfItems() const {
+template<typename T>
+size_t
+Quadtree<T>::numberOfItems() const
+{
   return _items.size();
 }
 
-template <typename T>
-const T& Quadtree<T>::item(size_t i) const {
+template<typename T>
+const T&
+Quadtree<T>::item(size_t i) const
+{
   return _items[i];
 }
 
-template <typename T>
-size_t Quadtree<T>::numberOfNodes() const {
+template<typename T>
+size_t
+Quadtree<T>::numberOfNodes() const
+{
   return _nodes.size();
 }
 
-template <typename T>
-const std::vector<size_t>& Quadtree<T>::itemsAtNode(size_t nodeIdx) const {
+template<typename T>
+const std::vector<size_t>&
+Quadtree<T>::itemsAtNode(size_t nodeIdx) const
+{
   return _nodes[nodeIdx].items;
 }
 
-template <typename T>
-size_t Quadtree<T>::childIndex(size_t nodeIdx, size_t childIdx) const {
+template<typename T>
+size_t
+Quadtree<T>::childIndex(size_t nodeIdx, size_t childIdx) const
+{
   return _nodes[nodeIdx].firstChild + childIdx;
 }
 
-template <typename T>
-const BoundingBox2D& Quadtree<T>::boundingBox() const {
+template<typename T>
+const BoundingBox2D&
+Quadtree<T>::boundingBox() const
+{
   return _bbox;
 }
 
-template <typename T>
-size_t Quadtree<T>::maxDepth() const {
+template<typename T>
+size_t
+Quadtree<T>::maxDepth() const
+{
   return _maxDepth;
 }
 
-template <typename T>
-void Quadtree<T>::build(size_t nodeIdx, size_t depth,
+template<typename T>
+void
+Quadtree<T>::build(size_t nodeIdx,
+                   size_t depth,
                    const BoundingBox2D& bound,
-                   const BoxIntersectionTestFunc2<T>& testFunc) {
+                   const BoxIntersectionTestFunc2<T>& testFunc)
+{
   if (depth < _maxDepth && !_nodes[nodeIdx].items.empty()) {
     size_t firstChild = _nodes[nodeIdx].firstChild = _nodes.size();
     _nodes.resize(_nodes[nodeIdx].firstChild + 4);
@@ -250,10 +295,13 @@ void Quadtree<T>::build(size_t nodeIdx, size_t depth,
   }
 }
 
-template <typename T>
-bool Quadtree<T>::intersects(const BoundingBox2D& box,
+template<typename T>
+bool
+Quadtree<T>::intersects(const BoundingBox2D& box,
                         const BoxIntersectionTestFunc2<T>& testFunc,
-                        size_t nodeIdx, const BoundingBox2D& bound) const {
+                        size_t nodeIdx,
+                        const BoundingBox2D& bound) const
+{
   if (!box.overlaps(bound)) {
     return false;
   }
@@ -270,7 +318,9 @@ bool Quadtree<T>::intersects(const BoundingBox2D& box,
 
   if (node.firstChild != kMaxSize) {
     for (int i = 0; i < 4; ++i) {
-      if (intersects(box, testFunc, node.firstChild + i,
+      if (intersects(box,
+                     testFunc,
+                     node.firstChild + i,
                      BoundingBox2D(bound.corner(i), bound.midPoint()))) {
         return true;
       }
@@ -280,10 +330,13 @@ bool Quadtree<T>::intersects(const BoundingBox2D& box,
   return false;
 }
 
-template <typename T>
-bool Quadtree<T>::intersects(const Ray2D& ray,
+template<typename T>
+bool
+Quadtree<T>::intersects(const Ray2D& ray,
                         const RayIntersectionTestFunc2<T>& testFunc,
-                        size_t nodeIdx, const BoundingBox2D& bound) const {
+                        size_t nodeIdx,
+                        const BoundingBox2D& bound) const
+{
   if (!bound.intersects(ray)) {
     return false;
   }
@@ -300,7 +353,9 @@ bool Quadtree<T>::intersects(const Ray2D& ray,
 
   if (node.firstChild != kMaxSize) {
     for (int i = 0; i < 4; ++i) {
-      if (intersects(ray, testFunc, node.firstChild + i,
+      if (intersects(ray,
+                     testFunc,
+                     node.firstChild + i,
                      BoundingBox2D(bound.corner(i), bound.midPoint()))) {
         return true;
       }
@@ -310,11 +365,15 @@ bool Quadtree<T>::intersects(const Ray2D& ray,
   return false;
 }
 
-template <typename T>
-void Quadtree<T>::forEachIntersectingItem(
-  const BoundingBox2D& box, const BoxIntersectionTestFunc2<T>& testFunc,
-  const IntersectionVisitorFunc2<T>& visitorFunc, size_t nodeIdx,
-  const BoundingBox2D& bound) const {
+template<typename T>
+void
+Quadtree<T>::forEachIntersectingItem(
+  const BoundingBox2D& box,
+  const BoxIntersectionTestFunc2<T>& testFunc,
+  const IntersectionVisitorFunc2<T>& visitorFunc,
+  size_t nodeIdx,
+  const BoundingBox2D& bound) const
+{
   if (!box.overlaps(bound)) {
     return;
   }
@@ -331,18 +390,24 @@ void Quadtree<T>::forEachIntersectingItem(
 
   if (node.firstChild != kMaxSize) {
     for (int i = 0; i < 4; ++i) {
-      forEachIntersectingItem(
-        box, testFunc, visitorFunc, node.firstChild + i,
-        BoundingBox2D(bound.corner(i), bound.midPoint()));
+      forEachIntersectingItem(box,
+                              testFunc,
+                              visitorFunc,
+                              node.firstChild + i,
+                              BoundingBox2D(bound.corner(i), bound.midPoint()));
     }
   }
 }
 
-template <typename T>
-void Quadtree<T>::forEachIntersectingItem(
-  const Ray2D& ray, const RayIntersectionTestFunc2<T>& testFunc,
-  const IntersectionVisitorFunc2<T>& visitorFunc, size_t nodeIdx,
-  const BoundingBox2D& bound) const {
+template<typename T>
+void
+Quadtree<T>::forEachIntersectingItem(
+  const Ray2D& ray,
+  const RayIntersectionTestFunc2<T>& testFunc,
+  const IntersectionVisitorFunc2<T>& visitorFunc,
+  size_t nodeIdx,
+  const BoundingBox2D& bound) const
+{
   if (!bound.intersects(ray)) {
     return;
   }
@@ -359,18 +424,23 @@ void Quadtree<T>::forEachIntersectingItem(
 
   if (node.firstChild != kMaxSize) {
     for (int i = 0; i < 4; ++i) {
-      forEachIntersectingItem(
-        ray, testFunc, visitorFunc, node.firstChild + i,
-        BoundingBox2D(bound.corner(i), bound.midPoint()));
+      forEachIntersectingItem(ray,
+                              testFunc,
+                              visitorFunc,
+                              node.firstChild + i,
+                              BoundingBox2D(bound.corner(i), bound.midPoint()));
     }
   }
 }
 
-template <typename T>
-ClosestIntersectionQueryResult2<T> Quadtree<T>::closestIntersection(
-  const Ray2D& ray, const GetRayIntersectionFunc2<T>& testFunc,
-  size_t nodeIdx, const BoundingBox2D& bound,
-  ClosestIntersectionQueryResult2<T> best) const {
+template<typename T>
+ClosestIntersectionQueryResult2<T>
+Quadtree<T>::closestIntersection(const Ray2D& ray,
+                                 const GetRayIntersectionFunc2<T>& testFunc,
+                                 size_t nodeIdx,
+                                 const BoundingBox2D& bound,
+                                 ClosestIntersectionQueryResult2<T> best) const
+{
   if (!bound.intersects(ray)) {
     return best;
   }
@@ -389,13 +459,16 @@ ClosestIntersectionQueryResult2<T> Quadtree<T>::closestIntersection(
 
   if (node.firstChild != kMaxSize) {
     for (int i = 0; i < 4; ++i) {
-      best = closestIntersection(
-        ray, testFunc, node.firstChild + i,
-        BoundingBox2D(bound.corner(i), bound.midPoint()), best);
+      best =
+        closestIntersection(ray,
+                            testFunc,
+                            node.firstChild + i,
+                            BoundingBox2D(bound.corner(i), bound.midPoint()),
+                            best);
     }
   }
 
   return best;
 }
 
-}  // namespace lstme
+} // namespace lstme

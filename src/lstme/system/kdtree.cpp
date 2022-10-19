@@ -8,40 +8,53 @@
 
 namespace lstme {
 
-template <typename T, size_t K>
-KdTree<T, K>::Node::Node() {
+template<typename T, size_t K>
+KdTree<T, K>::Node::Node()
+{
   child = kMaxSize;
 }
 
-template <typename T, size_t K>
-void KdTree<T, K>::Node::initLeaf(size_t it, const Point& pt) {
+template<typename T, size_t K>
+void
+KdTree<T, K>::Node::initLeaf(size_t it, const Point& pt)
+{
   flags = K;
   item = it;
   child = kMaxSize;
   point = pt;
 }
 
-template <typename T, size_t K>
-void KdTree<T, K>::Node::initInternal(size_t axis, size_t it, size_t c,
-                                 const Point& pt) {
+template<typename T, size_t K>
+void
+KdTree<T, K>::Node::initInternal(size_t axis,
+                                 size_t it,
+                                 size_t c,
+                                 const Point& pt)
+{
   flags = axis;
   item = it;
   child = c;
   point = pt;
 }
 
-template <typename T, size_t K>
-bool KdTree<T, K>::Node::isLeaf() const {
+template<typename T, size_t K>
+bool
+KdTree<T, K>::Node::isLeaf() const
+{
   return flags == K;
 }
 
 //
 
-template <typename T, size_t K>
-KdTree<T, K>::KdTree() {}
+template<typename T, size_t K>
+KdTree<T, K>::KdTree()
+{
+}
 
-template <typename T, size_t K>
-void KdTree<T, K>::build(const ConstArrayAccessor1<Point>& points) {
+template<typename T, size_t K>
+void
+KdTree<T, K>::build(const ConstArrayAccessor1<Point>& points)
+{
   _points.resize(points.size());
   std::copy(points.begin(), points.end(), _points.begin());
 
@@ -57,10 +70,13 @@ void KdTree<T, K>::build(const ConstArrayAccessor1<Point>& points) {
   build(0, itemIndices.data(), _points.size(), 0);
 }
 
-template <typename T, size_t K>
-void KdTree<T, K>::forEachNearbyPoint(
-  const Point& origin, T radius,
-  const std::function<void(size_t, const Point&)>& callback) const {
+template<typename T, size_t K>
+void
+KdTree<T, K>::forEachNearbyPoint(
+  const Point& origin,
+  T radius,
+  const std::function<void(size_t, const Point&)>& callback) const
+{
   const T r2 = radius * radius;
 
   // prepare to traverse the tree for sphere
@@ -108,8 +124,10 @@ void KdTree<T, K>::forEachNearbyPoint(
   }
 }
 
-template <typename T, size_t K>
-bool KdTree<T, K>::hasNearbyPoint(const Point& origin, T radius) const {
+template<typename T, size_t K>
+bool
+KdTree<T, K>::hasNearbyPoint(const Point& origin, T radius) const
+{
   const T r2 = radius * radius;
 
   // prepare to traverse the tree for sphere
@@ -159,8 +177,10 @@ bool KdTree<T, K>::hasNearbyPoint(const Point& origin, T radius) const {
   return false;
 }
 
-template <typename T, size_t K>
-size_t KdTree<T, K>::nearestPoint(const Point& origin) const {
+template<typename T, size_t K>
+size_t
+KdTree<T, K>::nearestPoint(const Point& origin) const
+{
   // prepare to traverse the tree for sphere
   static const int kMaxTreeDepth = 8 * sizeof(size_t);
   const Node* todo[kMaxTreeDepth];
@@ -212,55 +232,77 @@ size_t KdTree<T, K>::nearestPoint(const Point& origin) const {
   return nearest;
 }
 
-template <typename T, size_t K>
-void KdTree<T, K>::reserve(size_t numPoints, size_t numNodes) {
+template<typename T, size_t K>
+void
+KdTree<T, K>::reserve(size_t numPoints, size_t numNodes)
+{
   _points.resize(numPoints);
   _nodes.resize(numNodes);
 }
 
-template <typename T, size_t K>
-typename KdTree<T, K>::Iterator KdTree<T, K>::begin() {
+template<typename T, size_t K>
+typename KdTree<T, K>::Iterator
+KdTree<T, K>::begin()
+{
   return _points.begin();
 };
 
-template <typename T, size_t K>
-typename KdTree<T, K>::Iterator KdTree<T, K>::end() {
+template<typename T, size_t K>
+typename KdTree<T, K>::Iterator
+KdTree<T, K>::end()
+{
   return _points.end();
 };
 
-template <typename T, size_t K>
-typename KdTree<T, K>::ConstIterator KdTree<T, K>::begin() const {
+template<typename T, size_t K>
+typename KdTree<T, K>::ConstIterator
+KdTree<T, K>::begin() const
+{
   return _points.begin();
 };
 
-template <typename T, size_t K>
-typename KdTree<T, K>::ConstIterator KdTree<T, K>::end() const {
+template<typename T, size_t K>
+typename KdTree<T, K>::ConstIterator
+KdTree<T, K>::end() const
+{
   return _points.end();
 };
 
-template <typename T, size_t K>
-typename KdTree<T, K>::NodeIterator KdTree<T, K>::beginNode() {
+template<typename T, size_t K>
+typename KdTree<T, K>::NodeIterator
+KdTree<T, K>::beginNode()
+{
   return _nodes.begin();
 };
 
-template <typename T, size_t K>
-typename KdTree<T, K>::NodeIterator KdTree<T, K>::endNode() {
+template<typename T, size_t K>
+typename KdTree<T, K>::NodeIterator
+KdTree<T, K>::endNode()
+{
   return _nodes.end();
 };
 
-template <typename T, size_t K>
-typename KdTree<T, K>::ConstNodeIterator KdTree<T, K>::beginNode() const {
+template<typename T, size_t K>
+typename KdTree<T, K>::ConstNodeIterator
+KdTree<T, K>::beginNode() const
+{
   return _nodes.begin();
 };
 
-template <typename T, size_t K>
-typename KdTree<T, K>::ConstNodeIterator KdTree<T, K>::endNode() const {
+template<typename T, size_t K>
+typename KdTree<T, K>::ConstNodeIterator
+KdTree<T, K>::endNode() const
+{
   return _nodes.end();
 };
 
-template <typename T, size_t K>
-size_t KdTree<T, K>::build(size_t nodeIndex, size_t* itemIndices, size_t nItems,
-                    size_t currentDepth) {
+template<typename T, size_t K>
+size_t
+KdTree<T, K>::build(size_t nodeIndex,
+                    size_t* itemIndices,
+                    size_t nItems,
+                    size_t currentDepth)
+{
   // add a node
   _nodes.emplace_back();
 
@@ -283,20 +325,23 @@ size_t KdTree<T, K>::build(size_t nodeIndex, size_t* itemIndices, size_t nItems,
   size_t axis = static_cast<size_t>(d.dominantAxis());
 
   // pick mid point
-  std::nth_element(itemIndices, itemIndices + nItems / 2,
-                   itemIndices + nItems, [&](size_t a, size_t b) {
-                     return _points[a][axis] < _points[b][axis];
-                   });
+  std::nth_element(
+    itemIndices,
+    itemIndices + nItems / 2,
+    itemIndices + nItems,
+    [&](size_t a, size_t b) { return _points[a][axis] < _points[b][axis]; });
   size_t midPoint = nItems / 2;
 
   // recursively initialize children nodes
   size_t d0 = build(nodeIndex + 1, itemIndices, midPoint, currentDepth + 1);
-  _nodes[nodeIndex].initInternal(axis, itemIndices[midPoint], _nodes.size(),
-                                 _points[itemIndices[midPoint]]);
-  size_t d1 = build(_nodes[nodeIndex].child, itemIndices + midPoint + 1,
-                    nItems - midPoint - 1, currentDepth + 1);
+  _nodes[nodeIndex].initInternal(
+    axis, itemIndices[midPoint], _nodes.size(), _points[itemIndices[midPoint]]);
+  size_t d1 = build(_nodes[nodeIndex].child,
+                    itemIndices + midPoint + 1,
+                    nItems - midPoint - 1,
+                    currentDepth + 1);
 
   return std::max(d0, d1);
 }
 
-}  // namespace lstme
+} // namespace lstme

@@ -2,47 +2,56 @@
 // Created by LSTME on 2022-10-16.
 //
 
-
-#include <pch.hpp>
 #include <custom_scalar_field2.hpp>
+#include <pch.hpp>
+
 
 using namespace lstme;
 
 CustomScalarField2::CustomScalarField2(
   const std::function<double(const Vector2D&)>& customFunction,
-  double derivativeResolution) :
-  _customFunction(customFunction),
-  _resolution(derivativeResolution) {
+  double derivativeResolution)
+  : _customFunction(customFunction)
+  , _resolution(derivativeResolution)
+{
 }
 
 CustomScalarField2::CustomScalarField2(
   const std::function<double(const Vector2D&)>& customFunction,
   const std::function<Vector2D(const Vector2D&)>& customGradientFunction,
-  double derivativeResolution) :
-  _customFunction(customFunction),
-  _customGradientFunction(customGradientFunction),
-  _resolution(derivativeResolution) {
+  double derivativeResolution)
+  : _customFunction(customFunction)
+  , _customGradientFunction(customGradientFunction)
+  , _resolution(derivativeResolution)
+{
 }
 
 CustomScalarField2::CustomScalarField2(
   const std::function<double(const Vector2D&)>& customFunction,
   const std::function<Vector2D(const Vector2D&)>& customGradientFunction,
-  const std::function<double(const Vector2D&)>& customLaplacianFunction) :
-  _customFunction(customFunction),
-  _customGradientFunction(customGradientFunction),
-  _customLaplacianFunction(customLaplacianFunction),
-  _resolution(1e-3) {
+  const std::function<double(const Vector2D&)>& customLaplacianFunction)
+  : _customFunction(customFunction)
+  , _customGradientFunction(customGradientFunction)
+  , _customLaplacianFunction(customLaplacianFunction)
+  , _resolution(1e-3)
+{
 }
 
-double CustomScalarField2::sample(const Vector2D& x) const {
+double
+CustomScalarField2::sample(const Vector2D& x) const
+{
   return _customFunction(x);
 }
 
-std::function<double(const Vector2D&)> CustomScalarField2::sampler() const {
+std::function<double(const Vector2D&)>
+CustomScalarField2::sampler() const
+{
   return _customFunction;
 }
 
-Vector2D CustomScalarField2::gradient(const Vector2D& x) const {
+Vector2D
+CustomScalarField2::gradient(const Vector2D& x) const
+{
   if (_customGradientFunction) {
     return _customGradientFunction(x);
   } else {
@@ -51,13 +60,13 @@ Vector2D CustomScalarField2::gradient(const Vector2D& x) const {
     double bottom = _customFunction(x - Vector2D(0.0, 0.5 * _resolution));
     double top = _customFunction(x + Vector2D(0.0, 0.5 * _resolution));
 
-    return Vector2D(
-      (right - left) / _resolution,
-      (top - bottom) / _resolution);
+    return Vector2D((right - left) / _resolution, (top - bottom) / _resolution);
   }
 }
 
-double CustomScalarField2::laplacian(const Vector2D& x) const {
+double
+CustomScalarField2::laplacian(const Vector2D& x) const
+{
   if (_customLaplacianFunction) {
     return _customLaplacianFunction(x);
   } else {
@@ -67,75 +76,72 @@ double CustomScalarField2::laplacian(const Vector2D& x) const {
     double bottom = _customFunction(x - Vector2D(0.0, 0.5 * _resolution));
     double top = _customFunction(x + Vector2D(0.0, 0.5 * _resolution));
 
-    return (left + right + bottom + top - 4.0 * center)
-           / (_resolution * _resolution);
+    return (left + right + bottom + top - 4.0 * center) /
+           (_resolution * _resolution);
   }
 }
 
-CustomScalarField2::Builder CustomScalarField2::builder() {
+CustomScalarField2::Builder
+CustomScalarField2::builder()
+{
   return Builder();
 }
 
-
 CustomScalarField2::Builder&
 CustomScalarField2::Builder::withFunction(
-  const std::function<double(const Vector2D&)>& func) {
+  const std::function<double(const Vector2D&)>& func)
+{
   _customFunction = func;
   return *this;
 }
 
 CustomScalarField2::Builder&
 CustomScalarField2::Builder::withGradientFunction(
-  const std::function<Vector2D(const Vector2D&)>& func) {
+  const std::function<Vector2D(const Vector2D&)>& func)
+{
   _customGradientFunction = func;
   return *this;
 }
 
 CustomScalarField2::Builder&
 CustomScalarField2::Builder::withLaplacianFunction(
-  const std::function<double(const Vector2D&)>& func) {
+  const std::function<double(const Vector2D&)>& func)
+{
   _customLaplacianFunction = func;
   return *this;
 }
 
 CustomScalarField2::Builder&
-CustomScalarField2::Builder::withDerivativeResolution(double resolution) {
+CustomScalarField2::Builder::withDerivativeResolution(double resolution)
+{
   _resolution = resolution;
   return *this;
 }
 
-CustomScalarField2 CustomScalarField2::Builder::build() const {
+CustomScalarField2
+CustomScalarField2::Builder::build() const
+{
   if (_customLaplacianFunction) {
     return CustomScalarField2(
-      _customFunction,
-      _customGradientFunction,
-      _customLaplacianFunction);
+      _customFunction, _customGradientFunction, _customLaplacianFunction);
   } else {
     return CustomScalarField2(
-      _customFunction,
-      _customGradientFunction,
-      _resolution);
+      _customFunction, _customGradientFunction, _resolution);
   }
 }
 
-CustomScalarField2Ptr CustomScalarField2::Builder::makeShared() const {
+CustomScalarField2Ptr
+CustomScalarField2::Builder::makeShared() const
+{
   if (_customLaplacianFunction) {
     return std::shared_ptr<CustomScalarField2>(
       new CustomScalarField2(
-        _customFunction,
-        _customGradientFunction,
-        _customLaplacianFunction),
-      [] (CustomScalarField2* obj) {
-        delete obj;
-      });
+        _customFunction, _customGradientFunction, _customLaplacianFunction),
+      [](CustomScalarField2* obj) { delete obj; });
   } else {
     return std::shared_ptr<CustomScalarField2>(
       new CustomScalarField2(
-        _customFunction,
-        _customGradientFunction,
-        _resolution),
-      [] (CustomScalarField2* obj) {
-        delete obj;
-      });
+        _customFunction, _customGradientFunction, _resolution),
+      [](CustomScalarField2* obj) { delete obj; });
   }
 }

@@ -5,14 +5,13 @@
 #ifndef LSTME_CONSTANT_SCALAR_FIELD3_HPP
 #define LSTME_CONSTANT_SCALAR_FIELD3_HPP
 
-
-
 #include <scalar_field3.hpp>
 
 namespace lstme {
 
 //! 3-D constant scalar field.
-class ConstantScalarField3 final : public ScalarField3 {
+class ConstantScalarField3 final : public ScalarField3
+{
 public:
   class Builder;
 
@@ -35,11 +34,11 @@ private:
 //! Shared pointer for the ConstantScalarField3 type.
 typedef std::shared_ptr<ConstantScalarField3> ConstantScalarField3Ptr;
 
-
 //!
 //! \brief Front-end to create ConstantScalarField3 objects step by step.
 //!
-class ConstantScalarField3::Builder final {
+class ConstantScalarField3::Builder final
+{
 public:
   //! Returns builder with value.
   Builder& withValue(double value);
@@ -54,7 +53,6 @@ private:
   double _value = 0.0;
 };
 
-}  // namespace lstme
-
+} // namespace lstme
 
 #endif // LSTME_CONSTANT_SCALAR_FIELD3_HPP

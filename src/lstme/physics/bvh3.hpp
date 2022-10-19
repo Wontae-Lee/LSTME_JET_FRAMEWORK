@@ -20,9 +20,11 @@ namespace lstme {
 //! intersection tests. Also, NearestNeighborQueryEngine3 is implemented to
 //! provide nearest neighbor query.
 //!
-template <typename T>
-class Bvh3 final : public IntersectionQueryEngine3<T>,
-                   public NearestNeighborQueryEngine3<T> {
+template<typename T>
+class Bvh3 final
+  : public IntersectionQueryEngine3<T>
+  , public NearestNeighborQueryEngine3<T>
+{
 public:
   using ContainerType = std::vector<T>;
   using Iterator = typename ContainerType::iterator;
@@ -54,12 +56,14 @@ public:
 
   //! Invokes \p visitorFunc for every intersecting items.
   void forEachIntersectingItem(
-    const BoundingBox3D& box, const BoxIntersectionTestFunc3<T>& testFunc,
+    const BoundingBox3D& box,
+    const BoxIntersectionTestFunc3<T>& testFunc,
     const IntersectionVisitorFunc3<T>& visitorFunc) const override;
 
   //! Invokes \p visitorFunc for every intersecting items.
   void forEachIntersectingItem(
-    const Ray3D& ray, const RayIntersectionTestFunc3<T>& testFunc,
+    const Ray3D& ray,
+    const RayIntersectionTestFunc3<T>& testFunc,
     const IntersectionVisitorFunc3<T>& visitorFunc) const override;
 
   //! Returns the closest intersection for given \p ray.
@@ -107,9 +111,11 @@ public:
   ConstIterator itemOfNode(size_t i) const;
 
 private:
-  struct Node {
+  struct Node
+  {
     char flags;
-    union {
+    union
+    {
       size_t child;
       size_t item;
     };
@@ -126,14 +132,16 @@ private:
   std::vector<BoundingBox3D> _itemBounds;
   std::vector<Node> _nodes;
 
-  size_t build(size_t nodeIndex, size_t* itemIndices, size_t nItems,
+  size_t build(size_t nodeIndex,
+               size_t* itemIndices,
+               size_t nItems,
                size_t currentDepth);
 
-  size_t qsplit(size_t* itemIndices, size_t numItems, double pivot,
+  size_t qsplit(size_t* itemIndices,
+                size_t numItems,
+                double pivot,
                 uint8_t axis);
 };
-}  // namespace lstme
-
-
+} // namespace lstme
 
 #endif // LSTME_BVH3_HPP

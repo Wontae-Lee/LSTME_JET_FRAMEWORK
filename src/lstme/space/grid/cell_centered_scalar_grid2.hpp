@@ -5,10 +5,9 @@
 #ifndef LSTME_CELL_CENTERED_SCALAR_GRID2_HPP
 #define LSTME_CELL_CENTERED_SCALAR_GRID2_HPP
 
-
 #include <scalar_grid2.hpp>
-#include <utility>  // just make cpplint happy..
- 
+#include <utility> // just make cpplint happy..
+
 namespace lstme {
 
 //!
@@ -19,7 +18,8 @@ namespace lstme {
 //! center of a grid cell. Thus, the dimension of data points are equal to the
 //! dimension of the cells.
 //!
-class CellCenteredScalarGrid2 final : public ScalarGrid2 {
+class CellCenteredScalarGrid2 final : public ScalarGrid2
+{
 public:
   LSTME_GRID2_TYPE_NAME(CellCenteredScalarGrid2)
 
@@ -30,22 +30,20 @@ public:
 
   //! Constructs a grid with given resolution, grid spacing, origin and
   //! initial value.
-  CellCenteredScalarGrid2(
-    size_t resolutionX,
-    size_t resolutionY,
-    double gridSpacingX = 1.0,
-    double gridSpacingY = 1.0,
-    double originX = 0.0,
-    double originY = 0.0,
-    double initialValue = 0.0);
+  CellCenteredScalarGrid2(size_t resolutionX,
+                          size_t resolutionY,
+                          double gridSpacingX = 1.0,
+                          double gridSpacingY = 1.0,
+                          double originX = 0.0,
+                          double originY = 0.0,
+                          double initialValue = 0.0);
 
   //! Constructs a grid with given resolution, grid spacing, origin and
   //! initial value.
-  CellCenteredScalarGrid2(
-    const Size2& resolution,
-    const Vector2D& gridSpacing = Vector2D(1.0, 1.0),
-    const Vector2D& origin = Vector2D(),
-    double initialValue = 0.0);
+  CellCenteredScalarGrid2(const Size2& resolution,
+                          const Vector2D& gridSpacing = Vector2D(1.0, 1.0),
+                          const Vector2D& origin = Vector2D(),
+                          double initialValue = 0.0);
 
   //! Copy constructor.
   CellCenteredScalarGrid2(const CellCenteredScalarGrid2& other);
@@ -82,11 +80,11 @@ public:
 //! Shared pointer for the CellCenteredScalarGrid2 type.
 typedef std::shared_ptr<CellCenteredScalarGrid2> CellCenteredScalarGrid2Ptr;
 
-
 //!
 //! \brief Front-end to create CellCenteredScalarGrid2 objects step by step.
 //!
-class CellCenteredScalarGrid2::Builder final : public ScalarGridBuilder2 {
+class CellCenteredScalarGrid2::Builder final : public ScalarGridBuilder2
+{
 public:
   //! Returns builder with resolution.
   Builder& withResolution(const Size2& resolution);
@@ -120,22 +118,18 @@ public:
   //!
   //! This is an overriding function that implements ScalarGridBuilder2.
   //!
-  ScalarGrid2Ptr build(
-    const Size2& resolution,
-    const Vector2D& gridSpacing,
-    const Vector2D& gridOrigin,
-    double initialVal) const override;
+  ScalarGrid2Ptr build(const Size2& resolution,
+                       const Vector2D& gridSpacing,
+                       const Vector2D& gridOrigin,
+                       double initialVal) const override;
 
 private:
-  Size2 _resolution{1, 1};
-  Vector2D _gridSpacing{1, 1};
-  Vector2D _gridOrigin{0, 0};
+  Size2 _resolution{ 1, 1 };
+  Vector2D _gridSpacing{ 1, 1 };
+  Vector2D _gridOrigin{ 0, 0 };
   double _initialVal = 0.0;
 };
 
-}  // namespace lstme
-
-
-
+} // namespace lstme
 
 #endif // LSTME_CELL_CENTERED_SCALAR_GRID2_HPP

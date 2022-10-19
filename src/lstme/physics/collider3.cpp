@@ -2,8 +2,6 @@
 // Created by LSTME on 2022-10-15.
 //
 
-
-
 #include <pch.hpp>
 
 #include <collider3.hpp>
@@ -16,8 +14,12 @@ Collider3::Collider3() {}
 
 Collider3::~Collider3() {}
 
-void Collider3::resolveCollision(double radius, double restitutionCoefficient,
-                            Vector3D* newPosition, Vector3D* newVelocity) {
+void
+Collider3::resolveCollision(double radius,
+                            double restitutionCoefficient,
+                            Vector3D* newPosition,
+                            Vector3D* newVelocity)
+{
   LSTME_ASSERT(_surface);
 
   if (!_surface->isValidGeometry()) {
@@ -56,16 +58,15 @@ void Collider3::resolveCollision(double radius, double restitutionCoefficient,
       // Friction for Cloth Animation, 2002
       // http://graphics.stanford.edu/papers/cloth-sig02/cloth.pdf
       if (relativeVelT.lengthSquared() > 0.0) {
-        double frictionScale = std::max(
-          1.0 - _frictionCoeffient * deltaRelativeVelN.length() /
-                  relativeVelT.length(),
-          0.0);
+        double frictionScale =
+          std::max(1.0 - _frictionCoeffient * deltaRelativeVelN.length() /
+                           relativeVelT.length(),
+                   0.0);
         relativeVelT *= frictionScale;
       }
 
       // Reassemble the components
-      *newVelocity =
-        relativeVelN + relativeVelT + colliderVelAtTargetPoint;
+      *newVelocity = relativeVelN + relativeVelT + colliderVelAtTargetPoint;
     }
 
     // Geometric fix
@@ -73,37 +74,55 @@ void Collider3::resolveCollision(double radius, double restitutionCoefficient,
   }
 }
 
-double Collider3::frictionCoefficient() const { return _frictionCoeffient; }
+double
+Collider3::frictionCoefficient() const
+{
+  return _frictionCoeffient;
+}
 
-void Collider3::setFrictionCoefficient(double newFrictionCoeffient) {
+void
+Collider3::setFrictionCoefficient(double newFrictionCoeffient)
+{
   _frictionCoeffient = std::max(newFrictionCoeffient, 0.0);
 }
 
-const Surface3Ptr& Collider3::surface() const { return _surface; }
+const Surface3Ptr&
+Collider3::surface() const
+{
+  return _surface;
+}
 
-void Collider3::setSurface(const Surface3Ptr& newSurface) {
+void
+Collider3::setSurface(const Surface3Ptr& newSurface)
+{
   _surface = newSurface;
 }
 
-void Collider3::getClosestPoint(const Surface3Ptr& surface,
+void
+Collider3::getClosestPoint(const Surface3Ptr& surface,
                            const Vector3D& queryPoint,
-                           ColliderQueryResult* result) const {
+                           ColliderQueryResult* result) const
+{
   result->distance = surface->closestDistance(queryPoint);
   result->point = surface->closestPoint(queryPoint);
   result->normal = surface->closestNormal(queryPoint);
   result->velocity = velocityAt(queryPoint);
 }
 
-bool Collider3::isPenetrating(const ColliderQueryResult& colliderPoint,
-                         const Vector3D& position, double radius) {
+bool
+Collider3::isPenetrating(const ColliderQueryResult& colliderPoint,
+                         const Vector3D& position,
+                         double radius)
+{
   // If the new candidate position of the particle is inside
   // the volume defined by the surface OR the new distance to the surface is
   // less than the particle's radius, this particle is in colliding state.
   return _surface->isInside(position) || colliderPoint.distance < radius;
 }
 
-void Collider3::update(double currentTimeInSeconds,
-                  double timeIntervalInSeconds) {
+void
+Collider3::update(double currentTimeInSeconds, double timeIntervalInSeconds)
+{
   LSTME_ASSERT(_surface);
 
   if (!_surface->isValidGeometry()) {
@@ -117,7 +136,8 @@ void Collider3::update(double currentTimeInSeconds,
   }
 }
 
-void Collider3::setOnBeginUpdateCallback(
-  const OnBeginUpdateCallback& callback) {
+void
+Collider3::setOnBeginUpdateCallback(const OnBeginUpdateCallback& callback)
+{
   _onUpdateCallback = callback;
 }

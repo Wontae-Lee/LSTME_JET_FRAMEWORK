@@ -10,11 +10,12 @@
 namespace lstme {
 
 //! Returns the type of the value itself.
-template <typename T>
-struct ScalarType {
-    typedef T value;
+template<typename T>
+struct ScalarType
+{
+  typedef T value;
 };
 
-}  // namespace lstme
+} // namespace lstme
 
-#endif  // INCLUDE_LSTME_TYPE_HELPERS_H_
+#endif // INCLUDE_LSTME_TYPE_HELPERS_H_

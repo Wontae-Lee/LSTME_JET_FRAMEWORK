@@ -5,7 +5,6 @@
 #ifndef LSTME_BCC_LATTICE_POINT_GENERATOR_HPP
 #define LSTME_BCC_LATTICE_POINT_GENERATOR_HPP
 
-
 #include <point_generator3.hpp>
 
 namespace lstme {
@@ -16,7 +15,8 @@ namespace lstme {
 //! \see http://en.wikipedia.org/wiki/Cubic_crystal_system
 //!      http://mathworld.wolfram.com/CubicClosePacking.html
 //!
-class BccLatticePointGenerator final : public PointGenerator3 {
+class BccLatticePointGenerator final : public PointGenerator3
+{
 public:
   //!
   //! \brief Invokes \p callback function for each BCC-lattice points inside
@@ -34,7 +34,6 @@ public:
 //! Shared pointer type for the BccLatticePointGenerator.
 typedef std::shared_ptr<BccLatticePointGenerator> BccLatticePointGeneratorPtr;
 
-}  // namespace lstme
-
+} // namespace lstme
 
 #endif // LSTME_BCC_LATTICE_POINT_GENERATOR_HPP

@@ -3,26 +3,34 @@
 //
 
 #include <math_utils.hpp>
-#include <octree.hpp>
 #include <numeric>
+#include <octree.hpp>
 #include <stack>
+
 
 namespace lstme {
 
-template <typename T>
-bool Octree<T>::Node::isLeaf() const {
+template<typename T>
+bool
+Octree<T>::Node::isLeaf() const
+{
   return firstChild == kMaxSize;
 }
 
 //
 
-template <typename T>
-Octree<T>::Octree() {}
+template<typename T>
+Octree<T>::Octree()
+{
+}
 
-template <typename T>
-void Octree<T>::build(const std::vector<T>& items, const BoundingBox3D& bound,
+template<typename T>
+void
+Octree<T>::build(const std::vector<T>& items,
+                 const BoundingBox3D& bound,
                  const BoxIntersectionTestFunc3<T>& testFunc,
-                 size_t maxDepth) {
+                 size_t maxDepth)
+{
   // Reset items
   _maxDepth = maxDepth;
   _items = items;
@@ -30,7 +38,7 @@ void Octree<T>::build(const std::vector<T>& items, const BoundingBox3D& bound,
 
   // Normalize bounding box
   _bbox = bound;
-  double maxEdgeLen = max3(_bbox.width(), _bbox.hppeight(), _bbox.depth());
+  double maxEdgeLen = max3(_bbox.width(), _bbox.height(), _bbox.depth());
   _bbox.upperCorner =
     _bbox.lowerCorner + Vector3D(maxEdgeLen, maxEdgeLen, maxEdgeLen);
 
@@ -42,18 +50,21 @@ void Octree<T>::build(const std::vector<T>& items, const BoundingBox3D& bound,
   build(0, 1, _bbox, testFunc);
 }
 
-template <typename T>
-void Octree<T>::clear() {
+template<typename T>
+void
+Octree<T>::clear()
+{
   _maxDepth = 1;
   _items.clear();
   _nodes.cloear();
   _bbox = BoundingBox3D();
 }
 
-template <typename T>
-NearestNeighborQueryResult3<T> Octree<T>::nearest(
-  const Vector3D& pt,
-  const NearestNeighborDistanceFunc3<T>& distanceFunc) const {
+template<typename T>
+NearestNeighborQueryResult3<T>
+Octree<T>::nearest(const Vector3D& pt,
+                   const NearestNeighborDistanceFunc3<T>& distanceFunc) const
+{
   NearestNeighborQueryResult3<T> best;
   best.distance = kMaxD;
   best.item = nullptr;
@@ -90,15 +101,14 @@ NearestNeighborQueryResult3<T> Octree<T>::nearest(
       const auto midPoint = bound.midPoint();
       for (int i = 0; i < 8; ++i) {
         const Node* child = &_nodes[node->firstChild + i];
-        const auto childBound =
-          BoundingBox3D(bound.corner(i), midPoint);
+        const auto childBound = BoundingBox3D(bound.corner(i), midPoint);
         Vector3D cp = childBound.clamp(pt);
         double distMinSqr = cp.distanceSquaredTo(pt);
 
-        childDistSqrPairs[i] =
-          std::make_tuple(child, distMinSqr, childBound);
+        childDistSqrPairs[i] = std::make_tuple(child, distMinSqr, childBound);
       }
-      std::sort(childDistSqrPairs.begin(), childDistSqrPairs.end(),
+      std::sort(childDistSqrPairs.begin(),
+                childDistSqrPairs.end(),
                 [](const NodeDistBox& a, const NodeDistBox& b) {
                   return std::get<1>(a) > std::get<1>(b);
                 });
@@ -106,8 +116,7 @@ NearestNeighborQueryResult3<T> Octree<T>::nearest(
       for (int i = 0; i < 8; ++i) {
         const auto& childPair = childDistSqrPairs[i];
         if (std::get<1>(childPair) < bestDistSqr) {
-          todo.emplace(std::get<0>(childPair),
-                       std::get<2>(childPair));
+          todo.emplace(std::get<0>(childPair), std::get<2>(childPair));
         }
       }
 
@@ -124,35 +133,47 @@ NearestNeighborQueryResult3<T> Octree<T>::nearest(
   return best;
 }
 
-template <typename T>
-bool Octree<T>::intersects(const BoundingBox3D& box,
-                      const BoxIntersectionTestFunc3<T>& testFunc) const {
+template<typename T>
+bool
+Octree<T>::intersects(const BoundingBox3D& box,
+                      const BoxIntersectionTestFunc3<T>& testFunc) const
+{
   return intersects(box, testFunc, 0, _bbox);
 }
 
-template <typename T>
-bool Octree<T>::intersects(const Ray3D& ray,
-                      const RayIntersectionTestFunc3<T>& testFunc) const {
+template<typename T>
+bool
+Octree<T>::intersects(const Ray3D& ray,
+                      const RayIntersectionTestFunc3<T>& testFunc) const
+{
   return intersects(ray, testFunc, 0, _bbox);
 }
 
-template <typename T>
-void Octree<T>::forEachIntersectingItem(
-  const BoundingBox3D& box, const BoxIntersectionTestFunc3<T>& testFunc,
-  const IntersectionVisitorFunc3<T>& visitorFunc) const {
+template<typename T>
+void
+Octree<T>::forEachIntersectingItem(
+  const BoundingBox3D& box,
+  const BoxIntersectionTestFunc3<T>& testFunc,
+  const IntersectionVisitorFunc3<T>& visitorFunc) const
+{
   forEachIntersectingItem(box, testFunc, visitorFunc, 0, _bbox);
 }
 
-template <typename T>
-void Octree<T>::forEachIntersectingItem(
-  const Ray3D& ray, const RayIntersectionTestFunc3<T>& testFunc,
-  const IntersectionVisitorFunc3<T>& visitorFunc) const {
+template<typename T>
+void
+Octree<T>::forEachIntersectingItem(
+  const Ray3D& ray,
+  const RayIntersectionTestFunc3<T>& testFunc,
+  const IntersectionVisitorFunc3<T>& visitorFunc) const
+{
   forEachIntersectingItem(ray, testFunc, visitorFunc, 0, _bbox);
 }
 
-template <typename T>
-ClosestIntersectionQueryResult3<T> Octree<T>::closestIntersection(
-  const Ray3D& ray, const GetRayIntersectionFunc3<T>& testFunc) const {
+template<typename T>
+ClosestIntersectionQueryResult3<T>
+Octree<T>::closestIntersection(const Ray3D& ray,
+                               const GetRayIntersectionFunc3<T>& testFunc) const
+{
   ClosestIntersectionQueryResult3<T> best;
   best.distance = kMaxD;
   best.item = nullptr;
@@ -160,64 +181,90 @@ ClosestIntersectionQueryResult3<T> Octree<T>::closestIntersection(
   return closestIntersection(ray, testFunc, 0, _bbox, best);
 }
 
-template <typename T>
-typename Octree<T>::Iterator Octree<T>::begin() {
+template<typename T>
+typename Octree<T>::Iterator
+Octree<T>::begin()
+{
   return _items.begin();
 }
 
-template <typename T>
-typename Octree<T>::Iterator Octree<T>::end() {
+template<typename T>
+typename Octree<T>::Iterator
+Octree<T>::end()
+{
   return _items.end();
 }
 
-template <typename T>
-typename Octree<T>::ConstIterator Octree<T>::begin() const {
+template<typename T>
+typename Octree<T>::ConstIterator
+Octree<T>::begin() const
+{
   return _items.begin();
 }
 
-template <typename T>
-typename Octree<T>::ConstIterator Octree<T>::end() const {
+template<typename T>
+typename Octree<T>::ConstIterator
+Octree<T>::end() const
+{
   return _items.end();
 }
 
-template <typename T>
-size_t Octree<T>::numberOfItems() const {
+template<typename T>
+size_t
+Octree<T>::numberOfItems() const
+{
   return _items.size();
 }
 
-template <typename T>
-const T& Octree<T>::item(size_t i) const {
+template<typename T>
+const T&
+Octree<T>::item(size_t i) const
+{
   return _items[i];
 }
 
-template <typename T>
-size_t Octree<T>::numberOfNodes() const {
+template<typename T>
+size_t
+Octree<T>::numberOfNodes() const
+{
   return _nodes.size();
 }
 
-template <typename T>
-const std::vector<size_t>& Octree<T>::itemsAtNode(size_t nodeIdx) const {
+template<typename T>
+const std::vector<size_t>&
+Octree<T>::itemsAtNode(size_t nodeIdx) const
+{
   return _nodes[nodeIdx].items;
 }
 
-template <typename T>
-size_t Octree<T>::childIndex(size_t nodeIdx, size_t childIdx) const {
+template<typename T>
+size_t
+Octree<T>::childIndex(size_t nodeIdx, size_t childIdx) const
+{
   return _nodes[nodeIdx].firstChild + childIdx;
 }
 
-template <typename T>
-const BoundingBox3D& Octree<T>::boundingBox() const {
+template<typename T>
+const BoundingBox3D&
+Octree<T>::boundingBox() const
+{
   return _bbox;
 }
 
-template <typename T>
-size_t Octree<T>::maxDepth() const {
+template<typename T>
+size_t
+Octree<T>::maxDepth() const
+{
   return _maxDepth;
 }
 
-template <typename T>
-void Octree<T>::build(size_t nodeIdx, size_t depth, const BoundingBox3D& bound,
-                 const BoxIntersectionTestFunc3<T>& testFunc) {
+template<typename T>
+void
+Octree<T>::build(size_t nodeIdx,
+                 size_t depth,
+                 const BoundingBox3D& bound,
+                 const BoxIntersectionTestFunc3<T>& testFunc)
+{
   if (depth < _maxDepth && !_nodes[nodeIdx].items.empty()) {
     size_t firstChild = _nodes[nodeIdx].firstChild = _nodes.size();
     _nodes.resize(_nodes[nodeIdx].firstChild + 8);
@@ -248,10 +295,13 @@ void Octree<T>::build(size_t nodeIdx, size_t depth, const BoundingBox3D& bound,
   }
 }
 
-template <typename T>
-bool Octree<T>::intersects(const BoundingBox3D& box,
+template<typename T>
+bool
+Octree<T>::intersects(const BoundingBox3D& box,
                       const BoxIntersectionTestFunc3<T>& testFunc,
-                      size_t nodeIdx, const BoundingBox3D& bound) const {
+                      size_t nodeIdx,
+                      const BoundingBox3D& bound) const
+{
   if (!box.overlaps(bound)) {
     return false;
   }
@@ -268,7 +318,9 @@ bool Octree<T>::intersects(const BoundingBox3D& box,
 
   if (node.firstChild != kMaxSize) {
     for (int i = 0; i < 8; ++i) {
-      if (intersects(box, testFunc, node.firstChild + i,
+      if (intersects(box,
+                     testFunc,
+                     node.firstChild + i,
                      BoundingBox3D(bound.corner(i), bound.midPoint()))) {
         return true;
       }
@@ -278,10 +330,13 @@ bool Octree<T>::intersects(const BoundingBox3D& box,
   return false;
 }
 
-template <typename T>
-bool Octree<T>::intersects(const Ray3D& ray,
+template<typename T>
+bool
+Octree<T>::intersects(const Ray3D& ray,
                       const RayIntersectionTestFunc3<T>& testFunc,
-                      size_t nodeIdx, const BoundingBox3D& bound) const {
+                      size_t nodeIdx,
+                      const BoundingBox3D& bound) const
+{
   if (!bound.intersects(ray)) {
     return false;
   }
@@ -298,7 +353,9 @@ bool Octree<T>::intersects(const Ray3D& ray,
 
   if (node.firstChild != kMaxSize) {
     for (int i = 0; i < 8; ++i) {
-      if (intersects(ray, testFunc, node.firstChild + i,
+      if (intersects(ray,
+                     testFunc,
+                     node.firstChild + i,
                      BoundingBox3D(bound.corner(i), bound.midPoint()))) {
         return true;
       }
@@ -308,11 +365,15 @@ bool Octree<T>::intersects(const Ray3D& ray,
   return false;
 }
 
-template <typename T>
-void Octree<T>::forEachIntersectingItem(
-  const BoundingBox3D& box, const BoxIntersectionTestFunc3<T>& testFunc,
-  const IntersectionVisitorFunc3<T>& visitorFunc, size_t nodeIdx,
-  const BoundingBox3D& bound) const {
+template<typename T>
+void
+Octree<T>::forEachIntersectingItem(
+  const BoundingBox3D& box,
+  const BoxIntersectionTestFunc3<T>& testFunc,
+  const IntersectionVisitorFunc3<T>& visitorFunc,
+  size_t nodeIdx,
+  const BoundingBox3D& bound) const
+{
   if (!box.overlaps(bound)) {
     return;
   }
@@ -329,18 +390,24 @@ void Octree<T>::forEachIntersectingItem(
 
   if (node.firstChild != kMaxSize) {
     for (int i = 0; i < 8; ++i) {
-      forEachIntersectingItem(
-        box, testFunc, visitorFunc, node.firstChild + i,
-        BoundingBox3D(bound.corner(i), bound.midPoint()));
+      forEachIntersectingItem(box,
+                              testFunc,
+                              visitorFunc,
+                              node.firstChild + i,
+                              BoundingBox3D(bound.corner(i), bound.midPoint()));
     }
   }
 }
 
-template <typename T>
-void Octree<T>::forEachIntersectingItem(
-  const Ray3D& ray, const RayIntersectionTestFunc3<T>& testFunc,
-  const IntersectionVisitorFunc3<T>& visitorFunc, size_t nodeIdx,
-  const BoundingBox3D& bound) const {
+template<typename T>
+void
+Octree<T>::forEachIntersectingItem(
+  const Ray3D& ray,
+  const RayIntersectionTestFunc3<T>& testFunc,
+  const IntersectionVisitorFunc3<T>& visitorFunc,
+  size_t nodeIdx,
+  const BoundingBox3D& bound) const
+{
   if (!bound.intersects(ray)) {
     return;
   }
@@ -357,18 +424,23 @@ void Octree<T>::forEachIntersectingItem(
 
   if (node.firstChild != kMaxSize) {
     for (int i = 0; i < 8; ++i) {
-      forEachIntersectingItem(
-        ray, testFunc, visitorFunc, node.firstChild + i,
-        BoundingBox3D(bound.corner(i), bound.midPoint()));
+      forEachIntersectingItem(ray,
+                              testFunc,
+                              visitorFunc,
+                              node.firstChild + i,
+                              BoundingBox3D(bound.corner(i), bound.midPoint()));
     }
   }
 }
 
-template <typename T>
-ClosestIntersectionQueryResult3<T> Octree<T>::closestIntersection(
-  const Ray3D& ray, const GetRayIntersectionFunc3<T>& testFunc,
-  size_t nodeIdx, const BoundingBox3D& bound,
-  ClosestIntersectionQueryResult3<T> best) const {
+template<typename T>
+ClosestIntersectionQueryResult3<T>
+Octree<T>::closestIntersection(const Ray3D& ray,
+                               const GetRayIntersectionFunc3<T>& testFunc,
+                               size_t nodeIdx,
+                               const BoundingBox3D& bound,
+                               ClosestIntersectionQueryResult3<T> best) const
+{
   if (!bound.intersects(ray)) {
     return best;
   }
@@ -387,13 +459,16 @@ ClosestIntersectionQueryResult3<T> Octree<T>::closestIntersection(
 
   if (node.firstChild != kMaxSize) {
     for (int i = 0; i < 8; ++i) {
-      best = closestIntersection(
-        ray, testFunc, node.firstChild + i,
-        BoundingBox3D(bound.corner(i), bound.midPoint()), best);
+      best =
+        closestIntersection(ray,
+                            testFunc,
+                            node.firstChild + i,
+                            BoundingBox3D(bound.corner(i), bound.midPoint()),
+                            best);
     }
   }
 
   return best;
 }
 
-}  // namespace lstme
+} // namespace lstme

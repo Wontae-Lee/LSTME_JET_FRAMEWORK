@@ -5,9 +5,9 @@
 #ifndef LSTME_BOX3_HPP
 #define LSTME_BOX3_HPP
 
-
-#include <surface3.hpp>
 #include <bounding_box3.hpp>
+#include <surface3.hpp>
+
 
 namespace lstme {
 
@@ -18,31 +18,28 @@ namespace lstme {
 //! surface-related queries. This box implementation is an axis-aligned box
 //! that wraps lower-level primitive type, BoundingBox3D.
 //!
-class Box3 final : public Surface3 {
+class Box3 final : public Surface3
+{
 public:
   class Builder;
 
   //! Bounding box of this box.
-  BoundingBox3D bound
-    = BoundingBox3D(Vector3D(), Vector3D(1.0, 1.0, 1.0));
+  BoundingBox3D bound = BoundingBox3D(Vector3D(), Vector3D(1.0, 1.0, 1.0));
 
   //! Constructs (0, 0, 0) x (1, 1, 1) box.
-  Box3(
-    const Transform3& transform = Transform3(),
-    bool isNormalFlipped = false);
+  Box3(const Transform3& transform = Transform3(),
+       bool isNormalFlipped = false);
 
   //! Constructs a box with given \p lowerCorner and \p upperCorner.
-  Box3(
-    const Vector3D& lowerCorner,
-    const Vector3D& upperCorner,
-    const Transform3& transform = Transform3(),
-    bool isNormalFlipped = false);
+  Box3(const Vector3D& lowerCorner,
+       const Vector3D& upperCorner,
+       const Transform3& transform = Transform3(),
+       bool isNormalFlipped = false);
 
   //! Constructs a box with BoundingBox3D instance.
-  explicit Box3(
-    const BoundingBox3D& boundingBox,
-    const Transform3& transform = Transform3(),
-    bool isNormalFlipped = false);
+  explicit Box3(const BoundingBox3D& boundingBox,
+                const Transform3& transform = Transform3(),
+                bool isNormalFlipped = false);
 
   //! Copy constructor.
   Box3(const Box3& other);
@@ -68,11 +65,11 @@ protected:
 //! Shared pointer type for the Box3.
 typedef std::shared_ptr<Box3> Box3Ptr;
 
-
 //!
 //! \brief Front-end to create Box3 objects step by step.
 //!
-class Box3::Builder final : public SurfaceBuilderBase3<Box3::Builder> {
+class Box3::Builder final : public SurfaceBuilderBase3<Box3::Builder>
+{
 public:
   //! Returns builder with lower corner set.
   Builder& withLowerCorner(const Vector3D& pt);
@@ -90,12 +87,10 @@ public:
   Box3Ptr makeShared() const;
 
 private:
-  Vector3D _lowerCorner{0, 0, 0};
-  Vector3D _upperCorner{1, 1, 1};
+  Vector3D _lowerCorner{ 0, 0, 0 };
+  Vector3D _upperCorner{ 1, 1, 1 };
 };
 
-}  // namespace lstme
+} // namespace lstme
 
-
-#endif  // INCLUDE_JET_BOX3_H_
-
+#endif // INCLUDE_JET_BOX3_H_

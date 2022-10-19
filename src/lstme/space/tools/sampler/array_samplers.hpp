@@ -16,11 +16,12 @@ namespace lstme {
 //! \tparam R - The real number type.
 //! \tparam N - Dimension.
 //!
-template <typename T, typename R, size_t N>
-class NearestArraySampler final {
+template<typename T, typename R, size_t N>
+class NearestArraySampler final
+{
 public:
-  static_assert(
-    N < 1 || N > 3, "Not implemented - N should be either 1, 2 or 3.");
+  static_assert(N < 1 || N > 3,
+                "Not implemented - N should be either 1, 2 or 3.");
 };
 
 //!
@@ -30,11 +31,12 @@ public:
 //! \tparam R - The real number type.
 //! \tparam N - Dimension.
 //!
-template <typename T, typename R, size_t N>
-class LinearArraySampler final {
+template<typename T, typename R, size_t N>
+class LinearArraySampler final
+{
 public:
-  static_assert(
-    N < 1 || N > 3, "Not implemented - N should be either 1, 2 or 3.");
+  static_assert(N < 1 || N > 3,
+                "Not implemented - N should be either 1, 2 or 3.");
 };
 
 //!
@@ -44,12 +46,13 @@ public:
 //! \tparam R - The real number type.
 //! \tparam N - Dimension.
 //!
-template <typename T, typename R, size_t N>
-class CubicArraySampler final {
+template<typename T, typename R, size_t N>
+class CubicArraySampler final
+{
 public:
-  static_assert(
-    N < 1 || N > 3, "Not implemented - N should be either 1, 2 or 3.");
+  static_assert(N < 1 || N > 3,
+                "Not implemented - N should be either 1, 2 or 3.");
 };
 
-}  // namespace lstme
+} // namespace lstme
 #endif // LSTME_ARRAY_SAMPLERS_HPP

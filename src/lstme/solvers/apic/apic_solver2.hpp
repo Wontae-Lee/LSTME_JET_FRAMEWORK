@@ -5,11 +5,10 @@
 #ifndef LSTME_APIC_SOLVER2_HPP
 #define LSTME_APIC_SOLVER2_HPP
 
-
 #include <pic_solver2.hpp>
 
 namespace lstme {
- 
+
 //!
 //! \brief 2-D Affine Particle-in-Cell (APIC) implementation
 //!
@@ -19,7 +18,8 @@ namespace lstme {
 //! \see Jiang, Chenfanfu, et al. "The affine particle-in-cell method."
 //!      ACM Transactions on Graphics (TOG) 34.4 (2015): 51.
 //!
-class ApicSolver2 : public PicSolver2 {
+class ApicSolver2 : public PicSolver2
+{
 public:
   class Builder;
 
@@ -27,10 +27,9 @@ public:
   ApicSolver2();
 
   //! Constructs solver with initial grid size.
-  ApicSolver2(
-    const Size2& resolution,
-    const Vector2D& gridSpacing,
-    const Vector2D& gridOrigin);
+  ApicSolver2(const Size2& resolution,
+              const Vector2D& gridSpacing,
+              const Vector2D& gridOrigin);
 
   //! Default destructor.
   virtual ~ApicSolver2();
@@ -53,12 +52,12 @@ private:
 //! Shared pointer type for the ApicSolver2.
 typedef std::shared_ptr<ApicSolver2> ApicSolver2Ptr;
 
-
 //!
 //! \brief Front-end to create ApicSolver2 objects step by step.
 //!
 class ApicSolver2::Builder final
-  : public GridFluidSolverBuilderBase2<ApicSolver2::Builder> {
+  : public GridFluidSolverBuilderBase2<ApicSolver2::Builder>
+{
 public:
   //! Builds ApicSolver2.
   ApicSolver2 build() const;
@@ -67,8 +66,6 @@ public:
   ApicSolver2Ptr makeShared() const;
 };
 
-}  // namespace lstme
-
-
+} // namespace lstme
 
 #endif // LSTME_APIC_SOLVER2_HPP

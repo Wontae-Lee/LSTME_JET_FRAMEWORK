@@ -2,7 +2,6 @@
 // Created by LSTME on 2022-10-16.
 //
 
-
 #include <pch.hpp>
 
 #include <constants.hpp>
@@ -13,20 +12,26 @@ using namespace lstme;
 
 CustomImplicitSurface3::CustomImplicitSurface3(
   const std::function<double(const Vector3D&)>& func,
-  const BoundingBox3D& domain, double resolution,
-  double rayMarchingResolution, unsigned int maxNumOfIterations,
-  const Transform3& transform, bool isNormalFlipped)
-  : ImplicitSurface3(transform, isNormalFlipped),
-  _func(func),
-  _domain(domain),
-  _resolution(resolution),
-  _rayMarchingResolution(rayMarchingResolution),
-  _maxNumOfIterations(maxNumOfIterations) {}
+  const BoundingBox3D& domain,
+  double resolution,
+  double rayMarchingResolution,
+  unsigned int maxNumOfIterations,
+  const Transform3& transform,
+  bool isNormalFlipped)
+  : ImplicitSurface3(transform, isNormalFlipped)
+  , _func(func)
+  , _domain(domain)
+  , _resolution(resolution)
+  , _rayMarchingResolution(rayMarchingResolution)
+  , _maxNumOfIterations(maxNumOfIterations)
+{
+}
 
 CustomImplicitSurface3::~CustomImplicitSurface3() {}
 
-Vector3D CustomImplicitSurface3::closestPointLocal(
-  const Vector3D& otherPoint) const {
+Vector3D
+CustomImplicitSurface3::closestPointLocal(const Vector3D& otherPoint) const
+{
   Vector3D pt = clamp(otherPoint, _domain.lowerCorner, _domain.upperCorner);
   for (unsigned int iter = 0; iter < _maxNumOfIterations; ++iter) {
     double sdf = signedDistanceLocal(pt);
@@ -39,9 +44,10 @@ Vector3D CustomImplicitSurface3::closestPointLocal(
   return pt;
 }
 
-bool CustomImplicitSurface3::intersectsLocal(const Ray3D& ray) const {
-  BoundingBoxRayIntersection3D intersection =
-    _domain.closestIntersection(ray);
+bool
+CustomImplicitSurface3::intersectsLocal(const Ray3D& ray) const
+{
+  BoundingBoxRayIntersection3D intersection = _domain.closestIntersection(ray);
 
   if (intersection.isIntersecting) {
     double tStart, tEnd;
@@ -73,12 +79,15 @@ bool CustomImplicitSurface3::intersectsLocal(const Ray3D& ray) const {
   return false;
 }
 
-BoundingBox3D CustomImplicitSurface3::boundingBoxLocal() const {
+BoundingBox3D
+CustomImplicitSurface3::boundingBoxLocal() const
+{
   return _domain;
 }
 
-double CustomImplicitSurface3::signedDistanceLocal(
-  const Vector3D& otherPoint) const {
+double
+CustomImplicitSurface3::signedDistanceLocal(const Vector3D& otherPoint) const
+{
   if (_func) {
     return _func(otherPoint);
   } else {
@@ -86,8 +95,9 @@ double CustomImplicitSurface3::signedDistanceLocal(
   }
 }
 
-Vector3D CustomImplicitSurface3::closestNormalLocal(
-  const Vector3D& otherPoint) const {
+Vector3D
+CustomImplicitSurface3::closestNormalLocal(const Vector3D& otherPoint) const
+{
   Vector3D pt = closestPointLocal(otherPoint);
   Vector3D g = gradientLocal(pt);
   if (g.lengthSquared() > 0.0) {
@@ -97,12 +107,12 @@ Vector3D CustomImplicitSurface3::closestNormalLocal(
   }
 }
 
-SurfaceRayIntersection3 CustomImplicitSurface3::closestIntersectionLocal(
-  const Ray3D& ray) const {
+SurfaceRayIntersection3
+CustomImplicitSurface3::closestIntersectionLocal(const Ray3D& ray) const
+{
   SurfaceRayIntersection3 result;
 
-  BoundingBoxRayIntersection3D intersection =
-    _domain.closestIntersection(ray);
+  BoundingBoxRayIntersection3D intersection = _domain.closestIntersection(ray);
 
   if (intersection.isIntersecting) {
     double tStart, tEnd;
@@ -148,7 +158,9 @@ SurfaceRayIntersection3 CustomImplicitSurface3::closestIntersectionLocal(
   return result;
 }
 
-Vector3D CustomImplicitSurface3::gradientLocal(const Vector3D& x) const {
+Vector3D
+CustomImplicitSurface3::gradientLocal(const Vector3D& x) const
+{
   double left = _func(x - Vector3D(0.5 * _resolution, 0.0, 0.0));
   double right = _func(x + Vector3D(0.5 * _resolution, 0.0, 0.0));
   double bottom = _func(x - Vector3D(0.0, 0.5 * _resolution, 0.0));
@@ -156,56 +168,75 @@ Vector3D CustomImplicitSurface3::gradientLocal(const Vector3D& x) const {
   double back = _func(x - Vector3D(0.0, 0.0, 0.5 * _resolution));
   double front = _func(x + Vector3D(0.0, 0.0, 0.5 * _resolution));
 
-  return Vector3D((right - left) / _resolution, (top - bottom) / _resolution,
+  return Vector3D((right - left) / _resolution,
+                  (top - bottom) / _resolution,
                   (front - back) / _resolution);
 }
 
-CustomImplicitSurface3::Builder CustomImplicitSurface3::builder() {
+CustomImplicitSurface3::Builder
+CustomImplicitSurface3::builder()
+{
   return Builder();
 }
 
 CustomImplicitSurface3::Builder&
 CustomImplicitSurface3::Builder::withSignedDistanceFunction(
-  const std::function<double(const Vector3D&)>& func) {
+  const std::function<double(const Vector3D&)>& func)
+{
   _func = func;
   return *this;
 }
 
-CustomImplicitSurface3::Builder& CustomImplicitSurface3::Builder::withDomain(
-  const BoundingBox3D& domain) {
+CustomImplicitSurface3::Builder&
+CustomImplicitSurface3::Builder::withDomain(const BoundingBox3D& domain)
+{
   _domain = domain;
   return *this;
 }
 
 CustomImplicitSurface3::Builder&
-CustomImplicitSurface3::Builder::withResolution(double resolution) {
+CustomImplicitSurface3::Builder::withResolution(double resolution)
+{
   _resolution = resolution;
   return *this;
 }
 
 CustomImplicitSurface3::Builder&
-CustomImplicitSurface3::Builder::withRayMarchingResolution(double resolution) {
+CustomImplicitSurface3::Builder::withRayMarchingResolution(double resolution)
+{
   _rayMarchingResolution = resolution;
   return *this;
 }
 
 CustomImplicitSurface3::Builder&
-CustomImplicitSurface3::Builder::withMaxNumberOfIterations(
-  unsigned int numIter) {
+CustomImplicitSurface3::Builder::withMaxNumberOfIterations(unsigned int numIter)
+{
   _maxNumOfIterations = numIter;
   return *this;
 }
 
-CustomImplicitSurface3 CustomImplicitSurface3::Builder::build() const {
-  return CustomImplicitSurface3(_func, _domain, _resolution,
-                                _rayMarchingResolution, _maxNumOfIterations,
-                                _transform, _isNormalFlipped);
+CustomImplicitSurface3
+CustomImplicitSurface3::Builder::build() const
+{
+  return CustomImplicitSurface3(_func,
+                                _domain,
+                                _resolution,
+                                _rayMarchingResolution,
+                                _maxNumOfIterations,
+                                _transform,
+                                _isNormalFlipped);
 }
 
-CustomImplicitSurface3Ptr CustomImplicitSurface3::Builder::makeShared() const {
+CustomImplicitSurface3Ptr
+CustomImplicitSurface3::Builder::makeShared() const
+{
   return std::shared_ptr<CustomImplicitSurface3>(
-    new CustomImplicitSurface3(_func, _domain, _resolution,
-                               _rayMarchingResolution, _maxNumOfIterations,
-                               _transform, _isNormalFlipped),
+    new CustomImplicitSurface3(_func,
+                               _domain,
+                               _resolution,
+                               _rayMarchingResolution,
+                               _maxNumOfIterations,
+                               _transform,
+                               _isNormalFlipped),
     [](CustomImplicitSurface3* obj) { delete obj; });
 }

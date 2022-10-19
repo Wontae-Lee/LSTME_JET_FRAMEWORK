@@ -2,41 +2,55 @@
 // Created by LSTME on 2022-10-15.
 //
 
-
-#include <pch.hpp>
 #include <box2.hpp>
+#include <pch.hpp>
 #include <plane2.hpp>
+
 
 using namespace lstme;
 
 Box2::Box2(const Transform2& transform, bool isNormalFlipped)
-  : Surface2(transform, isNormalFlipped) {}
+  : Surface2(transform, isNormalFlipped)
+{
+}
 
-Box2::Box2(const Vector2D& lowerCorner, const Vector2D& upperCorner,
-           const Transform2& transform, bool isNormalFlipped)
-  : Box2(BoundingBox2D(lowerCorner, upperCorner), transform,
-         isNormalFlipped) {}
-
-Box2::Box2(const BoundingBox2D& boundingBox, const Transform2& transform,
+Box2::Box2(const Vector2D& lowerCorner,
+           const Vector2D& upperCorner,
+           const Transform2& transform,
            bool isNormalFlipped)
-  : Surface2(transform, isNormalFlipped), bound(boundingBox) {}
+  : Box2(BoundingBox2D(lowerCorner, upperCorner), transform, isNormalFlipped)
+{
+}
 
-Box2::Box2(const Box2& other) : Surface2(other), bound(other.bound) {}
+Box2::Box2(const BoundingBox2D& boundingBox,
+           const Transform2& transform,
+           bool isNormalFlipped)
+  : Surface2(transform, isNormalFlipped)
+  , bound(boundingBox)
+{
+}
 
-Vector2D Box2::closestPointLocal(const Vector2D& otherPoint) const {
+Box2::Box2(const Box2& other)
+  : Surface2(other)
+  , bound(other.bound)
+{
+}
+
+Vector2D
+Box2::closestPointLocal(const Vector2D& otherPoint) const
+{
   if (bound.contains(otherPoint)) {
-    Plane2 planes[4] = {Plane2(Vector2D(1, 0), bound.upperCorner),
+    Plane2 planes[4] = { Plane2(Vector2D(1, 0), bound.upperCorner),
                          Plane2(Vector2D(0, 1), bound.upperCorner),
                          Plane2(Vector2D(-1, 0), bound.lowerCorner),
-                         Plane2(Vector2D(0, -1), bound.lowerCorner)};
+                         Plane2(Vector2D(0, -1), bound.lowerCorner) };
 
     Vector2D result = planes[0].closestPoint(otherPoint);
     double distanceSquared = result.distanceSquaredTo(otherPoint);
 
     for (int i = 1; i < 4; ++i) {
       Vector2D localResult = planes[i].closestPoint(otherPoint);
-      double localDistanceSquared =
-        localResult.distanceSquaredTo(otherPoint);
+      double localDistanceSquared = localResult.distanceSquaredTo(otherPoint);
 
       if (localDistanceSquared < distanceSquared) {
         result = localResult;
@@ -50,11 +64,13 @@ Vector2D Box2::closestPointLocal(const Vector2D& otherPoint) const {
   }
 }
 
-Vector2D Box2::closestNormalLocal(const Vector2D& otherPoint) const {
-  Plane2 planes[4] = {Plane2(Vector2D(1, 0), bound.upperCorner),
+Vector2D
+Box2::closestNormalLocal(const Vector2D& otherPoint) const
+{
+  Plane2 planes[4] = { Plane2(Vector2D(1, 0), bound.upperCorner),
                        Plane2(Vector2D(0, 1), bound.upperCorner),
                        Plane2(Vector2D(-1, 0), bound.lowerCorner),
-                       Plane2(Vector2D(0, -1), bound.lowerCorner)};
+                       Plane2(Vector2D(0, -1), bound.lowerCorner) };
 
   if (bound.contains(otherPoint)) {
     Vector2D closestNormal = planes[0].normal;
@@ -93,11 +109,15 @@ Vector2D Box2::closestNormalLocal(const Vector2D& otherPoint) const {
   }
 }
 
-bool Box2::intersectsLocal(const Ray2D& ray) const {
+bool
+Box2::intersectsLocal(const Ray2D& ray) const
+{
   return bound.intersects(ray);
 }
 
-SurfaceRayIntersection2 Box2::closestIntersectionLocal(const Ray2D& ray) const {
+SurfaceRayIntersection2
+Box2::closestIntersectionLocal(const Ray2D& ray) const
+{
   SurfaceRayIntersection2 intersection;
   BoundingBoxRayIntersection2D bbRayIntersection =
     bound.closestIntersection(ray);
@@ -110,31 +130,49 @@ SurfaceRayIntersection2 Box2::closestIntersectionLocal(const Ray2D& ray) const {
   return intersection;
 }
 
-BoundingBox2D Box2::boundingBoxLocal() const { return bound; }
+BoundingBox2D
+Box2::boundingBoxLocal() const
+{
+  return bound;
+}
 
-Box2::Builder Box2::builder() { return Builder(); }
+Box2::Builder
+Box2::builder()
+{
+  return Builder();
+}
 
-Box2::Builder& Box2::Builder::withLowerCorner(const Vector2D& pt) {
+Box2::Builder&
+Box2::Builder::withLowerCorner(const Vector2D& pt)
+{
   _lowerCorner = pt;
   return *this;
 }
 
-Box2::Builder& Box2::Builder::withUpperCorner(const Vector2D& pt) {
+Box2::Builder&
+Box2::Builder::withUpperCorner(const Vector2D& pt)
+{
   _upperCorner = pt;
   return *this;
 }
 
-Box2::Builder& Box2::Builder::withBoundingBox(const BoundingBox2D& bbox) {
+Box2::Builder&
+Box2::Builder::withBoundingBox(const BoundingBox2D& bbox)
+{
   _lowerCorner = bbox.lowerCorner;
   _upperCorner = bbox.upperCorner;
   return *this;
 }
 
-Box2 Box2::Builder::build() const {
+Box2
+Box2::Builder::build() const
+{
   return Box2(_lowerCorner, _upperCorner, _transform, _isNormalFlipped);
 }
 
-Box2Ptr Box2::Builder::makeShared() const {
+Box2Ptr
+Box2::Builder::makeShared() const
+{
   return std::shared_ptr<Box2>(
     new Box2(_lowerCorner, _upperCorner, _transform, _isNormalFlipped),
     [](Box2* obj) { delete obj; });

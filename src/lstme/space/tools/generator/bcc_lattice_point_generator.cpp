@@ -2,16 +2,18 @@
 // Created by LSTME on 2022-10-15.
 //
 
-
-#include <pch.hpp>
 #include <bcc_lattice_point_generator.hpp>
+#include <pch.hpp>
+
 
 namespace lstme {
 
-void BccLatticePointGenerator::forEachPoint(
+void
+BccLatticePointGenerator::forEachPoint(
   const BoundingBox3D& boundingBox,
   double spacing,
-  const std::function<bool(const Vector3D&)>& callback) const {
+  const std::function<bool(const Vector3D&)>& callback) const
+{
   double halfSpacing = spacing / 2.0;
   double boxWidth = boundingBox.width();
   double boxHeight = boundingBox.height();
@@ -41,4 +43,4 @@ void BccLatticePointGenerator::forEachPoint(
   }
 }
 
-}  // namespace lstme
+} // namespace lstme

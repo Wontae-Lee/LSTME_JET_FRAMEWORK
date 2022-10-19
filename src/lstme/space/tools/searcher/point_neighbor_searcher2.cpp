@@ -9,8 +9,6 @@
 
 using namespace lstme;
 
-PointNeighborSearcher2::PointNeighborSearcher2() {
-}
+PointNeighborSearcher2::PointNeighborSearcher2() {}
 
-PointNeighborSearcher2::~PointNeighborSearcher2() {
-}
+PointNeighborSearcher2::~PointNeighborSearcher2() {}

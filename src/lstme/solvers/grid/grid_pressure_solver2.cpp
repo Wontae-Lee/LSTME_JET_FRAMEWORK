@@ -4,13 +4,11 @@
 // personal capacity and am not conveying any rights to any intellectual
 // property of any third parties.
 
-#include <pch.hpp>
 #include <grid_pressure_solver2.hpp>
+#include <pch.hpp>
 
 using namespace lstme;
 
-GridPressureSolver2::GridPressureSolver2() {
-}
+GridPressureSolver2::GridPressureSolver2() {}
 
-GridPressureSolver2::~GridPressureSolver2() {
-}
+GridPressureSolver2::~GridPressureSolver2() {}

@@ -14,7 +14,8 @@ namespace lstme {
 //!
 //! This class implements 3rd-order cubic 3-D semi-Lagrangian advection solver.
 //!
-class CubicSemiLagrangian3 final : public SemiLagrangian3 {
+class CubicSemiLagrangian3 final : public SemiLagrangian3
+{
 public:
   CubicSemiLagrangian3();
 
@@ -49,8 +50,6 @@ protected:
 
 typedef std::shared_ptr<CubicSemiLagrangian3> CubicSemiLagrangian3Ptr;
 
-}  // namespace lstme
-
-
+} // namespace lstme
 
 #endif // LSTME_CUBIC_SEMI_LAGRANGIAN3_HPP

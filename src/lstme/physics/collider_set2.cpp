@@ -2,23 +2,29 @@
 // Created by LSTME on 2022-10-15.
 //
 
-#include <pch.hpp>
 #include <collider_set2.hpp>
+#include <pch.hpp>
 #include <vector>
+
 
 using namespace lstme;
 
-ColliderSet2::ColliderSet2() : ColliderSet2(std::vector<Collider2Ptr>()) {
+ColliderSet2::ColliderSet2()
+  : ColliderSet2(std::vector<Collider2Ptr>())
+{
 }
 
-ColliderSet2::ColliderSet2(const std::vector<Collider2Ptr>& others) {
+ColliderSet2::ColliderSet2(const std::vector<Collider2Ptr>& others)
+{
   setSurface(std::make_shared<SurfaceSet2>());
   for (const auto& collider : others) {
     addCollider(collider);
   }
 }
 
-Vector2D ColliderSet2::velocityAt(const Vector2D& point) const {
+Vector2D
+ColliderSet2::velocityAt(const Vector2D& point) const
+{
   size_t closestCollider = kMaxSize;
   double closestDist = kMaxD;
   for (size_t i = 0; i < _colliders.size(); ++i) {
@@ -35,39 +41,48 @@ Vector2D ColliderSet2::velocityAt(const Vector2D& point) const {
   }
 }
 
-void ColliderSet2::addCollider(const Collider2Ptr& collider) {
+void
+ColliderSet2::addCollider(const Collider2Ptr& collider)
+{
   auto surfaceSet = std::dynamic_pointer_cast<SurfaceSet2>(surface());
   _colliders.push_back(collider);
   surfaceSet->addSurface(collider->surface());
 }
 
-size_t ColliderSet2::numberOfColliders() const {
+size_t
+ColliderSet2::numberOfColliders() const
+{
   return _colliders.size();
 }
 
-Collider2Ptr ColliderSet2::collider(size_t i) const {
+Collider2Ptr
+ColliderSet2::collider(size_t i) const
+{
   return _colliders[i];
 }
 
-ColliderSet2::Builder ColliderSet2::builder() {
+ColliderSet2::Builder
+ColliderSet2::builder()
+{
   return Builder();
 }
 
 ColliderSet2::Builder&
-ColliderSet2::Builder::withColliders(
-  const std::vector<Collider2Ptr>& others) {
+ColliderSet2::Builder::withColliders(const std::vector<Collider2Ptr>& others)
+{
   _colliders = others;
   return *this;
 }
 
-ColliderSet2 ColliderSet2::Builder::build() const {
+ColliderSet2
+ColliderSet2::Builder::build() const
+{
   return ColliderSet2(_colliders);
 }
 
-ColliderSet2Ptr ColliderSet2::Builder::makeShared() const {
-  return std::shared_ptr<ColliderSet2>(
-    new ColliderSet2(_colliders),
-    [] (ColliderSet2* obj) {
-      delete obj;
-    });
+ColliderSet2Ptr
+ColliderSet2::Builder::makeShared() const
+{
+  return std::shared_ptr<ColliderSet2>(new ColliderSet2(_colliders),
+                                       [](ColliderSet2* obj) { delete obj; });
 }

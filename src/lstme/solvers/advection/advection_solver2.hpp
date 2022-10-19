@@ -5,17 +5,16 @@
 #ifndef LSTME_ADVECTION_SOLVER2_HPP
 #define LSTME_ADVECTION_SOLVER2_HPP
 
-
 #include <collocated_vector_grid2.hpp>
 #include <constant_scalar_field2.hpp>
 #include <constants.hpp>
 #include <face_centered_grid2.hpp>
-#include <scalar_grid2.hpp>
 #include <limits>
 #include <memory>
+#include <scalar_grid2.hpp>
 
-namespace lstme{
 
+namespace lstme {
 
 //!
 //! \brief Abstract based class for 2-D grid-based advection solver.
@@ -23,7 +22,8 @@ namespace lstme{
 //! The implementation of this abstract base class should solve 2-D advection
 //! equation for scalar and vector fields.
 //!
-class AdvectionSolver2 {
+class AdvectionSolver2
+{
 public:
   AdvectionSolver2();
 
@@ -52,8 +52,7 @@ public:
     const VectorField2& flow,
     double dt,
     ScalarGrid2* output,
-    const ScalarField2& boundarySdf
-    = ConstantScalarField2(kMaxD)) = 0;
+    const ScalarField2& boundarySdf = ConstantScalarField2(kMaxD)) = 0;
 
   //!
   //! \brief Solves advection equation for given collocated vector grid.
@@ -78,8 +77,7 @@ public:
     const VectorField2& flow,
     double dt,
     CollocatedVectorGrid2* output,
-    const ScalarField2& boundarySdf
-    = ConstantScalarField2(kMaxD));
+    const ScalarField2& boundarySdf = ConstantScalarField2(kMaxD));
 
   //!
   //! \brief Solves advection equation for given face-centered vector grid.
@@ -105,17 +103,12 @@ public:
     const VectorField2& flow,
     double dt,
     FaceCenteredGrid2* output,
-    const ScalarField2& boundarySdf
-    = ConstantScalarField2(kMaxD));
+    const ScalarField2& boundarySdf = ConstantScalarField2(kMaxD));
 };
 
 //! Shared pointer type for the 2-D advection solver.
 typedef std::shared_ptr<AdvectionSolver2> AdvectionSolver2Ptr;
 
-
-
 }
-
-
 
 #endif // LSTME_ADVECTION_SOLVER2_HPP

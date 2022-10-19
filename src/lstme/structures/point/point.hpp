@@ -6,8 +6,9 @@
 #define LSTME_POINT_HPP
 
 #include <array>
-#include <type_traits>
 #include <cstddef>
+#include <type_traits>
+
 
 namespace lstme {
 /**

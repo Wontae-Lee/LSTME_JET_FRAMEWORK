@@ -2,8 +2,6 @@
 // Created by LSTME on 2022-10-17.
 //
 
-
-
 #include <pch.hpp>
 
 #include <cg.hpp>
@@ -13,12 +11,16 @@
 using namespace lstme;
 
 FdmCgSolver2::FdmCgSolver2(unsigned int maxNumberOfIterations, double tolerance)
-  : _maxNumberOfIterations(maxNumberOfIterations),
-  _lastNumberOfIterations(0),
-  _tolerance(tolerance),
-  _lastResidual(kMaxD) {}
+  : _maxNumberOfIterations(maxNumberOfIterations)
+  , _lastNumberOfIterations(0)
+  , _tolerance(tolerance)
+  , _lastResidual(kMaxD)
+{
+}
 
-bool FdmCgSolver2::solve(FdmLinearSystem2* system) {
+bool
+FdmCgSolver2::solve(FdmLinearSystem2* system)
+{
   FdmMatrix2& matrix = system->A;
   FdmVector2& solution = system->x;
   FdmVector2& rhs = system->b;
@@ -40,14 +42,25 @@ bool FdmCgSolver2::solve(FdmLinearSystem2* system) {
   _q.set(0.0);
   _s.set(0.0);
 
-  cg<FdmBlas2>(matrix, rhs, _maxNumberOfIterations, _tolerance, &solution,
-               &_r, &_d, &_q, &_s, &_lastNumberOfIterations, &_lastResidual);
+  cg<FdmBlas2>(matrix,
+               rhs,
+               _maxNumberOfIterations,
+               _tolerance,
+               &solution,
+               &_r,
+               &_d,
+               &_q,
+               &_s,
+               &_lastNumberOfIterations,
+               &_lastResidual);
 
   return _lastResidual <= _tolerance ||
          _lastNumberOfIterations < _maxNumberOfIterations;
 }
 
-bool FdmCgSolver2::solveCompressed(FdmCompressedLinearSystem2* system) {
+bool
+FdmCgSolver2::solveCompressed(FdmCompressedLinearSystem2* system)
+{
   MatrixCsrD& matrix = system->A;
   VectorND& solution = system->x;
   VectorND& rhs = system->b;
@@ -66,34 +79,58 @@ bool FdmCgSolver2::solveCompressed(FdmCompressedLinearSystem2* system) {
   _qComp.set(0.0);
   _sComp.set(0.0);
 
-  cg<FdmCompressedBlas2>(matrix, rhs, _maxNumberOfIterations, _tolerance,
-                         &solution, &_rComp, &_dComp, &_qComp, &_sComp,
-                         &_lastNumberOfIterations, &_lastResidual);
+  cg<FdmCompressedBlas2>(matrix,
+                         rhs,
+                         _maxNumberOfIterations,
+                         _tolerance,
+                         &solution,
+                         &_rComp,
+                         &_dComp,
+                         &_qComp,
+                         &_sComp,
+                         &_lastNumberOfIterations,
+                         &_lastResidual);
 
   return _lastResidual <= _tolerance ||
          _lastNumberOfIterations < _maxNumberOfIterations;
 }
 
-unsigned int FdmCgSolver2::maxNumberOfIterations() const {
+unsigned int
+FdmCgSolver2::maxNumberOfIterations() const
+{
   return _maxNumberOfIterations;
 }
 
-unsigned int FdmCgSolver2::lastNumberOfIterations() const {
+unsigned int
+FdmCgSolver2::lastNumberOfIterations() const
+{
   return _lastNumberOfIterations;
 }
 
-double FdmCgSolver2::tolerance() const { return _tolerance; }
+double
+FdmCgSolver2::tolerance() const
+{
+  return _tolerance;
+}
 
-double FdmCgSolver2::lastResidual() const { return _lastResidual; }
+double
+FdmCgSolver2::lastResidual() const
+{
+  return _lastResidual;
+}
 
-void FdmCgSolver2::clearUncompressedVectors() {
+void
+FdmCgSolver2::clearUncompressedVectors()
+{
   _r.clear();
   _d.clear();
   _q.clear();
   _s.clear();
 }
 
-void FdmCgSolver2::clearCompressedVectors() {
+void
+FdmCgSolver2::clearCompressedVectors()
+{
   _rComp.clear();
   _dComp.clear();
   _qComp.clear();

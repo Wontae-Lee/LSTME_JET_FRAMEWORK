@@ -23,92 +23,92 @@ namespace lstme {
 //! \see Zhu, Yongning, and Robert Bridson. "Animating sand as a fluid."
 //!     ACM Transactions on Graphics (TOG). Vol. 34. No. 3. ACM, 3005.
 //!
-class PicSolver3 : public GridFluidSolver3 {
- public:
-    class Builder;
+class PicSolver3 : public GridFluidSolver3
+{
+public:
+  class Builder;
 
-    //! Default constructor.
-    PicSolver3();
+  //! Default constructor.
+  PicSolver3();
 
-    //! Constructs solver with initial grid size.
-    PicSolver3(
-        const Size3& resolution,
-        const Vector3D& gridSpacing,
-        const Vector3D& gridOrigin);
+  //! Constructs solver with initial grid size.
+  PicSolver3(const Size3& resolution,
+             const Vector3D& gridSpacing,
+             const Vector3D& gridOrigin);
 
-    //! Default destructor.
-    virtual ~PicSolver3();
+  //! Default destructor.
+  virtual ~PicSolver3();
 
-    //! Returns the signed-distance field of particles.
-    ScalarGrid3Ptr signedDistanceField() const;
+  //! Returns the signed-distance field of particles.
+  ScalarGrid3Ptr signedDistanceField() const;
 
-    //! Returns the particle system data.
-    const ParticleSystemData3Ptr& particleSystemData() const;
+  //! Returns the particle system data.
+  const ParticleSystemData3Ptr& particleSystemData() const;
 
-    //! Returns the particle emitter.
-    const ParticleEmitter3Ptr& particleEmitter() const;
+  //! Returns the particle emitter.
+  const ParticleEmitter3Ptr& particleEmitter() const;
 
-    //! Sets the particle emitter.
-    void setParticleEmitter(const ParticleEmitter3Ptr& newEmitter);
+  //! Sets the particle emitter.
+  void setParticleEmitter(const ParticleEmitter3Ptr& newEmitter);
 
-    //! Returns builder fox PicSolver3.
-    static Builder builder();
+  //! Returns builder fox PicSolver3.
+  static Builder builder();
 
- protected:
-    Array3<char> _uMarkers;
-    Array3<char> _vMarkers;
-    Array3<char> _wMarkers;
+protected:
+  Array3<char> _uMarkers;
+  Array3<char> _vMarkers;
+  Array3<char> _wMarkers;
 
-    //! Initializes the simulator.
-    void onInitialize() override;
+  //! Initializes the simulator.
+  void onInitialize() override;
 
-    //! Invoked before a simulation time-step begins.
-    void onBeginAdvanceTimeStep(double timeIntervalInSeconds) override;
+  //! Invoked before a simulation time-step begins.
+  void onBeginAdvanceTimeStep(double timeIntervalInSeconds) override;
 
-    //! Computes the advection term of the fluid solver.
-    void computeAdvection(double timeIntervalInSeconds) override;
+  //! Computes the advection term of the fluid solver.
+  void computeAdvection(double timeIntervalInSeconds) override;
 
-    //! Returns the signed-distance field of the fluid.
-    ScalarField3Ptr fluidSdf() const override;
+  //! Returns the signed-distance field of the fluid.
+  ScalarField3Ptr fluidSdf() const override;
 
-    //! Transfers velocity field from particles to grids.
-    virtual void transferFromParticlesToGrids();
+  //! Transfers velocity field from particles to grids.
+  virtual void transferFromParticlesToGrids();
 
-    //! Transfers velocity field from grids to particles.
-    virtual void transferFromGridsToParticles();
+  //! Transfers velocity field from grids to particles.
+  virtual void transferFromGridsToParticles();
 
-    //! Moves particles.
-    virtual void moveParticles(double timeIntervalInSeconds);
+  //! Moves particles.
+  virtual void moveParticles(double timeIntervalInSeconds);
 
- private:
-    size_t _signedDistanceFieldId;
-    ParticleSystemData3Ptr _particles;
-    ParticleEmitter3Ptr _particleEmitter;
+private:
+  size_t _signedDistanceFieldId;
+  ParticleSystemData3Ptr _particles;
+  ParticleEmitter3Ptr _particleEmitter;
 
-    void extrapolateVelocityToAir();
+  void extrapolateVelocityToAir();
 
-    void buildSignedDistanceField();
+  void buildSignedDistanceField();
 
-    void updateParticleEmitter(double timeIntervalInSeconds);
+  void updateParticleEmitter(double timeIntervalInSeconds);
 };
 
 //! Shared pointer type for the PicSolver3.
 typedef std::shared_ptr<PicSolver3> PicSolver3Ptr;
 
-
 //!
 //! \brief Front-end to create PicSolver3 objects step by step.
 //!
 class PicSolver3::Builder final
-    : public GridFluidSolverBuilderBase3<PicSolver3::Builder> {
- public:
-    //! Builds PicSolver3.
-    PicSolver3 build() const;
+  : public GridFluidSolverBuilderBase3<PicSolver3::Builder>
+{
+public:
+  //! Builds PicSolver3.
+  PicSolver3 build() const;
 
-    //! Builds shared pointer of PicSolver3 instance.
-    PicSolver3Ptr makeShared() const;
+  //! Builds shared pointer of PicSolver3 instance.
+  PicSolver3Ptr makeShared() const;
 };
 
-}  // namespace lstme
+} // namespace lstme
 
-#endif  // INCLUDE_LSTME_PIC_SOLVER3_H_
+#endif // INCLUDE_LSTME_PIC_SOLVER3_H_

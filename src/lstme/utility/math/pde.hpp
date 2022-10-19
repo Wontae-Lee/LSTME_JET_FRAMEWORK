@@ -22,8 +22,9 @@ namespace lstme {
 //!
 //! Returns two solutions for each side.
 //!
-template <typename T>
-std::array<T, 2> upwind1(T* D0, T dx);
+template<typename T>
+std::array<T, 2>
+upwind1(T* D0, T dx);
 
 //!
 //! \brief 1-st order upwind differencing.
@@ -34,8 +35,9 @@ std::array<T, 2> upwind1(T* D0, T dx);
 //! D0[0]  D0[1]  D0[2]
 //! \endcode
 //!
-template <typename T>
-T upwind1(T* D0, T dx, bool isDirectionPositive);
+template<typename T>
+T
+upwind1(T* D0, T dx, bool isDirectionPositive);
 
 //!
 //! \brief 2nd-order central differencing.
@@ -46,8 +48,9 @@ T upwind1(T* D0, T dx, bool isDirectionPositive);
 //! D0[0]  D0[1]  D0[2]
 //! \endcode
 //!
-template <typename T>
-T cd2(T* D0, T dx);
+template<typename T>
+T
+cd2(T* D0, T dx);
 
 //!
 //! \brief 3rd-order ENO.
@@ -60,8 +63,9 @@ T cd2(T* D0, T dx);
 //!
 //! Returns two solutions for each side.
 //!
-template <typename T>
-std::array<T, 2> eno3(T* D0, T dx);
+template<typename T>
+std::array<T, 2>
+eno3(T* D0, T dx);
 
 //!
 //! \brief 3rd-order ENO.
@@ -73,8 +77,9 @@ std::array<T, 2> eno3(T* D0, T dx);
 //! \endcode
 //!
 //!
-template <typename T>
-T eno3(T* D0, T dx, bool isDirectionPositive);
+template<typename T>
+T
+eno3(T* D0, T dx, bool isDirectionPositive);
 
 //!
 //! \brief 5th-order Weno.
@@ -88,8 +93,9 @@ T eno3(T* D0, T dx, bool isDirectionPositive);
 //! Returns two solutions for each side.
 //!
 //!
-template <typename T>
-std::array<T, 2> weno5(T* v, T h, T eps = 1.0e-8);
+template<typename T>
+std::array<T, 2>
+weno5(T* v, T h, T eps = 1.0e-8);
 
 //!
 //! \brief 5th-order Weno.
@@ -100,11 +106,10 @@ std::array<T, 2> weno5(T* v, T h, T eps = 1.0e-8);
 //! D0[0]  D0[1]  D0[2]  D0[3]  D0[4]  D0[5]  D0[6]
 //! \endcode
 //!
-template <typename T>
-T weno5(T* v, T h, bool is_velocity_positive, T eps = 1.0e-8);
+template<typename T>
+T
+weno5(T* v, T h, bool is_velocity_positive, T eps = 1.0e-8);
 
-}  // namespace lstme
+} // namespace lstme
 
-
-
-#endif  // INCLUDE_LSTME_PDE_H_
+#endif // INCLUDE_LSTME_PDE_H_

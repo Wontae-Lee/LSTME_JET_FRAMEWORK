@@ -22,9 +22,11 @@ namespace lstme {
 //! \tparam     RandomIterator Random iterator type.
 //! \tparam     T              Value type of a container.
 //!
-template <typename RandomIterator, typename T>
-void serialFill(
-    const RandomIterator& begin, const RandomIterator& end, const T& value);
+template<typename RandomIterator, typename T>
+void
+serialFill(const RandomIterator& begin,
+           const RandomIterator& end,
+           const T& value);
 
 //!
 //! \brief      Makes a for-loop from \p beginIndex \p to endIndex.
@@ -39,9 +41,9 @@ void serialFill(
 //! \tparam     IndexType  Index type.
 //! \tparam     Function   Function type.
 //!
-template <typename IndexType, typename Function>
-void serialFor(
-    IndexType beginIndex, IndexType endIndex, const Function& function);
+template<typename IndexType, typename Function>
+void
+serialFor(IndexType beginIndex, IndexType endIndex, const Function& function);
 
 //!
 //! \brief      Makes a 2D nested for-loop.
@@ -59,13 +61,13 @@ void serialFor(
 //! \tparam     IndexType  Index type.
 //! \tparam     Function   Function type.
 //!
-template <typename IndexType, typename Function>
-void serialFor(
-    IndexType beginIndexX,
-    IndexType endIndexX,
-    IndexType beginIndexY,
-    IndexType endIndexY,
-    const Function& function);
+template<typename IndexType, typename Function>
+void
+serialFor(IndexType beginIndexX,
+          IndexType endIndexX,
+          IndexType beginIndexY,
+          IndexType endIndexY,
+          const Function& function);
 
 //!
 //! \brief      Makes a 3D nested for-loop.
@@ -85,15 +87,15 @@ void serialFor(
 //! \tparam     IndexType   Index type.
 //! \tparam     Function    Function type.
 //!
-template <typename IndexType, typename Function>
-void serialFor(
-    IndexType beginIndexX,
-    IndexType endIndexX,
-    IndexType beginIndexY,
-    IndexType endIndexY,
-    IndexType beginIndexZ,
-    IndexType endIndexZ,
-    const Function& function);
+template<typename IndexType, typename Function>
+void
+serialFor(IndexType beginIndexX,
+          IndexType endIndexX,
+          IndexType beginIndexY,
+          IndexType endIndexY,
+          IndexType beginIndexZ,
+          IndexType endIndexZ,
+          const Function& function);
 
 //!
 //! \brief      Sorts a container.
@@ -106,7 +108,8 @@ void serialFor(
 //! \tparam     RandomIterator Iterator type.
 //!
 template<typename RandomIterator>
-void serialSort(RandomIterator begin, RandomIterator end);
+void
+serialSort(RandomIterator begin, RandomIterator end);
 
 //!
 //! \brief      Sorts a container with a custom compare function.
@@ -123,12 +126,11 @@ void serialSort(RandomIterator begin, RandomIterator end);
 //! \tparam     CompareFunction Compare function type.
 //!
 template<typename RandomIterator, typename SortingFunction>
-void serialSort(
-    RandomIterator begin,
-    RandomIterator end,
-    const SortingFunction& sortingFunction);
+void
+serialSort(RandomIterator begin,
+           RandomIterator end,
+           const SortingFunction& sortingFunction);
 
-}  // namespace lstme
+} // namespace lstme
 
-
-#endif  // INCLUDE_LSTME_SERIAL_H_
+#endif // INCLUDE_LSTME_SERIAL_H_

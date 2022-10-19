@@ -6,10 +6,13 @@
 
 #include <cg.hpp>
 #include <fdm_iccg_solver2.hpp>
+#include <math_utils.hpp>
 
 using namespace lstme;
 
-void FdmIccgSolver2::Preconditioner::build(const FdmMatrix2& matrix) {
+void
+FdmIccgSolver2::Preconditioner::build(const FdmMatrix2& matrix)
+{
   Size2 size = matrix.size();
   A = matrix.constAccessor();
 
@@ -30,7 +33,9 @@ void FdmIccgSolver2::Preconditioner::build(const FdmMatrix2& matrix) {
   });
 }
 
-void FdmIccgSolver2::Preconditioner::solve(const FdmVector2& b, FdmVector2* x) {
+void
+FdmIccgSolver2::Preconditioner::solve(const FdmVector2& b, FdmVector2* x)
+{
   Size2 size = b.size();
   ssize_t sx = static_cast<ssize_t>(size.x);
   ssize_t sy = static_cast<ssize_t>(size.y);
@@ -44,8 +49,7 @@ void FdmIccgSolver2::Preconditioner::solve(const FdmVector2& b, FdmVector2* x) {
   for (ssize_t j = sy - 1; j >= 0; --j) {
     for (ssize_t i = sx - 1; i >= 0; --i) {
       (*x)(i, j) =
-        (y(i, j) -
-         ((i + 1 < sx) ? A(i, j).right * (*x)(i + 1, j) : 0.0) -
+        (y(i, j) - ((i + 1 < sx) ? A(i, j).right * (*x)(i + 1, j) : 0.0) -
          ((j + 1 < sy) ? A(i, j).up * (*x)(i, j + 1) : 0.0)) *
         d(i, j);
     }
@@ -54,7 +58,9 @@ void FdmIccgSolver2::Preconditioner::solve(const FdmVector2& b, FdmVector2* x) {
 
 //
 
-void FdmIccgSolver2::PreconditionerCompressed::build(const MatrixCsrD& matrix) {
+void
+FdmIccgSolver2::PreconditionerCompressed::build(const MatrixCsrD& matrix)
+{
   size_t size = matrix.cols();
   A = &matrix;
 
@@ -88,8 +94,9 @@ void FdmIccgSolver2::PreconditionerCompressed::build(const MatrixCsrD& matrix) {
   });
 }
 
-void FdmIccgSolver2::PreconditionerCompressed::solve(const VectorND& b,
-                                                VectorND* x) {
+void
+FdmIccgSolver2::PreconditionerCompressed::solve(const VectorND& b, VectorND* x)
+{
   const ssize_t size = static_cast<ssize_t>(b.size());
 
   const auto rp = A->rowPointersBegin();
@@ -133,12 +140,16 @@ void FdmIccgSolver2::PreconditionerCompressed::solve(const VectorND& b,
 
 FdmIccgSolver2::FdmIccgSolver2(unsigned int maxNumberOfIterations,
                                double tolerance)
-  : _maxNumberOfIterations(maxNumberOfIterations),
-  _lastNumberOfIterations(0),
-  _tolerance(tolerance),
-  _lastResidualNorm(kMaxD) {}
+  : _maxNumberOfIterations(maxNumberOfIterations)
+  , _lastNumberOfIterations(0)
+  , _tolerance(tolerance)
+  , _lastResidualNorm(kMaxD)
+{
+}
 
-bool FdmIccgSolver2::solve(FdmLinearSystem2* system) {
+bool
+FdmIccgSolver2::solve(FdmLinearSystem2* system)
+{
   FdmMatrix2& matrix = system->A;
   FdmVector2& solution = system->x;
   FdmVector2& rhs = system->b;
@@ -162,9 +173,18 @@ bool FdmIccgSolver2::solve(FdmLinearSystem2* system) {
 
   _precond.build(matrix);
 
-  pcg<FdmBlas2, Preconditioner>(
-    matrix, rhs, _maxNumberOfIterations, _tolerance, &_precond, &solution,
-    &_r, &_d, &_q, &_s, &_lastNumberOfIterations, &_lastResidualNorm);
+  pcg<FdmBlas2, Preconditioner>(matrix,
+                                rhs,
+                                _maxNumberOfIterations,
+                                _tolerance,
+                                &_precond,
+                                &solution,
+                                &_r,
+                                &_d,
+                                &_q,
+                                &_s,
+                                &_lastNumberOfIterations,
+                                &_lastResidualNorm);
 
   LSTME_INFO << "Residual after solving ICCG: " << _lastResidualNorm
              << " Number of ICCG iterations: " << _lastNumberOfIterations;
@@ -173,7 +193,9 @@ bool FdmIccgSolver2::solve(FdmLinearSystem2* system) {
          _lastNumberOfIterations < _maxNumberOfIterations;
 }
 
-bool FdmIccgSolver2::solveCompressed(FdmCompressedLinearSystem2* system) {
+bool
+FdmIccgSolver2::solveCompressed(FdmCompressedLinearSystem2* system)
+{
   MatrixCsrD& matrix = system->A;
   VectorND& solution = system->x;
   VectorND& rhs = system->b;
@@ -194,10 +216,18 @@ bool FdmIccgSolver2::solveCompressed(FdmCompressedLinearSystem2* system) {
 
   _precondComp.build(matrix);
 
-  pcg<FdmCompressedBlas2, PreconditionerCompressed>(
-    matrix, rhs, _maxNumberOfIterations, _tolerance, &_precondComp,
-    &solution, &_rComp, &_dComp, &_qComp, &_sComp, &_lastNumberOfIterations,
-    &_lastResidualNorm);
+  pcg<FdmCompressedBlas2, PreconditionerCompressed>(matrix,
+                                                    rhs,
+                                                    _maxNumberOfIterations,
+                                                    _tolerance,
+                                                    &_precondComp,
+                                                    &solution,
+                                                    &_rComp,
+                                                    &_dComp,
+                                                    &_qComp,
+                                                    &_sComp,
+                                                    &_lastNumberOfIterations,
+                                                    &_lastResidualNorm);
 
   LSTME_INFO << "Residual after solving ICCG: " << _lastResidualNorm
              << " Number of ICCG iterations: " << _lastNumberOfIterations;
@@ -206,25 +236,41 @@ bool FdmIccgSolver2::solveCompressed(FdmCompressedLinearSystem2* system) {
          _lastNumberOfIterations < _maxNumberOfIterations;
 }
 
-unsigned int FdmIccgSolver2::maxNumberOfIterations() const {
+unsigned int
+FdmIccgSolver2::maxNumberOfIterations() const
+{
   return _maxNumberOfIterations;
 }
 
-unsigned int FdmIccgSolver2::lastNumberOfIterations() const {
+unsigned int
+FdmIccgSolver2::lastNumberOfIterations() const
+{
   return _lastNumberOfIterations;
 }
 
-double FdmIccgSolver2::tolerance() const { return _tolerance; }
+double
+FdmIccgSolver2::tolerance() const
+{
+  return _tolerance;
+}
 
-double FdmIccgSolver2::lastResidual() const { return _lastResidualNorm; }
+double
+FdmIccgSolver2::lastResidual() const
+{
+  return _lastResidualNorm;
+}
 
-void FdmIccgSolver2::clearUncompressedVectors() {
+void
+FdmIccgSolver2::clearUncompressedVectors()
+{
   _r.clear();
   _d.clear();
   _q.clear();
   _s.clear();
 }
-void FdmIccgSolver2::clearCompressedVectors() {
+void
+FdmIccgSolver2::clearCompressedVectors()
+{
   _r.clear();
   _d.clear();
   _q.clear();

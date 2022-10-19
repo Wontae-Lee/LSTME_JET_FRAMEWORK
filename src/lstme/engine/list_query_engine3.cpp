@@ -6,20 +6,26 @@
 
 namespace lstme {
 
-template <typename T>
-void ListQueryEngine3<T>::add(const T& item) {
+template<typename T>
+void
+ListQueryEngine3<T>::add(const T& item)
+{
   _items.push_back(item);
 }
 
-template <typename T>
-void ListQueryEngine3<T>::add(const std::vector<T>& items) {
+template<typename T>
+void
+ListQueryEngine3<T>::add(const std::vector<T>& items)
+{
   _items.insert(_items.end(), items.begin(), items.end());
 }
 
-template <typename T>
-bool ListQueryEngine3<T>::intersects(
+template<typename T>
+bool
+ListQueryEngine3<T>::intersects(
   const BoundingBox3D& box,
-  const BoxIntersectionTestFunc3<T>& testFunc) const {
+  const BoxIntersectionTestFunc3<T>& testFunc) const
+{
   for (const auto& item : _items) {
     if (testFunc(item, box)) {
       return true;
@@ -29,9 +35,12 @@ bool ListQueryEngine3<T>::intersects(
   return false;
 }
 
-template <typename T>
-bool ListQueryEngine3<T>::intersects(
-  const Ray3D& ray, const RayIntersectionTestFunc3<T>& testFunc) const {
+template<typename T>
+bool
+ListQueryEngine3<T>::intersects(
+  const Ray3D& ray,
+  const RayIntersectionTestFunc3<T>& testFunc) const
+{
   for (const auto& item : _items) {
     if (testFunc(item, ray)) {
       return true;
@@ -41,10 +50,13 @@ bool ListQueryEngine3<T>::intersects(
   return false;
 }
 
-template <typename T>
-void ListQueryEngine3<T>::forEachIntersectingItem(
-  const BoundingBox3D& box, const BoxIntersectionTestFunc3<T>& testFunc,
-  const IntersectionVisitorFunc3<T>& visitorFunc) const {
+template<typename T>
+void
+ListQueryEngine3<T>::forEachIntersectingItem(
+  const BoundingBox3D& box,
+  const BoxIntersectionTestFunc3<T>& testFunc,
+  const IntersectionVisitorFunc3<T>& visitorFunc) const
+{
   for (const auto& item : _items) {
     if (testFunc(item, box)) {
       visitorFunc(item);
@@ -52,10 +64,13 @@ void ListQueryEngine3<T>::forEachIntersectingItem(
   }
 }
 
-template <typename T>
-void ListQueryEngine3<T>::forEachIntersectingItem(
-  const Ray3D& ray, const RayIntersectionTestFunc3<T>& testFunc,
-  const IntersectionVisitorFunc3<T>& visitorFunc) const {
+template<typename T>
+void
+ListQueryEngine3<T>::forEachIntersectingItem(
+  const Ray3D& ray,
+  const RayIntersectionTestFunc3<T>& testFunc,
+  const IntersectionVisitorFunc3<T>& visitorFunc) const
+{
   for (const auto& item : _items) {
     if (testFunc(item, ray)) {
       visitorFunc(item);
@@ -63,9 +78,12 @@ void ListQueryEngine3<T>::forEachIntersectingItem(
   }
 }
 
-template <typename T>
-ClosestIntersectionQueryResult3<T> ListQueryEngine3<T>::closestIntersection(
-  const Ray3D& ray, const GetRayIntersectionFunc3<T>& testFunc) const {
+template<typename T>
+ClosestIntersectionQueryResult3<T>
+ListQueryEngine3<T>::closestIntersection(
+  const Ray3D& ray,
+  const GetRayIntersectionFunc3<T>& testFunc) const
+{
   ClosestIntersectionQueryResult3<T> best;
   for (const auto& item : _items) {
     double dist = testFunc(item, ray);
@@ -78,10 +96,12 @@ ClosestIntersectionQueryResult3<T> ListQueryEngine3<T>::closestIntersection(
   return best;
 }
 
-template <typename T>
-NearestNeighborQueryResult3<T> ListQueryEngine3<T>::nearest(
+template<typename T>
+NearestNeighborQueryResult3<T>
+ListQueryEngine3<T>::nearest(
   const Vector3D& pt,
-  const NearestNeighborDistanceFunc3<T>& distanceFunc) const {
+  const NearestNeighborDistanceFunc3<T>& distanceFunc) const
+{
   NearestNeighborQueryResult3<T> best;
   for (const auto& item : _items) {
     double dist = distanceFunc(item, pt);
@@ -94,4 +114,4 @@ NearestNeighborQueryResult3<T> ListQueryEngine3<T>::nearest(
   return best;
 }
 
-}  // namespace lstme
+} // namespace lstme

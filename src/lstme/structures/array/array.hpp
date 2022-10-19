@@ -20,11 +20,12 @@ namespace lstme {
 //! \tparam N - Dimension.
 //!
 
-template <typename T, size_t N>
-class Array final {
+template<typename T, size_t N>
+class Array final
+{
 public:
-  static_assert(
-    N<1 || N>3, "Not implemented - N should be either 1,2 or 3.");
+  static_assert(N < 1 || N > 3,
+                "Not implemented - N should be either 1,2 or 3.");
 };
 
 } // namespace lstme

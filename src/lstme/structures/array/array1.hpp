@@ -11,10 +11,10 @@
 #include <fstream>
 #include <functional>
 #include <iostream>
-#include <utility>  // just make cpplint happy..
+#include <utility> // just make cpplint happy..
 #include <vector>
 
-namespace lstme{
+namespace lstme {
 
 //!
 //! \brief 1-D array class.
@@ -25,8 +25,9 @@ namespace lstme{
 //!
 //! \tparam T - Type to store in the array.
 //!
-template <typename T>
-class Array<T, 1> final {
+template<typename T>
+class Array<T, 1> final
+{
 public:
   typedef std::vector<T> ContainerType;
   typedef typename ContainerType::iterator Iterator;
@@ -132,7 +133,7 @@ public:
   //! });
   //! \endcode
   //!
-  template <typename Callback>
+  template<typename Callback>
   void forEach(Callback func) const;
 
   //!
@@ -150,7 +151,7 @@ public:
   //! });
   //! \endcode
   //!
-  template <typename Callback>
+  template<typename Callback>
   void forEachIndex(Callback func) const;
 
   //!
@@ -173,7 +174,7 @@ public:
   //! The parameter type of the callback function doesn't have to be T&, but
   //! const T& or T can be used as well.
   //!
-  template <typename Callback>
+  template<typename Callback>
   void parallelForEach(Callback func);
 
   //!
@@ -193,7 +194,7 @@ public:
   //! });
   //! \endcode
   //!
-  template <typename Callback>
+  template<typename Callback>
   void parallelForEachIndex(Callback func) const;
 
   //! Returns the reference to i-th element.
@@ -225,7 +226,7 @@ private:
 };
 
 //! Type alias for 1-D array.
-template <typename T>
+template<typename T>
 using Array1 = Array<T, 1>;
 
 }

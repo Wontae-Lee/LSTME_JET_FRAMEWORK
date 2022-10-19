@@ -26,9 +26,9 @@ namespace lstme {
 //! \param w The vector of singular values.
 //! \param v Right-most output matrix.
 //!
-template <typename T>
-void svd(const MatrixMxN<T>& a, MatrixMxN<T>& u, VectorN<T>& w,
-         MatrixMxN<T>& v);
+template<typename T>
+void
+svd(const MatrixMxN<T>& a, MatrixMxN<T>& u, VectorN<T>& w, MatrixMxN<T>& v);
 
 //!
 //! \brief Singular value decomposition (SVD).
@@ -42,11 +42,13 @@ void svd(const MatrixMxN<T>& a, MatrixMxN<T>& u, VectorN<T>& w,
 //! \param w The vector of singular values.
 //! \param v Right-most output matrix.
 //!
-template <typename T, size_t M, size_t N>
-void svd(const Matrix<T, M, N>& a, Matrix<T, M, N>& u, Vector<T, N>& w,
-         Matrix<T, N, N>& v);
+template<typename T, size_t M, size_t N>
+void
+svd(const Matrix<T, M, N>& a,
+    Matrix<T, M, N>& u,
+    Vector<T, N>& w,
+    Matrix<T, N, N>& v);
 
-}  // namespace lstme
+} // namespace lstme
 
-
-#endif  // INCLUDE_LSTME_SVD_H_
+#endif // INCLUDE_LSTME_SVD_H_

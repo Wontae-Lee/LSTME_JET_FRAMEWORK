@@ -5,10 +5,14 @@
 #ifndef LSTME_PARALLEL_HPP
 #define LSTME_PARALLEL_HPP
 
-namespace lstme{
+namespace lstme {
 
 //! Execution policy tag.
-enum class ExecutionPolicy { kSerial, kParallel };
+enum class ExecutionPolicy
+{
+  kSerial,
+  kParallel
+};
 
 //!
 //! \brief      Fills from \p begin to \p end with \p value in parallel.
@@ -25,8 +29,10 @@ enum class ExecutionPolicy { kSerial, kParallel };
 //! \tparam     RandomIterator Random iterator type.
 //! \tparam     T              Value type of a container.
 //!
-template <typename RandomIterator, typename T>
-void parallelFill(const RandomIterator& begin, const RandomIterator& end,
+template<typename RandomIterator, typename T>
+void
+parallelFill(const RandomIterator& begin,
+             const RandomIterator& end,
              const T& value,
              ExecutionPolicy policy = ExecutionPolicy::kParallel);
 
@@ -45,8 +51,10 @@ void parallelFill(const RandomIterator& begin, const RandomIterator& end,
 //! \tparam     IndexType  Index type.
 //! \tparam     Function   Function type.
 //!
-template <typename IndexType, typename Function>
-void parallelFor(IndexType beginIndex, IndexType endIndex,
+template<typename IndexType, typename Function>
+void
+parallelFor(IndexType beginIndex,
+            IndexType endIndex,
             const Function& function,
             ExecutionPolicy policy = ExecutionPolicy::kParallel);
 
@@ -67,8 +75,10 @@ void parallelFor(IndexType beginIndex, IndexType endIndex,
 //! \tparam     IndexType  Index type.
 //! \tparam     Function   Function type.
 //!
-template <typename IndexType, typename Function>
-void parallelRangeFor(IndexType beginIndex, IndexType endIndex,
+template<typename IndexType, typename Function>
+void
+parallelRangeFor(IndexType beginIndex,
+                 IndexType endIndex,
                  const Function& function,
                  ExecutionPolicy policy = ExecutionPolicy::kParallel);
 
@@ -90,9 +100,12 @@ void parallelRangeFor(IndexType beginIndex, IndexType endIndex,
 //! \tparam     IndexType  Index type.
 //! \tparam     Function   Function type.
 //!
-template <typename IndexType, typename Function>
-void parallelFor(IndexType beginIndexX, IndexType endIndexX,
-            IndexType beginIndexY, IndexType endIndexY,
+template<typename IndexType, typename Function>
+void
+parallelFor(IndexType beginIndexX,
+            IndexType endIndexX,
+            IndexType beginIndexY,
+            IndexType endIndexY,
             const Function& function,
             ExecutionPolicy policy = ExecutionPolicy::kParallel);
 
@@ -115,9 +128,12 @@ void parallelFor(IndexType beginIndexX, IndexType endIndexX,
 //! \tparam     IndexType  Index type.
 //! \tparam     Function   Function type.
 //!
-template <typename IndexType, typename Function>
-void parallelRangeFor(IndexType beginIndexX, IndexType endIndexX,
-                 IndexType beginIndexY, IndexType endIndexY,
+template<typename IndexType, typename Function>
+void
+parallelRangeFor(IndexType beginIndexX,
+                 IndexType endIndexX,
+                 IndexType beginIndexY,
+                 IndexType endIndexY,
                  const Function& function,
                  ExecutionPolicy policy = ExecutionPolicy::kParallel);
 
@@ -141,10 +157,14 @@ void parallelRangeFor(IndexType beginIndexX, IndexType endIndexX,
 //! \tparam     IndexType   Index type.
 //! \tparam     Function    Function type.
 //!
-template <typename IndexType, typename Function>
-void parallelFor(IndexType beginIndexX, IndexType endIndexX,
-            IndexType beginIndexY, IndexType endIndexY,
-            IndexType beginIndexZ, IndexType endIndexZ,
+template<typename IndexType, typename Function>
+void
+parallelFor(IndexType beginIndexX,
+            IndexType endIndexX,
+            IndexType beginIndexY,
+            IndexType endIndexY,
+            IndexType beginIndexZ,
+            IndexType endIndexZ,
             const Function& function,
             ExecutionPolicy policy = ExecutionPolicy::kParallel);
 
@@ -169,10 +189,14 @@ void parallelFor(IndexType beginIndexX, IndexType endIndexX,
 //! \tparam     IndexType   Index type.
 //! \tparam     Function    Function type.
 //!
-template <typename IndexType, typename Function>
-void parallelRangeFor(IndexType beginIndexX, IndexType endIndexX,
-                 IndexType beginIndexY, IndexType endIndexY,
-                 IndexType beginIndexZ, IndexType endIndexZ,
+template<typename IndexType, typename Function>
+void
+parallelRangeFor(IndexType beginIndexX,
+                 IndexType endIndexX,
+                 IndexType beginIndexY,
+                 IndexType endIndexY,
+                 IndexType beginIndexZ,
+                 IndexType endIndexZ,
                  const Function& function,
                  ExecutionPolicy policy = ExecutionPolicy::kParallel);
 
@@ -193,10 +217,12 @@ void parallelRangeFor(IndexType beginIndexX, IndexType endIndexX,
 //! \tparam     Value      Value type.
 //! \tparam     Function   Reduce function type.
 //!
-template <typename IndexType, typename Value, typename Function,
-         typename Reduce>
-Value parallelReduce(IndexType beginIndex, IndexType endIndex,
-               const Value& identity, const Function& func,
+template<typename IndexType, typename Value, typename Function, typename Reduce>
+Value
+parallelReduce(IndexType beginIndex,
+               IndexType endIndex,
+               const Value& identity,
+               const Function& func,
                const Reduce& reduce,
                ExecutionPolicy policy = ExecutionPolicy::kParallel);
 
@@ -211,8 +237,10 @@ Value parallelReduce(IndexType beginIndex, IndexType endIndex,
 //!
 //! \tparam     RandomIterator Iterator type.
 //!
-template <typename RandomIterator>
-void parallelSort(RandomIterator begin, RandomIterator end,
+template<typename RandomIterator>
+void
+parallelSort(RandomIterator begin,
+             RandomIterator end,
              ExecutionPolicy policy = ExecutionPolicy::kParallel);
 
 //!
@@ -230,16 +258,20 @@ void parallelSort(RandomIterator begin, RandomIterator end,
 //! \tparam     RandomIterator  Iterator type.
 //! \tparam     CompareFunction Compare function type.
 //!
-template <typename RandomIterator, typename CompareFunction>
-void parallelSort(RandomIterator begin, RandomIterator end,
+template<typename RandomIterator, typename CompareFunction>
+void
+parallelSort(RandomIterator begin,
+             RandomIterator end,
              CompareFunction compare,
              ExecutionPolicy policy = ExecutionPolicy::kParallel);
 
 //! Sets maximum number of threads to use.
-void setMaxNumberOfThreads(unsigned int numThreads);
+void
+setMaxNumberOfThreads(unsigned int numThreads);
 
 //! Returns maximum number of threads to use.
-unsigned int maxNumberOfThreads();
+unsigned int
+maxNumberOfThreads();
 
 }
 #endif // LSTME_PARALLEL_HPP

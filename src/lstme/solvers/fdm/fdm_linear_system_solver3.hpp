@@ -14,22 +14,23 @@
 namespace lstme {
 
 //! Abstract base class for 3-D finite difference-type linear system solver.
-class FdmLinearSystemSolver3 {
- public:
-    FdmLinearSystemSolver3() = default;
+class FdmLinearSystemSolver3
+{
+public:
+  FdmLinearSystemSolver3() = default;
 
-    virtual ~FdmLinearSystemSolver3() = default;
+  virtual ~FdmLinearSystemSolver3() = default;
 
-    //! Solves the given linear system.
-    virtual bool solve(FdmLinearSystem3* system) = 0;
+  //! Solves the given linear system.
+  virtual bool solve(FdmLinearSystem3* system) = 0;
 
-    //! Solves the given compressed linear system.
-    virtual bool solveCompressed(FdmCompressedLinearSystem3*) { return false; }
+  //! Solves the given compressed linear system.
+  virtual bool solveCompressed(FdmCompressedLinearSystem3*) { return false; }
 };
 
 //! Shared pointer type for the FdmLinearSystemSolver3.
 typedef std::shared_ptr<FdmLinearSystemSolver3> FdmLinearSystemSolver3Ptr;
 
-}  // namespace lstme
+} // namespace lstme
 
-#endif  // INCLUDE_LSTME_FDM_LINEAR_SYSTEM_SOLVER3_H_
+#endif // INCLUDE_LSTME_FDM_LINEAR_SYSTEM_SOLVER3_H_

@@ -6,15 +6,18 @@
 
 #include <anisotropic_points_to_implicit2.hpp>
 #include <fmm_level_set_solver2.hpp>
+#include <math_utils.hpp>
 #include <point_kdtree_searcher2.hpp>
 #include <sph_kernels2.hpp>
 #include <sph_system_data2.hpp>
 #include <svd.hpp>
-#include <math_utils.hpp>
+
 
 using namespace lstme;
 
-inline double p(double distance) {
+inline double
+p(double distance)
+{
   const double distanceSquared = distance * distance;
 
   if (distanceSquared >= 1.0) {
@@ -25,7 +28,9 @@ inline double p(double distance) {
   }
 }
 
-inline double wij(double distance, double r) {
+inline double
+wij(double distance, double r)
+{
   if (distance < r) {
     return 1.0 - cubic(distance / r);
   } else {
@@ -33,11 +38,15 @@ inline double wij(double distance, double r) {
   }
 }
 
-inline Matrix2x2D vvt(const Vector2D& v) {
+inline Matrix2x2D
+vvt(const Vector2D& v)
+{
   return Matrix2x2D(v.x * v.x, v.x * v.y, v.y * v.x, v.y * v.y);
 }
 
-inline double w(const Vector2D& r, const Matrix2x2D& g, double gDet) {
+inline double
+w(const Vector2D& r, const Matrix2x2D& g, double gDet)
+{
   static const double sigma = 4.0 / kPiD;
   return sigma * gDet * p((g * r).length());
 }
@@ -45,16 +54,24 @@ inline double w(const Vector2D& r, const Matrix2x2D& g, double gDet) {
 //
 
 AnisotropicPointsToImplicit2::AnisotropicPointsToImplicit2(
-  double kernelRadius, double cutOffDensity, double positionSmoothingFactor,
-  size_t minNumNeighbors, bool isOutputSdf)
-  : _kernelRadius(kernelRadius),
-  _cutOffDensity(cutOffDensity),
-  _positionSmoothingFactor(positionSmoothingFactor),
-  _minNumNeighbors(minNumNeighbors),
-  _isOutputSdf(isOutputSdf) {}
+  double kernelRadius,
+  double cutOffDensity,
+  double positionSmoothingFactor,
+  size_t minNumNeighbors,
+  bool isOutputSdf)
+  : _kernelRadius(kernelRadius)
+  , _cutOffDensity(cutOffDensity)
+  , _positionSmoothingFactor(positionSmoothingFactor)
+  , _minNumNeighbors(minNumNeighbors)
+  , _isOutputSdf(isOutputSdf)
+{
+}
 
-void AnisotropicPointsToImplicit2::convert(
-  const ConstArrayAccessor1<Vector2D>& points, ScalarGrid2* output) const {
+void
+AnisotropicPointsToImplicit2::convert(
+  const ConstArrayAccessor1<Vector2D>& points,
+  ScalarGrid2* output) const
+{
   if (output == nullptr) {
     LSTME_WARN << "Null scalar grid output pointer provided.";
     return;
@@ -149,7 +166,7 @@ void AnisotropicPointsToImplicit2::convert(
       const auto invSigma = Matrix2x2D::makeScaleMatrix(1.0 / v);
 
       // Compute G
-      const double scale = std::sqrt(v.x * v.y);  // area preservation
+      const double scale = std::sqrt(v.x * v.y); // area preservation
       const Matrix2x2D g = invH * scale * (w * invSigma * u.transposed());
       gs[i] = g;
     }
@@ -172,8 +189,7 @@ void AnisotropicPointsToImplicit2::convert(
     double sum = 0.0;
     meanNeighborSearcher2.forEachNearbyPoint(
       x, r, [&](size_t i, const Vector2D& neighborPosition) {
-        sum += m / d[i] *
-               w(neighborPosition - x, gs[i], gs[i].determinant());
+        sum += m / d[i] * w(neighborPosition - x, gs[i], gs[i].determinant());
       });
 
     return _cutOffDensity - sum;

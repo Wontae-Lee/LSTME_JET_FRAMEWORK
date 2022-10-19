@@ -5,11 +5,10 @@
 #ifndef LSTME_ARRAY_ACCESSOR3_HPP
 #define LSTME_ARRAY_ACCESSOR3_HPP
 
-
 #include <array_accessor.hpp>
 #include <point3.hpp>
 #include <size3.hpp>
-#include <utility>  // just make cpplint happy..
+#include <utility> // just make cpplint happy..
 
 namespace lstme {
 
@@ -26,8 +25,9 @@ namespace lstme {
 //!
 //! \tparam T - Array value type.
 //!
-template <typename T>
-class ArrayAccessor<T, 3> final {
+template<typename T>
+class ArrayAccessor<T, 3> final
+{
 public:
   //! Constructs empty 3-D array accessor.
   ArrayAccessor();
@@ -42,8 +42,7 @@ public:
   //! \param height Height of the 3-D array.
   //! \param depth Depth of the 3-D array.
   //! \param data Raw array pointer.
-  ArrayAccessor(
-    size_t width, size_t height, size_t depth, T* const data);
+  ArrayAccessor(size_t width, size_t height, size_t depth, T* const data);
 
   //! Copy constructor.
   ArrayAccessor(const ArrayAccessor& other);
@@ -135,7 +134,7 @@ public:
   //! });
   //! \endcode
   //!
-  template <typename Callback>
+  template<typename Callback>
   void forEach(Callback func) const;
 
   //!
@@ -168,7 +167,7 @@ public:
   //! });
   //! \endcode
   //!
-  template <typename Callback>
+  template<typename Callback>
   void forEachIndex(Callback func) const;
 
   //!
@@ -191,7 +190,7 @@ public:
   //! The parameter type of the callback function doesn't have to be T&, but
   //! const T& or T can be used as well.
   //!
-  template <typename Callback>
+  template<typename Callback>
   void parallelForEach(Callback func);
 
   //!
@@ -212,7 +211,7 @@ public:
   //! });
   //! \endcode
   //!
-  template <typename Callback>
+  template<typename Callback>
   void parallelForEachIndex(Callback func) const;
 
   //! Returns the linear index of the given 3-D coordinate (pt.x, pt.y, pt.z).
@@ -251,8 +250,8 @@ private:
 };
 
 //! Type alias for 3-D array accessor.
-template <typename T> using ArrayAccessor3 = ArrayAccessor<T, 3>;
-
+template<typename T>
+using ArrayAccessor3 = ArrayAccessor<T, 3>;
 
 //!
 //! \brief 3-D read-only array accessor class.
@@ -265,8 +264,9 @@ template <typename T> using ArrayAccessor3 = ArrayAccessor<T, 3>;
 //!
 //! \see Array<T, 3>
 //!
-template <typename T>
-class ConstArrayAccessor<T, 3> {
+template<typename T>
+class ConstArrayAccessor<T, 3>
+{
 public:
   //! Constructs empty 3-D read-only array accessor.
   ConstArrayAccessor();
@@ -281,8 +281,10 @@ public:
   //! \param height Height of the 3-D array.
   //! \param depth Depth of the 3-D array.
   //! \param data Raw array pointer.
-  ConstArrayAccessor(
-    size_t width, size_t height, size_t depth, const T* const data);
+  ConstArrayAccessor(size_t width,
+                     size_t height,
+                     size_t depth,
+                     const T* const data);
 
   //! Constructs a read-only array accessor from read/write accessor.
   explicit ConstArrayAccessor(const ArrayAccessor<T, 3>& other);
@@ -350,7 +352,7 @@ public:
   //! });
   //! \endcode
   //!
-  template <typename Callback>
+  template<typename Callback>
   void forEach(Callback func) const;
 
   //!
@@ -383,7 +385,7 @@ public:
   //! });
   //! \endcode
   //!
-  template <typename Callback>
+  template<typename Callback>
   void forEachIndex(Callback func) const;
 
   //!
@@ -404,7 +406,7 @@ public:
   //! });
   //! \endcode
   //!
-  template <typename Callback>
+  template<typename Callback>
   void parallelForEachIndex(Callback func) const;
 
   //! Returns the linear index of the given 3-D coordinate (pt.x, pt.y, pt.z).
@@ -428,8 +430,9 @@ private:
 };
 
 //! Type alias for 3-D const array accessor.
-template <typename T> using ConstArrayAccessor3 = ConstArrayAccessor<T, 3>;
+template<typename T>
+using ConstArrayAccessor3 = ConstArrayAccessor<T, 3>;
 
-}  // namespace lstme
+} // namespace lstme
 
 #endif // LSTME_ARRAY_ACCESSOR3_HPP

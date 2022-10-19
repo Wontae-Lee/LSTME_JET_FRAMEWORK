@@ -18,7 +18,8 @@ namespace lstme {
 //! \see Jiang, Chenfanfu, et al. "The affine particle-in-cell method."
 //!      ACM Transactions on Graphics (TOG) 34.4 (2015): 51.
 //!
-class ApicSolver3 : public PicSolver3 {
+class ApicSolver3 : public PicSolver3
+{
 public:
   class Builder;
 
@@ -26,10 +27,9 @@ public:
   ApicSolver3();
 
   //! Constructs solver with initial grid size.
-  ApicSolver3(
-    const Size3& resolution,
-    const Vector3D& gridSpacing,
-    const Vector3D& gridOrigin);
+  ApicSolver3(const Size3& resolution,
+              const Vector3D& gridSpacing,
+              const Vector3D& gridOrigin);
 
   //! Default destructor.
   virtual ~ApicSolver3();
@@ -53,12 +53,12 @@ private:
 //! Shared pointer type for the ApicSolver3.
 typedef std::shared_ptr<ApicSolver3> ApicSolver3Ptr;
 
-
 //!
 //! \brief Front-end to create ApicSolver3 objects step by step.
 //!
 class ApicSolver3::Builder final
-  : public GridFluidSolverBuilderBase3<ApicSolver3::Builder> {
+  : public GridFluidSolverBuilderBase3<ApicSolver3::Builder>
+{
 public:
   //! Builds ApicSolver3.
   ApicSolver3 build() const;
@@ -67,6 +67,6 @@ public:
   ApicSolver3Ptr makeShared() const;
 };
 
-}  // namespace lstme
+} // namespace lstme
 
 #endif // LSTME_APIC_SOLVER3_HPP

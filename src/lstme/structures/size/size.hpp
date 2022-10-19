@@ -7,6 +7,4 @@
 
 #include <point.hpp>
 
-
 #endif // LSTME_POINT_HPP
-

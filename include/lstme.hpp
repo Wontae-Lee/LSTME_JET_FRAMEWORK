@@ -6,10 +6,11 @@
 
 #ifndef INCLUDE_LSTME_LSTME_H_
 #define INCLUDE_LSTME_LSTME_H_
-#include "space/utility/sampler/array_samplers.hpp"
-#include "space/utility/sampler/array_samplers1.hpp"
-#include "space/utility/sampler/array_samplers2.hpp"
-#include "space/utility/sampler/array_samplers3.hpp"
+
+
+#include <array_samplers1.hpp>
+#include <array_samplers2.hpp>
+#include <array_samplers3.hpp>
 #include <advection_solver2.hpp>
 #include <advection_solver3.hpp>
 #include <animation.hpp>
@@ -142,7 +143,6 @@
 #include <list_query_engine2.hpp>
 #include <list_query_engine3.hpp>
 #include <logging.hpp>
-#include <lstme.hpp>
 #include <macros.hpp>
 #include <marching_cubes.hpp>
 #include <math_utils.hpp>

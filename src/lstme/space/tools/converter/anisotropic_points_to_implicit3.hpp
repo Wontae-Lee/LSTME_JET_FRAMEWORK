@@ -21,7 +21,8 @@ namespace lstme {
 //!      fluids using anisotropic kernels." ACM Transactions on Graphics (TOG)
 //!      32.1 (2013): 5.
 //!
-class AnisotropicPointsToImplicit3 final : public PointsToImplicit3 {
+class AnisotropicPointsToImplicit3 final : public PointsToImplicit3
+{
 public:
   //!
   //! \brief Constructs the converter with given parameters.
@@ -54,5 +55,5 @@ private:
 typedef std::shared_ptr<AnisotropicPointsToImplicit3>
   AnisotropicPointsToImplicit3Ptr;
 
-}  // namespace lstme
+} // namespace lstme
 #endif // LSTME_ANISOTROPIC_POINTS_TO_IMPLICIT3_HPP

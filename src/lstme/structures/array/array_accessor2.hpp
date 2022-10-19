@@ -8,11 +8,10 @@
 #include <array_accessor.hpp>
 #include <point2.hpp>
 
-
 #include <array_accessor.hpp>
 #include <point2.hpp>
 #include <size2.hpp>
-#include <utility>  // just make cpplint happy..
+#include <utility> // just make cpplint happy..
 
 namespace lstme {
 
@@ -29,8 +28,9 @@ namespace lstme {
 //!
 //! \tparam T - Array value type.
 //!
-template <typename T>
-class ArrayAccessor<T, 2> final {
+template<typename T>
+class ArrayAccessor<T, 2> final
+{
 public:
   //! Constructs empty 2-D array accessor.
   ArrayAccessor();
@@ -131,7 +131,7 @@ public:
   //! });
   //! \endcode
   //!
-  template <typename Callback>
+  template<typename Callback>
   void forEach(Callback func) const;
 
   //!
@@ -162,7 +162,7 @@ public:
   //! });
   //! \endcode
   //!
-  template <typename Callback>
+  template<typename Callback>
   void forEachIndex(Callback func) const;
 
   //!
@@ -185,9 +185,9 @@ public:
   //! The parameter type of the callback function doesn't have to be T&, but
   //! const T& or T can be used as well.
   //!
-  template <typename Callback>
+  template<typename Callback>
   void parallelForEach(Callback func);
- 
+
   //!
   //! \brief Iterates the array and invoke given \p func for each index in
   //!     parallel using multi-threading.
@@ -206,7 +206,7 @@ public:
   //! });
   //! \endcode
   //!
-  template <typename Callback>
+  template<typename Callback>
   void parallelForEachIndex(Callback func) const;
 
   //! Returns the linear index of the given 2-D coordinate (pt.x, pt.y).
@@ -245,8 +245,8 @@ private:
 };
 
 //! Type alias for 2-D array accessor.
-template <typename T> using ArrayAccessor2 = ArrayAccessor<T, 2>;
-
+template<typename T>
+using ArrayAccessor2 = ArrayAccessor<T, 2>;
 
 //!
 //! \brief 2-D read-only array accessor class.
@@ -259,8 +259,9 @@ template <typename T> using ArrayAccessor2 = ArrayAccessor<T, 2>;
 //!
 //! \see Array2<T, 2>
 //!
-template <typename T>
-class ConstArrayAccessor<T, 2> {
+template<typename T>
+class ConstArrayAccessor<T, 2>
+{
 public:
   //! Constructs empty 2-D read-only array accessor.
   ConstArrayAccessor();
@@ -274,8 +275,7 @@ public:
   //! \param width Width of the 2-D array.
   //! \param height Height of the 2-D array.
   //! \param data Raw array pointer.
-  ConstArrayAccessor(
-    size_t width, size_t height, const T* const data);
+  ConstArrayAccessor(size_t width, size_t height, const T* const data);
 
   //! Constructs a read-only array accessor from read/write accessor.
   explicit ConstArrayAccessor(const ArrayAccessor<T, 2>& other);
@@ -338,7 +338,7 @@ public:
   //! });
   //! \endcode
   //!
-  template <typename Callback>
+  template<typename Callback>
   void forEach(Callback func) const;
 
   //!
@@ -369,7 +369,7 @@ public:
   //! });
   //! \endcode
   //!
-  template <typename Callback>
+  template<typename Callback>
   void forEachIndex(Callback func) const;
 
   //!
@@ -390,7 +390,7 @@ public:
   //! });
   //! \endcode
   //!
-  template <typename Callback>
+  template<typename Callback>
   void parallelForEachIndex(Callback func) const;
 
   //! Returns the linear index of the given 2-D coordinate (pt.x, pt.y).
@@ -414,9 +414,9 @@ private:
 };
 
 //! Type alias for 2-D const array accessor.
-template <typename T> using ConstArrayAccessor2 = ConstArrayAccessor<T, 2>;
+template<typename T>
+using ConstArrayAccessor2 = ConstArrayAccessor<T, 2>;
 
-}  // namespace lstme
-
+} // namespace lstme
 
 #endif // LSTME_ARRAY_ACCESSOR2_HPP

@@ -8,7 +8,7 @@
 #include <array_accessor.hpp>
 #include <utility>
 
-namespace lstme{
+namespace lstme {
 
 //!
 //! \brief 1-D array accessor class.
@@ -21,8 +21,9 @@ namespace lstme{
 //!
 //! \tparam T - Array value type.
 //!
-template <typename T>
-class ArrayAccessor<T, 1> final {
+template<typename T>
+class ArrayAccessor<T, 1> final
+{
 public:
   //! Constructs empty 1-D array accessor.
   ArrayAccessor();
@@ -82,7 +83,7 @@ public:
   //! });
   //! \endcode
   //!
-  template <typename Callback>
+  template<typename Callback>
   void forEach(Callback func) const;
 
   //!
@@ -101,7 +102,7 @@ public:
   //! });
   //! \endcode
   //!
-  template <typename Callback>
+  template<typename Callback>
   void forEachIndex(Callback func) const;
 
   //!
@@ -125,7 +126,7 @@ public:
   //! The parameter type of the callback function doesn't have to be T&, but
   //! const T& or T can be used as well.
   //!
-  template <typename Callback>
+  template<typename Callback>
   void parallelForEach(Callback func);
 
   //!
@@ -146,7 +147,7 @@ public:
   //! });
   //! \endcode
   //!
-  template <typename Callback>
+  template<typename Callback>
   void parallelForEachIndex(Callback func) const;
 
   //! Returns the reference to i-th element.
@@ -167,8 +168,8 @@ private:
 };
 
 //! Type alias for 1-D array accessor.
-template <typename T> using ArrayAccessor1 = ArrayAccessor<T, 1>;
-
+template<typename T>
+using ArrayAccessor1 = ArrayAccessor<T, 1>;
 
 //!
 //! \brief 1-D read-only array accessor class.
@@ -178,8 +179,9 @@ template <typename T> using ArrayAccessor1 = ArrayAccessor<T, 1>;
 //! Thus, it is more like a random access iterator, but with multi-dimension
 //! support.
 //!
-template <typename T>
-class ConstArrayAccessor<T, 1> {
+template<typename T>
+class ConstArrayAccessor<T, 1>
+{
 public:
   //! Constructs empty 1-D array accessor.
   ConstArrayAccessor();
@@ -224,7 +226,7 @@ public:
   //! });
   //! \endcode
   //!
-  template <typename Callback>
+  template<typename Callback>
   void forEach(Callback func) const;
 
   //!
@@ -243,7 +245,7 @@ public:
   //! });
   //! \endcode
   //!
-  template <typename Callback>
+  template<typename Callback>
   void forEachIndex(Callback func) const;
 
   //!
@@ -264,7 +266,7 @@ public:
   //! });
   //! \endcode
   //!
-  template <typename Callback>
+  template<typename Callback>
   void parallelForEachIndex(Callback func) const;
 
   //! Returns the const reference to i-th element.
@@ -276,10 +278,9 @@ private:
 };
 
 //! Type alias for 1-D const array accessor.
-template <typename T> using ConstArrayAccessor1 = ConstArrayAccessor<T, 1>;
+template<typename T>
+using ConstArrayAccessor1 = ConstArrayAccessor<T, 1>;
 
 }
-
-
 
 #endif // LSTME_ARRAY_ACCESSOR1_HPP

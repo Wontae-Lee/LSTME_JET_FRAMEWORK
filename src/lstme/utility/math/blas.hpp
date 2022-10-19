@@ -5,8 +5,9 @@
 #ifndef LSTME_BLAS_HPP
 #define LSTME_BLAS_HPP
 
-#include <vector4.hpp>
 #include <matrix4x4.hpp>
+#include <vector4.hpp>
+
 
 namespace lstme {
 
@@ -21,8 +22,9 @@ namespace lstme {
 //! performing linear algebra routines (such as conjugate grapdient) for the
 //! custom vector/matrix types.
 //!
-template <typename S, typename V, typename M>
-struct Blas {
+template<typename S, typename V, typename M>
+struct Blas
+{
   typedef S ScalarType;
   typedef V VectorType;
   typedef M MatrixType;
@@ -44,24 +46,19 @@ struct Blas {
 
   //! Performs ax + y operation where \p a is a matrix and \p x and \p y are
   //! vectors.
-  static void axpy(
-    ScalarType a,
-    const VectorType& x,
-    const VectorType& y,
-    VectorType* result);
+  static void axpy(ScalarType a,
+                   const VectorType& x,
+                   const VectorType& y,
+                   VectorType* result);
 
   //! Performs matrix-vector multiplication.
-  static void mvm(
-    const MatrixType& m,
-    const VectorType& v,
-    VectorType* result);
+  static void mvm(const MatrixType& m, const VectorType& v, VectorType* result);
 
   //! Computes residual vector (b - ax).
-  static void residual(
-    const MatrixType& a,
-    const VectorType& x,
-    const VectorType& b,
-    VectorType* result);
+  static void residual(const MatrixType& a,
+                       const VectorType& x,
+                       const VectorType& b,
+                       VectorType* result);
 
   //! Returns L2-norm of the given vector \p v.
   static ScalarType l2Norm(const VectorType& v);
@@ -70,6 +67,6 @@ struct Blas {
   static ScalarType lInfNorm(const VectorType& v);
 };
 
-}  // namespace lstme
+} // namespace lstme
 
 #endif // LSTME_BLAS_HPP

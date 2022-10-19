@@ -2,18 +2,23 @@
 // Created by LSTME on 2022-10-13.
 //
 
-#include <constants.hpp>
 #include <cmath>
+#include <constants.hpp>
+
 
 namespace lstme {
 
-template <typename T>
-bool isInsideSdf(T phi) {
+template<typename T>
+bool
+isInsideSdf(T phi)
+{
   return phi < 0;
 }
 
-template <typename T>
-inline T smearedHeavisideSdf(T phi) {
+template<typename T>
+inline T
+smearedHeavisideSdf(T phi)
+{
   if (phi > 1.5) {
     return 1;
   } else {
@@ -26,8 +31,10 @@ inline T smearedHeavisideSdf(T phi) {
   }
 }
 
-template <typename T>
-inline T smearedDeltaSdf(T phi) {
+template<typename T>
+inline T
+smearedDeltaSdf(T phi)
+{
   if (std::fabs(phi) > 1.5) {
     return 0;
   } else {
@@ -35,8 +42,10 @@ inline T smearedDeltaSdf(T phi) {
   }
 }
 
-template <typename T>
-T fractionInsideSdf(T phi0, T phi1) {
+template<typename T>
+T
+fractionInsideSdf(T phi0, T phi1)
+{
   if (isInsideSdf(phi0) && isInsideSdf(phi1)) {
     return 1;
   } else if (isInsideSdf(phi0) && !isInsideSdf(phi1)) {
@@ -48,19 +57,23 @@ T fractionInsideSdf(T phi0, T phi1) {
   }
 }
 
-template <typename T>
-void cycleArray(T* arr, int size) {
+template<typename T>
+void
+cycleArray(T* arr, int size)
+{
   T t = arr[0];
-  for (int i = 0; i < size - 1; ++i) arr[i] = arr[i + 1];
+  for (int i = 0; i < size - 1; ++i)
+    arr[i] = arr[i + 1];
   arr[size - 1] = t;
 }
 
-template <typename T>
-T fractionInside(T phiBottomLeft, T phiBottomRight, T phiTopLeft,
-               T phiTopRight) {
+template<typename T>
+T
+fractionInside(T phiBottomLeft, T phiBottomRight, T phiTopLeft, T phiTopRight)
+{
   int inside_count = (phiBottomLeft < 0 ? 1 : 0) + (phiTopLeft < 0 ? 1 : 0) +
                      (phiBottomRight < 0 ? 1 : 0) + (phiTopRight < 0 ? 1 : 0);
-  T list[] = {phiBottomLeft, phiBottomRight, phiTopRight, phiTopLeft};
+  T list[] = { phiBottomLeft, phiBottomRight, phiTopRight, phiTopLeft };
 
   if (inside_count == 4) {
     return 1;
@@ -81,11 +94,11 @@ T fractionInside(T phiBottomLeft, T phiBottomRight, T phiTopLeft,
       cycleArray(list, 4);
     }
 
-    if (list[1] < 0) {  // the matching signs are adjacent
+    if (list[1] < 0) { // the matching signs are adjacent
       T side_left = fractionInsideSdf(list[0], list[3]);
       T side_right = fractionInsideSdf(list[1], list[2]);
       return 0.5f * (side_left + side_right);
-    } else {  // matching signs are diagonally opposite
+    } else { // matching signs are diagonally opposite
       // determine the centre point's sign to disambiguate this case
       T middle_point = 0.25f * (list[0] + list[1] + list[2] + list[3]);
       if (middle_point < 0) {
@@ -133,8 +146,10 @@ T fractionInside(T phiBottomLeft, T phiBottomRight, T phiTopLeft,
   }
 }
 
-template <typename T>
-T distanceToZeroLevelSet(T phi0, T phi1) {
+template<typename T>
+T
+distanceToZeroLevelSet(T phi0, T phi1)
+{
   if (std::fabs(phi0) + std::fabs(phi1) > kEpsilonD) {
     return std::fabs(phi0) / (std::fabs(phi0) + std::fabs(phi1));
   } else {
@@ -142,4 +157,4 @@ T distanceToZeroLevelSet(T phi0, T phi1) {
   }
 }
 
-}  // namespace lstme
+} // namespace lstme

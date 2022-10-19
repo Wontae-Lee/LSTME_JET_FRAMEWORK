@@ -5,11 +5,9 @@
 #ifndef LSTME_CELL_CENTERED_VECTOR_GRID2_HPP
 #define LSTME_CELL_CENTERED_VECTOR_GRID2_HPP
 
-
-
 #include <array2.hpp>
 #include <collocated_vector_grid2.hpp>
-#include <utility>  // just make cpplint happy..
+#include <utility> // just make cpplint happy..
 
 namespace lstme {
 
@@ -21,7 +19,8 @@ namespace lstme {
 //! point at the center of a grid cell. Thus, the dimension of data points are
 //! equal to the dimension of the cells.
 //!
-class CellCenteredVectorGrid2 final : public CollocatedVectorGrid2 {
+class CellCenteredVectorGrid2 final : public CollocatedVectorGrid2
+{
 public:
   LSTME_GRID2_TYPE_NAME(CellCenteredVectorGrid2)
 
@@ -32,23 +31,21 @@ public:
 
   //! Constructs a grid with given resolution, grid spacing, origin and
   //! initial value.
-  CellCenteredVectorGrid2(
-    size_t resolutionX,
-    size_t resolutionY,
-    double gridSpacingX = 1.0,
-    double gridSpacingY = 1.0,
-    double originX = 0.0,
-    double originY = 0.0,
-    double initialValueU = 0.0,
-    double initialValueV = 0.0);
+  CellCenteredVectorGrid2(size_t resolutionX,
+                          size_t resolutionY,
+                          double gridSpacingX = 1.0,
+                          double gridSpacingY = 1.0,
+                          double originX = 0.0,
+                          double originY = 0.0,
+                          double initialValueU = 0.0,
+                          double initialValueV = 0.0);
 
   //! Constructs a grid with given resolution, grid spacing, origin and
   //! initial value.
-  CellCenteredVectorGrid2(
-    const Size2& resolution,
-    const Vector2D& gridSpacing = Vector2D(1.0, 1.0),
-    const Vector2D& origin = Vector2D(),
-    const Vector2D& initialValue = Vector2D());
+  CellCenteredVectorGrid2(const Size2& resolution,
+                          const Vector2D& gridSpacing = Vector2D(1.0, 1.0),
+                          const Vector2D& origin = Vector2D(),
+                          const Vector2D& initialValue = Vector2D());
 
   //! Copy constructor.
   CellCenteredVectorGrid2(const CellCenteredVectorGrid2& other);
@@ -93,11 +90,11 @@ public:
 //! Shared pointer for the CellCenteredVectorGrid2 type.
 typedef std::shared_ptr<CellCenteredVectorGrid2> CellCenteredVectorGrid2Ptr;
 
-
 //!
 //! \brief Front-end to create CellCenteredVectorGrid2 objects step by step.
 //!
-class CellCenteredVectorGrid2::Builder final : public VectorGridBuilder2 {
+class CellCenteredVectorGrid2::Builder final : public VectorGridBuilder2
+{
 public:
   //! Returns builder with resolution.
   Builder& withResolution(const Size2& resolution);
@@ -134,20 +131,18 @@ public:
   //!
   //! This is an overriding function that implements VectorGridBuilder2.
   //!
-  VectorGrid2Ptr build(
-    const Size2& resolution,
-    const Vector2D& gridSpacing,
-    const Vector2D& gridOrigin,
-    const Vector2D& initialVal) const override;
+  VectorGrid2Ptr build(const Size2& resolution,
+                       const Vector2D& gridSpacing,
+                       const Vector2D& gridOrigin,
+                       const Vector2D& initialVal) const override;
 
 private:
-  Size2 _resolution{1, 1};
-  Vector2D _gridSpacing{1, 1};
-  Vector2D _gridOrigin{0, 0};
-  Vector2D _initialVal{0, 0};
+  Size2 _resolution{ 1, 1 };
+  Vector2D _gridSpacing{ 1, 1 };
+  Vector2D _gridOrigin{ 0, 0 };
+  Vector2D _initialVal{ 0, 0 };
 };
 
-}  // namespace lstme
-
+} // namespace lstme
 
 #endif // LSTME_CELL_CENTERED_VECTOR_GRID2_HPP

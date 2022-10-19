@@ -2,9 +2,10 @@
 // Created by LSTME on 2022-09-21.
 //
 
-#include <parallel.hpp>
-#include <macros.hpp>
 #include <constants.hpp>
+#include <macros.hpp>
+#include <parallel.hpp>
+
 
 #include <algorithm>
 #include <functional>
@@ -27,35 +28,44 @@ namespace internal {
 // NOTE - This abstraction takes a lambda which should take captured
 //        variables by *value* to ensure no captured references race
 //        with the task itself.
-template <typename TASK_T>
-inline void schedule(TASK_T&& fcn) {
+template<typename TASK_T>
+inline void
+schedule(TASK_T&& fcn)
+{
 #ifdef LSTME_TASKING_TBB
-  struct LocalTBBTask : public tbb::task {
+  struct LocalTBBTask : public tbb::task
+  {
     TASK_T func;
-    tbb::task* execute() override {
+    tbb::task* execute() override
+    {
       func();
       return nullptr;
     }
-    LocalTBBTask(TASK_T&& f) : func(std::forward<TASK_T>(f)) {}
+    LocalTBBTask(TASK_T&& f)
+      : func(std::forward<TASK_T>(f))
+    {
+    }
   };
 
-  auto* tbb_node = new (tbb::task::allocate_root())
-    LocalTBBTask(std::forward<TASK_T>(fcn));
+  auto* tbb_node =
+    new (tbb::task::allocate_root()) LocalTBBTask(std::forward<TASK_T>(fcn));
   tbb::task::enqueue(*tbb_node);
 #elif defined(LSTME_TASKING_CPP11THREADS)
   std::thread thread(fcn);
   thread.detach();
-#else  // OpenMP or Serial --> synchronous!
+#else // OpenMP or Serial --> synchronous!
   fcn();
 #endif
 }
 
-template <typename TASK_T>
+template<typename TASK_T>
 using operator_return_t = typename std::result_of<TASK_T()>::type;
 
 // NOTE - see above, same issues associated with schedule()
-template <typename TASK_T>
-inline auto async(TASK_T&& fcn) -> std::future<operator_return_t<TASK_T>> {
+template<typename TASK_T>
+inline auto
+async(TASK_T&& fcn) -> std::future<operator_return_t<TASK_T>>
+{
   using package_t = std::packaged_task<operator_return_t<TASK_T>()>;
 
   auto task = new package_t(std::forward<TASK_T>(fcn));
@@ -75,10 +85,15 @@ inline auto async(TASK_T&& fcn) -> std::future<operator_return_t<TASK_T>> {
 // Clustered SMPs. Proc PDPTA'11, the  2011 International Conference on Parallel
 // and Distributed Processing Techniques and Applications, CSREA Press
 // (H. Arabnia, Ed.), 2011, pp. 367 - 373.
-template <typename RandomIterator, typename RandomIterator2,
+template<typename RandomIterator,
+         typename RandomIterator2,
          typename CompareFunction>
-void merge(RandomIterator a, size_t size, RandomIterator2 temp,
-      CompareFunction compareFunction) {
+void
+merge(RandomIterator a,
+      size_t size,
+      RandomIterator2 temp,
+      CompareFunction compareFunction)
+{
   size_t i1 = 0;
   size_t i2 = size / 2;
   size_t tempi = 0;
@@ -110,18 +125,24 @@ void merge(RandomIterator a, size_t size, RandomIterator2 temp,
   parallelFor(kZeroSize, size, [&](size_t i) { a[i] = temp[i]; });
 }
 
-template <typename RandomIterator, typename RandomIterator2,
+template<typename RandomIterator,
+         typename RandomIterator2,
          typename CompareFunction>
-void parallelMergeSort(RandomIterator a, size_t size, RandomIterator2 temp,
+void
+parallelMergeSort(RandomIterator a,
+                  size_t size,
+                  RandomIterator2 temp,
                   unsigned int numThreads,
-                  CompareFunction compareFunction) {
+                  CompareFunction compareFunction)
+{
   if (numThreads == 1) {
     std::sort(a, a + size, compareFunction);
   } else if (numThreads > 1) {
     std::vector<std::future<void>> pool;
     pool.reserve(2);
 
-    auto launchRange = [compareFunction](RandomIterator begin, size_t k2,
+    auto launchRange = [compareFunction](RandomIterator begin,
+                                         size_t k2,
                                          RandomIterator2 temp,
                                          unsigned int numThreads) {
       parallelMergeSort(begin, k2, temp, numThreads, compareFunction);
@@ -131,7 +152,9 @@ void parallelMergeSort(RandomIterator a, size_t size, RandomIterator2 temp,
       [=]() { launchRange(a, size / 2, temp, numThreads / 2); }));
 
     pool.emplace_back(internal::async([=]() {
-      launchRange(a + size / 2, size - size / 2, temp + size / 2,
+      launchRange(a + size / 2,
+                  size - size / 2,
+                  temp + size / 2,
                   numThreads - numThreads / 2);
     }));
 
@@ -146,25 +169,33 @@ void parallelMergeSort(RandomIterator a, size_t size, RandomIterator2 temp,
   }
 }
 
-}  // namespace internal
+} // namespace internal
 
-template <typename RandomIterator, typename T>
-void parallelFill(const RandomIterator& begin, const RandomIterator& end,
-             const T& value, ExecutionPolicy policy) {
+template<typename RandomIterator, typename T>
+void
+parallelFill(const RandomIterator& begin,
+             const RandomIterator& end,
+             const T& value,
+             ExecutionPolicy policy)
+{
   auto diff = end - begin;
   if (diff <= 0) {
     return;
   }
 
   size_t size = static_cast<size_t>(diff);
-  parallelFor(kZeroSize, size, [begin, value](size_t i) { begin[i] = value; },
-    policy);
+  parallelFor(
+    kZeroSize, size, [begin, value](size_t i) { begin[i] = value; }, policy);
 }
 
 // Adopted from http://ideone.com/Z7zldb
-template <typename IndexType, typename Function>
-void parallelFor(IndexType start, IndexType end, const Function& func,
-            ExecutionPolicy policy) {
+template<typename IndexType, typename Function>
+void
+parallelFor(IndexType start,
+            IndexType end,
+            const Function& func,
+            ExecutionPolicy policy)
+{
   if (start > end) {
     return;
   }
@@ -188,8 +219,7 @@ void parallelFor(IndexType start, IndexType end, const Function& func,
 
   // Size of a slice for the range functions
   IndexType n = end - start + 1;
-  IndexType slice =
-    (IndexType)std::round(n / static_cast<double>(numThreads));
+  IndexType slice = (IndexType)std::round(n / static_cast<double>(numThreads));
   slice = std::max(slice, IndexType(1));
 
   // [Helper] Inner loop
@@ -226,9 +256,9 @@ void parallelFor(IndexType start, IndexType end, const Function& func,
 #pragma omp parallel for
 #if defined(_MSC_VER) && !defined(__INTEL_COMPILER)
     for (ssize_t i = start; i < ssize_t(end); ++i) {
-#else   // !MSVC || Intel
+#else  // !MSVC || Intel
     for (auto i = start; i < end; ++i) {
-#endif  // MSVC && !Intel
+#endif // MSVC && !Intel
       func(i);
     }
   } else {
@@ -236,18 +266,22 @@ void parallelFor(IndexType start, IndexType end, const Function& func,
       func(i);
     }
   }
-#else   // LSTME_TASKING_OPENMP
+#else  // LSTME_TASKING_OPENMP
   for (auto i = start; i < end; ++i) {
     func(i);
   }
-#endif  // LSTME_TASKING_OPENMP
+#endif // LSTME_TASKING_OPENMP
 
 #endif
 }
 
-template <typename IndexType, typename Function>
-void parallelRangeFor(IndexType start, IndexType end, const Function& func,
-                 ExecutionPolicy policy) {
+template<typename IndexType, typename Function>
+void
+parallelRangeFor(IndexType start,
+                 IndexType end,
+                 const Function& func,
+                 ExecutionPolicy policy)
+{
   if (start > end) {
     return;
   }
@@ -272,8 +306,7 @@ void parallelRangeFor(IndexType start, IndexType end, const Function& func,
 
   // Size of a slice for the range functions
   IndexType n = end - start + 1;
-  IndexType slice =
-    (IndexType)std::round(n / static_cast<double>(numThreads));
+  IndexType slice = (IndexType)std::round(n / static_cast<double>(numThreads));
   slice = std::max(slice, IndexType(1));
 
   // Create pool and launch jobs
@@ -299,11 +332,18 @@ void parallelRangeFor(IndexType start, IndexType end, const Function& func,
 #endif
 }
 
-template <typename IndexType, typename Function>
-void parallelFor(IndexType beginIndexX, IndexType endIndexX,
-            IndexType beginIndexY, IndexType endIndexY,
-            const Function& function, ExecutionPolicy policy) {
-  parallelFor(beginIndexY, endIndexY,
+template<typename IndexType, typename Function>
+void
+parallelFor(IndexType beginIndexX,
+            IndexType endIndexX,
+            IndexType beginIndexY,
+            IndexType endIndexY,
+            const Function& function,
+            ExecutionPolicy policy)
+{
+  parallelFor(
+    beginIndexY,
+    endIndexY,
     [&](IndexType j) {
       for (IndexType i = beginIndexX; i < endIndexX; ++i) {
         function(i, j);
@@ -312,23 +352,38 @@ void parallelFor(IndexType beginIndexX, IndexType endIndexX,
     policy);
 }
 
-template <typename IndexType, typename Function>
-void parallelRangeFor(IndexType beginIndexX, IndexType endIndexX,
-                 IndexType beginIndexY, IndexType endIndexY,
-                 const Function& function, ExecutionPolicy policy) {
-  parallelRangeFor(beginIndexY, endIndexY,
+template<typename IndexType, typename Function>
+void
+parallelRangeFor(IndexType beginIndexX,
+                 IndexType endIndexX,
+                 IndexType beginIndexY,
+                 IndexType endIndexY,
+                 const Function& function,
+                 ExecutionPolicy policy)
+{
+  parallelRangeFor(
+    beginIndexY,
+    endIndexY,
     [&](IndexType jBegin, IndexType jEnd) {
       function(beginIndexX, endIndexX, jBegin, jEnd);
     },
     policy);
 }
 
-template <typename IndexType, typename Function>
-void parallelFor(IndexType beginIndexX, IndexType endIndexX,
-            IndexType beginIndexY, IndexType endIndexY,
-            IndexType beginIndexZ, IndexType endIndexZ,
-            const Function& function, ExecutionPolicy policy) {
-  parallelFor(beginIndexZ, endIndexZ,
+template<typename IndexType, typename Function>
+void
+parallelFor(IndexType beginIndexX,
+            IndexType endIndexX,
+            IndexType beginIndexY,
+            IndexType endIndexY,
+            IndexType beginIndexZ,
+            IndexType endIndexZ,
+            const Function& function,
+            ExecutionPolicy policy)
+{
+  parallelFor(
+    beginIndexZ,
+    endIndexZ,
     [&](IndexType k) {
       for (IndexType j = beginIndexY; j < endIndexY; ++j) {
         for (IndexType i = beginIndexX; i < endIndexX; ++i) {
@@ -339,24 +394,35 @@ void parallelFor(IndexType beginIndexX, IndexType endIndexX,
     policy);
 }
 
-template <typename IndexType, typename Function>
-void parallelRangeFor(IndexType beginIndexX, IndexType endIndexX,
-                 IndexType beginIndexY, IndexType endIndexY,
-                 IndexType beginIndexZ, IndexType endIndexZ,
-                 const Function& function, ExecutionPolicy policy) {
-  parallelRangeFor(beginIndexZ, endIndexZ,
+template<typename IndexType, typename Function>
+void
+parallelRangeFor(IndexType beginIndexX,
+                 IndexType endIndexX,
+                 IndexType beginIndexY,
+                 IndexType endIndexY,
+                 IndexType beginIndexZ,
+                 IndexType endIndexZ,
+                 const Function& function,
+                 ExecutionPolicy policy)
+{
+  parallelRangeFor(
+    beginIndexZ,
+    endIndexZ,
     [&](IndexType kBegin, IndexType kEnd) {
-      function(beginIndexX, endIndexX, beginIndexY,
-               endIndexY, kBegin, kEnd);
+      function(beginIndexX, endIndexX, beginIndexY, endIndexY, kBegin, kEnd);
     },
     policy);
 }
 
-template <typename IndexType, typename Value, typename Function,
-         typename Reduce>
-Value parallelReduce(IndexType start, IndexType end, const Value& identity,
-               const Function& func, const Reduce& reduce,
-               ExecutionPolicy policy) {
+template<typename IndexType, typename Value, typename Function, typename Reduce>
+Value
+parallelReduce(IndexType start,
+               IndexType end,
+               const Value& identity,
+               const Function& func,
+               const Reduce& reduce,
+               ExecutionPolicy policy)
+{
   if (start > end) {
     return identity;
   }
@@ -364,9 +430,9 @@ Value parallelReduce(IndexType start, IndexType end, const Value& identity,
 #ifdef LSTME_TASKING_TBB
   if (policy == ExecutionPolicy::kParallel) {
     return tbb::parallel_reduce(
-      tbb::blocked_range<IndexType>(start, end), identity,
-      [&func](const tbb::blocked_range<IndexType>& range,
-              const Value& init) {
+      tbb::blocked_range<IndexType>(start, end),
+      identity,
+      [&func](const tbb::blocked_range<IndexType>& range, const Value& init) {
         return func(range.begin(), range.end(), init);
       },
       reduce);
@@ -385,8 +451,7 @@ Value parallelReduce(IndexType start, IndexType end, const Value& identity,
 
   // Size of a slice for the range functions
   IndexType n = end - start + 1;
-  IndexType slice =
-    (IndexType)std::round(n / static_cast<double>(numThreads));
+  IndexType slice = (IndexType)std::round(n / static_cast<double>(numThreads));
   slice = std::max(slice, IndexType(1));
 
   // Results
@@ -409,8 +474,7 @@ Value parallelReduce(IndexType start, IndexType end, const Value& identity,
     i2 = std::min(i2 + slice, end);
   }
   if (i1 < end) {
-    pool.emplace_back(
-      internal::async([=]() { launchRange(i1, end, tid); }));
+    pool.emplace_back(internal::async([=]() { launchRange(i1, end, tid); }));
   }
 
   // Wait for jobs to finish
@@ -430,9 +494,13 @@ Value parallelReduce(IndexType start, IndexType end, const Value& identity,
 #endif
 }
 
-template <typename RandomIterator, typename CompareFunction>
-void parallelSort(RandomIterator begin, RandomIterator end,
-             CompareFunction compareFunction, ExecutionPolicy policy) {
+template<typename RandomIterator, typename CompareFunction>
+void
+parallelSort(RandomIterator begin,
+             RandomIterator end,
+             CompareFunction compareFunction,
+             ExecutionPolicy policy)
+{
   if (end < begin) {
     return;
   }
@@ -447,8 +515,7 @@ void parallelSort(RandomIterator begin, RandomIterator end,
 #else
   size_t size = static_cast<size_t>(end - begin);
 
-  typedef
-    typename std::iterator_traits<RandomIterator>::value_type value_type;
+  typedef typename std::iterator_traits<RandomIterator>::value_type value_type;
   std::vector<value_type> temp(size);
 
   // Estimate number of threads in the pool
@@ -458,18 +525,20 @@ void parallelSort(RandomIterator begin, RandomIterator end,
       ? (numThreadsHint == 0u ? 8u : numThreadsHint)
       : 1;
 
-  internal::parallelMergeSort(begin, size, temp.begin(), numThreads,
-                              compareFunction);
+  internal::parallelMergeSort(
+    begin, size, temp.begin(), numThreads, compareFunction);
 #endif
 }
 
-template <typename RandomIterator>
-void parallelSort(RandomIterator begin, RandomIterator end,
-             ExecutionPolicy policy) {
+template<typename RandomIterator>
+void
+parallelSort(RandomIterator begin, RandomIterator end, ExecutionPolicy policy)
+{
   parallelSort(
-    begin, end,
+    begin,
+    end,
     std::less<typename std::iterator_traits<RandomIterator>::value_type>(),
     policy);
 }
 
-}  // namespace lstme
+} // namespace lstme

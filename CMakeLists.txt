@@ -11,7 +11,11 @@ project(lstme)
 set(EXTERNAL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/external)
 
 # Includes
-
+include_directories(external)
+include_directories(external/pybind11/include)
+include_directories(external/Clara/include)
+include_directories(external/tinyobj)
+include_directories(src/examples)
 
 # Configure tasking system backend
 include(cmake/TaskingSystemOptions.cmake)
@@ -28,4 +32,6 @@ if (CMAKE_BUILD_TYPE MATCHES Debug AND CMAKE_COMPILER_IS_GNUCXX AND BUILD_COVERA
 endif()
 
 # Project modules
-add_subdirectory(src/lstme)
+include(cmake/external.cmake)
+include(cmake/lstme.cmake)
+

@@ -9,13 +9,17 @@ namespace lstme {
 
 namespace internal {
 
-template <typename T>
-inline T sign(T a, T b) {
+template<typename T>
+inline T
+sign(T a, T b)
+{
   return b >= 0.0 ? std::fabs(a) : -std::fabs(a);
 }
 
-template <typename T>
-inline T pythag(T a, T b) {
+template<typename T>
+inline T
+pythag(T a, T b)
+{
   T at = std::fabs(a);
   T bt = std::fabs(b);
   T ct;
@@ -34,11 +38,12 @@ inline T pythag(T a, T b) {
   return result;
 }
 
-}  // namespace internal
+} // namespace internal
 
-template <typename T>
-void svd(const MatrixMxN<T>& a, MatrixMxN<T>& u, VectorN<T>& w,
-    MatrixMxN<T>& v) {
+template<typename T>
+void
+svd(const MatrixMxN<T>& a, MatrixMxN<T>& u, VectorN<T>& w, MatrixMxN<T>& v)
+{
   const int m = (int)a.rows();
   const int n = (int)a.cols();
 
@@ -251,9 +256,7 @@ void svd(const MatrixMxN<T>& a, MatrixMxN<T>& u, VectorN<T>& w,
       h = rv1[k];
       f = ((y - z) * (y + z) + (g - h) * (g + h)) / (2 * h * y);
       g = internal::pythag(f, (T)1);
-      f = ((x - z) * (x + z) +
-           h * ((y / (f + internal::sign(g, f))) - h)) /
-          x;
+      f = ((x - z) * (x + z) + h * ((y / (f + internal::sign(g, f))) - h)) / x;
 
       // next QR transformation
       c = s = 1;
@@ -300,9 +303,13 @@ void svd(const MatrixMxN<T>& a, MatrixMxN<T>& u, VectorN<T>& w,
   }
 }
 
-template <typename T, size_t M, size_t N>
-void svd(const Matrix<T, M, N>& a, Matrix<T, M, N>& u, Vector<T, N>& w,
-    Matrix<T, N, N>& v) {
+template<typename T, size_t M, size_t N>
+void
+svd(const Matrix<T, M, N>& a,
+    Matrix<T, M, N>& u,
+    Vector<T, N>& w,
+    Matrix<T, N, N>& v)
+{
   const int m = (int)M;
   const int n = (int)N;
 
@@ -514,9 +521,7 @@ void svd(const Matrix<T, M, N>& a, Matrix<T, M, N>& u, Vector<T, N>& w,
       h = rv1[k];
       f = ((y - z) * (y + z) + (g - h) * (g + h)) / (2 * h * y);
       g = internal::pythag(f, (T)1);
-      f = ((x - z) * (x + z) +
-           h * ((y / (f + internal::sign(g, f))) - h)) /
-          x;
+      f = ((x - z) * (x + z) + h * ((y / (f + internal::sign(g, f))) - h)) / x;
 
       // next QR transformation
       c = s = 1;
@@ -563,4 +568,4 @@ void svd(const Matrix<T, M, N>& a, Matrix<T, M, N>& u, Vector<T, N>& w,
   }
 }
 
-}  // namespace lstme
+} // namespace lstme

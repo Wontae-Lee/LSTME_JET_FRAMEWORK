@@ -8,20 +8,30 @@ namespace lstme {
 
 namespace internal {
 
-template <typename BlasType>
-MgResult mgVCycle(const MgMatrix<BlasType>& A, MgParameters<BlasType> params,
-         unsigned int currentLevel, MgVector<BlasType>* x,
-         MgVector<BlasType>* b, MgVector<BlasType>* buffer) {
+template<typename BlasType>
+MgResult
+mgVCycle(const MgMatrix<BlasType>& A,
+         MgParameters<BlasType> params,
+         unsigned int currentLevel,
+         MgVector<BlasType>* x,
+         MgVector<BlasType>* b,
+         MgVector<BlasType>* buffer)
+{
   // 1) Relax a few times on Ax = b, with arbitrary x
-  params.relaxFunc(A[currentLevel], (*b)[currentLevel],
-                   params.numberOfRestrictionIter, params.maxTolerance,
-                   &((*x)[currentLevel]), &((*buffer)[currentLevel]));
+  params.relaxFunc(A[currentLevel],
+                   (*b)[currentLevel],
+                   params.numberOfRestrictionIter,
+                   params.maxTolerance,
+                   &((*x)[currentLevel]),
+                   &((*buffer)[currentLevel]));
 
   // 2) if currentLevel is the coarsest grid, goto 5)
   if (currentLevel < A.levels.size() - 1) {
     auto r = buffer;
-    BlasType::residual(A[currentLevel], (*x)[currentLevel],
-                       (*b)[currentLevel], &(*r)[currentLevel]);
+    BlasType::residual(A[currentLevel],
+                       (*x)[currentLevel],
+                       (*b)[currentLevel],
+                       &(*r)[currentLevel]);
     params.restrictFunc((*r)[currentLevel], &(*b)[currentLevel + 1]);
 
     BlasType::set(0.0, &(*x)[currentLevel + 1]);
@@ -36,25 +46,38 @@ MgResult mgVCycle(const MgMatrix<BlasType>& A, MgParameters<BlasType> params,
 
     // 4) relax nItr times on Ax = b, with initial guess x
     if (currentLevel > 0) {
-      params.relaxFunc(A[currentLevel], (*b)[currentLevel],
-                       params.numberOfCorrectionIter, params.maxTolerance,
-                       &((*x)[currentLevel]), &((*buffer)[currentLevel]));
+      params.relaxFunc(A[currentLevel],
+                       (*b)[currentLevel],
+                       params.numberOfCorrectionIter,
+                       params.maxTolerance,
+                       &((*x)[currentLevel]),
+                       &((*buffer)[currentLevel]));
     } else {
-      params.relaxFunc(A[currentLevel], (*b)[currentLevel],
-                       params.numberOfFinalIter, params.maxTolerance,
-                       &((*x)[currentLevel]), &((*buffer)[currentLevel]));
+      params.relaxFunc(A[currentLevel],
+                       (*b)[currentLevel],
+                       params.numberOfFinalIter,
+                       params.maxTolerance,
+                       &((*x)[currentLevel]),
+                       &((*buffer)[currentLevel]));
     }
   } else {
     // 5) solve directly with initial guess x
-    params.relaxFunc(A[currentLevel], (*b)[currentLevel],
-                     params.numberOfCoarsestIter, params.maxTolerance,
-                     &((*x)[currentLevel]), &((*buffer)[currentLevel]));
+    params.relaxFunc(A[currentLevel],
+                     (*b)[currentLevel],
+                     params.numberOfCoarsestIter,
+                     params.maxTolerance,
+                     &((*x)[currentLevel]),
+                     &((*buffer)[currentLevel]));
 
-    BlasType::residual(A[currentLevel], (*x)[currentLevel],
-                       (*b)[currentLevel], &(*buffer)[currentLevel]);
+    BlasType::residual(A[currentLevel],
+                       (*x)[currentLevel],
+                       (*b)[currentLevel],
+                       &(*buffer)[currentLevel]);
   }
 
-  BlasType::residual(A[currentLevel], (*x)[currentLevel], (*b)[currentLevel],
+  BlasType::residual(A[currentLevel],
+                     (*x)[currentLevel],
+                     (*b)[currentLevel],
                      &(*buffer)[currentLevel]);
 
   MgResult result;
@@ -62,54 +85,72 @@ MgResult mgVCycle(const MgMatrix<BlasType>& A, MgParameters<BlasType> params,
   return result;
 }
 
-}  // namespace internal
+} // namespace internal
 
-template <typename BlasType>
-const typename BlasType::MatrixType& MgMatrix<BlasType>::operator[](
-  size_t i) const {
+template<typename BlasType>
+const typename BlasType::MatrixType&
+MgMatrix<BlasType>::operator[](size_t i) const
+{
   return levels[i];
 }
 
-template <typename BlasType>
-typename BlasType::MatrixType& MgMatrix<BlasType>::operator[](size_t i) {
+template<typename BlasType>
+typename BlasType::MatrixType&
+MgMatrix<BlasType>::operator[](size_t i)
+{
   return levels[i];
 }
 
-template <typename BlasType>
-const typename BlasType::MatrixType& MgMatrix<BlasType>::finest() const {
+template<typename BlasType>
+const typename BlasType::MatrixType&
+MgMatrix<BlasType>::finest() const
+{
   return levels.front();
 }
 
-template <typename BlasType>
-typename BlasType::MatrixType& MgMatrix<BlasType>::finest() {
+template<typename BlasType>
+typename BlasType::MatrixType&
+MgMatrix<BlasType>::finest()
+{
   return levels.front();
 }
 
-template <typename BlasType>
-const typename BlasType::VectorType& MgVector<BlasType>::operator[](
-  size_t i) const {
+template<typename BlasType>
+const typename BlasType::VectorType&
+MgVector<BlasType>::operator[](size_t i) const
+{
   return levels[i];
 }
 
-template <typename BlasType>
-typename BlasType::VectorType& MgVector<BlasType>::operator[](size_t i) {
+template<typename BlasType>
+typename BlasType::VectorType&
+MgVector<BlasType>::operator[](size_t i)
+{
   return levels[i];
 }
 
-template <typename BlasType>
-const typename BlasType::VectorType& MgVector<BlasType>::finest() const {
+template<typename BlasType>
+const typename BlasType::VectorType&
+MgVector<BlasType>::finest() const
+{
   return levels.front();
 }
 
-template <typename BlasType>
-typename BlasType::VectorType& MgVector<BlasType>::finest() {
+template<typename BlasType>
+typename BlasType::VectorType&
+MgVector<BlasType>::finest()
+{
   return levels.front();
 }
 
-template <typename BlasType>
-MgResult mgVCycle(const MgMatrix<BlasType>& A, MgParameters<BlasType> params,
-         MgVector<BlasType>* x, MgVector<BlasType>* b,
-         MgVector<BlasType>* buffer) {
+template<typename BlasType>
+MgResult
+mgVCycle(const MgMatrix<BlasType>& A,
+         MgParameters<BlasType> params,
+         MgVector<BlasType>* x,
+         MgVector<BlasType>* b,
+         MgVector<BlasType>* buffer)
+{
   return internal::mgVCycle<BlasType>(A, params, 0u, x, b, buffer);
 }
-}  // namespace lstme
+} // namespace lstme

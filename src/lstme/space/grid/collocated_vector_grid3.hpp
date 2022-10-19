@@ -5,15 +5,17 @@
 #ifndef LSTME_COLLOCATED_VECTOR_GRID3_HPP
 #define LSTME_COLLOCATED_VECTOR_GRID3_HPP
 
-#include <array_samplers3.hpp>
 #include <array3.hpp>
+#include <array_samplers3.hpp>
 #include <vector>
 #include <vector_grid3.hpp>
+
 
 namespace lstme {
 
 //! \brief Abstract base class for 3-D collocated vector grid structure.
-class CollocatedVectorGrid3 : public VectorGrid3 {
+class CollocatedVectorGrid3 : public VectorGrid3
+{
 public:
   //! Constructs an empty grid.
   CollocatedVectorGrid3();
@@ -112,11 +114,10 @@ private:
   LinearArraySampler3<Vector3D, double> _linearSampler;
   std::function<Vector3D(const Vector3D&)> _sampler;
 
-  void onResize(
-    const Size3& resolution,
-    const Vector3D& gridSpacing,
-    const Vector3D& origin,
-    const Vector3D& initialValue) final;
+  void onResize(const Size3& resolution,
+                const Vector3D& gridSpacing,
+                const Vector3D& origin,
+                const Vector3D& initialValue) final;
 
   void resetSampler();
 };
@@ -124,5 +125,5 @@ private:
 //! Shared pointer for the CollocatedVectorGrid3 type.
 typedef std::shared_ptr<CollocatedVectorGrid3> CollocatedVectorGrid3Ptr;
 
-}  // namespace lstme
+} // namespace lstme
 #endif // LSTME_COLLOCATED_VECTOR_GRID3_HPP

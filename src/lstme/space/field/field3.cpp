@@ -4,13 +4,11 @@
 // personal capacity and am not conveying any rights to any intellectual
 // property of any third parties.
 
-#include <pch.hpp>
 #include <field3.hpp>
+#include <pch.hpp>
 
 using namespace lstme;
 
-Field3::Field3() {
-}
+Field3::Field3() {}
 
-Field3::~Field3() {
-}
+Field3::~Field3() {}

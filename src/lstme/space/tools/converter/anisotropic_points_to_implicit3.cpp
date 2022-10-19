@@ -6,15 +6,18 @@
 
 #include <anisotropic_points_to_implicit3.hpp>
 #include <fmm_level_set_solver3.hpp>
+#include <math_utils.hpp>
 #include <point_kdtree_searcher3.hpp>
 #include <sph_kernels3.hpp>
 #include <sph_system_data3.hpp>
 #include <svd.hpp>
-#include <math_utils.hpp>
+
 
 using namespace lstme;
 
-inline double p(double distance) {
+inline double
+p(double distance)
+{
   const double distanceSquared = distance * distance;
 
   if (distanceSquared >= 1.0) {
@@ -25,7 +28,9 @@ inline double p(double distance) {
   }
 }
 
-inline double wij(double distance, double r) {
+inline double
+wij(double distance, double r)
+{
   if (distance < r) {
     return 1.0 - cubic(distance / r);
   } else {
@@ -33,12 +38,23 @@ inline double wij(double distance, double r) {
   }
 }
 
-inline Matrix3x3D vvt(const Vector3D& v) {
-  return Matrix3x3D(v.x * v.x, v.x * v.y, v.x * v.z, v.y * v.x, v.y * v.y,
-                    v.y * v.z, v.z * v.x, v.z * v.y, v.z * v.z);
+inline Matrix3x3D
+vvt(const Vector3D& v)
+{
+  return Matrix3x3D(v.x * v.x,
+                    v.x * v.y,
+                    v.x * v.z,
+                    v.y * v.x,
+                    v.y * v.y,
+                    v.y * v.z,
+                    v.z * v.x,
+                    v.z * v.y,
+                    v.z * v.z);
 }
 
-inline double w(const Vector3D& r, const Matrix3x3D& g, double gDet) {
+inline double
+w(const Vector3D& r, const Matrix3x3D& g, double gDet)
+{
   static const double sigma = 315.0 / (64 * kPiD);
   return sigma * gDet * p((g * r).length());
 }
@@ -46,16 +62,24 @@ inline double w(const Vector3D& r, const Matrix3x3D& g, double gDet) {
 //
 
 AnisotropicPointsToImplicit3::AnisotropicPointsToImplicit3(
-  double kernelRadius, double cutOffDensity, double positionSmoothingFactor,
-  size_t minNumNeighbors, bool isOutputSdf)
-  : _kernelRadius(kernelRadius),
-  _cutOffDensity(cutOffDensity),
-  _positionSmoothingFactor(positionSmoothingFactor),
-  _minNumNeighbors(minNumNeighbors),
-  _isOutputSdf(isOutputSdf) {}
+  double kernelRadius,
+  double cutOffDensity,
+  double positionSmoothingFactor,
+  size_t minNumNeighbors,
+  bool isOutputSdf)
+  : _kernelRadius(kernelRadius)
+  , _cutOffDensity(cutOffDensity)
+  , _positionSmoothingFactor(positionSmoothingFactor)
+  , _minNumNeighbors(minNumNeighbors)
+  , _isOutputSdf(isOutputSdf)
+{
+}
 
-void AnisotropicPointsToImplicit3::convert(
-  const ConstArrayAccessor1<Vector3D>& points, ScalarGrid3* output) const {
+void
+AnisotropicPointsToImplicit3::convert(
+  const ConstArrayAccessor1<Vector3D>& points,
+  ScalarGrid3* output) const
+{
   if (output == nullptr) {
     LSTME_WARN << "Null scalar grid output pointer provided.";
     return;
@@ -156,7 +180,7 @@ void AnisotropicPointsToImplicit3::convert(
 
       // Compute G
       const double scale =
-        std::pow(v.x * v.y * v.z, 1.0 / 3.0);  // volume preservation
+        std::pow(v.x * v.y * v.z, 1.0 / 3.0); // volume preservation
       const Matrix3x3D g = invH * scale * (w * invSigma * u.transposed());
       gs[i] = g;
     }
@@ -179,8 +203,7 @@ void AnisotropicPointsToImplicit3::convert(
     double sum = 0.0;
     meanNeighborSearcher2.forEachNearbyPoint(
       x, r, [&](size_t i, const Vector3D& neighborPosition) {
-        sum += m / d[i] *
-               w(neighborPosition - x, gs[i], gs[i].determinant());
+        sum += m / d[i] * w(neighborPosition - x, gs[i], gs[i].determinant());
       });
 
     return _cutOffDensity - sum;

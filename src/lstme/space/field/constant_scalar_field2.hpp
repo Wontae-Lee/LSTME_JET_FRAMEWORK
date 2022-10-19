@@ -5,13 +5,13 @@
 #ifndef LSTME_CONSTANT_SCALAR_FIELD2_HPP
 #define LSTME_CONSTANT_SCALAR_FIELD2_HPP
 
-
 #include <scalar_field2.hpp>
 
 namespace lstme {
 
 //! 2-D constant scalar field.
-class ConstantScalarField2 final : public ScalarField2 {
+class ConstantScalarField2 final : public ScalarField2
+{
 public:
   class Builder;
 
@@ -34,11 +34,11 @@ private:
 //! Shared pointer for the ConstantScalarField2 type.
 typedef std::shared_ptr<ConstantScalarField2> ConstantScalarField2Ptr;
 
-
 //!
 //! \brief Front-end to create ConstantScalarField2 objects step by step.
 //!
-class ConstantScalarField2::Builder final {
+class ConstantScalarField2::Builder final
+{
 public:
   //! Returns builder with value.
   Builder& withValue(double value);
@@ -53,6 +53,6 @@ private:
   double _value = 0.0;
 };
 
-}  // namespace lstme
+} // namespace lstme
 
 #endif // LSTME_CONSTANT_SCALAR_FIELD2_HPP

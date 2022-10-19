@@ -10,14 +10,14 @@
 
 namespace lstme {
 
-
 //!
 //! \brief Representation of an animation frame.
 //!
 //! This struct holds current animation frame index and frame interval in
 //! seconds.
 //!
-struct Frame final {
+struct Frame final
+{
   //! Frame index.
   int index = 0;
 
@@ -55,7 +55,8 @@ struct Frame final {
 //! This base class provides a virtual function update() which can be
 //! overriden by its sub-classes to implement their own state update logic.
 //!
-class Animation {
+class Animation
+{
 public:
   Animation();
 
@@ -84,12 +85,6 @@ protected:
 //! Shared pointer for the Animation type.
 typedef std::shared_ptr<Animation> AnimationPtr;
 
-
-
-
-
 }
-
-
 
 #endif // LSTME_ANIMATION_HPP

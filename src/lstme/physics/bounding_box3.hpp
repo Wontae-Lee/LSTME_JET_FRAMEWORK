@@ -5,11 +5,11 @@
 #ifndef LSTME_BOUNDING_BOX3_HPP
 #define LSTME_BOUNDING_BOX3_HPP
 
-
 #include <bounding_box.hpp>
+#include <limits>
 #include <ray3.hpp>
 #include <vector3.hpp>
-#include <limits>
+
 
 namespace lstme {
 
@@ -18,8 +18,9 @@ namespace lstme {
 //!
 //! \tparam     T     The value type.
 //!
-template <typename T>
-struct BoundingBoxRayIntersection3 {
+template<typename T>
+struct BoundingBoxRayIntersection3
+{
   //! True if the box and ray intersects.
   bool isIntersecting = false;
 
@@ -36,8 +37,9 @@ struct BoundingBoxRayIntersection3 {
 //! \tparam T - Real number type.
 //! \tparam N - Dimension.
 //!
-template <typename T>
-class BoundingBox<T, 3> {
+template<typename T>
+class BoundingBox<T, 3>
+{
 public:
   //! Lower corner of the bounding box.
   Vector3<T> lowerCorner;
@@ -79,8 +81,7 @@ public:
   //! intersecting with this box. If interesects, intersection.tNear is
   //! assigned with distant to the closest intersecting point, and
   //! intersection.tFar with furthest.
-  BoundingBoxRayIntersection3<T> closestIntersection(
-    const Ray3<T>& ray) const;
+  BoundingBoxRayIntersection3<T> closestIntersection(const Ray3<T>& ray) const;
 
   //! Returns the mid-point of this box.
   Vector3<T> midPoint() const;
@@ -116,7 +117,7 @@ public:
 };
 
 //! Type alias for 3-D BoundingBox.
-template <typename T>
+template<typename T>
 using BoundingBox3 = BoundingBox<T, 3>;
 
 //! Float-type 3-D BoundingBox.
@@ -131,8 +132,6 @@ typedef BoundingBoxRayIntersection3<float> BoundingBoxRayIntersection3F;
 //! Double-type 3-D box-ray intersection result.
 typedef BoundingBoxRayIntersection3<double> BoundingBoxRayIntersection3D;
 
-}  // namespace lstme
-
-
+} // namespace lstme
 
 #endif // LSTME_BOUNDING_BOX3_HPP

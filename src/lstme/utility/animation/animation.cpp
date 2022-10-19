@@ -2,40 +2,50 @@
 // Created by LSTME on 2022-10-15.
 //
 
-
-#include <pch.hpp>
 #include <animation.hpp>
-#include <timer.hpp>
+#include <pch.hpp>
 #include <private_helpers.hpp>
+#include <timer.hpp>
+
 
 using namespace lstme;
 
-Frame::Frame() {
-}
+Frame::Frame() {}
 
 Frame::Frame(int newIndex, double newTimeIntervalInSeconds)
   : index(newIndex)
-  , timeIntervalInSeconds(newTimeIntervalInSeconds) {
+  , timeIntervalInSeconds(newTimeIntervalInSeconds)
+{
 }
 
-double Frame::timeInSeconds() const {
+double
+Frame::timeInSeconds() const
+{
   return index * timeIntervalInSeconds;
 }
 
-void Frame::advance() {
+void
+Frame::advance()
+{
   ++index;
 }
 
-void Frame::advance(int delta) {
+void
+Frame::advance(int delta)
+{
   index += delta;
 }
 
-Frame& Frame::operator++() {
+Frame&
+Frame::operator++()
+{
   advance();
   return *this;
 }
 
-Frame Frame::operator++(int i) {
+Frame
+Frame::operator++(int i)
+{
   UNUSED_VARIABLE(i);
 
   Frame result = *this;
@@ -43,19 +53,18 @@ Frame Frame::operator++(int i) {
   return result;
 }
 
-Animation::Animation() {
-}
+Animation::Animation() {}
 
-Animation::~Animation() {
-}
+Animation::~Animation() {}
 
-void Animation::update(const Frame& frame) {
+void
+Animation::update(const Frame& frame)
+{
   Timer timer;
 
   LSTME_INFO << "Begin updating frame: " << frame.index
              << " timeIntervalInSeconds: " << frame.timeIntervalInSeconds
-             << " (1/" << 1.0 / frame.timeIntervalInSeconds
-             << ") seconds";
+             << " (1/" << 1.0 / frame.timeIntervalInSeconds << ") seconds";
 
   onUpdate(frame);
 

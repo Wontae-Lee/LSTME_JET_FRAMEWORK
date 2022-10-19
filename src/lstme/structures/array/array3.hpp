@@ -5,14 +5,13 @@
 #ifndef LSTME_ARRAY3_HPP
 #define LSTME_ARRAY3_HPP
 
-
 #include <array.hpp>
 #include <array_accessor3.hpp>
 
 #include <fstream>
 #include <functional>
 #include <iostream>
-#include <utility>  // just make cpplint happy..
+#include <utility> // just make cpplint happy..
 #include <vector>
 
 namespace lstme {
@@ -38,8 +37,9 @@ namespace lstme {
 //!
 //! \tparam T - Type to store in the array.
 //!
-template <typename T>
-class Array<T, 3> final {
+template<typename T>
+class Array<T, 3> final
+{
 public:
   typedef std::vector<T> ContainerType;
   typedef typename ContainerType::iterator Iterator;
@@ -59,7 +59,9 @@ public:
   //! \param height Initial height of the array.
   //! \param depth Initial depth of the array.
   //! \param initVal Initial value of each array element.
-  explicit Array(size_t width, size_t height, size_t depth,
+  explicit Array(size_t width,
+                 size_t height,
+                 size_t depth,
                  const T& initVal = T());
 
   //!
@@ -130,7 +132,9 @@ public:
 
   //! Resizes the array with size \p width x \p height and fill the new
   //! element with \p initVal.
-  void resize(size_t width, size_t height, size_t depth,
+  void resize(size_t width,
+              size_t height,
+              size_t depth,
               const T& initVal = T());
 
   //!
@@ -232,7 +236,7 @@ public:
   //! });
   //! \endcode
   //!
-  template <typename Callback>
+  template<typename Callback>
   void forEach(Callback func) const;
 
   //!
@@ -263,7 +267,7 @@ public:
   //! });
   //! \endcode
   //!
-  template <typename Callback>
+  template<typename Callback>
   void forEachIndex(Callback func) const;
 
   //!
@@ -285,7 +289,7 @@ public:
   //! The parameter type of the callback function doesn't have to be T&, but
   //! const T& or T can be used as well.
   //!
-  template <typename Callback>
+  template<typename Callback>
   void parallelForEach(Callback func);
 
   //!
@@ -305,7 +309,7 @@ public:
   //! });
   //! \endcode
   //!
-  template <typename Callback>
+  template<typename Callback>
   void parallelForEachIndex(Callback func) const;
 
   //!
@@ -389,9 +393,9 @@ private:
 };
 
 //! Type alias for 3-D array.
-template <typename T>
+template<typename T>
 using Array3 = Array<T, 3>;
 
-}  // namespace lstme
+} // namespace lstme
 
 #endif // LSTME_ARRAY3_HPP

@@ -5,7 +5,6 @@
 #ifndef LSTME_COLLIDER_SET2_HPP
 #define LSTME_COLLIDER_SET2_HPP
 
-
 #include <collider2.hpp>
 #include <surface_set2.hpp>
 #include <vector>
@@ -13,7 +12,8 @@
 namespace lstme {
 
 //! Collection of 2-D colliders
-class ColliderSet2 final : public Collider2 {
+class ColliderSet2 final : public Collider2
+{
 public:
   class Builder;
 
@@ -45,11 +45,11 @@ private:
 //! Shared pointer for the ColliderSet2 type.
 typedef std::shared_ptr<ColliderSet2> ColliderSet2Ptr;
 
-
 //!
 //! \brief Front-end to create ColliderSet2 objects step by step.
 //!
-class ColliderSet2::Builder final {
+class ColliderSet2::Builder final
+{
 public:
   //! Returns builder with other colliders.
   Builder& withColliders(const std::vector<Collider2Ptr>& others);
@@ -64,7 +64,6 @@ private:
   std::vector<Collider2Ptr> _colliders;
 };
 
-}  // namespace lstme
-
+} // namespace lstme
 
 #endif // LSTME_COLLIDER_SET2_HPP

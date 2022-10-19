@@ -5,9 +5,8 @@
 #ifndef LSTME_CELL_CENTERED_SCALAR_GRID3_HPP
 #define LSTME_CELL_CENTERED_SCALAR_GRID3_HPP
 
-
 #include <scalar_grid3.hpp>
-#include <utility>  // just make cpplint happy..
+#include <utility> // just make cpplint happy..
 
 namespace lstme {
 
@@ -19,7 +18,8 @@ namespace lstme {
 //! center of a grid cell. Thus, the dimension of data points are equal to the
 //! dimension of the cells.
 //!
-class CellCenteredScalarGrid3 final : public ScalarGrid3 {
+class CellCenteredScalarGrid3 final : public ScalarGrid3
+{
 public:
   LSTME_GRID3_TYPE_NAME(CellCenteredScalarGrid3)
 
@@ -30,25 +30,23 @@ public:
 
   //! Constructs a grid with given resolution, grid spacing, origin and
   //! initial value.
-  CellCenteredScalarGrid3(
-    size_t resolutionX,
-    size_t resolutionY,
-    size_t resolutionZ,
-    double gridSpacingX = 1.0,
-    double gridSpacingY = 1.0,
-    double gridSpacingZ = 1.0,
-    double originX = 0.0,
-    double originY = 0.0,
-    double originZ = 0.0,
-    double initialValue = 0.0);
+  CellCenteredScalarGrid3(size_t resolutionX,
+                          size_t resolutionY,
+                          size_t resolutionZ,
+                          double gridSpacingX = 1.0,
+                          double gridSpacingY = 1.0,
+                          double gridSpacingZ = 1.0,
+                          double originX = 0.0,
+                          double originY = 0.0,
+                          double originZ = 0.0,
+                          double initialValue = 0.0);
 
   //! Constructs a grid with given resolution, grid spacing, origin and
   //! initial value.
-  CellCenteredScalarGrid3(
-    const Size3& resolution,
-    const Vector3D& gridSpacing = Vector3D(1.0, 1.0, 1.0),
-    const Vector3D& origin = Vector3D(),
-    double initialValue = 0.0);
+  CellCenteredScalarGrid3(const Size3& resolution,
+                          const Vector3D& gridSpacing = Vector3D(1.0, 1.0, 1.0),
+                          const Vector3D& origin = Vector3D(),
+                          double initialValue = 0.0);
 
   //! Copy constructor.
   CellCenteredScalarGrid3(const CellCenteredScalarGrid3& other);
@@ -85,32 +83,35 @@ public:
 //! Shared pointer for the CellCenteredScalarGrid3 type.
 typedef std::shared_ptr<CellCenteredScalarGrid3> CellCenteredScalarGrid3Ptr;
 
-
 //!
 //! \brief Front-end to create CellCenteredScalarGrid3 objects step by step.
 //!
-class CellCenteredScalarGrid3::Builder final : public ScalarGridBuilder3 {
+class CellCenteredScalarGrid3::Builder final : public ScalarGridBuilder3
+{
 public:
   //! Returns builder with resolution.
   Builder& withResolution(const Size3& resolution);
 
   //! Returns builder with resolution.
-  Builder& withResolution(
-    size_t resolutionX, size_t resolutionY, size_t resolutionZ);
+  Builder& withResolution(size_t resolutionX,
+                          size_t resolutionY,
+                          size_t resolutionZ);
 
   //! Returns builder with grid spacing.
   Builder& withGridSpacing(const Vector3D& gridSpacing);
 
   //! Returns builder with grid spacing.
-  Builder& withGridSpacing(
-    double gridSpacingX, double gridSpacingY, double gridSpacingZ);
+  Builder& withGridSpacing(double gridSpacingX,
+                           double gridSpacingY,
+                           double gridSpacingZ);
 
   //! Returns builder with grid origin.
   Builder& withOrigin(const Vector3D& gridOrigin);
 
   //! Returns builder with grid origin.
-  Builder& withOrigin(
-    double gridOriginX, double gridOriginY, double gridOriginZ);
+  Builder& withOrigin(double gridOriginX,
+                      double gridOriginY,
+                      double gridOriginZ);
 
   //! Returns builder with initial value.
   Builder& withInitialValue(double initialVal);
@@ -126,22 +127,18 @@ public:
   //!
   //! This is an overriding function that implements ScalarGridBuilder3.
   //!
-  ScalarGrid3Ptr build(
-    const Size3& resolution,
-    const Vector3D& gridSpacing,
-    const Vector3D& gridOrigin,
-    double initialVal) const override;
+  ScalarGrid3Ptr build(const Size3& resolution,
+                       const Vector3D& gridSpacing,
+                       const Vector3D& gridOrigin,
+                       double initialVal) const override;
 
 private:
-  Size3 _resolution{1, 1, 1};
-  Vector3D _gridSpacing{1, 1, 1};
-  Vector3D _gridOrigin{0, 0, 0};
+  Size3 _resolution{ 1, 1, 1 };
+  Vector3D _gridSpacing{ 1, 1, 1 };
+  Vector3D _gridOrigin{ 0, 0, 0 };
   double _initialVal = 0.0;
 };
 
-}  // namespace lstme
-
-
-
+} // namespace lstme
 
 #endif // LSTME_CELL_CENTERED_SCALAR_GRID3_HPP

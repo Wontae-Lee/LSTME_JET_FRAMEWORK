@@ -4,13 +4,11 @@
 // personal capacity and am not conveying any rights to any intellectual
 // property of any third parties.
 
-#include <pch.hpp>
 #include <grid_diffusion_solver2.hpp>
+#include <pch.hpp>
 
 using namespace lstme;
 
-GridDiffusionSolver2::GridDiffusionSolver2() {
-}
+GridDiffusionSolver2::GridDiffusionSolver2() {}
 
-GridDiffusionSolver2::~GridDiffusionSolver2() {
-}
+GridDiffusionSolver2::~GridDiffusionSolver2() {}

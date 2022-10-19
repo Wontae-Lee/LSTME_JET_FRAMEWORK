@@ -5,10 +5,11 @@
 #ifndef LSTME_POINT2_HPP
 #define LSTME_POINT2_HPP
 
-#include <point.hpp>
 #include <algorithm>
+#include <point.hpp>
 
-namespace lstme{
+
+namespace lstme {
 
 //!
 //! \brief 2-D point class.
@@ -18,8 +19,9 @@ namespace lstme{
 //! \tparam T - Type of the element
 //!
 
-template <typename T>
-class Point<T, 2> {
+template<typename T>
+class Point<T, 2>
+{
 public:
   static_assert(std::is_arithmetic<T>::value,
                 "Point only can be instantiated with arithmetic types");
@@ -33,17 +35,29 @@ public:
   // MARK: Constructors
 
   //! Constructs default point (0, 0).
-  constexpr Point() : x(0), y(0) {}
+  constexpr Point()
+    : x(0)
+    , y(0)
+  {
+  }
 
   //! Constructs point with given parameters \p x_ and \p y_.
-  constexpr Point(T x_, T y_) : x(x_), y(y_) {}
+  constexpr Point(T x_, T y_)
+    : x(x_)
+    , y(y_)
+  {
+  }
 
   //! Constructs point with initializer list.
-  template <typename U>
+  template<typename U>
   Point(const std::initializer_list<U>& lst);
 
   //! Copy constructor.
-  constexpr Point(const Point& v) : x(v.x), y(v.y) {}
+  constexpr Point(const Point& v)
+    : x(v.x)
+    , y(v.y)
+  {
+  }
 
   // MARK: Basic setters
 
@@ -54,7 +68,7 @@ public:
   void set(T x, T y);
 
   //! Set x and y components with given initializer list.
-  template <typename U>
+  template<typename U>
   void set(const std::initializer_list<U>& lst);
 
   //! Set x and y with other point \p pt.
@@ -159,7 +173,7 @@ public:
   size_t subminantAxis() const;
 
   //! Returns a point with different value type.
-  template <typename U>
+  template<typename U>
   Point<U, 2> castTo() const;
 
   //! Returns true if \p other is the same as this point.
@@ -211,81 +225,98 @@ public:
 };
 
 //! Type alias for two dimensional point.
-template <typename T>
+template<typename T>
 using Point2 = Point<T, 2>;
 
 //! Positive sign operator.
-template <typename T>
-Point<T, 2> operator+(const Point<T, 2>& a);
+template<typename T>
+Point<T, 2>
+operator+(const Point<T, 2>& a);
 
 //! Negative sign operator.
-template <typename T>
-Point2<T> operator-(const Point2<T>& a);
+template<typename T>
+Point2<T>
+operator-(const Point2<T>& a);
 
 //! Computes (a, a) + (b.x, b.y).
-template <typename T>
-Point2<T> operator+(T a, const Point2<T>& b);
+template<typename T>
+Point2<T>
+operator+(T a, const Point2<T>& b);
 
 //! Computes (a.x, a.y) + (b.x, b.y).
-template <typename T>
-Point2<T> operator+(const Point2<T>& a, const Point2<T>& b);
+template<typename T>
+Point2<T>
+operator+(const Point2<T>& a, const Point2<T>& b);
 
 //! Computes (a.x, a.y) - (b, b).
-template <typename T>
-Point2<T> operator-(const Point2<T>& a, T b);
+template<typename T>
+Point2<T>
+operator-(const Point2<T>& a, T b);
 
 //! Computes (a, a) - (b.x, b.y).
-template <typename T>
-Point2<T> operator-(T a, const Point2<T>& b);
+template<typename T>
+Point2<T>
+operator-(T a, const Point2<T>& b);
 
 //! Computes (a.x, a.y) - (b.x, b.y).
-template <typename T>
-Point2<T> operator-(const Point2<T>& a, const Point2<T>& b);
+template<typename T>
+Point2<T>
+operator-(const Point2<T>& a, const Point2<T>& b);
 
 //! Computes (a.x, a.y) * (b, b).
-template <typename T>
-Point2<T> operator*(const Point2<T>& a, T b);
+template<typename T>
+Point2<T>
+operator*(const Point2<T>& a, T b);
 
 //! Computes (a, a) * (b.x, b.y).
-template <typename T>
-Point2<T> operator*(T a, const Point2<T>& b);
+template<typename T>
+Point2<T>
+operator*(T a, const Point2<T>& b);
 
 //! Computes (a.x, a.y) * (b.x, b.y).
-template <typename T>
-Point2<T> operator*(const Point2<T>& a, const Point2<T>& b);
+template<typename T>
+Point2<T>
+operator*(const Point2<T>& a, const Point2<T>& b);
 
 //! Computes (a.x, a.y) / (b, b).
-template <typename T>
-Point2<T> operator/(const Point2<T>& a, T b);
+template<typename T>
+Point2<T>
+operator/(const Point2<T>& a, T b);
 
 //! Computes (a, a) / (b.x, b.y).
-template <typename T>
-Point2<T> operator/(T a, const Point2<T>& b);
+template<typename T>
+Point2<T>
+operator/(T a, const Point2<T>& b);
 
 //! Computes (a.x, a.y) / (b.x, b.y).
-template <typename T>
-Point2<T> operator/(const Point2<T>& a, const Point2<T>& b);
+template<typename T>
+Point2<T>
+operator/(const Point2<T>& a, const Point2<T>& b);
 
 //! Returns element-wise min point: (min(a.x, b.x), min(a.y, b.y)).
-template <typename T>
-Point2<T> min(const Point2<T>& a, const Point2<T>& b);
+template<typename T>
+Point2<T>
+min(const Point2<T>& a, const Point2<T>& b);
 
 //! Returns element-wise max point: (max(a.x, b.x), max(a.y, b.y)).
-template <typename T>
-Point2<T> max(const Point2<T>& a, const Point2<T>& b);
+template<typename T>
+Point2<T>
+max(const Point2<T>& a, const Point2<T>& b);
 
 //! Returns element-wise clamped point.
-template <typename T>
-Point2<T> clamp(const Point2<T>& v, const Point2<T>& low,
-      const Point2<T>& high);
+template<typename T>
+Point2<T>
+clamp(const Point2<T>& v, const Point2<T>& low, const Point2<T>& high);
 
 //! Returns element-wise called point.
-template <typename T>
-Point2<T> ceil(const Point2<T>& a);
+template<typename T>
+Point2<T>
+ceil(const Point2<T>& a);
 
 //! Returns element-wise floored point.
-template <typename T>
-Point2<T> floor(const Point2<T>& a);
+template<typename T>
+Point2<T>
+floor(const Point2<T>& a);
 
 //! Float-type 2D point.
 typedef Point2<float> Point2F;
@@ -299,8 +330,6 @@ typedef Point2<ssize_t> Point2I;
 //! Unsigned integer-type 2D point.
 typedef Point2<size_t> Point2UI;
 
-
 }
-
 
 #endif // LSTME_POINT2_HPP

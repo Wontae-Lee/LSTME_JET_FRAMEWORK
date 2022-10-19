@@ -2,26 +2,29 @@
 // Created by LSTME on 2022-10-16.
 //
 
+#include <algorithm>
+#include <eno_level_set_solver3.hpp>
 #include <pch.hpp>
 #include <pde.hpp>
-#include <eno_level_set_solver3.hpp>
-#include <algorithm>
+
 
 using namespace lstme;
 
-EnoLevelSetSolver3::EnoLevelSetSolver3() {
+EnoLevelSetSolver3::EnoLevelSetSolver3()
+{
   setMaxCfl(0.25);
 }
 
-void EnoLevelSetSolver3::getDerivatives(
-  ConstArrayAccessor3<double> grid,
-  const Vector3D& gridSpacing,
-  size_t i,
-  size_t j,
-  size_t k,
-  std::array<double, 2>* dx,
-  std::array<double, 2>* dy,
-  std::array<double, 2>* dz) const {
+void
+EnoLevelSetSolver3::getDerivatives(ConstArrayAccessor3<double> grid,
+                                   const Vector3D& gridSpacing,
+                                   size_t i,
+                                   size_t j,
+                                   size_t k,
+                                   std::array<double, 2>* dx,
+                                   std::array<double, 2>* dy,
+                                   std::array<double, 2>* dz) const
+{
   double D0[7];
   Size3 size = grid.size();
 

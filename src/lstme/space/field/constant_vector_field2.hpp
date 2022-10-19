@@ -5,13 +5,15 @@
 #ifndef LSTME_CONSTANT_VECTOR_FIELD2_HPP
 #define LSTME_CONSTANT_VECTOR_FIELD2_HPP
 
-#include <vector_field2.hpp>
 #include <memory>
+#include <vector_field2.hpp>
+
 
 namespace lstme {
 
 //! 2-D constant vector field.
-class ConstantVectorField2 final : public VectorField2 {
+class ConstantVectorField2 final : public VectorField2
+{
 public:
   class Builder;
 
@@ -34,11 +36,11 @@ private:
 //! Shared pointer for the ConstantVectorField2 type.
 typedef std::shared_ptr<ConstantVectorField2> ConstantVectorField2Ptr;
 
-
 //!
 //! \brief Front-end to create ConstantVectorField2 objects step by step.
 //!
-class ConstantVectorField2::Builder final {
+class ConstantVectorField2::Builder final
+{
 public:
   //! Returns builder with value.
   Builder& withValue(const Vector2D& value);
@@ -50,9 +52,9 @@ public:
   ConstantVectorField2Ptr makeShared() const;
 
 private:
-  Vector2D _value{0, 0};
+  Vector2D _value{ 0, 0 };
 };
 
-}  // namespace lstme
+} // namespace lstme
 
 #endif // LSTME_CONSTANT_VECTOR_FIELD2_HPP

@@ -5,8 +5,6 @@
 #ifndef LSTME_BOUNDING_BOX_HPP
 #define LSTME_BOUNDING_BOX_HPP
 
-
-
 #include <vector.hpp>
 
 namespace lstme {
@@ -17,11 +15,11 @@ namespace lstme {
 //! \tparam T - Real number type.
 //! \tparam N - Dimension.
 //!
-template <typename T, size_t N>
-class BoundingBox {
+template<typename T, size_t N>
+class BoundingBox
+{
 public:
-  static_assert(
-    N > 0, "Size of static-sized box should be greater than zero.");
+  static_assert(N > 0, "Size of static-sized box should be greater than zero.");
 
   typedef Vector<T, N> VectorType;
 
@@ -40,7 +38,6 @@ public:
   //! Constructs a box with other box instance.
   BoundingBox(const BoundingBox& other);
 
-
   //! Returns true of this box and other box overlaps.
   bool overlaps(const BoundingBox& other) const;
 
@@ -55,7 +52,6 @@ public:
 
   //! Returns squared diagonal length of this box.
   T diagonalLengthSquared() const;
-
 
   //! Resets this box to initial state (min=infinite, max=-infinite).
   void reset();
@@ -72,6 +68,6 @@ public:
   void expand(T delta);
 };
 
-}  // namespace lstme
+} // namespace lstme
 
 #endif // LSTME_BOUNDING_BOX_HPP

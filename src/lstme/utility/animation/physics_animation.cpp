@@ -14,116 +14,147 @@
 
 using namespace lstme;
 
-PhysicsAnimation::PhysicsAnimation() { _currentFrame.index = -1; }
+PhysicsAnimation::PhysicsAnimation()
+{
+  _currentFrame.index = -1;
+}
 
 PhysicsAnimation::~PhysicsAnimation() {}
 
-bool PhysicsAnimation::isUsingFixedSubTimeSteps() const {
-    return _isUsingFixedSubTimeSteps;
+bool
+PhysicsAnimation::isUsingFixedSubTimeSteps() const
+{
+  return _isUsingFixedSubTimeSteps;
 }
 
-void PhysicsAnimation::setIsUsingFixedSubTimeSteps(bool isUsing) {
-    _isUsingFixedSubTimeSteps = isUsing;
+void
+PhysicsAnimation::setIsUsingFixedSubTimeSteps(bool isUsing)
+{
+  _isUsingFixedSubTimeSteps = isUsing;
 }
 
-unsigned int PhysicsAnimation::numberOfFixedSubTimeSteps() const {
-    return _numberOfFixedSubTimeSteps;
+unsigned int
+PhysicsAnimation::numberOfFixedSubTimeSteps() const
+{
+  return _numberOfFixedSubTimeSteps;
 }
 
-void PhysicsAnimation::setNumberOfFixedSubTimeSteps(
-    unsigned int numberOfSteps) {
-    _numberOfFixedSubTimeSteps = numberOfSteps;
+void
+PhysicsAnimation::setNumberOfFixedSubTimeSteps(unsigned int numberOfSteps)
+{
+  _numberOfFixedSubTimeSteps = numberOfSteps;
 }
 
-void PhysicsAnimation::advanceSingleFrame() {
-    Frame f = _currentFrame;
-    update(++f);
+void
+PhysicsAnimation::advanceSingleFrame()
+{
+  Frame f = _currentFrame;
+  update(++f);
 }
 
-Frame PhysicsAnimation::currentFrame() const { return _currentFrame; }
+Frame
+PhysicsAnimation::currentFrame() const
+{
+  return _currentFrame;
+}
 
-void PhysicsAnimation::setCurrentFrame(const Frame& frame) {
+void
+PhysicsAnimation::setCurrentFrame(const Frame& frame)
+{
+  _currentFrame = frame;
+}
+
+double
+PhysicsAnimation::currentTimeInSeconds() const
+{
+  return _currentTime;
+}
+
+unsigned int
+PhysicsAnimation::numberOfSubTimeSteps(double timeIntervalInSeconds) const
+{
+  UNUSED_VARIABLE(timeIntervalInSeconds);
+
+  // Returns number of fixed sub-timesteps by default
+  return _numberOfFixedSubTimeSteps;
+}
+
+void
+PhysicsAnimation::onUpdate(const Frame& frame)
+{
+  if (frame.index > _currentFrame.index) {
+    if (_currentFrame.index < 0) {
+      initialize();
+    }
+
+    int32_t numberOfFrames = frame.index - _currentFrame.index;
+
+    for (int32_t i = 0; i < numberOfFrames; ++i) {
+      advanceTimeStep(frame.timeIntervalInSeconds);
+    }
+
     _currentFrame = frame;
+  }
 }
 
-double PhysicsAnimation::currentTimeInSeconds() const { return _currentTime; }
+void
+PhysicsAnimation::advanceTimeStep(double timeIntervalInSeconds)
+{
+  _currentTime = _currentFrame.timeInSeconds();
 
-unsigned int PhysicsAnimation::numberOfSubTimeSteps(
-    double timeIntervalInSeconds) const {
-    UNUSED_VARIABLE(timeIntervalInSeconds);
+  if (_isUsingFixedSubTimeSteps) {
+    LSTME_INFO << "Using fixed sub-timesteps: " << _numberOfFixedSubTimeSteps;
 
-    // Returns number of fixed sub-timesteps by default
-    return _numberOfFixedSubTimeSteps;
-}
+    // Perform fixed time-stepping
+    const double actualTimeInterval =
+      timeIntervalInSeconds / static_cast<double>(_numberOfFixedSubTimeSteps);
 
-void PhysicsAnimation::onUpdate(const Frame& frame) {
-    if (frame.index > _currentFrame.index) {
-        if (_currentFrame.index < 0) {
-            initialize();
-        }
+    for (unsigned int i = 0; i < _numberOfFixedSubTimeSteps; ++i) {
+      LSTME_INFO << "Begin onAdvanceTimeStep: " << actualTimeInterval << " (1/"
+                 << 1.0 / actualTimeInterval << ") seconds";
 
-        int32_t numberOfFrames = frame.index - _currentFrame.index;
+      Timer timer;
+      onAdvanceTimeStep(actualTimeInterval);
 
-        for (int32_t i = 0; i < numberOfFrames; ++i) {
-            advanceTimeStep(frame.timeIntervalInSeconds);
-        }
+      LSTME_INFO << "End onAdvanceTimeStep (took " << timer.durationInSeconds()
+                 << " seconds)";
 
-        _currentFrame = frame;
+      _currentTime += actualTimeInterval;
     }
-}
+  } else {
+    LSTME_INFO << "Using adaptive sub-timesteps";
 
-void PhysicsAnimation::advanceTimeStep(double timeIntervalInSeconds) {
-    _currentTime = _currentFrame.timeInSeconds();
+    // Perform adaptive time-stepping
+    double remainingTime = timeIntervalInSeconds;
+    while (remainingTime > kEpsilonD) {
+      unsigned int numSteps = numberOfSubTimeSteps(remainingTime);
+      double actualTimeInterval = remainingTime / static_cast<double>(numSteps);
 
-    if (_isUsingFixedSubTimeSteps) {
-        LSTME_INFO << "Using fixed sub-timesteps: " << _numberOfFixedSubTimeSteps;
+      LSTME_INFO << "Number of remaining sub-timesteps: " << numSteps;
 
-        // Perform fixed time-stepping
-        const double actualTimeInterval =
-            timeIntervalInSeconds /
-            static_cast<double>(_numberOfFixedSubTimeSteps);
+      LSTME_INFO << "Begin onAdvanceTimeStep: " << actualTimeInterval << " (1/"
+                 << 1.0 / actualTimeInterval << ") seconds";
 
-        for (unsigned int i = 0; i < _numberOfFixedSubTimeSteps; ++i) {
-            LSTME_INFO << "Begin onAdvanceTimeStep: " << actualTimeInterval
-                     << " (1/" << 1.0 / actualTimeInterval << ") seconds";
+      Timer timer;
+      onAdvanceTimeStep(actualTimeInterval);
 
-            Timer timer;
-            onAdvanceTimeStep(actualTimeInterval);
+      LSTME_INFO << "End onAdvanceTimeStep (took " << timer.durationInSeconds()
+                 << " seconds)";
 
-            LSTME_INFO << "End onAdvanceTimeStep (took "
-                     << timer.durationInSeconds() << " seconds)";
-
-            _currentTime += actualTimeInterval;
-        }
-    } else {
-        LSTME_INFO << "Using adaptive sub-timesteps";
-
-        // Perform adaptive time-stepping
-        double remainingTime = timeIntervalInSeconds;
-        while (remainingTime > kEpsilonD) {
-            unsigned int numSteps = numberOfSubTimeSteps(remainingTime);
-            double actualTimeInterval =
-                remainingTime / static_cast<double>(numSteps);
-
-            LSTME_INFO << "Number of remaining sub-timesteps: " << numSteps;
-
-            LSTME_INFO << "Begin onAdvanceTimeStep: " << actualTimeInterval
-                     << " (1/" << 1.0 / actualTimeInterval << ") seconds";
-
-            Timer timer;
-            onAdvanceTimeStep(actualTimeInterval);
-
-            LSTME_INFO << "End onAdvanceTimeStep (took "
-                     << timer.durationInSeconds() << " seconds)";
-
-            remainingTime -= actualTimeInterval;
-            _currentTime += actualTimeInterval;
-        }
+      remainingTime -= actualTimeInterval;
+      _currentTime += actualTimeInterval;
     }
+  }
 }
 
-void PhysicsAnimation::initialize() { onInitialize(); }
+void
+PhysicsAnimation::initialize()
+{
+  onInitialize();
+}
 
-void PhysicsAnimation::onInitialize() {
-    // Do nothing
+void
+PhysicsAnimation::onInitialize()
+{
+  // Do nothing
 }

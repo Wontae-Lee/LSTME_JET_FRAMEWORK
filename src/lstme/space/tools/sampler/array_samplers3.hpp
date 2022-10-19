@@ -20,12 +20,12 @@ namespace lstme {
 //! \tparam T - The value type to sample.
 //! \tparam R - The real number type.
 //!
-template <typename T, typename R>
-class NearestArraySampler<T, R, 3> final {
+template<typename T, typename R>
+class NearestArraySampler<T, R, 3> final
+{
 public:
-  static_assert(
-    std::is_floating_point<R>::value,
-    "Samplers only can be instantiated with floating point types");
+  static_assert(std::is_floating_point<R>::value,
+                "Samplers only can be instantiated with floating point types");
 
   //!
   //! \brief      Constructs a sampler using array accessor, spacing between
@@ -35,10 +35,9 @@ public:
   //! \param[in]  gridSpacing The grid spacing.
   //! \param[in]  gridOrigin  The grid origin.
   //!
-  explicit NearestArraySampler(
-    const ConstArrayAccessor3<T>& accessor,
-    const Vector3<R>& gridSpacing,
-    const Vector3<R>& gridOrigin);
+  explicit NearestArraySampler(const ConstArrayAccessor3<T>& accessor,
+                               const Vector3<R>& gridSpacing,
+                               const Vector3<R>& gridOrigin);
 
   //! Copy constructor.
   NearestArraySampler(const NearestArraySampler& other);
@@ -59,9 +58,8 @@ private:
 };
 
 //! Type alias for 3-D nearest array sampler.
-template <typename T, typename R> using NearestArraySampler3
-  = NearestArraySampler<T, R, 3>;
-
+template<typename T, typename R>
+using NearestArraySampler3 = NearestArraySampler<T, R, 3>;
 
 //!
 //! \brief 2-D linear array sampler class.
@@ -71,12 +69,12 @@ template <typename T, typename R> using NearestArraySampler3
 //! \tparam T - The value type to sample.
 //! \tparam R - The real number type.
 //!
-template <typename T, typename R>
-class LinearArraySampler<T, R, 3> final {
+template<typename T, typename R>
+class LinearArraySampler<T, R, 3> final
+{
 public:
-  static_assert(
-    std::is_floating_point<R>::value,
-    "Samplers only can be instantiated with floating point types");
+  static_assert(std::is_floating_point<R>::value,
+                "Samplers only can be instantiated with floating point types");
 
   //!
   //! \brief      Constructs a sampler using array accessor, spacing between
@@ -86,10 +84,9 @@ public:
   //! \param[in]  gridSpacing The grid spacing.
   //! \param[in]  gridOrigin  The grid origin.
   //!
-  explicit LinearArraySampler(
-    const ConstArrayAccessor3<T>& accessor,
-    const Vector3<R>& gridSpacing,
-    const Vector3<R>& gridOrigin);
+  explicit LinearArraySampler(const ConstArrayAccessor3<T>& accessor,
+                              const Vector3<R>& gridSpacing,
+                              const Vector3<R>& gridOrigin);
 
   //! Copy constructor.
   LinearArraySampler(const LinearArraySampler& other);
@@ -98,10 +95,9 @@ public:
   T operator()(const Vector3<R>& pt) const;
 
   //! Returns the indices of points and their sampling weight for given point.
-  void getCoordinatesAndWeights(
-    const Vector3<R>& pt,
-    std::array<Point3UI, 8>* indices,
-    std::array<R, 8>* weights) const;
+  void getCoordinatesAndWeights(const Vector3<R>& pt,
+                                std::array<Point3UI, 8>* indices,
+                                std::array<R, 8>* weights) const;
 
   //! Returns the indices of points and their gradient of sampling weight for
   //! given point.
@@ -121,9 +117,8 @@ private:
 };
 
 //! Type alias for 3-D linear array sampler.
-template <typename T, typename R> using LinearArraySampler3
-  = LinearArraySampler<T, R, 3>;
-
+template<typename T, typename R>
+using LinearArraySampler3 = LinearArraySampler<T, R, 3>;
 
 //!
 //! \brief 3-D cubic array sampler class.
@@ -133,12 +128,12 @@ template <typename T, typename R> using LinearArraySampler3
 //! \tparam T - The value type to sample.
 //! \tparam R - The real number type.
 //!
-template <typename T, typename R>
-class CubicArraySampler<T, R, 3> final {
+template<typename T, typename R>
+class CubicArraySampler<T, R, 3> final
+{
 public:
-  static_assert(
-    std::is_floating_point<R>::value,
-    "Samplers only can be instantiated with floating point types");
+  static_assert(std::is_floating_point<R>::value,
+                "Samplers only can be instantiated with floating point types");
 
   //!
   //! \brief      Constructs a sampler using array accessor, spacing between
@@ -148,10 +143,9 @@ public:
   //! \param[in]  gridSpacing The grid spacing.
   //! \param[in]  gridOrigin  The grid origin.
   //!
-  explicit CubicArraySampler(
-    const ConstArrayAccessor3<T>& accessor,
-    const Vector3<R>& gridSpacing,
-    const Vector3<R>& gridOrigin);
+  explicit CubicArraySampler(const ConstArrayAccessor3<T>& accessor,
+                             const Vector3<R>& gridSpacing,
+                             const Vector3<R>& gridOrigin);
 
   //! Copy constructor.
   CubicArraySampler(const CubicArraySampler& other);
@@ -169,11 +163,9 @@ private:
 };
 
 //! Type alias for 3-D cubic array sampler.
-template <typename T, typename R> using CubicArraySampler3
-  = CubicArraySampler<T, R, 3>;
+template<typename T, typename R>
+using CubicArraySampler3 = CubicArraySampler<T, R, 3>;
 
-}  // namespace lstme
-
-
+} // namespace lstme
 
 #endif // LSTME_ARRAY_SAMPLERS3_HPP

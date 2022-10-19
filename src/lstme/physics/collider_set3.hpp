@@ -5,8 +5,6 @@
 #ifndef LSTME_COLLIDER_SET3_HPP
 #define LSTME_COLLIDER_SET3_HPP
 
-
-
 #include <collider3.hpp>
 #include <surface_set3.hpp>
 #include <vector>
@@ -14,7 +12,8 @@
 namespace lstme {
 
 //! Collection of 3-D colliders
-class ColliderSet3 final : public Collider3 {
+class ColliderSet3 final : public Collider3
+{
 public:
   class Builder;
 
@@ -45,12 +44,12 @@ private:
 
 //! Shared pointer for the ColliderSet3 type.
 typedef std::shared_ptr<ColliderSet3> ColliderSet3Ptr;
- 
 
 //!
 //! \brief Front-end to create ColliderSet3 objects step by step.
 //!
-class ColliderSet3::Builder final {
+class ColliderSet3::Builder final
+{
 public:
   //! Returns builder with other colliders.
   Builder& withColliders(const std::vector<Collider3Ptr>& others);
@@ -65,7 +64,6 @@ private:
   std::vector<Collider3Ptr> _colliders;
 };
 
-}  // namespace lstme
-
+} // namespace lstme
 
 #endif // LSTME_COLLIDER_SET3_HPP

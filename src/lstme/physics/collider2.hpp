@@ -5,9 +5,9 @@
 #ifndef LSTME_COLLIDER2_HPP
 #define LSTME_COLLIDER2_HPP
 
-
-#include <surface2.hpp>
 #include <functional>
+#include <surface2.hpp>
+
 
 namespace lstme {
 
@@ -20,7 +20,8 @@ namespace lstme {
 //! provide a Surface2 instance to define collider surface using
 //! Collider2::setSurface function.
 //!
-class Collider2 {
+class Collider2
+{
 public:
   //!
   //! \brief Callback function type for update calls.
@@ -28,8 +29,7 @@ public:
   //! This type of callback function will take the collider pointer, current
   //! time, and time interval in seconds.
   //!
-  typedef std::function<void(Collider2*, double, double)>
-    OnBeginUpdateCallback;
+  typedef std::function<void(Collider2*, double, double)> OnBeginUpdateCallback;
 
   //! Default constructor.
   Collider2();
@@ -48,11 +48,10 @@ public:
   //! \param position Input and output position of the point.
   //! \param position Input and output velocity of the point.
   //!
-  void resolveCollision(
-    double radius,
-    double restitutionCoefficient,
-    Vector2D* position,
-    Vector2D* velocity);
+  void resolveCollision(double radius,
+                        double restitutionCoefficient,
+                        Vector2D* position,
+                        Vector2D* velocity);
 
   //! Returns friction coefficent.
   double frictionCoefficient() const;
@@ -85,7 +84,8 @@ public:
 
 protected:
   //! Internal query result structure.
-  struct ColliderQueryResult final {
+  struct ColliderQueryResult final
+  {
     double distance;
     Vector2D point;
     Vector2D normal;
@@ -96,16 +96,14 @@ protected:
   void setSurface(const Surface2Ptr& newSurface);
 
   //! Outputs closest point's information.
-  void getClosestPoint(
-    const Surface2Ptr& surface,
-    const Vector2D& queryPoint,
-    ColliderQueryResult* result) const;
+  void getClosestPoint(const Surface2Ptr& surface,
+                       const Vector2D& queryPoint,
+                       ColliderQueryResult* result) const;
 
   //! Returns true if given point is in the opposite side of the surface.
-  bool isPenetrating(
-    const ColliderQueryResult& colliderPoint,
-    const Vector2D& position,
-    double radius);
+  bool isPenetrating(const ColliderQueryResult& colliderPoint,
+                     const Vector2D& position,
+                     double radius);
 
 private:
   Surface2Ptr _surface;
@@ -116,7 +114,6 @@ private:
 //! Shared pointer type for the Collider2.
 typedef std::shared_ptr<Collider2> Collider2Ptr;
 
-}  // namespace lstme
-
+} // namespace lstme
 
 #endif // LSTME_COLLIDER2_HPP
