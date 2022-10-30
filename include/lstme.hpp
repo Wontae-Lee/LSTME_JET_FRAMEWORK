@@ -7,7 +7,6 @@
 #ifndef INCLUDE_LSTME_LSTME_H_
 #define INCLUDE_LSTME_LSTME_H_
 
-
 #include <array_samplers1.hpp>
 #include <array_samplers2.hpp>
 #include <array_samplers3.hpp>
