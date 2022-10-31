@@ -12,10 +12,7 @@ set(EXTERNAL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/external)
 
 # Includes
 include_directories(external)
-
-
-# Configure tasking system backend
-include(cmake/FindTBB.cmake)
+include_directories(external/oneTBB)
 
 # Project modules
 

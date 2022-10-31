@@ -1,18 +1,8 @@
-//
-// Created by LSTME on 2022-09-21.
-//
-
 #ifndef LSTME_PARALLEL_HPP
 #define LSTME_PARALLEL_HPP
 
 namespace lstme {
 
-//! Execution policy tag.
-enum class ExecutionPolicy
-{
-  kSerial,
-  kParallel
-};
 
 //!
 //! \brief      Fills from \p begin to \p end with \p value in parallel.
@@ -24,7 +14,7 @@ enum class ExecutionPolicy
 //! \param[in]  begin          The begin iterator of a container.
 //! \param[in]  end            The end iterator of a container.
 //! \param[in]  value          The value to fill a container.
-//! \param[in]  policy         The execution policy (parallel or serial).
+
 //!
 //! \tparam     RandomIterator Random iterator type.
 //! \tparam     T              Value type of a container.
@@ -33,8 +23,7 @@ template<typename RandomIterator, typename T>
 void
 parallelFill(const RandomIterator& begin,
              const RandomIterator& end,
-             const T& value,
-             ExecutionPolicy policy = ExecutionPolicy::kParallel);
+             const T& value         );
 
 //!
 //! \brief      Makes a for-loop from \p beginIndex \p to endIndex in parallel.
@@ -46,7 +35,7 @@ parallelFill(const RandomIterator& begin,
 //! \param[in]  beginIndex The begin index.
 //! \param[in]  endIndex   The end index.
 //! \param[in]  function   The function to call for each index.
-//! \param[in]  policy     The execution policy (parallel or serial).
+
 //!
 //! \tparam     IndexType  Index type.
 //! \tparam     Function   Function type.
@@ -55,8 +44,7 @@ template<typename IndexType, typename Function>
 void
 parallelFor(IndexType beginIndex,
             IndexType endIndex,
-            const Function& function,
-            ExecutionPolicy policy = ExecutionPolicy::kParallel);
+            const Function& function);
 
 //!
 //! \brief      Makes a range-loop from \p beginIndex \p to endIndex in
@@ -70,7 +58,7 @@ parallelFor(IndexType beginIndex,
 //! \param[in]  beginIndex The begin index.
 //! \param[in]  endIndex   The end index.
 //! \param[in]  function   The function to call for each index range.
-//! \param[in]  policy     The execution policy (parallel or serial).
+
 //!
 //! \tparam     IndexType  Index type.
 //! \tparam     Function   Function type.
@@ -79,8 +67,7 @@ template<typename IndexType, typename Function>
 void
 parallelRangeFor(IndexType beginIndex,
                  IndexType endIndex,
-                 const Function& function,
-                 ExecutionPolicy policy = ExecutionPolicy::kParallel);
+                 const Function& function);
 
 //!
 //! \brief      Makes a 2D nested for-loop in parallel.
@@ -94,8 +81,7 @@ parallelRangeFor(IndexType beginIndex,
 //! \param[in]  endIndexX   The end index in X dimension.
 //! \param[in]  beginIndexY The begin index in Y dimension.
 //! \param[in]  endIndexY   The end index in Y dimension.
-//! \param[in]  function    The function to call for each index (i, j).
-//! \param[in]  policy      The execution policy (parallel or serial).
+
 //!
 //! \tparam     IndexType  Index type.
 //! \tparam     Function   Function type.
@@ -106,8 +92,7 @@ parallelFor(IndexType beginIndexX,
             IndexType endIndexX,
             IndexType beginIndexY,
             IndexType endIndexY,
-            const Function& function,
-            ExecutionPolicy policy = ExecutionPolicy::kParallel);
+            const Function& function);
 
 //!
 //! \brief      Makes a 2D nested range-loop in parallel.
@@ -123,7 +108,7 @@ parallelFor(IndexType beginIndexX,
 //! \param[in]  beginIndexY The begin index in Y dimension.
 //! \param[in]  endIndexY   The end index in Y dimension.
 //! \param[in]  function   The function to call for each index range.
-//! \param[in]  policy      The execution policy (parallel or serial).
+
 //!
 //! \tparam     IndexType  Index type.
 //! \tparam     Function   Function type.
@@ -134,8 +119,7 @@ parallelRangeFor(IndexType beginIndexX,
                  IndexType endIndexX,
                  IndexType beginIndexY,
                  IndexType endIndexY,
-                 const Function& function,
-                 ExecutionPolicy policy = ExecutionPolicy::kParallel);
+                 const Function& function);
 
 //!
 //! \brief      Makes a 3D nested for-loop in parallel.
@@ -152,8 +136,7 @@ parallelRangeFor(IndexType beginIndexX,
 //! \param[in]  beginIndexZ The begin index in Z dimension.
 //! \param[in]  endIndexZ   The end index in Z dimension.
 //! \param[in]  function    The function to call for each index (i, j, k).
-//! \param[in]  policy      The execution policy (parallel or serial).
-//!
+
 //! \tparam     IndexType   Index type.
 //! \tparam     Function    Function type.
 //!
@@ -165,8 +148,7 @@ parallelFor(IndexType beginIndexX,
             IndexType endIndexY,
             IndexType beginIndexZ,
             IndexType endIndexZ,
-            const Function& function,
-            ExecutionPolicy policy = ExecutionPolicy::kParallel);
+            const Function& function);
 
 //!
 //! \brief      Makes a 3D nested range-loop in parallel.
@@ -184,7 +166,7 @@ parallelFor(IndexType beginIndexX,
 //! \param[in]  beginIndexZ The begin index in Z dimension.
 //! \param[in]  endIndexZ   The end index in Z dimension.
 //! \param[in]  function    The function to call for each index (i, j, k).
-//! \param[in]  policy      The execution policy (parallel or serial).
+
 //!
 //! \tparam     IndexType   Index type.
 //! \tparam     Function    Function type.
@@ -197,8 +179,7 @@ parallelRangeFor(IndexType beginIndexX,
                  IndexType endIndexY,
                  IndexType beginIndexZ,
                  IndexType endIndexZ,
-                 const Function& function,
-                 ExecutionPolicy policy = ExecutionPolicy::kParallel);
+                 const Function& function);
 
 //!
 //! \brief      Performs reduce operation in parallel.
@@ -211,7 +192,7 @@ parallelRangeFor(IndexType beginIndexX,
 //! \param[in]  identity   Identity value for the reduce operation.
 //! \param[in]  function   The function for reducing subrange.
 //! \param[in]  reduce     The reduce operator.
-//! \param[in]  policy     The execution policy (parallel or serial).
+
 //!
 //! \tparam     IndexType  Index type.
 //! \tparam     Value      Value type.
@@ -223,8 +204,7 @@ parallelReduce(IndexType beginIndex,
                IndexType endIndex,
                const Value& identity,
                const Function& func,
-               const Reduce& reduce,
-               ExecutionPolicy policy = ExecutionPolicy::kParallel);
+               const Reduce& reduce);
 
 //!
 //! \brief      Sorts a container in parallel.
@@ -233,15 +213,14 @@ parallelReduce(IndexType beginIndex,
 //!
 //! \param[in]  begin          The begin random access iterator.
 //! \param[in]  end            The end random access iterator.
-//! \param[in]  policy         The execution policy (parallel or serial).
+
 //!
 //! \tparam     RandomIterator Iterator type.
 //!
 template<typename RandomIterator>
 void
 parallelSort(RandomIterator begin,
-             RandomIterator end,
-             ExecutionPolicy policy = ExecutionPolicy::kParallel);
+             RandomIterator end);
 
 //!
 //! \brief      Sorts a container in parallel with a custom compare function.
@@ -253,7 +232,7 @@ parallelSort(RandomIterator begin,
 //! \param[in]  begin           The begin random access iterator.
 //! \param[in]  end             The end random access iterator.
 //! \param[in]  compare         The compare function.
-//! \param[in]  policy          The execution policy (parallel or serial).
+
 //!
 //! \tparam     RandomIterator  Iterator type.
 //! \tparam     CompareFunction Compare function type.
@@ -262,16 +241,6 @@ template<typename RandomIterator, typename CompareFunction>
 void
 parallelSort(RandomIterator begin,
              RandomIterator end,
-             CompareFunction compare,
-             ExecutionPolicy policy = ExecutionPolicy::kParallel);
-
-//! Sets maximum number of threads to use.
-void
-setMaxNumberOfThreads(unsigned int numThreads);
-
-//! Returns maximum number of threads to use.
-unsigned int
-maxNumberOfThreads();
-
+             CompareFunction compare);
 }
 #endif // LSTME_PARALLEL_HPP
