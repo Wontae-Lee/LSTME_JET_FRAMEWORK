@@ -1,13 +1,8 @@
-//
-// Created by LSTME on 2022-09-26.
-//
-
 #ifndef LSTME_COLLIDER3_HPP
 #define LSTME_COLLIDER3_HPP
 
+#include "surface3.hpp"
 #include <functional>
-#include <surface3.hpp>
-
 
 namespace lstme {
 

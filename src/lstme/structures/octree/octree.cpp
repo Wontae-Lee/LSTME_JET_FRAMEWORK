@@ -7,7 +7,6 @@
 #include <octree.hpp>
 #include <stack>
 
-
 namespace lstme {
 
 template<typename T>

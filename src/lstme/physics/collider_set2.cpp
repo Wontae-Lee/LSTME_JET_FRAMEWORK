@@ -1,11 +1,7 @@
-//
-// Created by LSTME on 2022-10-15.
-//
+#include "collider_set2.hpp"
+#include "pch.hpp"
 
-#include <collider_set2.hpp>
-#include <pch.hpp>
 #include <vector>
-
 
 using namespace lstme;
 

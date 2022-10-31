@@ -9,7 +9,6 @@
 #include <cstddef>
 #include <type_traits>
 
-
 namespace lstme {
 /**
  * @brief Generic N-D point class.

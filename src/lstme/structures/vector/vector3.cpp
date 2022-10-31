@@ -9,7 +9,6 @@
 #include <tuple>
 #include <vector3.hpp>
 
-
 namespace lstme {
 
 // Constructors

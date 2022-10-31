@@ -6,13 +6,13 @@
 
 #include <pch.hpp>
 
+#include <math_utils.hpp>
 #include <matrix2x2.hpp>
 #include <point_hash_grid_searcher2.hpp>
 #include <samplers.hpp>
 #include <surface_to_implicit2.hpp>
 #include <triangle_point_generator.hpp>
 #include <volume_particle_emitter2.hpp>
-#include <math_utils.hpp>
 
 using namespace lstme;
 

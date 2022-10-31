@@ -304,6 +304,4 @@ floor(const Size3& a);
 
 } // namespace lstme
 
-
-
 #endif // INCLUDE_LSTME_SIZE3_H_

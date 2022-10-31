@@ -1,11 +1,7 @@
-//
-// Created by LSTME on 2022-09-22.
-//
-
 #ifndef LSTME_BOUNDING_BOX_HPP
 #define LSTME_BOUNDING_BOX_HPP
 
-#include <vector.hpp>
+#include "vector.hpp"
 
 namespace lstme {
 

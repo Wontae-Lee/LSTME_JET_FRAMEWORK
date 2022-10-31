@@ -7,8 +7,8 @@
 #ifndef INCLUDE_LSTME_MATRIX_EXPRESSION_H_
 #define INCLUDE_LSTME_MATRIX_EXPRESSION_H_
 
-#include <size2.hpp>
-#include <vector_expression.hpp>
+#include "size2.hpp"
+#include "vector_expression.hpp"
 
 namespace lstme {
 

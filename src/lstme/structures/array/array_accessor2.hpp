@@ -5,12 +5,9 @@
 #ifndef LSTME_ARRAY_ACCESSOR2_HPP
 #define LSTME_ARRAY_ACCESSOR2_HPP
 
-#include <array_accessor.hpp>
-#include <point2.hpp>
-
-#include <array_accessor.hpp>
-#include <point2.hpp>
-#include <size2.hpp>
+#include "array_accessor.hpp"
+#include "point2.hpp"
+#include "size2.hpp"
 #include <utility> // just make cpplint happy..
 
 namespace lstme {

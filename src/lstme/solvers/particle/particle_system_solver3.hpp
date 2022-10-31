@@ -7,12 +7,12 @@
 #ifndef INCLUDE_LSTME_PARTICLE_SYSTEM_SOLVER3_H_
 #define INCLUDE_LSTME_PARTICLE_SYSTEM_SOLVER3_H_
 
-#include <collider3.hpp>
-#include <constants.hpp>
-#include <particle_emitter3.hpp>
-#include <particle_system_data3.hpp>
-#include <physics_animation.hpp>
-#include <vector_field3.hpp>
+#include "collider3.hpp"
+#include "constants.hpp"
+#include "particle_emitter3.hpp"
+#include "particle_system_data3.hpp"
+#include "physics_animation.hpp"
+#include "vector_field3.hpp"
 
 namespace lstme {
 

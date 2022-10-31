@@ -38,10 +38,7 @@ static const float edgeDirection2D[4][2] = { { 1.0f, 0.0f },
 // vertex states
 // There are 4 edges.  For each entry in the table, if edge #n is intersected,
 // then bit #n is set to 1
-static const int squareEdgeFlags[16] = { 0x000, 0x009, 0x003, 0x00a,
-                                         0x006, 0x00f, 0x005, 0x00c,
-                                         0x00c, 0x005, 0x00f, 0x006,
-                                         0x00a, 0x003, 0x009, 0x000 };
+static const int squareEdgeFlags[16] = { 0x000, 0x009, 0x003, 0x00a, 0x006, 0x00f, 0x005, 0x00c, 0x00c, 0x005, 0x00f, 0x006, 0x00a, 0x003, 0x009, 0x000 };
 
 // For each of the possible vertex states listed in RectEdgeFlags there is a
 // specific triangulation of the edge intersection points.

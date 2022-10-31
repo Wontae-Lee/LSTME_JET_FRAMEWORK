@@ -1,11 +1,7 @@
-//
-// Created by LSTME on 2022-09-22.
-//
-
 #ifndef LSTME_ANIMATION_HPP
 #define LSTME_ANIMATION_HPP
 
-#include <macros.hpp>
+#include "macros.hpp"
 #include <memory>
 
 namespace lstme {

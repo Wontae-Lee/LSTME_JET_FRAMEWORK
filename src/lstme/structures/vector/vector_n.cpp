@@ -2,11 +2,12 @@
 // Created by LSTME on 2022-10-14.
 //
 
+#include <constants.hpp>
 #include <macros.hpp>
 #include <math_utils.hpp>
 #include <parallel.hpp>
 #include <vector_n.hpp>
-#include <constants.hpp>
+
 
 namespace lstme {
 

@@ -1,11 +1,7 @@
-//
-// Created by LSTME on 2022-09-21.
-//
-
 #ifndef LSTME_CONSTANTS_HPP
 #define LSTME_CONSTANTS_HPP
 
-#include <macros.hpp>
+#include "macros.hpp"
 
 #include <cmath>
 #include <limits>

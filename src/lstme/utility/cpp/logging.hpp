@@ -97,21 +97,21 @@ extern Logger errorLogger;
 //! Debug-level logger.
 extern Logger debugLogger;
 
-#define LSTME_INFO                                                             \
-  (Logger(LoggingLevel::Info)                                                  \
-   << Logging::getHeader(LoggingLevel::Info) << "[" << __FILE__ << ":"         \
+#define LSTME_INFO                                                     \
+  (Logger(LoggingLevel::Info)                                          \
+   << Logging::getHeader(LoggingLevel::Info) << "[" << __FILE__ << ":" \
    << __LINE__ << " (" << __func__ << ")] ")
-#define LSTME_WARN                                                             \
-  (Logger(LoggingLevel::Warn)                                                  \
-   << Logging::getHeader(LoggingLevel::Warn) << "[" << __FILE__ << ":"         \
+#define LSTME_WARN                                                     \
+  (Logger(LoggingLevel::Warn)                                          \
+   << Logging::getHeader(LoggingLevel::Warn) << "[" << __FILE__ << ":" \
    << __LINE__ << " (" << __func__ << ")] ")
-#define LSTME_ERROR                                                            \
-  (Logger(LoggingLevel::Error)                                                 \
-   << Logging::getHeader(LoggingLevel::Error) << "[" << __FILE__ << ":"        \
+#define LSTME_ERROR                                                     \
+  (Logger(LoggingLevel::Error)                                          \
+   << Logging::getHeader(LoggingLevel::Error) << "[" << __FILE__ << ":" \
    << __LINE__ << " (" << __func__ << ")] ")
-#define LSTME_DEBUG                                                            \
-  (Logger(LoggingLevel::Debug)                                                 \
-   << Logging::getHeader(LoggingLevel::Debug) << "[" << __FILE__ << ":"        \
+#define LSTME_DEBUG                                                     \
+  (Logger(LoggingLevel::Debug)                                          \
+   << Logging::getHeader(LoggingLevel::Debug) << "[" << __FILE__ << ":" \
    << __LINE__ << " (" << __func__ << ")] ")
 
 } // namespace lstme

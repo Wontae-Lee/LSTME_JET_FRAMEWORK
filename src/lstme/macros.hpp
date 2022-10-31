@@ -1,7 +1,3 @@
-//
-// Created by LSTME on 2022-09-21.
-//
-
 #ifndef LSTME_MACROS_HPP
 #define LSTME_MACROS_HPP
 
@@ -25,20 +21,20 @@
 #endif
 
 #ifdef __cplusplus
-#define LSTME_NON_COPYABLE(ClassName)                                          \
-  ClassName(const ClassName&) = delete;                                        \
+#define LSTME_NON_COPYABLE(ClassName)   \
+  ClassName(const ClassName&) = delete; \
   ClassName& operator=(const ClassName&) = delete;
 #endif
 
 #ifdef __cplusplus
 #include <stdexcept>
-#define LSTME_THROW_INVALID_ARG_IF(expression)                                 \
-  if (expression) {                                                            \
-    throw std::invalid_argument(#expression);                                  \
+#define LSTME_THROW_INVALID_ARG_IF(expression) \
+  if (expression) {                            \
+    throw std::invalid_argument(#expression);  \
   }
-#define LSTME_THROW_INVALID_ARG_WITH_MESSAGE_IF(expression, message)           \
-  if (expression) {                                                            \
-    throw std::invalid_argument(message);                                      \
+#define LSTME_THROW_INVALID_ARG_WITH_MESSAGE_IF(expression, message) \
+  if (expression) {                                                  \
+    throw std::invalid_argument(message);                            \
   }
 #endif
 
@@ -54,12 +50,12 @@ typedef SSIZE_T ssize_t;
 #define LSTME_DIAG_PRAGMA(compiler, x) LSTME_DIAG_DO_PRAGMA(warning(x))
 #else
 #define LSTME_DIAG_DO_PRAGMA(x) _Pragma(#x)
-#define LSTME_DIAG_PRAGMA(compiler, x)                                         \
+#define LSTME_DIAG_PRAGMA(compiler, x) \
   LSTME_DIAG_DO_PRAGMA(compiler diagnostic x)
 #endif
 #if defined(__clang__)
-#define LSTME_DISABLE_CLANG_WARNING(clang_option)                              \
-  LSTME_DIAG_PRAGMA(clang, push)                                               \
+#define LSTME_DISABLE_CLANG_WARNING(clang_option) \
+  LSTME_DIAG_PRAGMA(clang, push)                  \
   LSTME_DIAG_PRAGMA(clang, ignored LSTME_DIAG_JOINSTR(-W, clang_option))
 #define LSTME_ENABLE_CLANG_WARNING(clang_option) LSTME_DIAG_PRAGMA(clang, pop)
 #define LSTME_DISABLE_MSVC_WARNING(gcc_option)
@@ -69,9 +65,10 @@ typedef SSIZE_T ssize_t;
 #elif defined(_MSC_VER)
 #define LSTME_DISABLE_CLANG_WARNING(gcc_option)
 #define LSTME_ENABLE_CLANG_WARNING(gcc_option)
-#define LSTME_DISABLE_MSVC_WARNING(msvc_errorcode)                             \
-  LSTME_DIAG_PRAGMA(msvc, push)                                                \
-  LSTME_DIAG_DO_PRAGMA(warning(disable :##msvc_errorcode))
+#define LSTME_DISABLE_MSVC_WARNING(msvc_errorcode) \
+  LSTME_DIAG_PRAGMA(msvc, push)                    \
+  LSTME_DIAG_DO_PRAGMA(warning(disable             \
+                               :##msvc_errorcode))
 #define LSTME_ENABLE_MSVC_WARNING(msvc_errorcode) LSTME_DIAG_PRAGMA(msvc, pop)
 #define LSTME_DISABLE_GCC_WARNING(gcc_option)
 #define LSTME_ENABLE_GCC_WARNING(gcc_option)
@@ -81,8 +78,8 @@ typedef SSIZE_T ssize_t;
 #define LSTME_ENABLE_CLANG_WARNING(gcc_option)
 #define LSTME_DISABLE_MSVC_WARNING(gcc_option)
 #define LSTME_ENABLE_MSVC_WARNING(gcc_option)
-#define LSTME_DISABLE_GCC_WARNING(gcc_option)                                  \
-  LSTME_DIAG_PRAGMA(GCC, push)                                                 \
+#define LSTME_DISABLE_GCC_WARNING(gcc_option) \
+  LSTME_DIAG_PRAGMA(GCC, push)                \
   LSTME_DIAG_PRAGMA(GCC, ignored LSTME_DIAG_JOINSTR(-W, gcc_option))
 #define LSTME_ENABLE_GCC_WARNING(gcc_option) LSTME_DIAG_PRAGMA(GCC, pop)
 #else
@@ -90,9 +87,9 @@ typedef SSIZE_T ssize_t;
 #define LSTME_ENABLE_CLANG_WARNING(gcc_option)
 #define LSTME_DISABLE_MSVC_WARNING(gcc_option)
 #define LSTME_ENABLE_MSVC_WARNING(gcc_option)
-#define LSTME_DISABLE_GCC_WARNING(gcc_option)                                  \
+#define LSTME_DISABLE_GCC_WARNING(gcc_option) \
   LSTME_DIAG_PRAGMA(GCC, ignored LSTME_DIAG_JOINSTR(-W, gcc_option))
-#define LSTME_ENABLE_GCC_WARNING(gcc_option)                                   \
+#define LSTME_ENABLE_GCC_WARNING(gcc_option) \
   LSTME_DIAG_PRAGMA(GCC, warning LSTME_DIAG_JOINSTR(-W, gcc_option))
 #endif
 #endif

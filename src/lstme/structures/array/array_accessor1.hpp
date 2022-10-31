@@ -5,7 +5,7 @@
 #ifndef LSTME_ARRAY_ACCESSOR1_HPP
 #define LSTME_ARRAY_ACCESSOR1_HPP
 
-#include <array_accessor.hpp>
+#include "array_accessor.hpp"
 #include <utility>
 
 namespace lstme {

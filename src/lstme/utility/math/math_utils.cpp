@@ -8,7 +8,6 @@
 #include <limits>
 #include <math_utils.hpp>
 
-
 namespace lstme {
 
 template<typename T>

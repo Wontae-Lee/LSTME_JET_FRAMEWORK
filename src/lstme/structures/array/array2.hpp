@@ -5,12 +5,9 @@
 #ifndef LSTME_ARRAY2_HPP
 #define LSTME_ARRAY2_HPP
 
-#include <array.hpp>
-#include <array_accessor2.hpp>
-
-#include <array.hpp>
-#include <array_accessor2.hpp>
-#include <size2.hpp>
+#include "array.hpp"
+#include "array_accessor2.hpp"
+#include "size2.hpp"
 
 #include <fstream>
 #include <functional>

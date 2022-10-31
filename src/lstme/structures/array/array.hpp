@@ -5,7 +5,7 @@
 #ifndef LSTME_ARRAY_HPP
 #define LSTME_ARRAY_HPP
 
-#include <size.hpp>
+#include "size.hpp"
 
 namespace lstme {
 //!

@@ -7,11 +7,11 @@
 #ifndef INCLUDE_LSTME_SURFACE3_H_
 #define INCLUDE_LSTME_SURFACE3_H_
 
-#include <bounding_box3.hpp>
+#include "bounding_box3.hpp"
 #include <constants.hpp>
 #include <memory>
-#include <ray3.hpp>
-#include <transform3.hpp>
+#include "ray3.hpp"
+#include "transform3.hpp"
 
 namespace lstme {
 

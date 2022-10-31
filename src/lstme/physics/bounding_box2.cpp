@@ -1,13 +1,8 @@
-//
-// Created by LSTME on 2022-09-29.
-//
+#include "bounding_box2.hpp"
 
-#include <algorithm>
-#include <bounding_box2.hpp>
 #include <limits>
 #include <utility> // just make cpplint happy..
-
-
+#include <algorithm>
 namespace lstme {
 
 template<typename T>

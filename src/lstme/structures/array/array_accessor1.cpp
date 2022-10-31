@@ -1,12 +1,7 @@
-//
-// Created by LSTME on 2022-09-21.
-//
-
-#include <array_accessor1.hpp>
-#include <constants.hpp>
-#include <macros.hpp>
-#include <parallel.hpp>
-
+#include "array_accessor1.hpp"
+#include "constants.hpp"
+#include "macros.hpp"
+#include "parallel.hpp"
 
 #include <utility>
 

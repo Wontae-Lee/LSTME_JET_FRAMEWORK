@@ -7,16 +7,8 @@
 #ifndef INCLUDE_LSTME_LSTME_H_
 #define INCLUDE_LSTME_LSTME_H_
 
-#include <array_samplers1.hpp>
-#include <array_samplers2.hpp>
-#include <array_samplers3.hpp>
-#include <advection_solver2.hpp>
-#include <advection_solver3.hpp>
 #include <animation.hpp>
-#include <anisotropic_points_to_implicit2.hpp>
-#include <anisotropic_points_to_implicit3.hpp>
-#include <apic_solver2.hpp>
-#include <apic_solver3.hpp>
+
 #include <array.hpp>
 #include <array1.hpp>
 #include <array2.hpp>
@@ -26,7 +18,7 @@
 #include <array_accessor2.hpp>
 #include <array_accessor3.hpp>
 #include <array_utils.hpp>
-#include <bcc_lattice_point_generator.hpp>
+
 #include <blas.hpp>
 #include <bounding_box.hpp>
 #include <bounding_box2.hpp>
@@ -52,8 +44,7 @@
 #include <constant_vector_field3.hpp>
 #include <constants.hpp>
 #include <cpp_utils.hpp>
-#include <cubic_semi_lagrangian2.hpp>
-#include <cubic_semi_lagrangian3.hpp>
+
 #include <custom_implicit_surface2.hpp>
 #include <custom_implicit_surface3.hpp>
 #include <custom_scalar_field2.hpp>
@@ -61,69 +52,23 @@
 #include <custom_vector_field2.hpp>
 #include <custom_vector_field3.hpp>
 #include <cylinder3.hpp>
-#include <eno_level_set_solver2.hpp>
-#include <eno_level_set_solver3.hpp>
+
 #include <face_centered_grid2.hpp>
 #include <face_centered_grid3.hpp>
-#include <fcc_lattice_point_generator.hpp>
-#include <fdm_cg_solver2.hpp>
-#include <fdm_cg_solver3.hpp>
-#include <fdm_gauss_seidel_solver2.hpp>
-#include <fdm_gauss_seidel_solver3.hpp>
-#include <fdm_iccg_solver2.hpp>
-#include <fdm_iccg_solver3.hpp>
-#include <fdm_jacobi_solver2.hpp>
-#include <fdm_jacobi_solver3.hpp>
-#include <fdm_linear_system2.hpp>
-#include <fdm_linear_system3.hpp>
-#include <fdm_linear_system_solver2.hpp>
-#include <fdm_linear_system_solver3.hpp>
-#include <fdm_mg_linear_system2.hpp>
-#include <fdm_mg_linear_system3.hpp>
-#include <fdm_mg_solver2.hpp>
-#include <fdm_mg_solver3.hpp>
-#include <fdm_mgpcg_solver2.hpp>
-#include <fdm_mgpcg_solver3.hpp>
-#include <fdm_utils.hpp>
+
+
 #include <field2.hpp>
 #include <field3.hpp>
-#include <flip_solver2.hpp>
-#include <flip_solver3.hpp>
-#include <fmm_level_set_solver2.hpp>
-#include <fmm_level_set_solver3.hpp>
+
 #include <functors.hpp>
 #include <grid2.hpp>
 #include <grid3.hpp>
-#include <grid_backward_euler_diffusion_solver2.hpp>
-#include <grid_backward_euler_diffusion_solver3.hpp>
-#include <grid_blocked_boundary_condition_solver2.hpp>
-#include <grid_blocked_boundary_condition_solver3.hpp>
-#include <grid_boundary_condition_solver2.hpp>
-#include <grid_boundary_condition_solver3.hpp>
-#include <grid_diffusion_solver2.hpp>
-#include <grid_diffusion_solver3.hpp>
+
 #include <grid_emitter2.hpp>
 #include <grid_emitter3.hpp>
 #include <grid_emitter_set2.hpp>
 #include <grid_emitter_set3.hpp>
-#include <grid_fluid_solver2.hpp>
-#include <grid_fluid_solver3.hpp>
-#include <grid_forward_euler_diffusion_solver2.hpp>
-#include <grid_forward_euler_diffusion_solver3.hpp>
-#include <grid_fractional_boundary_condition_solver2.hpp>
-#include <grid_fractional_boundary_condition_solver3.hpp>
-#include <grid_fractional_single_phase_pressure_solver2.hpp>
-#include <grid_fractional_single_phase_pressure_solver3.hpp>
-#include <grid_point_generator2.hpp>
-#include <grid_point_generator3.hpp>
-#include <grid_pressure_solver2.hpp>
-#include <grid_pressure_solver3.hpp>
-#include <grid_single_phase_pressure_solver2.hpp>
-#include <grid_single_phase_pressure_solver3.hpp>
-#include <grid_smoke_solver2.hpp>
-#include <grid_smoke_solver3.hpp>
-#include <grid_system_data2.hpp>
-#include <grid_system_data3.hpp>
+
 #include <implicit_surface2.hpp>
 #include <implicit_surface3.hpp>
 #include <implicit_surface_set2.hpp>
@@ -131,16 +76,7 @@
 #include <implicit_triangle_mesh3.hpp>
 #include <intersection_query_engine2.hpp>
 #include <intersection_query_engine3.hpp>
-#include <iterative_level_set_solver2.hpp>
-#include <iterative_level_set_solver3.hpp>
-#include <kdtree.hpp>
-#include <level_set_liquid_solver2.hpp>
-#include <level_set_liquid_solver3.hpp>
-#include <level_set_solver2.hpp>
-#include <level_set_solver3.hpp>
-#include <level_set_utils.hpp>
-#include <list_query_engine2.hpp>
-#include <list_query_engine3.hpp>
+
 #include <logging.hpp>
 #include <macros.hpp>
 #include <marching_cubes.hpp>
@@ -152,9 +88,7 @@
 #include <matrix_csr.hpp>
 #include <matrix_expression.hpp>
 #include <matrix_mxn.hpp>
-#include <mg.hpp>
-#include <nearest_neighbor_query_engine2.hpp>
-#include <nearest_neighbor_query_engine3.hpp>
+
 #include <octree.hpp>
 #include <parallel.hpp>
 #include <particle_emitter2.hpp>
@@ -169,29 +103,16 @@
 #include <pci_sph_solver3.hpp>
 #include <pde.hpp>
 #include <physics_animation.hpp>
-#include <pic_solver2.hpp>
-#include <pic_solver3.hpp>
+
 #include <plane2.hpp>
 #include <plane3.hpp>
 #include <point.hpp>
 #include <point2.hpp>
 #include <point3.hpp>
-#include <point_generator2.hpp>
-#include <point_generator3.hpp>
-#include <point_hash_grid_searcher2.hpp>
-#include <point_hash_grid_searcher3.hpp>
-#include <point_kdtree_searcher2.hpp>
-#include <point_kdtree_searcher3.hpp>
-#include <point_neighbor_searcher2.hpp>
-#include <point_neighbor_searcher3.hpp>
-#include <point_parallel_hash_grid_searcher2.hpp>
-#include <point_parallel_hash_grid_searcher3.hpp>
+
 #include <point_particle_emitter2.hpp>
 #include <point_particle_emitter3.hpp>
-#include <point_simple_list_searcher2.hpp>
-#include <point_simple_list_searcher3.hpp>
-#include <points_to_implicit2.hpp>
-#include <points_to_implicit3.hpp>
+
 #include <quadtree.hpp>
 #include <quaternion.hpp>
 #include <ray.hpp>
@@ -199,13 +120,12 @@
 #include <ray3.hpp>
 #include <rigid_body_collider2.hpp>
 #include <rigid_body_collider3.hpp>
-#include <samplers.hpp>
+
 #include <scalar_field2.hpp>
 #include <scalar_field3.hpp>
 #include <scalar_grid2.hpp>
 #include <scalar_grid3.hpp>
-#include <semi_lagrangian2.hpp>
-#include <semi_lagrangian3.hpp>
+
 #include <serial.hpp>
 #include <serialization.hpp>
 #include <size.hpp>
@@ -213,33 +133,28 @@
 #include <size3.hpp>
 #include <sph_kernels2.hpp>
 #include <sph_kernels3.hpp>
-#include <sph_points_to_implicit2.hpp>
-#include <sph_points_to_implicit3.hpp>
+
 #include <sph_solver2.hpp>
 #include <sph_solver3.hpp>
 #include <sph_system_data2.hpp>
 #include <sph_system_data3.hpp>
 #include <sphere2.hpp>
 #include <sphere3.hpp>
-#include <spherical_points_to_implicit2.hpp>
-#include <spherical_points_to_implicit3.hpp>
+
 #include <surface2.hpp>
 #include <surface3.hpp>
 #include <surface_set2.hpp>
 #include <surface_set3.hpp>
-#include <surface_to_implicit2.hpp>
-#include <surface_to_implicit3.hpp>
+
 #include <svd.hpp>
 #include <timer.hpp>
 #include <transform2.hpp>
 #include <transform3.hpp>
 #include <triangle3.hpp>
 #include <triangle_mesh3.hpp>
-#include <triangle_mesh_to_sdf.hpp>
-#include <triangle_point_generator.hpp>
+
 #include <type_helpers.hpp>
-#include <upwind_level_set_solver2.hpp>
-#include <upwind_level_set_solver3.hpp>
+
 #include <vector.hpp>
 #include <vector2.hpp>
 #include <vector3.hpp>
@@ -258,6 +173,5 @@
 #include <volume_grid_emitter3.hpp>
 #include <volume_particle_emitter2.hpp>
 #include <volume_particle_emitter3.hpp>
-#include <zhu_bridson_points_to_implicit2.hpp>
-#include <zhu_bridson_points_to_implicit3.hpp>
+
 #endif  // INCLUDE_LSTME_LSTME_H_

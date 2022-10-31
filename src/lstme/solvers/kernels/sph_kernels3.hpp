@@ -1,14 +1,3 @@
-// Copyright (c) 2018 Doyub Kim
-//
-// I am making my contributions/submissions to this project solely in my
-// personal capacity and am not conveying any rights to any intellectual
-// property of any third parties.
-//
-// Adopted from the sample code of:
-// Bart Adams and Martin Wicke,
-// "Meshless Approximation Methods and Applications in Physics Based Modeling
-// and Animation", Eurographics 2009 Tutorial
-
 #ifndef INCLUDE_LSTME_SPH_KERNELS3_H_
 #define INCLUDE_LSTME_SPH_KERNELS3_H_
 
@@ -115,6 +104,5 @@ struct SphSpikyKernel3
 };
 
 } // namespace lstme
-
 
 #endif // INCLUDE_LSTME_SPH_KERNELS3_H_

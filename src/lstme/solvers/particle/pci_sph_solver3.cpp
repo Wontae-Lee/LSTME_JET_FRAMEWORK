@@ -5,11 +5,11 @@
 // property of any third parties.
 
 #include <bcc_lattice_point_generator.hpp>
+#include <math_utils.hpp>
 #include <parallel.hpp>
 #include <pch.hpp>
 #include <pci_sph_solver3.hpp>
 #include <sph_kernels3.hpp>
-#include <math_utils.hpp>
 
 #include <algorithm>
 

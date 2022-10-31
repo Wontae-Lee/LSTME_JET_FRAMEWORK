@@ -1,12 +1,8 @@
-//
-// Created by LSTME on 2022-09-22.
-//
-
 #ifndef LSTME_BVH2_HPP
 #define LSTME_BVH2_HPP
 
-#include <intersection_query_engine2.hpp>
-#include <nearest_neighbor_query_engine2.hpp>
+#include "intersection_query_engine2.hpp"
+#include "nearest_neighbor_query_engine2.hpp"
 
 #include <vector>
 

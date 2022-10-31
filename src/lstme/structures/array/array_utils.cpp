@@ -12,7 +12,6 @@
 #include <serial.hpp>
 #include <type_helpers.hpp>
 
-
 namespace lstme {
 
 template<typename ArrayType, typename T>

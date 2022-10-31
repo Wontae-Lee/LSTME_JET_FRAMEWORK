@@ -7,10 +7,10 @@
 #ifndef INCLUDE_LSTME_VECTOR_H_
 #define INCLUDE_LSTME_VECTOR_H_
 
-#include <array_accessor1.hpp>
-#include <constants.hpp>
-#include <type_helpers.hpp>
-#include <vector_expression.hpp>
+#include "array_accessor1.hpp"
+#include "constants.hpp"
+#include "type_helpers.hpp"
+#include "vector_expression.hpp"
 
 #include <array>
 #include <type_traits>

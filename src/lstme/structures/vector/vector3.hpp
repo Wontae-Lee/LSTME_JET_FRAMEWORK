@@ -10,7 +10,7 @@
 #include <algorithm> // just make cpplint happy..
 #include <limits>
 #include <tuple>
-#include <vector2.hpp>
+#include "vector2.hpp"
 
 namespace lstme {
 

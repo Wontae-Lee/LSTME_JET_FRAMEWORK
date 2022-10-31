@@ -5,12 +5,11 @@
 #ifndef LSTME_ARRAY_UTILS_HPP
 #define LSTME_ARRAY_UTILS_HPP
 
-#include <array1.hpp>
-#include <array2.hpp>
-#include <array3.hpp>
-#include <array_accessor2.hpp>
-#include <array_accessor3.hpp>
-
+#include "array1.hpp"
+#include "array2.hpp"
+#include "array3.hpp"
+#include "array_accessor2.hpp"
+#include "array_accessor3.hpp"
 
 namespace lstme {
 

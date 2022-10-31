@@ -1,14 +1,8 @@
-// Copyright (c) 2018 Doyub Kim
-//
-// I am making my contributions/submissions to this project solely in my
-// personal capacity and am not conveying any rights to any intellectual
-// property of any third parties.
-
 #ifndef INCLUDE_LSTME_RIGID_BODY_COLLIDER3_H_
 #define INCLUDE_LSTME_RIGID_BODY_COLLIDER3_H_
 
-#include <collider3.hpp>
-#include <quaternion.hpp>
+#include "collider3.hpp"
+#include "quaternion.hpp"
 
 namespace lstme {
 

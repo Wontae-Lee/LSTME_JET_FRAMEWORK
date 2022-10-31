@@ -5,7 +5,6 @@
 #include <array1.hpp>
 #include <constants.hpp>
 
-
 #include <algorithm>
 #include <utility>
 #include <vector>

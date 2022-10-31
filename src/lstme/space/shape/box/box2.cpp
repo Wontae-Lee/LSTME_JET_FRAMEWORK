@@ -6,7 +6,6 @@
 #include <pch.hpp>
 #include <plane2.hpp>
 
-
 using namespace lstme;
 
 Box2::Box2(const Transform2& transform, bool isNormalFlipped)

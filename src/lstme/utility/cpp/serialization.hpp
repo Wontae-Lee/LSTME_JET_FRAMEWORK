@@ -56,5 +56,4 @@ deserialize(const std::vector<uint8_t>& buffer, Array1<T>* array);
 
 } // namespace lstme
 
-
 #endif // INCLUDE_LSTME_SERIALIZATION_H_

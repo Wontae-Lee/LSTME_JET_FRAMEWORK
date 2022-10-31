@@ -1,14 +1,8 @@
-// Copyright (c) 2018 Doyub Kim
-//
-// I am making my contributions/submissions to this project solely in my
-// personal capacity and am not conveying any rights to any intellectual
-// property of any third parties.
-
 #ifndef INCLUDE_LSTME_INTERSECTION_QUERY_ENGINE2_H_
 #define INCLUDE_LSTME_INTERSECTION_QUERY_ENGINE2_H_
 
-#include <bounding_box2.hpp>
-#include <constants.hpp>
+#include "bounding_box2.hpp"
+#include "constants.hpp"
 
 #include <functional>
 

@@ -5,6 +5,6 @@
 #ifndef LSTME_SIZE_HPP
 #define LSTME_SIZE_HPP
 
-#include <point.hpp>
+#include "point.hpp"
 
 #endif // LSTME_POINT_HPP

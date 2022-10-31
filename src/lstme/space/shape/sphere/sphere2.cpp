@@ -6,8 +6,8 @@
 
 #include <pch.hpp>
 
-#include <sphere2.hpp>
 #include <math_utils.hpp>
+#include <sphere2.hpp>
 
 using namespace lstme;
 

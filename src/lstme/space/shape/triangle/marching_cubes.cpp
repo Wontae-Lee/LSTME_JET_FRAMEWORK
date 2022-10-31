@@ -23,7 +23,6 @@
 #include <marching_cubes_table.hpp>
 #include <marching_squares_table.hpp>
 
-
 #include <bounding_box2.hpp>
 #include <bounding_box3.hpp>
 #include <level_set_utils.hpp>
@@ -114,9 +113,7 @@ globalEdgeId(size_t i, size_t j, size_t k, const Size3& dim, size_t localEdgeId)
 {
   // See edgeConnection in marching_cubes_table.hpp for the edge ordering.
   static const int edgeOffset3D[12][3] = {
-    { 1, 0, 0 }, { 2, 0, 1 }, { 1, 0, 2 }, { 0, 0, 1 },
-    { 1, 2, 0 }, { 2, 2, 1 }, { 1, 2, 2 }, { 0, 2, 1 },
-    { 0, 1, 0 }, { 2, 1, 0 }, { 2, 1, 2 }, { 0, 1, 2 }
+    { 1, 0, 0 }, { 2, 0, 1 }, { 1, 0, 2 }, { 0, 0, 1 }, { 1, 2, 0 }, { 2, 2, 1 }, { 1, 2, 2 }, { 0, 2, 1 }, { 0, 1, 0 }, { 2, 1, 0 }, { 2, 1, 2 }, { 0, 1, 2 }
   };
 
   return ((2 * k + edgeOffset3D[localEdgeId][2]) * 2 * dim.y +
@@ -140,10 +137,7 @@ globalVertexId(size_t i,
                size_t localVertexId)
 {
   // See edgeConnection in marching_cubes_table.hpp for the edge ordering.
-  static const int vertexOffset3D[8][3] = { { 0, 0, 0 }, { 2, 0, 0 },
-                                            { 2, 0, 2 }, { 0, 0, 2 },
-                                            { 0, 2, 0 }, { 2, 2, 0 },
-                                            { 2, 2, 2 }, { 0, 2, 2 } };
+  static const int vertexOffset3D[8][3] = { { 0, 0, 0 }, { 2, 0, 0 }, { 2, 0, 2 }, { 0, 0, 2 }, { 0, 2, 0 }, { 2, 2, 0 }, { 2, 2, 2 }, { 0, 2, 2 } };
 
   return ((2 * k + vertexOffset3D[localVertexId][2]) * 2 * dim.y +
           (2 * j + vertexOffset3D[localVertexId][1])) *

@@ -6,8 +6,7 @@
 #define LSTME_POINT2_HPP
 
 #include <algorithm>
-#include <point.hpp>
-
+#include "point.hpp"
 
 namespace lstme {
 

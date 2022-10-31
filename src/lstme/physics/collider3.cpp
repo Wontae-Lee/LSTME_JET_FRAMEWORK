@@ -1,10 +1,6 @@
-//
-// Created by LSTME on 2022-10-15.
-//
+#include "pch.hpp"
 
-#include <pch.hpp>
-
-#include <collider3.hpp>
+#include "collider3.hpp"
 
 #include <algorithm>
 

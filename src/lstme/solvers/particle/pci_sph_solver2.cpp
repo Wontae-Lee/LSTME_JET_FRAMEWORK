@@ -4,12 +4,12 @@
 // personal capacity and am not conveying any rights to any intellectual
 // property of any third parties.
 
+#include <math_utils.hpp>
 #include <parallel.hpp>
 #include <pch.hpp>
 #include <pci_sph_solver2.hpp>
 #include <sph_kernels2.hpp>
 #include <triangle_point_generator.hpp>
-#include <math_utils.hpp>
 
 #include <algorithm>
 

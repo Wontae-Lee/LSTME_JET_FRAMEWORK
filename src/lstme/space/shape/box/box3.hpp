@@ -5,9 +5,8 @@
 #ifndef LSTME_BOX3_HPP
 #define LSTME_BOX3_HPP
 
-#include <bounding_box3.hpp>
-#include <surface3.hpp>
-
+#include "bounding_box3.hpp"
+#include "surface3.hpp"
 
 namespace lstme {
 

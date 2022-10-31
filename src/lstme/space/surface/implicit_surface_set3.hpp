@@ -1,14 +1,8 @@
-// Copyright (c) 2018 Doyub Kim
-//
-// I am making my contributions/submissions to this project solely in my
-// personal capacity and am not conveying any rights to any intellectual
-// property of any third parties.
-
 #ifndef INCLUDE_LSTME_IMPLICIT_SURFACE_SET3_H_
 #define INCLUDE_LSTME_IMPLICIT_SURFACE_SET3_H_
 
-#include <bvh3.hpp>
-#include <implicit_surface3.hpp>
+#include "bvh3.hpp"
+#include "implicit_surface3.hpp"
 
 #include <vector>
 

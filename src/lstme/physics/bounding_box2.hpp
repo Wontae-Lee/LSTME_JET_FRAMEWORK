@@ -1,15 +1,12 @@
-//
-// Created by LSTME on 2022-09-22.
-//
+#ifndef BOUNDING_BOX2
+#define BOUNDING_BOX2
 
-#ifndef LSTME_BOUNDING_BOX2_HPP
-#define LSTME_BOUNDING_BOX2_HPP
+#include "bounding_box.hpp"
+#include "ray2.hpp"
+#include "vector2.hpp"
 
-#include <bounding_box.hpp>
+
 #include <limits>
-#include <ray2.hpp>
-#include <vector2.hpp>
-
 
 namespace lstme {
 
@@ -131,4 +128,4 @@ typedef BoundingBoxRayIntersection2<double> BoundingBoxRayIntersection2D;
 
 } // namespace lstme
 
-#endif // LSTME_BOUNDING_BOX2_HPP
+#endif /* BOUNDING_BOX2 */

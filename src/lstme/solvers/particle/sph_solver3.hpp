@@ -7,9 +7,9 @@
 #ifndef INCLUDE_LSTME_SPH_SOLVER3_H_
 #define INCLUDE_LSTME_SPH_SOLVER3_H_
 
-#include <constants.hpp>
-#include <particle_system_solver3.hpp>
-#include <sph_system_data3.hpp>
+#include "constants.hpp"
+#include "particle_system_solver3.hpp"
+#include "sph_system_data3.hpp"
 
 namespace lstme {
 

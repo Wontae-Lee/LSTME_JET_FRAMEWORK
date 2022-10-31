@@ -1,9 +1,7 @@
-//
-// Created by LSTME on 2022-09-29.
-//
+#include "bounding_box3.hpp"
+
 
 #include <algorithm>
-#include <bounding_box3.hpp>
 #include <limits>
 #include <utility> // just make cpplint happy..
 
@@ -235,10 +233,7 @@ Vector3<T>
 BoundingBox<T, 3>::corner(size_t idx) const
 {
   static const T h = static_cast<T>(1) / 2;
-  static const Vector3<T> offset[8] = { { -h, -h, -h }, { +h, -h, -h },
-                                        { -h, +h, -h }, { +h, +h, -h },
-                                        { -h, -h, +h }, { +h, -h, +h },
-                                        { -h, +h, +h }, { +h, +h, +h } };
+  static const Vector3<T> offset[8] = { { -h, -h, -h }, { +h, -h, -h }, { -h, +h, -h }, { +h, +h, -h }, { -h, -h, +h }, { +h, -h, +h }, { -h, +h, +h }, { +h, +h, +h } };
 
   return Vector3<T>(width(), height(), depth()) * offset[idx] + midPoint();
 }

@@ -12,8 +12,8 @@
 #endif
 
 #ifndef CLONE_W_CUSTOM_DELETER
-#define CLONE_W_CUSTOM_DELETER(ClassName)                                      \
-  std::shared_ptr<ClassName>(new ClassName(*this),                             \
+#define CLONE_W_CUSTOM_DELETER(ClassName)          \
+  std::shared_ptr<ClassName>(new ClassName(*this), \
                              [](ClassName* obj) { delete obj; });
 #endif
 
@@ -39,18 +39,18 @@ throwIfFailed(HRESULT hr)
 }
 
 #ifndef IF_FAILED_CLEANUP
-#define IF_FAILED_CLEANUP(_hr)                                                 \
-  if (FAILED(_hr)) {                                                           \
-    hr = _hr;                                                                  \
-    goto Cleanup;                                                              \
+#define IF_FAILED_CLEANUP(_hr) \
+  if (FAILED(_hr)) {           \
+    hr = _hr;                  \
+    goto Cleanup;              \
   }
 #endif
 
 #ifndef FAIL_AND_CLEANUP
-#define FAIL_AND_CLEANUP(_hr)                                                  \
-  {                                                                            \
-    hr = _hr;                                                                  \
-    goto Cleanup;                                                              \
+#define FAIL_AND_CLEANUP(_hr) \
+  {                           \
+    hr = _hr;                 \
+    goto Cleanup;             \
   }
 #endif
 

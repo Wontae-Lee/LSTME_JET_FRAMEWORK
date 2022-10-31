@@ -1,9 +1,5 @@
-//
-// Created by LSTME on 2022-10-14.
-//
-
-#include <constants.hpp>
-#include <sph_kernels3.hpp>
+#include "constants.hpp"
+#include "sph_kernels3.hpp"
 
 #include <constants.hpp>
 

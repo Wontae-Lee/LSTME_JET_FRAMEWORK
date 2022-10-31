@@ -15,10 +15,10 @@
 #include <generated/sph_system_data3_generated.hpp>
 
 #include <bcc_lattice_point_generator.hpp>
+#include <math_utils.hpp>
 #include <parallel.hpp>
 #include <sph_kernels3.hpp>
 #include <sph_system_data3.hpp>
-#include <math_utils.hpp>
 
 #include <algorithm>
 #include <vector>

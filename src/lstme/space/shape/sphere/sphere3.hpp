@@ -7,8 +7,8 @@
 #ifndef INCLUDE_LSTME_SPHERE3_H_
 #define INCLUDE_LSTME_SPHERE3_H_
 
-#include <bounding_box3.hpp>
-#include <surface3.hpp>
+#include "bounding_box3.hpp"
+#include "surface3.hpp"
 
 namespace lstme {
 

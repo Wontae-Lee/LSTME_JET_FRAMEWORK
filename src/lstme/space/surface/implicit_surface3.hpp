@@ -7,7 +7,7 @@
 #ifndef INCLUDE_LSTME_IMPLICIT_SURFACE3_H_
 #define INCLUDE_LSTME_IMPLICIT_SURFACE3_H_
 
-#include <surface3.hpp>
+#include "surface3.hpp"
 
 namespace lstme {
 

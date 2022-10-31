@@ -7,8 +7,8 @@
 #ifndef INCLUDE_LSTME_RAY3_H_
 #define INCLUDE_LSTME_RAY3_H_
 
-#include <ray.hpp>
-#include <vector3.hpp>
+#include "ray.hpp"
+#include "vector3.hpp"
 
 namespace lstme {
 
@@ -54,7 +54,5 @@ typedef Ray3<float> Ray3F;
 typedef Ray3<double> Ray3D;
 
 } // namespace lstme
-
-
 
 #endif // INCLUDE_LSTME_RAY3_H_

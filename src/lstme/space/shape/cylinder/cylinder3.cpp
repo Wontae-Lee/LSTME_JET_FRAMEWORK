@@ -9,7 +9,6 @@
 #include <math_utils.hpp>
 #include <plane3.hpp>
 
-
 using namespace lstme;
 
 Cylinder3::Cylinder3(const Transform3& transform, bool isNormalFlipped)

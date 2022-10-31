@@ -1,12 +1,8 @@
-//
-// Created by LSTME on 2022-09-22.
-//
+#ifndef BVH3
+#define BVH3
 
-#ifndef LSTME_BVH3_HPP
-#define LSTME_BVH3_HPP
-
-#include <intersection_query_engine3.hpp>
-#include <nearest_neighbor_query_engine3.hpp>
+#include "intersection_query_engine3.hpp"
+#include "nearest_neighbor_query_engine3.hpp"
 
 #include <vector>
 
@@ -144,4 +140,4 @@ private:
 };
 } // namespace lstme
 
-#endif // LSTME_BVH3_HPP
+#endif /* BVH3 */

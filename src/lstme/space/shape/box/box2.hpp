@@ -8,7 +8,6 @@
 #include <bounding_box2.hpp>
 #include <surface2.hpp>
 
-
 namespace lstme {
 
 //!

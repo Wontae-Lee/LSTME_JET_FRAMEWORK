@@ -4,11 +4,11 @@
 // personal capacity and am not conveying any rights to any intellectual
 // property of any third parties.
 
+#include <math_utils.hpp>
 #include <matrix2x2.hpp>
 #include <pch.hpp>
 #include <point_particle_emitter2.hpp>
 #include <samplers.hpp>
-#include <math_utils.hpp>
 
 namespace lstme {
 

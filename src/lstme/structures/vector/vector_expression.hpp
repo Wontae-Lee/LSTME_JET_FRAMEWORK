@@ -8,7 +8,7 @@
 #define INCLUDE_LSTME_VECTOR_EXPRESSION_H_
 
 #include <cmath>
-#include <functors.hpp>
+#include "functors.hpp"
 
 namespace lstme {
 

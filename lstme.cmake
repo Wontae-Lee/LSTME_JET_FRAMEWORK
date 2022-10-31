@@ -37,17 +37,10 @@ file(GLOB headers
         ${LSTME_SOURCE_DIR}/utility/timer/*.hpp
 
         # solvers
-        ${LSTME_SOURCE_DIR}/solvers/advection/*.hpp
-        ${LSTME_SOURCE_DIR}/solvers/apic/*.hpp
-        ${LSTME_SOURCE_DIR}/solvers/lagrangian/*.hpp
-        ${LSTME_SOURCE_DIR}/solvers/eno_level_set/*.hpp
-        ${LSTME_SOURCE_DIR}/solvers/fdm/*.hpp
-        ${LSTME_SOURCE_DIR}/solvers/flip/*.hpp
-        ${LSTME_SOURCE_DIR}/solvers/level_set/*.hpp
-        ${LSTME_SOURCE_DIR}/solvers/grid/*.hpp
+
         ${LSTME_SOURCE_DIR}/solvers/particle/*.hpp
         ${LSTME_SOURCE_DIR}/solvers/kernels/*.hpp
-        ${LSTME_SOURCE_DIR}/solvers/pic/*.hpp
+
 
         # Space
         ${LSTME_SOURCE_DIR}/space/grid/*.hpp

@@ -7,8 +7,8 @@
 #ifndef INCLUDE_LSTME_MATRIX4X4_H_
 #define INCLUDE_LSTME_MATRIX4X4_H_
 
-#include <matrix3x3.hpp>
-#include <vector4.hpp>
+#include "matrix3x3.hpp"
+#include "vector4.hpp"
 
 #include <array>
 #include <limits>

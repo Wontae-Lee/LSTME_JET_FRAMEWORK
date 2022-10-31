@@ -171,5 +171,4 @@ private:
 
 } // namespace lstme
 
-
 #endif // INCLUDE_LSTME_OCTREE_H_

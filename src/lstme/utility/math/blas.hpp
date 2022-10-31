@@ -8,7 +8,6 @@
 #include <matrix4x4.hpp>
 #include <vector4.hpp>
 
-
 namespace lstme {
 
 //!

@@ -14,11 +14,11 @@
 #include <fbs_helpers.hpp>
 #include <generated/sph_system_data2_generated.hpp>
 
+#include <math_utils.hpp>
 #include <parallel.hpp>
 #include <sph_kernels2.hpp>
 #include <sph_system_data2.hpp>
 #include <triangle_point_generator.hpp>
-#include <math_utils.hpp>
 
 #include <algorithm>
 #include <vector>

@@ -9,7 +9,7 @@
 
 #include <algorithm> // just make cpplint happy..
 #include <limits>
-#include <vector.hpp>
+#include "vector.hpp"
 
 namespace lstme {
 

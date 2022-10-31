@@ -7,7 +7,7 @@
 #ifndef INCLUDE_LSTME_VECTOR4_H_
 #define INCLUDE_LSTME_VECTOR4_H_
 
-#include <vector3.hpp>
+#include "vector3.hpp"
 
 #include <algorithm> // just make cpplint happy..
 #include <limits>
@@ -419,7 +419,5 @@ monotonicCatmullRom(const Vector4<T>& v0,
                     T f);
 
 } // namespace lstme
-
-
 
 #endif // INCLUDE_LSTME_VECTOR4_H_

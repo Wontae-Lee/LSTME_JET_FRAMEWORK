@@ -5,8 +5,8 @@
 #ifndef LSTME_ARRAY1_HPP
 #define LSTME_ARRAY1_HPP
 
-#include <array.hpp>
-#include <array_accessor1.hpp>
+#include "array.hpp"
+#include "array_accessor1.hpp"
 
 #include <fstream>
 #include <functional>

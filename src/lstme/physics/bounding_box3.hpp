@@ -1,15 +1,11 @@
-//
-// Created by LSTME on 2022-09-22.
-//
-
 #ifndef LSTME_BOUNDING_BOX3_HPP
 #define LSTME_BOUNDING_BOX3_HPP
 
-#include <bounding_box.hpp>
-#include <limits>
-#include <ray3.hpp>
-#include <vector3.hpp>
+#include "bounding_box.hpp"
+#include "ray3.hpp"
+#include "vector3.hpp"
 
+#include <limits>
 
 namespace lstme {
 

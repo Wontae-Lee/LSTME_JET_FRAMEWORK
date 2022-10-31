@@ -7,7 +7,7 @@
 #ifndef INCLUDE_LSTME_RAY_H_
 #define INCLUDE_LSTME_RAY_H_
 
-#include <vector.hpp>
+#include "vector.hpp"
 
 namespace lstme {
 

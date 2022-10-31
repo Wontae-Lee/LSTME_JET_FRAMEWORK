@@ -7,8 +7,8 @@
 #ifndef INCLUDE_LSTME_PARTICLE_EMITTER3_H_
 #define INCLUDE_LSTME_PARTICLE_EMITTER3_H_
 
-#include <animation.hpp>
-#include <particle_system_data3.hpp>
+#include "animation.hpp"
+#include "particle_system_data3.hpp"
 
 namespace lstme {
 

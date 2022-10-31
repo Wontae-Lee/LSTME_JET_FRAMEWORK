@@ -1,38 +1,12 @@
-// Copyright (c) 2018 Doyub Kim
-//
-// I am making my contributions/submissions to this project solely in my
-// personal capacity and am not conveying any rights to any intellectual
-// property of any third parties.
-
 #ifndef INCLUDE_LSTME_PARTICLE_SYSTEM_DATA3_H_
 #define INCLUDE_LSTME_PARTICLE_SYSTEM_DATA3_H_
 
-#include <array1.hpp>
-#include <point_neighbor_searcher3.hpp>
-#include <serialization.hpp>
+#include "array1.hpp"
+#include "point_neighbor_searcher3.hpp"
+#include "serialization.hpp"
 
 #include <memory>
 #include <vector>
-
-#ifndef LSTME_DOXYGEN
-
-namespace flatbuffers {
-
-class FlatBufferBuilder;
-template<typename T>
-struct Offset;
-
-}
-
-namespace lstme {
-namespace fbs {
-
-struct ParticleSystemData3;
-
-}
-}
-
-#endif // LSTME_DOXYGEN
 
 namespace lstme {
 
@@ -221,14 +195,6 @@ public:
 
   //! Copies from other particle system data.
   ParticleSystemData3& operator=(const ParticleSystemData3& other);
-
-protected:
-  void serializeParticleSystemData(
-    flatbuffers::FlatBufferBuilder* builder,
-    flatbuffers::Offset<fbs::ParticleSystemData3>* fbsParticleSystemData) const;
-
-  void deserializeParticleSystemData(
-    const fbs::ParticleSystemData3* fbsParticleSystemData);
 
 private:
   double _radius = 1e-3;

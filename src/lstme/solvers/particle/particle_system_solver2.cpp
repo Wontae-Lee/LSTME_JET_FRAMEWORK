@@ -1,17 +1,11 @@
-// Copyright (c) 2018 Doyub Kim
-//
-// I am making my contributions/submissions to this project solely in my
-// personal capacity and am not conveying any rights to any intellectual
-// property of any third parties.
+#include "pch.hpp"
 
-#include <pch.hpp>
-
-#include <array_utils.hpp>
-#include <constant_vector_field2.hpp>
-#include <parallel.hpp>
-#include <particle_system_solver2.hpp>
-#include <timer.hpp>
-#include <math_utils.hpp>
+#include "array_utils.hpp"
+#include "constant_vector_field2.hpp"
+#include "math_utils.hpp"
+#include "parallel.hpp"
+#include "particle_system_solver2.hpp"
+#include "timer.hpp"
 
 #include <algorithm>
 

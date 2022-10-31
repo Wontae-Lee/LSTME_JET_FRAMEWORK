@@ -8,7 +8,6 @@
 #include <serial.hpp>
 #include <vector>
 
-
 namespace lstme {
 
 template<typename RandomIterator, typename T>

@@ -1,12 +1,7 @@
-//
-// Created by LSTME on 2022-10-15.
-//
-
-#include <animation.hpp>
-#include <pch.hpp>
-#include <private_helpers.hpp>
-#include <timer.hpp>
-
+#include "animation.hpp"
+#include "pch.hpp"
+#include "private_helpers.hpp"
+#include "timer.hpp"
 
 using namespace lstme;
 

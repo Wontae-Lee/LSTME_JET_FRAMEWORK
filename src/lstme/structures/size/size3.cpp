@@ -7,7 +7,6 @@
 #include <math_utils.hpp>
 #include <size3.hpp>
 
-
 namespace lstme {
 
 // Constructors

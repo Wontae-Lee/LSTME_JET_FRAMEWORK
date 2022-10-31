@@ -1,15 +1,9 @@
-// Copyright (c) 2018 Doyub Kim
-//
-// I am making my contributions/submissions to this project solely in my
-// personal capacity and am not conveying any rights to any intellectual
-// property of any third parties.
-
 #ifndef INCLUDE_LSTME_PARTICLE_SYSTEM_DATA2_H_
 #define INCLUDE_LSTME_PARTICLE_SYSTEM_DATA2_H_
 
-#include <array1.hpp>
-#include <point_neighbor_searcher2.hpp>
-#include <serialization.hpp>
+#include "array1.hpp"
+#include "point_neighbor_searcher2.hpp"
+#include "serialization.hpp"
 
 #include <memory>
 #include <vector>

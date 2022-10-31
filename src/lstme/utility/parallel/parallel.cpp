@@ -6,7 +6,6 @@
 #include <macros.hpp>
 #include <parallel.hpp>
 
-
 #include <algorithm>
 #include <functional>
 #include <future>

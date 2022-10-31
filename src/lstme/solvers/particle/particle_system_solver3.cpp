@@ -8,10 +8,10 @@
 
 #include <array_utils.hpp>
 #include <constant_vector_field3.hpp>
+#include <math_utils.hpp>
 #include <parallel.hpp>
 #include <particle_system_solver3.hpp>
 #include <timer.hpp>
-#include <math_utils.hpp>
 
 #include <algorithm>
 

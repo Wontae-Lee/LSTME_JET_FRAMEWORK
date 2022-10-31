@@ -7,8 +7,8 @@
 #ifndef INTERSECTION_QUERY_ENGINE3
 #define INTERSECTION_QUERY_ENGINE3
 
-#include <bounding_box3.hpp>
-#include <constants.hpp>
+#include "bounding_box3.hpp"
+#include "constants.hpp"
 
 #include <functional>
 

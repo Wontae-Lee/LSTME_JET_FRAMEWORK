@@ -7,8 +7,8 @@
 #ifndef INCLUDE_LSTME_MATRIX_H_
 #define INCLUDE_LSTME_MATRIX_H_
 
-#include <macros.hpp>
-#include <matrix_expression.hpp>
+#include "macros.hpp"
+#include "matrix_expression.hpp"
 
 #include <array>
 #include <type_traits>

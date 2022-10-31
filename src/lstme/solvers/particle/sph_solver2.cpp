@@ -4,13 +4,13 @@
 // personal capacity and am not conveying any rights to any intellectual
 // property of any third parties.
 
+#include <math_utils.hpp>
 #include <parallel.hpp>
 #include <pch.hpp>
 #include <physics_helpers.hpp>
 #include <sph_kernels2.hpp>
 #include <sph_solver2.hpp>
 #include <timer.hpp>
-#include <math_utils.hpp>
 
 #include <algorithm>
 

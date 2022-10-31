@@ -1,10 +1,6 @@
-//
-// Created by LSTME on 2022-09-29.
-//
-
-#include <bvh3.hpp>
-#include <constants.hpp>
-#include <math_utils.hpp>
+#include "bvh3.hpp"
+#include "constants.hpp"
+#include "math_utils.hpp"
 
 #include <numeric>
 

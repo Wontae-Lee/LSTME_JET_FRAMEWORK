@@ -7,11 +7,11 @@
 #include <pch.hpp>
 
 #include <bcc_lattice_point_generator.hpp>
+#include <math_utils.hpp>
 #include <point_hash_grid_searcher3.hpp>
 #include <samplers.hpp>
 #include <surface_to_implicit3.hpp>
 #include <volume_particle_emitter3.hpp>
-#include <math_utils.hpp>
 
 using namespace lstme;
 

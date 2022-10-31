@@ -7,7 +7,7 @@
 #ifndef INCLUDE_LSTME_SIZE2_H_
 #define INCLUDE_LSTME_SIZE2_H_
 
-#include <size.hpp>
+#include "size.hpp"
 
 namespace lstme {
 
@@ -287,7 +287,5 @@ Size2
 floor(const Size2& a);
 
 } // namespace lstme
-
-
 
 #endif // INCLUDE_LSTME_SIZE2_H_

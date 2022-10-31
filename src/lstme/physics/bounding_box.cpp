@@ -1,13 +1,8 @@
-//
-// Created by LSTME on 2022-09-29.
-//
+#include "bounding_box.hpp"
+#include "math_utils.hpp"
 
-#include <algorithm>
-#include <bounding_box.hpp>
 #include <limits>
-#include <math_utils.hpp>
-
-
+#include <algorithm>
 namespace lstme {
 
 template<typename T, size_t N>
