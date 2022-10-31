@@ -1,0 +1,6 @@
+[submodule "external/oneTBB"]
+	path = external/oneTBB
+	url = https://github.com/oneapi-src/oneTBB.git
+[submodule "external/pystring"]
+	path = external/pystring
+	url = https://github.com/imageworks/pystring.git
