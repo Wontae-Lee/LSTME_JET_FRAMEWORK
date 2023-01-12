@@ -1,10 +1,9 @@
 //
 // Stiches multiple .obj files into one .obj.
 //
-
-#define TINYOBJLOADER_IMPLEMENTATION
-#include "../../tiny_obj_loader.h"
 #include "obj_writer.h"
+
+#include "../../tiny_obj_loader.h"
 
 #include <cassert>
 #include <iostream>
@@ -133,9 +132,14 @@ int main(int argc, char **argv)
 
   for (int i = 0; i < num_objfiles; i++) {
     std::cout << "Loading " << argv[i+1] << " ... " << std::flush;
-    
+
+    std::string warn;
     std::string err;
-    bool ret = tinyobj::LoadObj(&attributes[i], &shapes[i], &materials[i], &err, argv[i+1]);
+    bool ret = tinyobj::LoadObj(&attributes[i], &shapes[i], &materials[i], &warn, &err, argv[i+1]);
+    if (!warn.empty()) {
+      std::cerr << "WARN:" << warn << std::endl;
+    }
+
     if (!err.empty()) {
       std::cerr << err << std::endl;
     }

@@ -3,8 +3,8 @@
 # Platform and architecture setup
 #
 
-option(LSTME_WARNINGS_AS_ERRORS "Treat all warnings as errors" ON)
-if(LSTME_WARNINGS_AS_ERRORS)
+option(JET_WARNINGS_AS_ERRORS "Treat all warnings as errors" ON)
+if(JET_WARNINGS_AS_ERRORS)
     if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
         set(WARN_AS_ERROR_FLAGS "/WX")
     else()
@@ -27,7 +27,7 @@ endif()
 #
 
 set(DEFAULT_PROJECT_OPTIONS
-    CXX_STANDARD              17 # Not available before CMake 3.1; see below for manual command line argument addition
+    CXX_STANDARD              11 # Not available before CMake 3.1; see below for manual command line argument addition
     LINKER_LANGUAGE           "CXX"
     POSITION_INDEPENDENT_CODE ON
 )
