@@ -16,7 +16,7 @@
 #include "jet/primitive/plane/plane3.h"
 #include "jet/primitive/surface/implicit_surface_set3.h"
 #include "jet/solver/grid/grid_fractional_single_phase_pressure_solver3.h"
-#include "jet/solver/pci/pic_solver3.h"
+#include "jet/solver/sph/pic_solver3.h"
 #include "jet/transfer/surface_to_implicit3.h"
 #include "jet/utility/level_set_utils.h"
 

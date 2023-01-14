@@ -5,7 +5,7 @@
 // property of any third parties.
 
 #include "jet/primitive/grid/cell_centered_scalar_grid2.h"
-#include "pch.h"
+#include "jet/helpers/pch.h"
 
 #include <algorithm>
 #include <utility>  // just make cpplint happy..

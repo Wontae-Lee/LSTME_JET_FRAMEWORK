@@ -7,7 +7,7 @@
 #ifndef INCLUDE_JET_TRIANGLE_MESH3_H_
 #define INCLUDE_JET_TRIANGLE_MESH3_H_
 
-#include "jet/figure/triangle3.h"
+#include "jet/primitive/triangle/triangle3.h"
 #include "jet/math/quaternion.h"
 #include "jet/physics/bounding_volume_hierarchy/bvh3.h"
 #include "jet/primitive/array/array1.h"

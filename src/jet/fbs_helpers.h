@@ -7,9 +7,9 @@
 #ifndef SRC_JET_FBS_HELPERS_H_
 #define SRC_JET_FBS_HELPERS_H_
 
-#include <generated/basic_types_generated.h>
 #include <algorithm>
 #include <vector>
+#include "generated/basic_types_generated.h"
 #include "jet/primitive/size/size2.h"
 #include "jet/primitive/size/size3.h"
 #include "jet/primitive/vector/vector2.h"

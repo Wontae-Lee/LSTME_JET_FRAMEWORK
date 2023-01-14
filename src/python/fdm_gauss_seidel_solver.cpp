@@ -7,8 +7,8 @@
 #include "fdm_gauss_seidel_solver.h"
 #include "pybind11_utils.h"
 
-#include "jet/solver/gauss_seidel/fdm_gauss_seidel_solver2.h"
-#include "jet/solver/gauss_seidel/fdm_gauss_seidel_solver3.h"
+#include "jet/solver/fdm/fdm_gauss_seidel_solver2.h"
+#include "jet/solver/fdm/fdm_gauss_seidel_solver3.h"
 
 namespace py = pybind11;
 using namespace jet;

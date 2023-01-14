@@ -8,7 +8,7 @@
 #define INCLUDE_JET_SURFACE2_H_
 
 #include <memory>
-#include "jet/figure/ray2.h"
+#include "jet/primitive/ray/ray2.h"
 #include "jet/math/constants.h"
 #include "jet/physics/bounding_box/bounding_box2.h"
 #include "jet/transform/transform2.h"

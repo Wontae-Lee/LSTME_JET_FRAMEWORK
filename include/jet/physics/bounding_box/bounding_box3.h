@@ -9,7 +9,7 @@
 
 #include <limits>
 #include "bounding_box.h"
-#include "jet/figure/ray3.h"
+#include "jet/primitive/ray/ray3.h"
 #include "jet/primitive/vector/vector3.h"
 
 namespace jet {

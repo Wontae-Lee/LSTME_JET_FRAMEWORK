@@ -10,7 +10,7 @@
 #include "jet/figure/box2.h"
 #include "jet/figure/sphere2.h"
 #include "jet/physics/collider/rigid_body_collider2.h"
-#include "jet/solver/pci/pic_solver2.h"
+#include "jet/solver/sph/pic_solver2.h"
 
 using namespace jet;
 

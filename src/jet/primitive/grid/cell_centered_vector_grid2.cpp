@@ -4,7 +4,7 @@
 // personal capacity and am not conveying any rights to any intellectual
 // property of any third parties.
 
-#include "pch.h"
+#include "jet/helpers/pch.h"
 
 #include "jet/parallel/parallel.h"
 #include "jet/primitive/grid/cell_centered_vector_grid2.h"

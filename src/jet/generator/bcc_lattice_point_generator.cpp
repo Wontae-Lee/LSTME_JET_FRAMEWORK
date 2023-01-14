@@ -5,7 +5,7 @@
 // property of any third parties.
 
 #include "jet/generator/bcc_lattice_point_generator.h"
-#include "pch.h"
+#include "jet/helpers/pch.h"
 
 namespace jet {
 

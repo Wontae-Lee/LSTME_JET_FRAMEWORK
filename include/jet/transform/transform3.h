@@ -7,7 +7,7 @@
 #ifndef INCLUDE_JET_TRANSFORM3_H_
 #define INCLUDE_JET_TRANSFORM3_H_
 
-#include "jet/figure/ray3.h"
+#include "jet/primitive/ray/ray3.h"
 #include "jet/math/quaternion.h"
 #include "jet/physics/bounding_box/bounding_box3.h"
 #include "jet/primitive/vector/vector3.h"

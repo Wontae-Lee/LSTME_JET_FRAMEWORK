@@ -3,7 +3,7 @@
 #ifndef FLATBUFFERS_GENERATED_GRIDSYSTEMDATA3_JET_FBS_H_
 #define FLATBUFFERS_GENERATED_GRIDSYSTEMDATA3_JET_FBS_H_
 
-#include "flatbuffers/flatbuffers.h"
+#include "../3rdparty/flatbuffers/flatbuffers.h"
 
 #include "basic_types_generated.h"
 

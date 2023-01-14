@@ -4,7 +4,7 @@
 // personal capacity and am not conveying any rights to any intellectual
 // property of any third parties.
 
-#include "pch.h"
+#include "jet/helpers/pch.h"
 
 #include "jet/primitive/matrix/svd.h"
 #include "jet/searcher/point_kdtree_searcher3.h"

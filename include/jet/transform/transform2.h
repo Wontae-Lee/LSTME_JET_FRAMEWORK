@@ -7,7 +7,7 @@
 #ifndef INCLUDE_JET_TRANSFORM2_H_
 #define INCLUDE_JET_TRANSFORM2_H_
 
-#include "jet/figure/ray2.h"
+#include "jet/primitive/ray/ray2.h"
 #include "jet/physics/bounding_box/bounding_box2.h"
 #include "jet/primitive/vector/vector2.h"
 

@@ -5,7 +5,7 @@
 // property of any third parties.
 
 #include "jet/solver/apic/apic_solver3.h"
-#include "pch.h"
+#include "jet/helpers/pch.h"
 
 using namespace jet;
 

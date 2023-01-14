@@ -6,7 +6,7 @@
 
 #include "jet/solver/advection/advection_solver2.h"
 #include <limits>
-#include "pch.h"
+#include "jet/helpers/pch.h"
 
 using namespace jet;
 

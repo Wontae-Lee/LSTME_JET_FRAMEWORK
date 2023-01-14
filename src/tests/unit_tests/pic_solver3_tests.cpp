@@ -5,7 +5,7 @@
 // property of any third parties.
 
 #include <gtest/gtest.h>
-#include "jet/solver/pci/pic_solver3.h"
+#include "jet/solver/sph/pic_solver3.h"
 
 using namespace jet;
 

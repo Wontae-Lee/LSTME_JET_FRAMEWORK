@@ -5,10 +5,10 @@
 // property of any third parties.
 
 #include "jet/animation/animation.h"
+#include "jet/helpers/pch.h"
 #include "jet/timer/timer.h"
-#include "pch.h"
 
-#include "./private_helpers.h"
+#include "jet/helpers/private_helpers.h"
 
 using namespace jet;
 

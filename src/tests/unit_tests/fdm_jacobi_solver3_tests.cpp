@@ -6,7 +6,7 @@
 
 #include "fdm_linear_system_solver_test_helper3.h"
 
-#include "jet/solver/jacobi/fdm_jacobi_solver3.h"
+#include "jet/solver/fdm/fdm_jacobi_solver3.h"
 
 #include <gtest/gtest.h>
 

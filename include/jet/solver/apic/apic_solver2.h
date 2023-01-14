@@ -7,7 +7,7 @@
 #ifndef INCLUDE_JET_APIC_SOLVER2_H_
 #define INCLUDE_JET_APIC_SOLVER2_H_
 
-#include "jet/solver/pci/pic_solver2.h"
+#include "jet/solver/sph/pic_solver2.h"
 
 namespace jet {
 

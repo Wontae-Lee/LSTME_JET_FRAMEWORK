@@ -12,7 +12,7 @@
 #include "jet/physics/collider/rigid_body_collider2.h"
 #include "jet/primitive/plane/plane2.h"
 #include "jet/primitive/surface/implicit_surface_set2.h"
-#include "jet/solver/pci/pci_sph_solver2.h"
+#include "jet/solver/sph/pci_sph_solver2.h"
 #include "jet/transfer/surface_to_implicit2.h"
 
 using namespace jet;

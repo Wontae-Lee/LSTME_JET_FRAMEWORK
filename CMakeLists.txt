@@ -7,13 +7,13 @@
 #
 
 # CMake version
-cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.22.1 FATAL_ERROR)
 
 # Include cmake modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 # Declare project
-project(jet)
+project(jet VERSION 1.0.0)
 
 # Useful paths
 set(EXTERNAL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/external)

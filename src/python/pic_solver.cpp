@@ -7,8 +7,8 @@
 #include "pic_solver.h"
 #include "pybind11_utils.h"
 
-#include "jet/solver/pci/pic_solver2.h"
-#include "jet/solver/pci/pic_solver3.h"
+#include "jet/solver/sph/pic_solver2.h"
+#include "jet/solver/sph/pic_solver3.h"
 
 namespace py = pybind11;
 using namespace jet;
