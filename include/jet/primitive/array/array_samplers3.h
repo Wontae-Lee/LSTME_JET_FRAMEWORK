@@ -38,7 +38,7 @@ class NearestArraySampler<T, R, 3> final {
     explicit NearestArraySampler(const ConstArrayAccessor3<T>& accessor, const Vector3<R>& gridSpacing, const Vector3<R>& gridOrigin);
 
     //! Copy constructor.
-    NearestArraySampler(const NearestArraySampler& other);
+    NearestArraySampler(const NearestArraySampler<T,R,3>& other);
 
     //! Returns sampled value at point \p pt.
     T operator()(const Vector3<R>& pt) const;
@@ -83,7 +83,7 @@ class LinearArraySampler<T, R, 3> final {
     explicit LinearArraySampler(const ConstArrayAccessor3<T>& accessor, const Vector3<R>& gridSpacing, const Vector3<R>& gridOrigin);
 
     //! Copy constructor.
-    LinearArraySampler(const LinearArraySampler& other);
+    LinearArraySampler(const LinearArraySampler<T,R,3>& other);
 
     //! Returns sampled value at point \p pt.
     T operator()(const Vector3<R>& pt) const;
@@ -133,7 +133,7 @@ class CubicArraySampler<T, R, 3> final {
     explicit CubicArraySampler(const ConstArrayAccessor3<T>& accessor, const Vector3<R>& gridSpacing, const Vector3<R>& gridOrigin);
 
     //! Copy constructor.
-    CubicArraySampler(const CubicArraySampler& other);
+    CubicArraySampler(const CubicArraySampler<T,R,3>& other);
 
     //! Returns sampled value at point \p pt.
     T operator()(const Vector3<R>& pt) const;

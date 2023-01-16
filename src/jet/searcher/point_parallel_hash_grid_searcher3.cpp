@@ -8,7 +8,7 @@
 #pragma warning(disable : 4244)
 #endif
 
-#include "fbs_helpers.h"
+#include "jet/helpers/fbs_helpers.h"
 #include "generated/point_parallel_hash_grid_searcher3_generated.h"
 #include "jet/helpers/pch.h"
 

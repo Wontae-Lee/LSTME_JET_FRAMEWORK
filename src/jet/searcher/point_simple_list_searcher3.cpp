@@ -4,7 +4,7 @@
 // personal capacity and am not conveying any rights to any intellectual
 // property of any third parties.
 
-#include "fbs_helpers.h"
+#include "jet/helpers/fbs_helpers.h"
 #include "generated/point_simple_list_searcher3_generated.h"
 #include "jet/helpers/pch.h"
 

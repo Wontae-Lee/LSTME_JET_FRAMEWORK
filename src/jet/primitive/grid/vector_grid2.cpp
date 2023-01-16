@@ -10,14 +10,14 @@
 
 #include "jet/helpers/pch.h"
 
-#include "fbs_helpers.h"
+#include "jet/helpers/fbs_helpers.h"
 #include "generated/vector_grid2_generated.h"
 
 #include "jet/primitive/array/array_samplers2.h"
 #include "jet/primitive/grid/vector_grid2.h"
 
-#include "3rdparty/flatbuffers/flatbuffers.h"
 
+#include <flatbuffers/flatbuffers.h>
 #include <algorithm>
 #include <string>
 #include <vector>

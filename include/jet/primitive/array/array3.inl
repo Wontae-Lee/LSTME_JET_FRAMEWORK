@@ -35,12 +35,12 @@ Array<T, 3>::Array(const std::initializer_list<std::initializer_list<std::initia
 }
 
 template <typename T>
-Array<T, 3>::Array(const Array& other) {
+Array<T, 3>::Array(const Array<T,3>& other) {
     set(other);
 }
 
 template <typename T>
-Array<T, 3>::Array(Array&& other) {
+Array<T, 3>::Array(Array<T,3>&& other) {
     (*this) = std::move(other);
 }
 
@@ -52,7 +52,7 @@ void Array<T, 3>::set(const T& value) {
 }
 
 template <typename T>
-void Array<T, 3>::set(const Array& other) {
+void Array<T, 3>::set(const Array<T,3>& other) {
     _data.resize(other._data.size());
     std::copy(other._data.begin(), other._data.end(), _data.begin());
     _size = other._size;
@@ -207,7 +207,7 @@ ConstArrayAccessor3<T> Array<T, 3>::constAccessor() const {
 }
 
 template <typename T>
-void Array<T, 3>::swap(Array& other) {
+void Array<T, 3>::swap(Array<T,3>& other) {
     std::swap(other._data, _data);
     std::swap(other._size, _size);
 }
@@ -277,13 +277,13 @@ Array<T, 3>& Array<T, 3>::operator=(const T& value) {
 }
 
 template <typename T>
-Array<T, 3>& Array<T, 3>::operator=(const Array& other) {
+Array<T, 3>& Array<T, 3>::operator=(const Array<T,3>& other) {
     set(other);
     return *this;
 }
 
 template <typename T>
-Array<T, 3>& Array<T, 3>::operator=(Array&& other) {
+Array<T, 3>& Array<T, 3>::operator=(Array<T,3>&& other) {
     _data = std::move(other._data);
     _size = other._size;
     other._size = Size3();

@@ -139,7 +139,7 @@ T* const ArrayAccessor<T, 3>::data() const {
 }
 
 template <typename T>
-void ArrayAccessor<T, 3>::swap(ArrayAccessor& other) {
+void ArrayAccessor<T, 3>::swap(ArrayAccessor<T,3>& other) {
     std::swap(other._data, _data);
     std::swap(other._size, _size);
 }
@@ -215,7 +215,7 @@ const T& ArrayAccessor<T, 3>::operator()(size_t i, size_t j, size_t k) const {
 }
 
 template <typename T>
-ArrayAccessor<T, 3>& ArrayAccessor<T, 3>::operator=(const ArrayAccessor& other) {
+ArrayAccessor<T, 3>& ArrayAccessor<T, 3>::operator=(const ArrayAccessor<T,3>& other) {
     set(other);
     return *this;
 }

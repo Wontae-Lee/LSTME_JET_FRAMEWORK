@@ -10,15 +10,14 @@
 
 #include "jet/helpers/pch.h"
 
-#include "fbs_helpers.h"
+#include "jet/helpers/fbs_helpers.h"
+#include <flatbuffers/flatbuffers.h>
 #include "generated/scalar_grid3_generated.h"
 
 #include "jet/parallel/parallel.h"
 #include "jet/primitive/grid/scalar_grid3.h"
 #include "jet/serialization/serial.h"
 #include "jet/utility/fdm_utils.h"
-
-#include "3rdparty/flatbuffers/flatbuffers.h"
 
 #include <algorithm>
 #include <string>

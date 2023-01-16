@@ -10,7 +10,7 @@
 
 #include "jet/helpers/pch.h"
 
-#include "fbs_helpers.h"
+#include "jet/helpers/fbs_helpers.h"
 #include "generated/point_kdtree_searcher2_generated.h"
 
 #include "jet/physics/bounding_box/bounding_box2.h"

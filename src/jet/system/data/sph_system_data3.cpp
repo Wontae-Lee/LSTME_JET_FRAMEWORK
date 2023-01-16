@@ -11,7 +11,7 @@
 
 #include "jet/helpers/pch.h"
 
-#include "fbs_helpers.h"
+#include "jet/helpers/fbs_helpers.h"
 #include "generated/sph_system_data3_generated.h"
 
 #include "jet/generator/bcc_lattice_point_generator.h"

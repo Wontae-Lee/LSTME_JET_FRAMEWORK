@@ -81,16 +81,16 @@ class Array<T, 2> final {
     Array(const std::initializer_list<std::initializer_list<T>>& lst);
 
     //! Copy constructor.
-    Array(const Array& other);
+    Array(const Array<T,2>& other);
 
     //! Move constructor.
-    Array(Array&& other);
+    Array(Array<T,2>&& other);
 
     //! Sets entire array with given \p value.
     void set(const T& value);
 
     //! Copies given array \p other to this array.
-    void set(const Array& other);
+    void set(const Array<T,2>& other);
 
     //!
     //! Copies given initializer list \p lst to this array.

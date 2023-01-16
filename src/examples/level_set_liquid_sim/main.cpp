@@ -6,13 +6,7 @@
 
 #include <jet/jet.h>
 #include <pystring/pystring.h>
-
-#ifdef JET_WINDOWS
-#include <direct.h>
-#else
 #include <sys/stat.h>
-#endif
-
 #include <example_utils/clara_utils.h>
 #include <clara.hpp>
 

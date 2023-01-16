@@ -45,10 +45,10 @@ class ArrayAccessor<T, 2> final {
     ArrayAccessor(size_t width, size_t height, T* const data);
 
     //! Copy constructor.
-    ArrayAccessor(const ArrayAccessor& other);
+    ArrayAccessor(const ArrayAccessor<T,2>& other);
 
     //! Replaces the content with given \p other array accessor.
-    void set(const ArrayAccessor& other);
+    void set(const ArrayAccessor<T,2>& other);
 
     //! Resets the array.
     void reset(const Size2& size, T* const data);
@@ -99,7 +99,7 @@ class ArrayAccessor<T, 2> final {
     T* const data() const;
 
     //! Swaps the content of with \p other array accessor.
-    void swap(ArrayAccessor& other);
+    void swap(ArrayAccessor<T,2>& other);
 
     //!
     //! \brief Iterates the array and invoke given \p func for each index.
@@ -232,7 +232,7 @@ class ArrayAccessor<T, 2> final {
     const T& operator()(size_t i, size_t j) const;
 
     //! Copies given array accessor \p other.
-    ArrayAccessor& operator=(const ArrayAccessor& other);
+    ArrayAccessor& operator=(const ArrayAccessor<T,2>& other);
 
     //! Casts type to ConstArrayAccessor.
     operator ConstArrayAccessor<T, 2>() const;

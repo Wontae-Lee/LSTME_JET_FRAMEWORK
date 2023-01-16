@@ -212,11 +212,7 @@ void parallelSort(RandomIterator begin, RandomIterator end, ExecutionPolicy poli
 template <typename RandomIterator, typename CompareFunction>
 void parallelSort(RandomIterator begin, RandomIterator end, CompareFunction compare, ExecutionPolicy policy = ExecutionPolicy::kParallel);
 
-//! Sets maximum number of threads to use.
-void setMaxNumberOfThreads(unsigned int numThreads);
 
-//! Returns maximum number of threads to use.
-unsigned int maxNumberOfThreads();
 
 }  // namespace jet
 

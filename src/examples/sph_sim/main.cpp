@@ -6,12 +6,7 @@
 
 #include <jet/jet.h>
 #include <pystring/pystring.h>
-
-#ifdef JET_WINDOWS
-#include <direct.h>
-#else
 #include <sys/stat.h>
-#endif
 
 #include <example_utils/clara_utils.h>
 #include <clara.hpp>
@@ -23,7 +18,6 @@
 #include <vector>
 
 #define APP_NAME "sph_sim"
-
 using namespace jet;
 
 void saveParticleAsPos(const ParticleSystemData3Ptr& particles, const std::string& rootDir, int frameCnt) {
@@ -114,54 +108,41 @@ void runExample2(const std::string& rootDir, double targetSpacing, int numberOfF
 }
 
 int main(int argc, char* argv[]) {
-    //    bool showHelp = false;
+    bool showHelp = false;
     double targetSpacing = 0.1;
     int numberOfFrames = 2;
     double fps = 60.0;
-    //    int exampleNum = 2;
+    int exampleNum = 2;
     std::string logFilename = APP_NAME ".log";
     std::string outputDir = APP_NAME "_output";
     std::string format = "xyz";
 
-    //    // Parsing
-    //    auto parser =
-    //        clara::Help(showHelp) |
-    //        clara::Opt(targetSpacing, "targetSpacing")["-s"]["--spacing"](
-    //            "target particle spacing (default is 0.02)") |
-    //        clara::Opt(numberOfFrames, "numberOfFrames")["-f"]["--frames"](
-    //            "total number of frames (default is 100)") |
-    //        clara::Opt(
-    //            fps, "fps")["-p"]["--fps"]("frames per second (default is 60.0)") |
-    //        clara::Opt(exampleNum, "exampleNum")["-e"]["--example"](
-    //            "example number (between 1 and 3, default is 1)") |
-    //        clara::Opt(logFilename, "logFilename")["-l"]["--log"](
-    //            "log file name (default is " APP_NAME ".log)") |
-    //        clara::Opt(outputDir, "outputDir")["-o"]["--output"](
-    //            "output directory name (default is " APP_NAME "_output)") |
-    //        clara::Opt(format, "format")["-m"]["--format"](
-    //            "particle output format (xyz or pos. default is xyz)");
-    //
-    //    auto result = parser.parse(clara::Args(argc, argv));
-    //    if (!result) {
-    //        std::cerr << "Error in command line: " << result.errorMessage() << '\n';
-    //        exit(EXIT_FAILURE);
-    //    }
-    //
-    //    if (showHelp) {
-    //        std::cout << toString(parser) << '\n';
-    //        exit(EXIT_SUCCESS);
-    //    }
+    // Parsing
+    auto parser = clara::Help(showHelp) | clara::Opt(targetSpacing, "targetSpacing")["-s"]["--spacing"]("target particle spacing (default is 0.02)") |
+                  clara::Opt(numberOfFrames, "numberOfFrames")["-f"]["--frames"]("total number of frames (default is 100)") |
+                  clara::Opt(fps, "fps")["-p"]["--fps"]("frames per second (default is 60.0)") |
+                  clara::Opt(exampleNum, "exampleNum")["-e"]["--example"]("example number (between 1 and 3, default is 1)") |
+                  clara::Opt(logFilename, "logFilename")["-l"]["--log"]("log file name (default is " APP_NAME ".log)") |
+                  clara::Opt(outputDir, "outputDir")["-o"]["--output"]("output directory name (default is " APP_NAME "_output)") |
+                  clara::Opt(format, "format")["-m"]["--format"]("particle output format (xyz or pos. default is xyz)");
 
-#ifdef JET_WINDOWS
-    _mkdir(outputDir.c_str());
-#else
+    auto result = parser.parse(clara::Args(argc, argv));
+    if (!result) {
+        std::cerr << "Error in command line: " << result.errorMessage() << '\n';
+        exit(EXIT_FAILURE);
+    }
+
+    if (showHelp) {
+        std::cout << toString(parser) << '\n';
+        exit(EXIT_SUCCESS);
+    }
+
     mkdir(outputDir.c_str(), S_IRWXU | S_IRWXG | S_IRWXO);
-#endif
 
-    //    std::ofstream logFile(logFilename.c_str());
-    //    if (logFile) {
-    //        Logging::setAllStream(&logFile);
-    //    }
+    std::ofstream logFile(logFilename.c_str());
+    if (logFile) {
+        Logging::setAllStream(&logFile);
+    }
 
     runExample2(outputDir, targetSpacing, numberOfFrames, format, fps);
 

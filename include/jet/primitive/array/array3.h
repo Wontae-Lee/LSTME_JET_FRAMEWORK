@@ -86,16 +86,16 @@ class Array<T, 3> final {
     Array(const std::initializer_list<std::initializer_list<std::initializer_list<T>>>& lst);
 
     //! Copy constructor.
-    Array(const Array& other);
+    Array(const Array<T,3>& other);
 
     //! Move constructor.
-    Array(Array&& other);
+    Array(Array<T,3>&& other);
 
     //! Sets entire array with given \p value.
     void set(const T& value);
 
     //! Copies given array \p other to this array.
-    void set(const Array& other);
+    void set(const Array<T,3>& other);
 
     //!
     //! Copies given initializer list \p lst to this array.
@@ -199,7 +199,7 @@ class Array<T, 3> final {
     ConstArrayAccessor3<T> constAccessor() const;
 
     //! Swaps the content of the array with \p other array.
-    void swap(Array& other);
+    void swap(Array<T,3>& other);
 
     //!
     //! \brief Iterates the array and invoke given \p func for each index.
@@ -345,10 +345,10 @@ class Array<T, 3> final {
     Array& operator=(const T& value);
 
     //! Copies given array \p other to this array.
-    Array& operator=(const Array& other);
+    Array& operator=(const Array<T,3>& other);
 
     //! Move assignment.
-    Array& operator=(Array&& other);
+    Array& operator=(Array<T,3>&& other);
 
     //!
     //! Copies given initializer list \p lst to this array.

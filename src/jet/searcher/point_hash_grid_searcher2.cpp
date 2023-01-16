@@ -10,7 +10,7 @@
 
 #include "jet/helpers/pch.h"
 
-#include "fbs_helpers.h"
+#include "jet/helpers/fbs_helpers.h"
 #include "generated/point_hash_grid_searcher2_generated.h"
 
 #include "jet/primitive/array/array1.h"

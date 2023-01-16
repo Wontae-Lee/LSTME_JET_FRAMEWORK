@@ -22,7 +22,7 @@ NearestArraySampler1<T, R>::NearestArraySampler(const ConstArrayAccessor1<T>& ac
 }
 
 template <typename T, typename R>
-NearestArraySampler1<T, R>::NearestArraySampler(const NearestArraySampler& other) {
+NearestArraySampler1<T, R>::NearestArraySampler(const NearestArraySampler<T,R,1>& other) {
     _gridSpacing = other._gridSpacing;
     _origin = other._origin;
     _accessor = other._accessor;
@@ -74,7 +74,7 @@ LinearArraySampler1<T, R>::LinearArraySampler(const ConstArrayAccessor1<T>& acce
 }
 
 template <typename T, typename R>
-LinearArraySampler1<T, R>::LinearArraySampler(const LinearArraySampler& other) {
+LinearArraySampler1<T, R>::LinearArraySampler(const LinearArraySampler<T,R,1>& other) {
     _gridSpacing = other._gridSpacing;
     _origin = other._origin;
     _accessor = other._accessor;
@@ -131,7 +131,7 @@ CubicArraySampler1<T, R>::CubicArraySampler(const ConstArrayAccessor1<T>& access
 }
 
 template <typename T, typename R>
-CubicArraySampler1<T, R>::CubicArraySampler(const CubicArraySampler& other) {
+CubicArraySampler1<T, R>::CubicArraySampler(const CubicArraySampler<T,R,1>& other) {
     _gridSpacing = other._gridSpacing;
     _origin = other._origin;
     _accessor = other._accessor;

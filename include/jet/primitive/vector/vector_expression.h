@@ -24,7 +24,7 @@ namespace jet {
 template <typename T, typename E>
 class VectorExpression {
  public:
-    //! Size of the vector.
+    virtual  //! Size of the vector.
     size_t size() const;
 
     //! Returns actual implementation (the subclass).

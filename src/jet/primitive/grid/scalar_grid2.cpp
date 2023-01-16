@@ -9,8 +9,9 @@
 #endif
 
 #include "jet/helpers/pch.h"
-
-#include "fbs_helpers.h"
+#include "jet/helpers/fbs_helpers.h"
+#include <flatbuffers/flatbuffers.h>
+#include <flatbuffers/flatbuffer_builder.h>
 #include "generated/scalar_grid2_generated.h"
 
 #include "jet/parallel/parallel.h"
@@ -18,7 +19,6 @@
 #include "jet/serialization/serial.h"
 #include "jet/utility/fdm_utils.h"
 
-#include "3rdparty/flatbuffers/flatbuffers.h"
 
 #include <algorithm>
 #include <string>

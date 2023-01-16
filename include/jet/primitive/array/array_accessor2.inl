@@ -27,12 +27,12 @@ ArrayAccessor<T, 2>::ArrayAccessor(size_t width, size_t height, T* const data) {
 }
 
 template <typename T>
-ArrayAccessor<T, 2>::ArrayAccessor(const ArrayAccessor& other) {
+ArrayAccessor<T, 2>::ArrayAccessor(const ArrayAccessor<T,2>& other) {
     set(other);
 }
 
 template <typename T>
-void ArrayAccessor<T, 2>::set(const ArrayAccessor& other) {
+void ArrayAccessor<T, 2>::set(const ArrayAccessor<T,2>& other) {
     reset(other._size, other._data);
 }
 
@@ -122,7 +122,7 @@ T* const ArrayAccessor<T, 2>::data() const {
 }
 
 template <typename T>
-void ArrayAccessor<T, 2>::swap(ArrayAccessor& other) {
+void ArrayAccessor<T, 2>::swap(ArrayAccessor<T,2>& other) {
     std::swap(other._data, _data);
     std::swap(other._size, _size);
 }
@@ -206,7 +206,7 @@ const T& ArrayAccessor<T, 2>::operator()(size_t i, size_t j) const {
 }
 
 template <typename T>
-ArrayAccessor<T, 2>& ArrayAccessor<T, 2>::operator=(const ArrayAccessor& other) {
+ArrayAccessor<T, 2>& ArrayAccessor<T, 2>::operator=(const ArrayAccessor<T,2>& other) {
     set(other);
     return *this;
 }
@@ -238,7 +238,7 @@ ConstArrayAccessor<T, 2>::ConstArrayAccessor(const ArrayAccessor<T, 2>& other) {
 }
 
 template <typename T>
-ConstArrayAccessor<T, 2>::ConstArrayAccessor(const ConstArrayAccessor& other) {
+ConstArrayAccessor<T, 2>::ConstArrayAccessor(const ConstArrayAccessor<T,2>& other) {
     _size = other._size;
     _data = other._data;
 }

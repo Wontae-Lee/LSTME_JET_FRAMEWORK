@@ -57,16 +57,16 @@ class Array<T, 1> final {
     Array(const std::initializer_list<T>& lst);
 
     //! Copy constructor.
-    Array(const Array& other);
+    Array(const Array<T, 1>& other);
 
     //! Move constructor.
-    Array(Array&& other);
+    Array(Array<T, 1>&& other);
 
     //! Sets entire array with given \p value.
     void set(const T& value);
 
     //! Copies given array \p other to this array.
-    void set(const Array& other);
+    void set(const Array<T, 1>& other);
 
     //! Copies given initializer list \p lst to this array.
     void set(const std::initializer_list<T>& lst);
@@ -111,13 +111,13 @@ class Array<T, 1> final {
     ConstArrayAccessor1<T> constAccessor() const;
 
     //! Swaps the content of the array with \p other array.
-    void swap(Array& other);
+    void swap(Array<T, 1>& other);
 
     //! Appends single value \p newVal at the end of the array.
     void append(const T& newVal);
 
     //! Appends \p other array at the end of the array.
-    void append(const Array& other);
+    void append(const Array<T, 1>& other);
 
     //!
     //! \brief Iterates the array and invoke given \p func for each element.
@@ -208,10 +208,10 @@ class Array<T, 1> final {
     Array& operator=(const T& other);
 
     //! Copies given array \p other to this array.
-    Array& operator=(const Array& other);
+    Array& operator=(const Array<T, 1>& other);
 
     //! Move assignment.
-    Array& operator=(Array&& other);
+    Array& operator=(Array<T, 1>&& other);
 
     //! Copies given initializer list \p lst to this array.
     Array& operator=(const std::initializer_list<T>& lst);

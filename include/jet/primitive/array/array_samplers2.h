@@ -38,7 +38,7 @@ class NearestArraySampler<T, R, 2> final {
     explicit NearestArraySampler(const ConstArrayAccessor2<T>& accessor, const Vector2<R>& gridSpacing, const Vector2<R>& gridOrigin);
 
     //! Copy constructor.
-    NearestArraySampler(const NearestArraySampler& other);
+    NearestArraySampler(const NearestArraySampler<T,R,2>& other);
 
     //! Returns sampled value at point \p pt.
     T operator()(const Vector2<R>& pt) const;
@@ -46,7 +46,7 @@ class NearestArraySampler<T, R, 2> final {
     //! Returns the nearest array index for point \p x.
     void getCoordinate(const Vector2<R>& pt, Point2UI* index) const;
 
-    //! Returns a funtion object that wraps this instance.
+    //! Returns a function object that wraps this instance.
     std::function<T(const Vector2<R>&)> functor() const;
 
  private:
@@ -83,7 +83,7 @@ class LinearArraySampler<T, R, 2> final {
     explicit LinearArraySampler(const ConstArrayAccessor2<T>& accessor, const Vector2<R>& gridSpacing, const Vector2<R>& gridOrigin);
 
     //! Copy constructor.
-    LinearArraySampler(const LinearArraySampler& other);
+    LinearArraySampler(const LinearArraySampler<T,R,2>& other);
 
     //! Returns sampled value at point \p pt.
     T operator()(const Vector2<R>& pt) const;
@@ -133,7 +133,7 @@ class CubicArraySampler<T, R, 2> final {
     explicit CubicArraySampler(const ConstArrayAccessor2<T>& accessor, const Vector2<R>& gridSpacing, const Vector2<R>& gridOrigin);
 
     //! Copy constructor.
-    CubicArraySampler(const CubicArraySampler& other);
+    CubicArraySampler(const CubicArraySampler<T,R,2>& other);
 
     //! Returns sampled value at point \p pt.
     T operator()(const Vector2<R>& pt) const;

@@ -25,13 +25,13 @@ namespace jet {
 template <typename T, typename E>
 class MatrixExpression {
  public:
-    //! Size of the matrix.
+    virtual  //! Size of the matrix.
     Size2 size() const;
 
-    //! Number of rows.
+    virtual  //! Number of rows.
     size_t rows() const;
 
-    //! Number of columns.
+    virtual  //! Number of columns.
     size_t cols() const;
 
     //! Returns actual implementation (the subclass).
