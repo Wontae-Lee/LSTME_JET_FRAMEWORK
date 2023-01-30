@@ -27,6 +27,7 @@ void ParticleEmitterSet3::onSetTarget(const ParticleSystemData3Ptr& particles) {
 }
 
 void ParticleEmitterSet3::onUpdate(double currentTimeInSeconds, double timeIntervalInSeconds) {
+
     if (!isEnabled()) {
         return;
     }

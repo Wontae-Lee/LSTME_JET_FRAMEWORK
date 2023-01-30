@@ -7,7 +7,7 @@
 #ifndef INCLUDE_JET_VOLUME_GRID_EMITTER2_H_
 #define INCLUDE_JET_VOLUME_GRID_EMITTER2_H_
 
-#include "jet/emitter/grid/grid_emitter2.h"
+#include "grid_emitter2.h"
 #include "jet/primitive/grid/scalar_grid2.h"
 #include "jet/primitive/grid/vector_grid2.h"
 

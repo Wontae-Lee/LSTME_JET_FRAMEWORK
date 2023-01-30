@@ -72,10 +72,10 @@ void runSimulation(const std::string& rootDir, const SphSolver3Ptr& solver, int 
 
 // Water-drop example (SPH)
 void runExample2(const std::string& rootDir, double targetSpacing, int numberOfFrames, const std::string& format, double fps) {
+
+    // Initial condition
     BoundingBox3D domain(Vector3D(), Vector3D(1, 2, 1));
-
     auto solver = SphSolver3::builder().withTargetDensity(1000.0).withTargetSpacing(targetSpacing).makeShared();
-
     solver->setPseudoViscosityCoefficient(0.0);
 
     // Build emitter
@@ -83,18 +83,14 @@ void runExample2(const std::string& rootDir, double targetSpacing, int numberOfF
     sourceBound.expand(-targetSpacing);
 
     auto plane = Plane3::builder().withNormal({0, 1, 0}).withPoint({0, 0.25 * domain.height(), 0}).makeShared();
-
     auto sphere = Sphere3::builder().withCenter(domain.midPoint()).withRadius(0.15 * domain.width()).makeShared();
-
     auto surfaceSet = ImplicitSurfaceSet3::builder().withExplicitSurfaces({plane, sphere}).makeShared();
-
     auto emitter = VolumeParticleEmitter3::builder().withImplicitSurface(surfaceSet).withSpacing(targetSpacing).withMaxRegion(sourceBound).withIsOneShot(true).makeShared();
 
     solver->setEmitter(emitter);
 
     // Build collider
     auto box = Box3::builder().withIsNormalFlipped(true).withBoundingBox(domain).makeShared();
-
     auto collider = RigidBodyCollider3::builder().withSurface(box).makeShared();
 
     solver->setCollider(collider);

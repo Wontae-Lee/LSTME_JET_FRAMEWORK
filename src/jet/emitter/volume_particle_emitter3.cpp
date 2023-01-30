@@ -33,6 +33,7 @@ VolumeParticleEmitter3::VolumeParticleEmitter3(const ImplicitSurface3Ptr& implic
 }
 
 void VolumeParticleEmitter3::onUpdate(double currentTimeInSeconds, double timeIntervalInSeconds) {
+
     UNUSED_VARIABLE(currentTimeInSeconds);
     UNUSED_VARIABLE(timeIntervalInSeconds);
 
@@ -45,7 +46,7 @@ void VolumeParticleEmitter3::onUpdate(double currentTimeInSeconds, double timeIn
     if (!isEnabled()) {
         return;
     }
-
+    JET_INFO;
     Array1<Vector3D> newPositions;
     Array1<Vector3D> newVelocities;
 

@@ -29,6 +29,7 @@ size_t PointParticleEmitter3::maxNumberOfParticles() const { return _maxNumberOf
 void PointParticleEmitter3::setMaxNumberOfParticles(size_t maxNumberOfParticles) { _maxNumberOfParticles = maxNumberOfParticles; }
 
 void PointParticleEmitter3::onUpdate(double currentTimeInSeconds, double timeIntervalInSeconds) {
+
     auto particles = target();
 
     if (particles == nullptr) {

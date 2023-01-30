@@ -30,7 +30,9 @@ bool ParticleEmitter3::isEnabled() const { return _isEnabled; }
 void ParticleEmitter3::setIsEnabled(bool enabled) { _isEnabled = enabled; }
 
 void ParticleEmitter3::update(double currentTimeInSeconds, double timeIntervalInSeconds) {
+
     if (_onBeginUpdateCallback) {
+
         _onBeginUpdateCallback(this, currentTimeInSeconds, timeIntervalInSeconds);
     }
 

@@ -29,7 +29,7 @@ BoundingBox<T, 3>::BoundingBox(const Vector3<T>& point1, const Vector3<T>& point
 }
 
 template <typename T>
-BoundingBox<T, 3>::BoundingBox(const BoundingBox& other) : lowerCorner(other.lowerCorner), upperCorner(other.upperCorner) {}
+BoundingBox<T, 3>::BoundingBox(const BoundingBox<T,3>& other) : lowerCorner(other.lowerCorner), upperCorner(other.upperCorner) {}
 
 template <typename T>
 T BoundingBox<T, 3>::width() const {
@@ -52,7 +52,7 @@ T BoundingBox<T, 3>::length(size_t axis) {
 }
 
 template <typename T>
-bool BoundingBox<T, 3>::overlaps(const BoundingBox& other) const {
+bool BoundingBox<T, 3>::overlaps(const BoundingBox<T,3>& other) const {
     if (upperCorner.x < other.lowerCorner.x || lowerCorner.x > other.upperCorner.x) {
         return false;
     }
@@ -176,7 +176,7 @@ void BoundingBox<T, 3>::merge(const Vector3<T>& point) {
 }
 
 template <typename T>
-void BoundingBox<T, 3>::merge(const BoundingBox& other) {
+void BoundingBox<T, 3>::merge(const BoundingBox<T,3>& other) {
     lowerCorner.x = std::min(lowerCorner.x, other.lowerCorner.x);
     lowerCorner.y = std::min(lowerCorner.y, other.lowerCorner.y);
     lowerCorner.z = std::min(lowerCorner.z, other.lowerCorner.z);

@@ -9,7 +9,7 @@
 
 #include "grid_pressure_solver3.h"
 #include "jet/animation/physics_animation.h"
-#include "jet/emitter/grid/grid_emitter3.h"
+#include "jet/emitter/grid_emitter3.h"
 #include "jet/physics/collider/collider3.h"
 #include "jet/primitive/grid/cell_centered_scalar_grid3.h"
 #include "jet/primitive/grid/face_centered_grid3.h"

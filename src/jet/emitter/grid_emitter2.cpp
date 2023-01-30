@@ -6,7 +6,7 @@
 
 #include "jet/helpers/pch.h"
 
-#include "jet/emitter/grid/grid_emitter2.h"
+#include "jet/emitter/grid_emitter2.h"
 
 using namespace jet;
 

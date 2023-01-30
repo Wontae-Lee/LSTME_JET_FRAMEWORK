@@ -58,7 +58,7 @@ void ParticleSystemSolver3::setWind(const VectorField3Ptr& newWind) { _wind = ne
 
 void ParticleSystemSolver3::onInitialize() {
     // When initializing the solver, update the collider and emitter state as
-    // well since they also affects the initial condition of the simulation.
+    // well since they also affect the initial condition of the simulation.
     Timer timer;
     updateCollider(0.0);
     JET_INFO << "Update collider took " << timer.durationInSeconds() << " seconds";
@@ -189,6 +189,7 @@ void ParticleSystemSolver3::updateCollider(double timeStepInSeconds) {
 }
 
 void ParticleSystemSolver3::updateEmitter(double timeStepInSeconds) {
+
     if (_emitter != nullptr) {
         _emitter->update(currentTimeInSeconds(), timeStepInSeconds);
     }

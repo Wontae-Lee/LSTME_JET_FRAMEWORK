@@ -8,7 +8,7 @@
 
 #include <vector>
 
-#include "jet/emitter/grid/grid_emitter_set3.h"
+#include "jet/emitter/grid_emitter_set3.h"
 
 using namespace jet;
 

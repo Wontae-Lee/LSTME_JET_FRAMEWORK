@@ -8,7 +8,7 @@
 #define INCLUDE_JET_BOUNDING_BOX3_H_
 
 #include <limits>
-#include "bounding_box.h"
+#include "jet/physics/bounding_box/bounding_box.h"
 #include "jet/primitive/ray/ray3.h"
 #include "jet/primitive/vector/vector3.h"
 
@@ -53,7 +53,7 @@ class BoundingBox<T, 3> {
     BoundingBox(const Vector3<T>& point1, const Vector3<T>& point2);
 
     //! Constructs a box with other box instance.
-    BoundingBox(const BoundingBox& other);
+    BoundingBox(const BoundingBox<T,3>& other);
 
     //! Returns width of the box.
     T width() const;
@@ -68,7 +68,7 @@ class BoundingBox<T, 3> {
     T length(size_t axis);
 
     //! Returns true of this box and other box overlaps.
-    bool overlaps(const BoundingBox& other) const;
+    bool overlaps(const BoundingBox<T,3>& other) const;
 
     //! Returns true if the input vector is inside of this box.
     bool contains(const Vector3<T>& point) const;
@@ -98,7 +98,7 @@ class BoundingBox<T, 3> {
     void merge(const Vector3<T>& point);
 
     //! Merges this and other box.
-    void merge(const BoundingBox& other);
+    void merge(const BoundingBox<T,3>& other);
 
     //! Expands this box by given delta to all direction.
     //! If the width of the box was x, expand(y) will result a box with
