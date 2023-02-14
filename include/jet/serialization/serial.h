@@ -22,8 +22,9 @@ namespace jet {
 //! \tparam     RandomIterator Random iterator type.
 //! \tparam     T              Value type of a container.
 //!
-template <typename RandomIterator, typename T>
-void serialFill(const RandomIterator& begin, const RandomIterator& end, const T& value);
+template<typename RandomIterator, typename T>
+void
+serialFill(const RandomIterator& begin, const RandomIterator& end, const T& value);
 
 //!
 //! \brief      Makes a for-loop from \p beginIndex \p to endIndex.
@@ -38,8 +39,9 @@ void serialFill(const RandomIterator& begin, const RandomIterator& end, const T&
 //! \tparam     IndexType  Index type.
 //! \tparam     Function   Function type.
 //!
-template <typename IndexType, typename Function>
-void serialFor(IndexType beginIndex, IndexType endIndex, const Function& function);
+template<typename IndexType, typename Function>
+void
+serialFor(IndexType beginIndex, IndexType endIndex, const Function& function);
 
 //!
 //! \brief      Makes a 2D nested for-loop.
@@ -57,8 +59,9 @@ void serialFor(IndexType beginIndex, IndexType endIndex, const Function& functio
 //! \tparam     IndexType  Index type.
 //! \tparam     Function   Function type.
 //!
-template <typename IndexType, typename Function>
-void serialFor(IndexType beginIndexX, IndexType endIndexX, IndexType beginIndexY, IndexType endIndexY, const Function& function);
+template<typename IndexType, typename Function>
+void
+serialFor(IndexType beginIndexX, IndexType endIndexX, IndexType beginIndexY, IndexType endIndexY, const Function& function);
 
 //!
 //! \brief      Makes a 3D nested for-loop.
@@ -78,8 +81,15 @@ void serialFor(IndexType beginIndexX, IndexType endIndexX, IndexType beginIndexY
 //! \tparam     IndexType   Index type.
 //! \tparam     Function    Function type.
 //!
-template <typename IndexType, typename Function>
-void serialFor(IndexType beginIndexX, IndexType endIndexX, IndexType beginIndexY, IndexType endIndexY, IndexType beginIndexZ, IndexType endIndexZ, const Function& function);
+template<typename IndexType, typename Function>
+void
+serialFor(IndexType beginIndexX,
+          IndexType endIndexX,
+          IndexType beginIndexY,
+          IndexType endIndexY,
+          IndexType beginIndexZ,
+          IndexType endIndexZ,
+          const Function& function);
 
 //!
 //! \brief      Sorts a container.
@@ -91,8 +101,9 @@ void serialFor(IndexType beginIndexX, IndexType endIndexX, IndexType beginIndexY
 //!
 //! \tparam     RandomIterator Iterator type.
 //!
-template <typename RandomIterator>
-void serialSort(RandomIterator begin, RandomIterator end);
+template<typename RandomIterator>
+void
+serialSort(RandomIterator begin, RandomIterator end);
 
 //!
 //! \brief      Sorts a container with a custom compare function.
@@ -108,11 +119,12 @@ void serialSort(RandomIterator begin, RandomIterator end);
 //! \tparam     RandomIterator  Iterator type.
 //! \tparam     CompareFunction Compare function type.
 //!
-template <typename RandomIterator, typename SortingFunction>
-void serialSort(RandomIterator begin, RandomIterator end, const SortingFunction& sortingFunction);
+template<typename RandomIterator, typename SortingFunction>
+void
+serialSort(RandomIterator begin, RandomIterator end, const SortingFunction& sortingFunction);
 
-}  // namespace jet
+} // namespace jet
 
 #include "serial.inl"
 
-#endif  // INCLUDE_JET_SERIAL_H_
+#endif // INCLUDE_JET_SERIAL_H_

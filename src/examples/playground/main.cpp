@@ -10,27 +10,31 @@
 
 using namespace jet;
 
-void runSimulation(MyPhysicsSolver& solver, double frameIntervalInSeconds, int numberOfFrames) {
-    for (Frame frame(0, frameIntervalInSeconds); frame.index < numberOfFrames; ++frame) {
-        printf("Updating frame %u\n", frame.index);
-        solver.update(frame);
-    }
+void
+runSimulation(MyPhysicsSolver& solver, double frameIntervalInSeconds, int numberOfFrames)
+{
+  for (Frame frame(0, frameIntervalInSeconds); frame.index < numberOfFrames; ++frame) {
+    printf("Updating frame %u\n", frame.index);
+    solver.update(frame);
+  }
 }
 
-int main() {
-    // Set up output log file
-    std::ofstream logFile("playground.log");
-    if (logFile) {
-        Logging::setAllStream(&logFile);
-    }
+int
+main()
+{
+  // Set up output log file
+  std::ofstream logFile("playground.log");
+  if (logFile) {
+    Logging::setAllStream(&logFile);
+  }
 
-    // Set up simulation
-    MyPhysicsSolver solver;
-    double frameIntervalInSeconds = 0.01;
-    unsigned int numberOfFrames = 300;
+  // Set up simulation
+  MyPhysicsSolver solver;
+  double frameIntervalInSeconds = 0.01;
+  unsigned int numberOfFrames = 300;
 
-    // Run the sim
-    runSimulation(solver, frameIntervalInSeconds, numberOfFrames);
+  // Run the sim
+  runSimulation(solver, frameIntervalInSeconds, numberOfFrames);
 
-    return 0;
+  return 0;
 }

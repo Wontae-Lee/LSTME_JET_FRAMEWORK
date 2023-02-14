@@ -25,10 +25,11 @@ namespace jet {
 //! \tparam T - Real number type.
 //! \tparam N - Dimension.
 //!
-template <typename T, size_t N>
-class ArrayAccessor final {
- public:
-    static_assert(N < 1 || N > 3, "Not implemented - N should be either 1, 2 or 3.");
+template<typename T, size_t N>
+class ArrayAccessor final
+{
+public:
+  static_assert(N < 1 || N > 3, "Not implemented - N should be either 1, 2 or 3.");
 };
 
 //!
@@ -42,12 +43,13 @@ class ArrayAccessor final {
 //! handle memory management. Thus, it is more like a random access iterator,
 //! but with multi-dimension support.
 //!
-template <typename T, size_t N>
-class ConstArrayAccessor final {
- public:
-    static_assert(N < 1 || N > 3, "Not implemented - N should be either 1, 2 or 3.");
+template<typename T, size_t N>
+class ConstArrayAccessor final
+{
+public:
+  static_assert(N < 1 || N > 3, "Not implemented - N should be either 1, 2 or 3.");
 };
 
-}  // namespace jet
+} // namespace jet
 
-#endif  // INCLUDE_JET_ARRAY_ACCESSOR_H_
+#endif // INCLUDE_JET_ARRAY_ACCESSOR_H_

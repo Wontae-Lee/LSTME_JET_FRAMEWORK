@@ -1,15 +1,14 @@
 /* Copyright (c) 2023 Wontae Lee
-*
-* Reference: Fluid Engine Development. 2018. Doyub Kim
-* License: MIT License
-*
-* Copyright (c) 2018 Doyub Kim
-*
-* I am making my contributions/submissions to this project solely in my
-* personal capacity and am not conveying any rights to any intellectual
-* property of any third parties.
-*/
-        
+ *
+ * Reference: Fluid Engine Development. 2018. Doyub Kim
+ * License: MIT License
+ *
+ * Copyright (c) 2018 Doyub Kim
+ *
+ * I am making my contributions/submissions to this project solely in my
+ * personal capacity and am not conveying any rights to any intellectual
+ * property of any third parties.
+ */
 
 #ifndef INCLUDE_JET_JET_H_
 #define INCLUDE_JET_JET_H_
@@ -273,4 +272,4 @@
 #include "utility/functors.h"
 #include "utility/level_set_utils.h"
 #include "utility/math_utils.h"
-#endif  // INCLUDE_JET_JET_H_
+#endif // INCLUDE_JET_JET_H_

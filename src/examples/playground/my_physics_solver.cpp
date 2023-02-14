@@ -12,15 +12,19 @@ MyPhysicsSolver::MyPhysicsSolver() {}
 
 MyPhysicsSolver::~MyPhysicsSolver() {}
 
-void MyPhysicsSolver::onInitialize() {
-    // This function is called at frame 0
-    // TODO: Perform initialization here
+void
+MyPhysicsSolver::onInitialize()
+{
+  // This function is called at frame 0
+  // TODO: Perform initialization here
 }
 
-void MyPhysicsSolver::onAdvanceTimeStep(double timeIntervalInSeconds) {
-    // This function is called at frames greater than 0
+void
+MyPhysicsSolver::onAdvanceTimeStep(double timeIntervalInSeconds)
+{
+  // This function is called at frames greater than 0
 
-    (void)timeIntervalInSeconds;
+  (void)timeIntervalInSeconds;
 
-    // TODO: Perform simulation update here
+  // TODO: Perform simulation update here
 }

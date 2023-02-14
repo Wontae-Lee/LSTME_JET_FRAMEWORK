@@ -23,69 +23,70 @@ namespace jet {
 //! \see Zhu, Yongning, and Robert Bridson. "Animating sand as a fluid."
 //!     ACM Transactions on Graphics (TOG). Vol. 24. No. 3. ACM, 2005.
 //!
-class PicSolver2 : public GridFluidSolver2 {
- public:
-    class Builder;
+class PicSolver2 : public GridFluidSolver2
+{
+public:
+  class Builder;
 
-    //! Default constructor.
-    PicSolver2();
+  //! Default constructor.
+  PicSolver2();
 
-    //! Constructs solver with initial grid size.
-    PicSolver2(const Size2& resolution, const Vector2D& gridSpacing, const Vector2D& gridOrigin);
+  //! Constructs solver with initial grid size.
+  PicSolver2(const Size2& resolution, const Vector2D& gridSpacing, const Vector2D& gridOrigin);
 
-    //! Default destructor.
-    virtual ~PicSolver2();
+  //! Default destructor.
+  virtual ~PicSolver2();
 
-    //! Returns the signed-distance field of particles.
-    ScalarGrid2Ptr signedDistanceField() const;
+  //! Returns the signed-distance field of particles.
+  ScalarGrid2Ptr signedDistanceField() const;
 
-    //! Returns the particle system data.
-    const ParticleSystemData2Ptr& particleSystemData() const;
+  //! Returns the particle system data.
+  const ParticleSystemData2Ptr& particleSystemData() const;
 
-    //! Returns the particle emitter.
-    const ParticleEmitter2Ptr& particleEmitter() const;
+  //! Returns the particle emitter.
+  const ParticleEmitter2Ptr& particleEmitter() const;
 
-    //! Sets the particle emitter.
-    void setParticleEmitter(const ParticleEmitter2Ptr& newEmitter);
+  //! Sets the particle emitter.
+  void setParticleEmitter(const ParticleEmitter2Ptr& newEmitter);
 
-    //! Returns builder fox PicSolver2.
-    static Builder builder();
+  //! Returns builder fox PicSolver2.
+  static Builder builder();
 
- protected:
-    Array2<char> _uMarkers;
-    Array2<char> _vMarkers;
+protected:
+  Array2<char> _uMarkers;
+  Array2<char> _vMarkers;
 
-    //! Initializes the simulator.
-    void onInitialize() override;
+  //! Initializes the simulator.
+  void onInitialize() override;
 
-    //! Invoked before a simulation time-step begins.
-    void onBeginAdvanceTimeStep(double timeIntervalInSeconds) override;
+  //! Invoked before a simulation time-step begins.
+  void onBeginAdvanceTimeStep(double timeIntervalInSeconds) override;
 
-    //! Computes the advection term of the fluid solver.
-    void computeAdvection(double timeIntervalInSeconds) override;
+  //! Computes the advection term of the fluid solver.
+  void computeAdvection(double timeIntervalInSeconds) override;
 
-    //! Returns the signed-distance field of the fluid.
-    ScalarField2Ptr fluidSdf() const override;
+  //! Returns the signed-distance field of the fluid.
+  ScalarField2Ptr fluidSdf() const override;
 
-    //! Transfers velocity field from particles to grids.
-    virtual void transferFromParticlesToGrids();
+  //! Transfers velocity field from particles to grids.
+  virtual void transferFromParticlesToGrids();
 
-    //! Transfers velocity field from grids to particles.
-    virtual void transferFromGridsToParticles();
+  //! Transfers velocity field from grids to particles.
+  virtual void transferFromGridsToParticles();
 
-    //! Moves particles.
-    virtual void moveParticles(double timeIntervalInSeconds);
+  //! Moves particles.
+  virtual void moveParticles(double timeIntervalInSeconds);
 
- private:
-    size_t _signedDistanceFieldId;
-    ParticleSystemData2Ptr _particles;
-    ParticleEmitter2Ptr _particleEmitter;
+private:
+  size_t _signedDistanceFieldId;
+  ParticleSystemData2Ptr _particles;
+  ParticleEmitter2Ptr _particleEmitter;
 
-    void extrapolateVelocityToAir();
+  void extrapolateVelocityToAir();
 
-    void buildSignedDistanceField();
+  void buildSignedDistanceField();
 
-    void updateParticleEmitter(double timeIntervalInSeconds);
+  void updateParticleEmitter(double timeIntervalInSeconds);
 };
 
 //! Shared pointer type for the PicSolver2.
@@ -94,15 +95,16 @@ typedef std::shared_ptr<PicSolver2> PicSolver2Ptr;
 //!
 //! \brief Front-end to create PicSolver2 objects step by step.
 //!
-class PicSolver2::Builder final : public GridFluidSolverBuilderBase2<PicSolver2::Builder> {
- public:
-    //! Builds PicSolver2.
-    PicSolver2 build() const;
+class PicSolver2::Builder final : public GridFluidSolverBuilderBase2<PicSolver2::Builder>
+{
+public:
+  //! Builds PicSolver2.
+  PicSolver2 build() const;
 
-    //! Builds shared pointer of PicSolver2 instance.
-    PicSolver2Ptr makeShared() const;
+  //! Builds shared pointer of PicSolver2 instance.
+  PicSolver2Ptr makeShared() const;
 };
 
-}  // namespace jet
+} // namespace jet
 
-#endif  // INCLUDE_JET_PIC_SOLVER2_H_
+#endif // INCLUDE_JET_PIC_SOLVER2_H_

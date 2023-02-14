@@ -14,35 +14,54 @@ using namespace jet;
 
 GridEmitterSet3::GridEmitterSet3() {}
 
-GridEmitterSet3::GridEmitterSet3(const std::vector<GridEmitter3Ptr>& emitters) {
-    for (const auto& e : emitters) {
-        addEmitter(e);
-    }
+GridEmitterSet3::GridEmitterSet3(const std::vector<GridEmitter3Ptr>& emitters)
+{
+  for (const auto& e : emitters) {
+    addEmitter(e);
+  }
 }
 
 GridEmitterSet3::~GridEmitterSet3() {}
 
-void GridEmitterSet3::addEmitter(const GridEmitter3Ptr& emitter) { _emitters.push_back(emitter); }
-
-void GridEmitterSet3::onUpdate(double currentTimeInSeconds, double timeIntervalInSeconds) {
-    if (!isEnabled()) {
-        return;
-    }
-
-    for (auto& emitter : _emitters) {
-        emitter->update(currentTimeInSeconds, timeIntervalInSeconds);
-    }
+void
+GridEmitterSet3::addEmitter(const GridEmitter3Ptr& emitter)
+{
+  _emitters.push_back(emitter);
 }
 
-GridEmitterSet3::Builder GridEmitterSet3::builder() { return Builder(); }
+void
+GridEmitterSet3::onUpdate(double currentTimeInSeconds, double timeIntervalInSeconds)
+{
+  if (!isEnabled()) {
+    return;
+  }
 
-GridEmitterSet3::Builder& GridEmitterSet3::Builder::withEmitters(const std::vector<GridEmitter3Ptr>& emitters) {
-    _emitters = emitters;
-    return *this;
+  for (auto& emitter : _emitters) {
+    emitter->update(currentTimeInSeconds, timeIntervalInSeconds);
+  }
 }
 
-GridEmitterSet3 GridEmitterSet3::Builder::build() const { return GridEmitterSet3(_emitters); }
+GridEmitterSet3::Builder
+GridEmitterSet3::builder()
+{
+  return Builder();
+}
 
-GridEmitterSet3Ptr GridEmitterSet3::Builder::makeShared() const {
-    return std::shared_ptr<GridEmitterSet3>(new GridEmitterSet3(_emitters), [](GridEmitterSet3* obj) { delete obj; });
+GridEmitterSet3::Builder&
+GridEmitterSet3::Builder::withEmitters(const std::vector<GridEmitter3Ptr>& emitters)
+{
+  _emitters = emitters;
+  return *this;
+}
+
+GridEmitterSet3
+GridEmitterSet3::Builder::build() const
+{
+  return GridEmitterSet3(_emitters);
+}
+
+GridEmitterSet3Ptr
+GridEmitterSet3::Builder::makeShared() const
+{
+  return std::shared_ptr<GridEmitterSet3>(new GridEmitterSet3(_emitters), [](GridEmitterSet3* obj) { delete obj; });
 }

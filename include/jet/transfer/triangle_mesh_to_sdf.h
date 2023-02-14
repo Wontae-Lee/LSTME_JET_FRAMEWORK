@@ -25,8 +25,9 @@ namespace jet {
 //! \param[in,out]  sdf       The output signed-distance field.
 //! \param[in]      exactBand This parameter is no longer used.
 //!
-void triangleMeshToSdf(const TriangleMesh3& mesh, ScalarGrid3* sdf, const unsigned int exactBand = 1);
+void
+triangleMeshToSdf(const TriangleMesh3& mesh, ScalarGrid3* sdf, const unsigned int exactBand = 1);
 
-}  // namespace jet
+} // namespace jet
 
-#endif  // INCLUDE_JET_TRIANGLE_MESH_TO_SDF_H_
+#endif // INCLUDE_JET_TRIANGLE_MESH_TO_SDF_H_

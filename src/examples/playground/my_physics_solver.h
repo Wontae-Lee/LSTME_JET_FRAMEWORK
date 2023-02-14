@@ -9,15 +9,16 @@
 
 #include <jet/jet.h>
 
-class MyPhysicsSolver : public jet::PhysicsAnimation {
- public:
-    MyPhysicsSolver();
-    virtual ~MyPhysicsSolver();
+class MyPhysicsSolver : public jet::PhysicsAnimation
+{
+public:
+  MyPhysicsSolver();
+  virtual ~MyPhysicsSolver();
 
- protected:
-    void onInitialize() override;
+protected:
+  void onInitialize() override;
 
-    void onAdvanceTimeStep(double timeIntervalInSeconds) override;
+  void onAdvanceTimeStep(double timeIntervalInSeconds) override;
 };
 
-#endif  // MY_PHYSICS_SOLVER_H_
+#endif // MY_PHYSICS_SOLVER_H_

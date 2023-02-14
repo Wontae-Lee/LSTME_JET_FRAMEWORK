@@ -19,7 +19,7 @@
 
 #ifdef JET_WINDOWS
 
-#define WIN32_LEAN_AND_MEAN  // Exclude rarely-used stuff from Windows headers
+#define WIN32_LEAN_AND_MEAN // Exclude rarely-used stuff from Windows headers
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
 #endif
@@ -30,28 +30,30 @@
 #include <exception>
 #include <string>
 
-inline void throwIfFailed(HRESULT hr) {
-    if (FAILED(hr)) {
-        throw std::runtime_error(std::to_string(hr).c_str());
-    }
+inline void
+throwIfFailed(HRESULT hr)
+{
+  if (FAILED(hr)) {
+    throw std::runtime_error(std::to_string(hr).c_str());
+  }
 }
 
 #ifndef IF_FAILED_CLEANUP
-#define IF_FAILED_CLEANUP(_hr) \
-    if (FAILED(_hr)) {         \
-        hr = _hr;              \
-        goto Cleanup;          \
-    }
+#define IF_FAILED_CLEANUP(_hr)                                                                                                                       \
+  if (FAILED(_hr)) {                                                                                                                                 \
+    hr = _hr;                                                                                                                                        \
+    goto Cleanup;                                                                                                                                    \
+  }
 #endif
 
 #ifndef FAIL_AND_CLEANUP
-#define FAIL_AND_CLEANUP(_hr) \
-    {                         \
-        hr = _hr;             \
-        goto Cleanup;         \
-    }
+#define FAIL_AND_CLEANUP(_hr)                                                                                                                        \
+  {                                                                                                                                                  \
+    hr = _hr;                                                                                                                                        \
+    goto Cleanup;                                                                                                                                    \
+  }
 #endif
 
-#endif  // JET_WINDOWS
+#endif // JET_WINDOWS
 
-#endif  // SRC_JET_PRIVATE_HELPERS_H_
+#endif // SRC_JET_PRIVATE_HELPERS_H_

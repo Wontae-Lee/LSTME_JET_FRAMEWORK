@@ -27,8 +27,9 @@ namespace jet {
 //!
 //! \return     Sampled direction vector.
 //!
-template <typename T>
-inline Vector3<T> uniformSampleCone(T u1, T u2, const Vector3<T>& axis, T angle);
+template<typename T>
+inline Vector3<T>
+uniformSampleCone(T u1, T u2, const Vector3<T>& axis, T angle);
 
 //!
 //! \brief      Returns randomly sampled point within a unit hemisphere.
@@ -44,8 +45,9 @@ inline Vector3<T> uniformSampleCone(T u1, T u2, const Vector3<T>& axis, T angle)
 //!
 //! \return     Sampled point.
 //!
-template <typename T>
-inline Vector3<T> uniformSampleHemisphere(T u1, T u2, const Vector3<T>& normal);
+template<typename T>
+inline Vector3<T>
+uniformSampleHemisphere(T u1, T u2, const Vector3<T>& normal);
 
 //!
 //! \brief      Returns weighted sampled point on a hemisphere.
@@ -62,8 +64,9 @@ inline Vector3<T> uniformSampleHemisphere(T u1, T u2, const Vector3<T>& normal);
 //!
 //! \return     Sampled point.
 //!
-template <typename T>
-inline Vector3<T> cosineWeightedSampleHemisphere(T u1, T u2, const Vector3<T>& normal);
+template<typename T>
+inline Vector3<T>
+cosineWeightedSampleHemisphere(T u1, T u2, const Vector3<T>& normal);
 
 //!
 //! \brief      Returns randomly a point on a sphere.
@@ -80,8 +83,9 @@ inline Vector3<T> cosineWeightedSampleHemisphere(T u1, T u2, const Vector3<T>& n
 //!
 //! \return     Sampled point.
 //!
-template <typename T>
-inline Vector3<T> uniformSampleSphere(T u1, T u2);
+template<typename T>
+inline Vector3<T>
+uniformSampleSphere(T u1, T u2);
 
 //!
 //! \brief      Returns randomly a point on a disk.
@@ -95,11 +99,12 @@ inline Vector3<T> uniformSampleSphere(T u1, T u2);
 //!
 //! \return     Sampled point.
 //!
-template <typename T>
-inline Vector2<T> uniformSampleDisk(T u1, T u2);
+template<typename T>
+inline Vector2<T>
+uniformSampleDisk(T u1, T u2);
 
-}  // namespace jet
+} // namespace jet
 
 #include "samplers.inl"
 
-#endif  // INCLUDE_JET_SAMPLERS_H_
+#endif // INCLUDE_JET_SAMPLERS_H_

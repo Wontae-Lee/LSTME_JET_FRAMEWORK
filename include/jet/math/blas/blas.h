@@ -23,46 +23,47 @@ namespace jet {
 //! performing linear algebra routines (such as conjugate grapdient) for the
 //! custom vector/matrix types.
 //!
-template <typename S, typename V, typename M>
-struct Blas {
-    typedef S ScalarType;
-    typedef V VectorType;
-    typedef M MatrixType;
+template<typename S, typename V, typename M>
+struct Blas
+{
+  typedef S ScalarType;
+  typedef V VectorType;
+  typedef M MatrixType;
 
-    //! Sets entire element of given vector \p result with scalar \p s.
-    static void set(ScalarType s, VectorType* result);
+  //! Sets entire element of given vector \p result with scalar \p s.
+  static void set(ScalarType s, VectorType* result);
 
-    //! Copies entire element of given vector \p result with other vector \p v.
-    static void set(const VectorType& v, VectorType* result);
+  //! Copies entire element of given vector \p result with other vector \p v.
+  static void set(const VectorType& v, VectorType* result);
 
-    //! Sets entire element of given matrix \p result with scalar \p s.
-    static void set(ScalarType s, MatrixType* result);
+  //! Sets entire element of given matrix \p result with scalar \p s.
+  static void set(ScalarType s, MatrixType* result);
 
-    //! Copies entire element of given matrix \p result with other matrix \p v.
-    static void set(const MatrixType& m, MatrixType* result);
+  //! Copies entire element of given matrix \p result with other matrix \p v.
+  static void set(const MatrixType& m, MatrixType* result);
 
-    //! Performs dot product with vector \p a and \p b.
-    static ScalarType dot(const VectorType& a, const VectorType& b);
+  //! Performs dot product with vector \p a and \p b.
+  static ScalarType dot(const VectorType& a, const VectorType& b);
 
-    //! Performs ax + y operation where \p a is a matrix and \p x and \p y are
-    //! vectors.
-    static void axpy(ScalarType a, const VectorType& x, const VectorType& y, VectorType* result);
+  //! Performs ax + y operation where \p a is a matrix and \p x and \p y are
+  //! vectors.
+  static void axpy(ScalarType a, const VectorType& x, const VectorType& y, VectorType* result);
 
-    //! Performs matrix-vector multiplication.
-    static void mvm(const MatrixType& m, const VectorType& v, VectorType* result);
+  //! Performs matrix-vector multiplication.
+  static void mvm(const MatrixType& m, const VectorType& v, VectorType* result);
 
-    //! Computes residual vector (b - ax).
-    static void residual(const MatrixType& a, const VectorType& x, const VectorType& b, VectorType* result);
+  //! Computes residual vector (b - ax).
+  static void residual(const MatrixType& a, const VectorType& x, const VectorType& b, VectorType* result);
 
-    //! Returns L2-norm of the given vector \p v.
-    static ScalarType l2Norm(const VectorType& v);
+  //! Returns L2-norm of the given vector \p v.
+  static ScalarType l2Norm(const VectorType& v);
 
-    //! Returns Linf-norm of the given vector \p v.
-    static ScalarType lInfNorm(const VectorType& v);
+  //! Returns Linf-norm of the given vector \p v.
+  static ScalarType lInfNorm(const VectorType& v);
 };
 
-}  // namespace jet
+} // namespace jet
 
 #include "blas.inl"
 
-#endif  // INCLUDE_JET_BLAS_H_
+#endif // INCLUDE_JET_BLAS_H_

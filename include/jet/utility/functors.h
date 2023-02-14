@@ -12,24 +12,27 @@
 namespace jet {
 
 //! Type casting operator.
-template <typename T, typename U>
-struct TypeCast {
-    constexpr U operator()(const T& a) const;
+template<typename T, typename U>
+struct TypeCast
+{
+  constexpr U operator()(const T& a) const;
 };
 
 //! Reverse minus operator.
-template <typename T>
-struct RMinus {
-    constexpr T operator()(const T& a, const T& b) const;
+template<typename T>
+struct RMinus
+{
+  constexpr T operator()(const T& a, const T& b) const;
 };
 
 //! Reverse divides operator.
-template <typename T>
-struct RDivides {
-    constexpr T operator()(const T& a, const T& b) const;
+template<typename T>
+struct RDivides
+{
+  constexpr T operator()(const T& a, const T& b) const;
 };
-}  // namespace jet
+} // namespace jet
 
 #include "functors.inl"
 
-#endif  // INCLUDE_JET_FUNCTORS_H_
+#endif // INCLUDE_JET_FUNCTORS_H_

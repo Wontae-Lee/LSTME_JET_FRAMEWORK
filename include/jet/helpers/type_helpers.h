@@ -10,11 +10,12 @@
 namespace jet {
 
 //! Returns the type of the value itself.
-template <typename T>
-struct ScalarType {
-    typedef T value;
+template<typename T>
+struct ScalarType
+{
+  typedef T value;
 };
 
-}  // namespace jet
+} // namespace jet
 
-#endif  // INCLUDE_JET_TYPE_HELPERS_H_
+#endif // INCLUDE_JET_TYPE_HELPERS_H_

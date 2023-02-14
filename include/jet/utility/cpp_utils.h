@@ -11,10 +11,11 @@
 
 namespace jet {
 
-template <class ForwardIt, class T, class Compare = std::less<T>>
-ForwardIt binaryFind(ForwardIt first, ForwardIt last, const T& value, Compare comp = {});
-}  // namespace jet
+template<class ForwardIt, class T, class Compare = std::less<T>>
+ForwardIt
+binaryFind(ForwardIt first, ForwardIt last, const T& value, Compare comp = {});
+} // namespace jet
 
 #include "cpp_utils.inl"
 
-#endif  // INCLUDE_JET_CPP_UTILS_H_
+#endif // INCLUDE_JET_CPP_UTILS_H_

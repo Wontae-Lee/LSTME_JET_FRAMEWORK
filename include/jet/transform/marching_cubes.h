@@ -31,9 +31,15 @@ namespace jet {
 //! \param[in]  bndClose        The boundary open flag.
 //! \param[in]  bndConnectivity The boundary connectivity flag.
 //!
-void marchingCubes(const ConstArrayAccessor3<double>& grid, const Vector3D& gridSize, const Vector3D& origin, TriangleMesh3* mesh, double isoValue = 0, int bndClose = kDirectionAll,
-                   int bndConnectivity = kDirectionNone);
+void
+marchingCubes(const ConstArrayAccessor3<double>& grid,
+              const Vector3D& gridSize,
+              const Vector3D& origin,
+              TriangleMesh3* mesh,
+              double isoValue = 0,
+              int bndClose = kDirectionAll,
+              int bndConnectivity = kDirectionNone);
 
-}  // namespace jet
+} // namespace jet
 
-#endif  // INCLUDE_JET_MARCHING_CUBES_H_
+#endif // INCLUDE_JET_MARCHING_CUBES_H_
