@@ -6,7 +6,7 @@
 
 #include "jet/emitter/point_particle_emitter2.h"
 #include "jet/helpers/pch.h"
-#include "jet/primitive/matrix/matrix2x2.h"
+#include "jet/math/matrix/matrix2x2.h"
 #include "jet/sampler/samplers.h"
 
 namespace jet {

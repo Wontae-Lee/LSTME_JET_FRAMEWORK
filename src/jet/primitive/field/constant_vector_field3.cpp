@@ -4,7 +4,7 @@
 // personal capacity and am not conveying any rights to any intellectual
 // property of any third parties.
 
-#include "jet/primitive/field/constant_vector_field3.h"
+#include "jet/math/field/constant_vector_field3.h"
 #include "jet/helpers/pch.h"
 
 using namespace jet;

@@ -10,7 +10,7 @@
 #include <functional>
 #include "array_accessor2.h"
 #include "array_samplers.h"
-#include "jet/primitive/vector/vector2.h"
+#include "jet/math/vector/vector2.h"
 
 namespace jet {
 

@@ -8,9 +8,9 @@
 #define INCLUDE_JET_SURFACE3_H_
 
 #include <memory>
-#include "jet/primitive/ray/ray3.h"
-#include "jet/math/constants.h"
+#include "jet/math/constants/constants.h"
 #include "jet/physics/bounding_box/bounding_box3.h"
+#include "jet/primitive/ray/ray3.h"
 #include "jet/transform/transform3.h"
 
 namespace jet {

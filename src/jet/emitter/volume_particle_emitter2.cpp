@@ -8,7 +8,7 @@
 
 #include "jet/emitter/volume_particle_emitter2.h"
 #include "jet/generator/triangle_point_generator.h"
-#include "jet/primitive/matrix/matrix2x2.h"
+#include "jet/math/matrix/matrix2x2.h"
 #include "jet/sampler/samplers.h"
 #include "jet/searcher/point_hash_grid_searcher2.h"
 #include "jet/transfer/surface_to_implicit2.h"

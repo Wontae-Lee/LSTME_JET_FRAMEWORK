@@ -7,8 +7,8 @@
 #ifndef INCLUDE_JET_BLAS_H_
 #define INCLUDE_JET_BLAS_H_
 
-#include "jet/primitive/matrix/matrix4x4.h"
-#include "jet/primitive/vector/vector4.h"
+#include "jet/math/matrix/matrix4x4.h"
+#include "jet/math/vector/vector4.h"
 
 namespace jet {
 

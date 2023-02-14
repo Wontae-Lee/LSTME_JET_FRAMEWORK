@@ -6,8 +6,8 @@
 
 #include "jet/solver/fdm/fdm_cg_solver3.h"
 #include "jet/helpers/pch.h"
-#include "jet/math/cg.h"
-#include "jet/math/constants.h"
+#include "jet/math/cg/cg.h"
+#include "jet/math/constants/constants.h"
 
 using namespace jet;
 

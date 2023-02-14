@@ -6,7 +6,7 @@
 
 #include "jet/helpers/pch.h"
 
-#include "jet/math/cg.h"
+#include "jet/math/cg/cg.h"
 #include "jet/solver/fdm/fdm_iccg_solver2.h"
 
 using namespace jet;

@@ -7,10 +7,10 @@
 #ifndef INCLUDE_JET_FDM_LINEAR_SYSTEM3_H_
 #define INCLUDE_JET_FDM_LINEAR_SYSTEM3_H_
 
+#include "jet/math/matrix/matrix_csr.h"
+#include "jet/math/vector/vector_n.h"
 #include "jet/primitive/array/array1.h"
 #include "jet/primitive/array/array3.h"
-#include "jet/primitive/matrix/matrix_csr.h"
-#include "jet/primitive/vector/vector_n.h"
 
 namespace jet {
 

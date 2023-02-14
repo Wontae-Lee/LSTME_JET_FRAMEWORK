@@ -7,7 +7,7 @@
 #include "jet/solver/level_set/eno_level_set_solver3.h"
 #include <algorithm>
 #include "jet/helpers/pch.h"
-#include "jet/math/pde.h"
+#include "jet/math/pde/pde.h"
 
 using namespace jet;
 

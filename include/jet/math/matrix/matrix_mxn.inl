@@ -9,8 +9,8 @@
 
 #include "jet/helpers/macros.h"
 #include "jet/parallel/parallel.h"
-#include "jet/primitive/matrix/matrix_mxn.h"
 #include "jet/utility/math_utils.h"
+#include "matrix_mxn.h"
 
 namespace jet {
 

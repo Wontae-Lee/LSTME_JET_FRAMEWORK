@@ -4,11 +4,10 @@
 // personal capacity and am not conveying any rights to any intellectual
 // property of any third parties.
 
-
-#include "jet/helpers/pch.h"
-#include "jet/math/cg.h"
-#include "jet/math/constants.h"
 #include "jet/solver/fdm/fdm_iccg_solver3.h"
+#include "jet/helpers/pch.h"
+#include "jet/math/cg/cg.h"
+#include "jet/math/constants/constants.h"
 
 using namespace jet;
 

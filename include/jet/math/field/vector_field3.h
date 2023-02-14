@@ -9,8 +9,8 @@
 
 #include <functional>
 #include <memory>
-#include "jet/primitive/field/field3.h"
-#include "jet/primitive/vector/vector3.h"
+#include "field3.h"
+#include "jet/math/vector/vector3.h"
 
 namespace jet {
 

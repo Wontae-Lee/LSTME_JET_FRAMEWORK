@@ -7,7 +7,7 @@
 #ifndef INCLUDE_JET_SPH_SOLVER3_H_
 #define INCLUDE_JET_SPH_SOLVER3_H_
 
-#include "jet/math/constants.h"
+#include "jet/math/constants/constants.h"
 #include "jet/solver/particle/particle_system_solver3.h"
 #include "jet/system/data/sph_system_data3.h"
 

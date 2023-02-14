@@ -6,7 +6,7 @@
 
 #include "jet/helpers/pch.h"
 
-#include "jet/math/constants.h"
+#include "jet/math/constants/constants.h"
 #include "jet/primitive/surface/custom_implicit_surface3.h"
 #include "jet/utility/level_set_utils.h"
 

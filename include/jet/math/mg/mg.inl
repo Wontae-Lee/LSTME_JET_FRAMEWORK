@@ -7,7 +7,7 @@
 #ifndef INCLUDE_JET_DETAIL_MG_INL_H_
 #define INCLUDE_JET_DETAIL_MG_INL_H_
 
-#include "jet/math/mg.h"
+#include "mg.h"
 
 namespace jet {
 

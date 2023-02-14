@@ -7,7 +7,7 @@
 #ifndef INCLUDE_JET_MG_H_
 #define INCLUDE_JET_MG_H_
 
-#include "jet/math/blas.h"
+#include "jet/math/blas/blas.h"
 
 #include <functional>
 #include <vector>

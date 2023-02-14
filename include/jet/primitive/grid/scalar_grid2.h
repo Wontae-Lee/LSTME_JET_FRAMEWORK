@@ -9,10 +9,10 @@
 
 #include <memory>
 #include <vector>
+#include "jet/math/field/scalar_field2.h"
 #include "jet/primitive/array/array2.h"
 #include "jet/primitive/array/array_accessor2.h"
 #include "jet/primitive/array/array_samplers2.h"
-#include "jet/primitive/field/scalar_field2.h"
 #include "jet/primitive/grid/grid2.h"
 
 namespace jet {

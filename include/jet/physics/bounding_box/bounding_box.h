@@ -7,7 +7,7 @@
 #ifndef INCLUDE_JET_BOUNDING_BOX_H_
 #define INCLUDE_JET_BOUNDING_BOX_H_
 
-#include "jet/primitive/vector/vector.h"
+#include "jet/math/vector/vector.h"
 
 namespace jet {
 

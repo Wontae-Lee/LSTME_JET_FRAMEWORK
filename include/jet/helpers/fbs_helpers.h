@@ -10,10 +10,10 @@
 #include <algorithm>
 #include <vector>
 #include "generated/basic_types_generated.h"
+#include "jet/math/vector/vector2.h"
+#include "jet/math/vector/vector3.h"
 #include "jet/primitive/size/size2.h"
 #include "jet/primitive/size/size3.h"
-#include "jet/primitive/vector/vector2.h"
-#include "jet/primitive/vector/vector3.h"
 
 namespace jet {
 

@@ -6,8 +6,8 @@
 
 #include "jet/helpers/pch.h"
 
-#include "jet/math/cg.h"
-#include "jet/math/mg.h"
+#include "jet/math/cg/cg.h"
+#include "jet/math/mg/mg.h"
 #include "jet/solver/fdm/fdm_mgpcg_solver2.h"
 
 using namespace jet;

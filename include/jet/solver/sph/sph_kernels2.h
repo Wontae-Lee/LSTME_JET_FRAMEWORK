@@ -12,8 +12,8 @@
 #ifndef INCLUDE_JET_SPH_KERNELS2_H_
 #define INCLUDE_JET_SPH_KERNELS2_H_
 
-#include "jet/math/constants.h"
-#include "jet/primitive/vector/vector2.h"
+#include "jet/math/constants/constants.h"
+#include "jet/math/vector/vector2.h"
 
 namespace jet {
 

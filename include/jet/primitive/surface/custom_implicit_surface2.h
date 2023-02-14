@@ -8,7 +8,7 @@
 #define INCLUDE_JET_CUSTOM_IMPLICIT_SURFACE2_H_
 
 #include "implicit_surface2.h"
-#include "jet/primitive/field/scalar_field2.h"
+#include "jet/math/field/scalar_field2.h"
 
 namespace jet {
 

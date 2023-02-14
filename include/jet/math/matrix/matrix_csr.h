@@ -7,8 +7,8 @@
 #ifndef INCLUDE_JET_MATRIX_CSR_H_
 #define INCLUDE_JET_MATRIX_CSR_H_
 
+#include "jet/math/vector/vector_n.h"
 #include "jet/primitive/size/size2.h"
-#include "jet/primitive/vector/vector_n.h"
 #include "matrix_expression.h"
 
 #include <tuple>

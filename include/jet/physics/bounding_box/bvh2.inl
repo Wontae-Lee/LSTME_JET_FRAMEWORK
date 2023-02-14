@@ -7,7 +7,7 @@
 #ifndef INCLUDE_JET_DETAIL_BVH2_INL_H_
 #define INCLUDE_JET_DETAIL_BVH2_INL_H_
 
-#include "jet/math/constants.h"
+#include "jet/math/constants/constants.h"
 #include "jet/physics/bounding_volume_hierarchy/bvh2.h"
 #include "jet/utility/math_utils.h"
 

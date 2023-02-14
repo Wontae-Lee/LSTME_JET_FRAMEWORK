@@ -7,11 +7,11 @@
 #ifndef INCLUDE_JET_KDTREE_H
 #define INCLUDE_JET_KDTREE_H
 
+#include "jet/math/vector/vector2.h"
+#include "jet/math/vector/vector3.h"
+#include "jet/math/vector/vector4.h"
 #include "jet/physics/bounding_box/bounding_box2.h"
 #include "jet/physics/bounding_box/bounding_box3.h"
-#include "jet/primitive/vector/vector2.h"
-#include "jet/primitive/vector/vector3.h"
-#include "jet/primitive/vector/vector4.h"
 
 #include <vector>
 

@@ -10,7 +10,7 @@
 #include <limits>
 #include <memory>
 #include "grid_diffusion_solver2.h"
-#include "jet/primitive/field/constant_scalar_field2.h"
+#include "jet/math/field/constant_scalar_field2.h"
 #include "jet/solver/fdm/fdm_linear_system_solver2.h"
 
 namespace jet {

@@ -7,7 +7,7 @@
 #ifndef INCLUDE_JET_CG_H_
 #define INCLUDE_JET_CG_H_
 
-#include "jet/math/blas.h"
+#include "jet/math/blas/blas.h"
 
 namespace jet {
 

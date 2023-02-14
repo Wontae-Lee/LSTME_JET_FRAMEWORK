@@ -7,8 +7,8 @@
 #ifndef INCLUDE_JET_NEAREST_NEIGHBOR_QUERY_ENGINE3_H_
 #define INCLUDE_JET_NEAREST_NEIGHBOR_QUERY_ENGINE3_H_
 
-#include "jet/math/constants.h"
-#include "jet/primitive/vector/vector3.h"
+#include "jet/math/constants/constants.h"
+#include "jet/math/vector/vector3.h"
 
 #include <functional>
 

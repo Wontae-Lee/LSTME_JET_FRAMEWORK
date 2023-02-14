@@ -8,9 +8,9 @@
 #define INCLUDE_JET_BOUNDING_BOX3_H_
 
 #include <limits>
+#include "jet/math/vector/vector3.h"
 #include "jet/physics/bounding_box/bounding_box.h"
 #include "jet/primitive/ray/ray3.h"
-#include "jet/primitive/vector/vector3.h"
 
 namespace jet {
 

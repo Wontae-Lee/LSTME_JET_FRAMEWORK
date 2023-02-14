@@ -6,7 +6,7 @@
 
 #include "jet/helpers/pch.h"
 
-#include "jet/primitive/matrix/svd.h"
+#include "jet/math/matrix/svd.h"
 #include "jet/searcher/point_kdtree_searcher2.h"
 #include "jet/solver/level_set/fmm_level_set_solver2.h"
 #include "jet/solver/sph/sph_kernels2.h"

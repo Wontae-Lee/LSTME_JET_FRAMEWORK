@@ -8,7 +8,7 @@
 #define INCLUDE_JET_DETAIL_CG_INL_H_
 
 #include <limits>
-#include "jet/math/constants.h"
+#include "jet/math/constants/constants.h"
 
 namespace jet {
 

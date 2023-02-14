@@ -16,7 +16,7 @@
 #define INCLUDE_JET_DETAIL_LEVEL_SET_UTILS_INL_H_
 
 #include <cmath>
-#include "jet/math/constants.h"
+#include "jet/math/constants/constants.h"
 
 namespace jet {
 

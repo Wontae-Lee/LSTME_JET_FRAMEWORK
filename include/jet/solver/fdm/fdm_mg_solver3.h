@@ -8,7 +8,7 @@
 #define INCLUDE_JET_FDM_MG_SOLVER3_H_
 
 #include "fdm_linear_system_solver3.h"
-#include "jet/math/mg.h"
+#include "jet/math/mg/mg.h"
 #include "jet/system/fdm/fdm_mg_linear_system3.h"
 
 namespace jet {

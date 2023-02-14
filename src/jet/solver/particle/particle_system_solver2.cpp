@@ -6,8 +6,8 @@
 
 #include "jet/helpers/pch.h"
 
+#include "jet/math/field/constant_vector_field2.h"
 #include "jet/parallel/parallel.h"
-#include "jet/primitive/field/constant_vector_field2.h"
 #include "jet/solver/particle/particle_system_solver2.h"
 #include "jet/timer/timer.h"
 #include "jet/utility/array_utils.h"

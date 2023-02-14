@@ -8,7 +8,7 @@
 #define SRC_JET_PHYSICS_HELPERS_H_
 
 #include <algorithm>
-#include "jet/primitive/vector/vector3.h"
+#include "jet/math/vector/vector3.h"
 
 namespace jet {
 

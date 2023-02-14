@@ -9,7 +9,7 @@
 
 #include <limits>
 #include <memory>
-#include "jet/primitive/field/constant_scalar_field3.h"
+#include "jet/math/field/constant_scalar_field3.h"
 #include "jet/solver/grid/grid_diffusion_solver3.h"
 
 namespace jet {

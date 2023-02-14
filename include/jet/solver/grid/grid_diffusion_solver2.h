@@ -9,8 +9,8 @@
 
 #include <limits>
 #include <memory>
-#include "jet/math/constants.h"
-#include "jet/primitive/field/constant_scalar_field2.h"
+#include "jet/math/constants/constants.h"
+#include "jet/math/field/constant_scalar_field2.h"
 #include "jet/primitive/grid/collocated_vector_grid2.h"
 #include "jet/primitive/grid/face_centered_grid2.h"
 #include "jet/primitive/grid/scalar_grid2.h"

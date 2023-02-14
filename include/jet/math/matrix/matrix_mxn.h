@@ -7,8 +7,8 @@
 #ifndef INCLUDE_JET_MATRIX_MXN_H_
 #define INCLUDE_JET_MATRIX_MXN_H_
 
+#include "jet/math/vector/vector_n.h"
 #include "jet/primitive/array/array2.h"
-#include "jet/primitive/vector/vector_n.h"
 #include "matrix_expression.h"
 
 namespace jet {

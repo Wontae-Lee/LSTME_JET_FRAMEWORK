@@ -8,8 +8,8 @@
 #define INCLUDE_JET_DETAIL_VECTOR_INL_H_
 
 #include "jet/helpers/macros.h"
-#include "jet/primitive/vector/vector.h"
 #include "jet/utility/math_utils.h"
+#include "vector.h"
 
 namespace jet {
 

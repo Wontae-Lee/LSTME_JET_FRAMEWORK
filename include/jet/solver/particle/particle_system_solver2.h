@@ -9,9 +9,9 @@
 
 #include "jet/animation/physics_animation.h"
 #include "jet/emitter/particle_emitter2.h"
-#include "jet/math/constants.h"
+#include "jet/math/constants/constants.h"
+#include "jet/math/field/vector_field2.h"
 #include "jet/physics/collider/collider2.h"
-#include "jet/primitive/field/vector_field2.h"
 #include "jet/system/data/particle_system_data2.h"
 
 namespace jet {

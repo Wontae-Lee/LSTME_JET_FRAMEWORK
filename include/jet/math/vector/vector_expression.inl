@@ -7,7 +7,7 @@
 #ifndef INCLUDE_JET_DETAIL_VECTOR_EXPRESSION_INL_H
 #define INCLUDE_JET_DETAIL_VECTOR_EXPRESSION_INL_H
 
-#include "jet/primitive/vector/vector_expression.h"
+#include "vector_expression.h"
 
 namespace jet {
 

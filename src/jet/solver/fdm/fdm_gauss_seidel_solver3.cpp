@@ -6,7 +6,7 @@
 
 #include "jet/helpers/pch.h"
 
-#include "jet/math/constants.h"
+#include "jet/math/constants/constants.h"
 #include "jet/solver/fdm/fdm_gauss_seidel_solver3.h"
 
 using namespace jet;

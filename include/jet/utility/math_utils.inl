@@ -10,7 +10,7 @@
 #include <algorithm>
 #include <cmath>
 #include <limits>
-#include "jet/math/constants.h"
+#include "jet/math/constants/constants.h"
 
 namespace jet {
 

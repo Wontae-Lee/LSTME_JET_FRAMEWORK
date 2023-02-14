@@ -8,9 +8,9 @@
 #define INCLUDE_JET_DETAIL_MATRIX_CSR_INL_H_
 
 #include "jet/parallel/parallel.h"
-#include "jet/primitive/matrix/matrix_csr.h"
 #include "jet/utility/cpp_utils.h"
 #include "jet/utility/math_utils.h"
+#include "matrix_csr.h"
 
 #include <numeric>
 

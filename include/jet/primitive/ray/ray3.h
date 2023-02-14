@@ -7,7 +7,7 @@
 #ifndef INCLUDE_JET_RAY3_H_
 #define INCLUDE_JET_RAY3_H_
 
-#include "jet/primitive/vector/vector3.h"
+#include "jet/math/vector/vector3.h"
 #include "ray.h"
 
 namespace jet {

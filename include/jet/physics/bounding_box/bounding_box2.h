@@ -9,8 +9,8 @@
 
 #include <limits>
 #include "bounding_box.h"
+#include "jet/math/vector/vector2.h"
 #include "jet/primitive/ray/ray2.h"
-#include "jet/primitive/vector/vector2.h"
 
 namespace jet {
 

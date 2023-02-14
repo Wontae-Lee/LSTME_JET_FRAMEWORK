@@ -8,7 +8,7 @@
 #define INCLUDE_JET_FDM_MG_LINEAR_SYSTEM3_H_
 
 #include "fdm_linear_system3.h"
-#include "jet/math/mg.h"
+#include "jet/math/mg/mg.h"
 #include "jet/primitive/grid/face_centered_grid3.h"
 
 namespace jet {

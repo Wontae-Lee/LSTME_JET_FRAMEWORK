@@ -7,7 +7,7 @@
 #ifndef INCLUDE_JET_MARCHING_CUBES_H_
 #define INCLUDE_JET_MARCHING_CUBES_H_
 
-#include "jet/math/constants.h"
+#include "jet/math/constants/constants.h"
 #include "jet/primitive/array/array_accessor3.h"
 #include "jet/primitive/mesh/triangle_mesh3.h"
 

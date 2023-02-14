@@ -12,7 +12,7 @@
 #include "generated/point_parallel_hash_grid_searcher3_generated.h"
 #include "jet/helpers/pch.h"
 
-#include "jet/math/constants.h"
+#include "jet/math/constants/constants.h"
 #include "jet/parallel/parallel.h"
 #include "jet/searcher/point_parallel_hash_grid_searcher3.h"
 

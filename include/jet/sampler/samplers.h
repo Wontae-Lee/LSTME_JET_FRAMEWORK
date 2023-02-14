@@ -7,8 +7,8 @@
 #ifndef INCLUDE_JET_SAMPLERS_H_
 #define INCLUDE_JET_SAMPLERS_H_
 
-#include "jet/primitive/vector/vector2.h"
-#include "jet/primitive/vector/vector3.h"
+#include "jet/math/vector/vector2.h"
+#include "jet/math/vector/vector3.h"
 
 namespace jet {
 

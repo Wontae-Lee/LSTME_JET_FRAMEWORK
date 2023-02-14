@@ -9,7 +9,7 @@
 
 #include "jet/emitter/particle_emitter2.h"
 #include "jet/generator/point_generator2.h"
-#include "jet/math/constants.h"
+#include "jet/math/constants/constants.h"
 #include "jet/physics/bounding_box/bounding_box2.h"
 #include "jet/primitive/surface/implicit_surface2.h"
 

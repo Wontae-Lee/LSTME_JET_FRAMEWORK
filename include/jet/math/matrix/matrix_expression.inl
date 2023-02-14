@@ -7,7 +7,7 @@
 #ifndef INCLUDE_DETAIL_JET_MATRIX_EXPRESSION_INL_H_
 #define INCLUDE_DETAIL_JET_MATRIX_EXPRESSION_INL_H_
 
-#include "jet/primitive/matrix/matrix_expression.h"
+#include "matrix_expression.h"
 
 namespace jet {
 

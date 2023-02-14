@@ -4,11 +4,11 @@
 // personal capacity and am not conveying any rights to any intellectual
 // property of any third parties.
 
-#ifndef INCLUDE_JET_MATRIX4X4_H_
-#define INCLUDE_JET_MATRIX4X4_H_
+#ifndef INCLUDE_JET_MATRIX2X2_H_
+#define INCLUDE_JET_MATRIX2X2_H_
 
-#include "jet/primitive/vector/vector4.h"
-#include "matrix3x3.h"
+#include "jet/math/vector/vector2.h"
+#include "matrix.h"
 
 #include <array>
 #include <limits>
@@ -16,15 +16,14 @@
 namespace jet {
 
 //!
-//! \brief 4-D matrix class.
+//! \brief 2-D matrix class.
 //!
-//! This class is a row-major 4-D matrix class, which means each element of
-//! the matrix is stored in order of (0,0), ... , (0,3), (1,0), ... , (3,3).
-//! Also, this 4-D matrix is speciallized for geometric transformations.
+//! This class is a row-major 2-D matrix class, which means each element of
+//! the matrix is stored in order of (0, 0), (0, 1), (1, 0) and (1, 1).
 //! \tparam T - Type of the element.
 //!
 template <typename T>
-class Matrix<T, 4, 4> {
+class Matrix<T, 2, 2> {
  public:
     static_assert(std::is_floating_point<T>::value, "Matrix only can be instantiated with floating point types");
 
@@ -37,14 +36,8 @@ class Matrix<T, 4, 4> {
     explicit Matrix(T s);
 
     //! Constructs a matrix with input elements.
-    //! This constructor initialize 3x3 part, and other parts are set to 0
-    //! except (3,3) which will be set to 1.
     //! \warning Ordering of the input elements is row-major.
-    Matrix(T m00, T m01, T m02, T m10, T m11, T m12, T m20, T m21, T m22);
-
-    //! Constructs a matrix with input elements.
-    //! \warning Ordering of the input elements is row-major.
-    Matrix(T m00, T m01, T m02, T m03, T m10, T m11, T m12, T m13, T m20, T m21, T m22, T m23, T m30, T m31, T m32, T m33);
+    Matrix(T m00, T m01, T m10, T m11);
 
     //!
     //! \brief Constructs a matrix with given initializer list \p lst.
@@ -53,25 +46,18 @@ class Matrix<T, 4, 4> {
     //! such as
     //!
     //! \code{.cpp}
-    //! Matrix<float, 4, 4> arr = {
-    //!     {1.f, 2.f, 4.f, 3.f},
-    //!     {9.f, 3.f, 5.f, 1.f},
-    //!     {4.f, 8.f, 1.f, 5.f},
-    //!     {3.f, 7.f, 2.f, 6.f}
+    //! Matrix<float, 2, 2> arr = {
+    //!     {1.f, 2.f},
+    //!     {9.f, 3.f}
     //! };
     //! \endcode
     //!
-    //! Note the initializer also has 4x4 structure.
+    //! Note the initializer also has 2x2 structure.
     //!
     //! \param lst Initializer list that should be copy to the new matrix.
     //!
     template <typename U>
     Matrix(const std::initializer_list<std::initializer_list<U>>& lst);
-
-    //! Constructs a matrix with 3x3 matrix.
-    //! This constructor initialize 3x3 part, and other parts are set to 0
-    //! except (3,3) which is set to 1.
-    explicit Matrix(const Matrix3x3<T>& m33);
 
     //! Constructs a matrix with input matrix.
     Matrix(const Matrix& m);
@@ -86,42 +72,29 @@ class Matrix<T, 4, 4> {
     void set(T s);
 
     //! Sets this matrix with input elements.
-    //! This method copies 3x3 part only, and other parts are set to 0
-    //! except (3,3) which is set to 1.
     //! \warning Ordering of the input elements is row-major.
-    void set(T m00, T m01, T m02, T m10, T m11, T m12, T m20, T m21, T m22);
-
-    //! Sets this matrix with input elements.
-    //! \warning Ordering of the input elements is row-major.
-    void set(T m00, T m01, T m02, T m03, T m10, T m11, T m12, T m13, T m20, T m21, T m22, T m23, T m30, T m31, T m32, T m33);
+    void set(T m00, T m01, T m10, T m11);
 
     //!
-    //! \brief Sets a matrix with given initializer list \p lst.
+    //! \brief Sets this matrix with given initializer list \p lst.
     //!
     //! This function will fill the matrix with given initializer list \p lst
     //! such as
     //!
     //! \code{.cpp}
-    //! Matrix<float, 4, 4> arr;
+    //! Matrix<float, 2, 2> arr;
     //! arr.set({
-    //!     {1.f, 2.f, 4.f, 3.f},
-    //!     {9.f, 3.f, 5.f, 1.f},
-    //!     {4.f, 8.f, 1.f, 5.f},
-    //!     {3.f, 7.f, 2.f, 6.f}
+    //!     {1, 2},
+    //!     {9, 3}
     //! });
     //! \endcode
     //!
-    //! Note the initializer also has 3x3 structure.
+    //! Note the initializer also has 2x2 structure.
     //!
-    //! \param lst Initializer list that should be copy to the new matrix.
+    //! \param lst Initializer list that should be copy to the matrix.
     //!
     template <typename U>
     void set(const std::initializer_list<std::initializer_list<U>>& lst);
-
-    //! Sets this matrix with input 3x3 matrix.
-    //! This method copies 3x3 part only, and other parts are set to 0
-    //! except (3,3) which will be set to 1.
-    void set(const Matrix3x3<T>& m33);
 
     //! Copies from input matrix.
     void set(const Matrix& m);
@@ -137,10 +110,10 @@ class Matrix<T, 4, 4> {
     void setOffDiagonal(T s);
 
     //! Sets i-th row with input vector.
-    void setRow(size_t i, const Vector4<T>& row);
+    void setRow(size_t i, const Vector2<T>& row);
 
     //! Sets i-th column with input vector.
-    void setColumn(size_t i, const Vector4<T>& col);
+    void setColumn(size_t i, const Vector2<T>& col);
 
     // MARK: Basic getters
 
@@ -163,9 +136,6 @@ class Matrix<T, 4, 4> {
     //! Returns constant pointer of this matrix.
     const T* data() const;
 
-    //! Returns 3x3 part of this matrix.
-    Matrix<T, 3, 3> matrix3() const;
-
     // MARK: Binary operator methods - new instance = this instance (+) input
     //! Returns this matrix + input scalar.
     Matrix add(T s) const;
@@ -183,7 +153,7 @@ class Matrix<T, 4, 4> {
     Matrix mul(T s) const;
 
     //! Returns this matrix * input vector.
-    Vector4<T> mul(const Vector4<T>& v) const;
+    Vector2<T> mul(const Vector2<T>& v) const;
 
     //! Returns this matrix * input matrix.
     Matrix mul(const Matrix& m) const;
@@ -210,7 +180,7 @@ class Matrix<T, 4, 4> {
     //! Returns input matrix * this matrix.
     Matrix rmul(const Matrix& m) const;
 
-    //! Returns input matrix / this scalar.
+    //! Returns input scalar / this matrix.
     Matrix rdiv(T s) const;
 
     // MARK: Augmented operator methods - this instance (+)= input
@@ -229,11 +199,6 @@ class Matrix<T, 4, 4> {
     //! Multiplies input scalar to this matrix.
     void imul(T s);
 
-    //! Multiplies input 3x3 matrix to this matrix.
-    //! This method assumes missing part of the input matrix has 0 for the
-    //! off-diagonal and 1 for the diagonal part.
-    void imul(const Matrix3x3<T>& m33);
-
     //! Multiplies input matrix to this matrix.
     void imul(const Matrix& m);
 
@@ -248,6 +213,7 @@ class Matrix<T, 4, 4> {
     void invert();
 
     // MARK: Complex getters
+
     //! Returns sum of all elements.
     T sum() const;
 
@@ -296,8 +262,11 @@ class Matrix<T, 4, 4> {
     //! Returns inverse matrix.
     Matrix inverse() const;
 
+    //! Returns Frobenius norm.
+    T frobeniusNorm() const;
+
     template <typename U>
-    Matrix<U, 4, 4> castTo() const;
+    Matrix<U, 2, 2> castTo() const;
 
     // MARK: Setter operators
     //! Assigns input matrix.
@@ -320,11 +289,6 @@ class Matrix<T, 4, 4> {
 
     //! Multiplication assignment with input matrix.
     Matrix& operator*=(const Matrix& m);
-
-    //! Multiplication assignment with input 3x3 matrix.
-    //! This method assumes missing part of the input matrix has 0 for the
-    //! off-diagonal and 1 for the diagonal part.
-    Matrix& operator*=(const Matrix3x3<T>& m);
 
     //! Division assignment with input scalar.
     Matrix& operator/=(T s);
@@ -356,99 +320,84 @@ class Matrix<T, 4, 4> {
     static Matrix makeIdentity();
 
     //! Makes scale matrix.
-    static Matrix makeScaleMatrix(T sx, T sy, T sz);
+    static Matrix makeScaleMatrix(T sx, T sy);
 
     //! Makes scale matrix.
-    static Matrix makeScaleMatrix(const Vector3<T>& s);
+    static Matrix makeScaleMatrix(const Vector2<T>& s);
 
     //! Makes rotation matrix.
     //! \warning Input angle should be radian.
-    static Matrix makeRotationMatrix(const Vector3<T>& axis, T rad);
-
-    //! Makes translation matrix.
-    static Matrix makeTranslationMatrix(const Vector3<T>& t);
+    static Matrix makeRotationMatrix(const T& rad);
 
  private:
-    std::array<T, 16> _elements;
+    std::array<T, 4> _elements;
 };
 
-//! Type alias for 4x4 matrix.
+//! Type alias for 2x2 matrix.
 template <typename T>
-using Matrix4x4 = Matrix<T, 4, 4>;
+using Matrix2x2 = Matrix<T, 2, 2>;
 
-// Operator overloadings
+// MARK: Operator overloadings
 //! Returns a matrix with opposite sign.
 template <typename T>
-Matrix4x4<T> operator-(const Matrix4x4<T>& a);
+Matrix2x2<T> operator-(const Matrix2x2<T>& a);
 
 //! Returns a + b (element-size).
 template <typename T>
-Matrix4x4<T> operator+(const Matrix4x4<T>& a, const Matrix4x4<T>& b);
+Matrix2x2<T> operator+(const Matrix2x2<T>& a, const Matrix2x2<T>& b);
 
 //! Returns a + b', where every element of matrix b' is b.
 template <typename T>
-Matrix4x4<T> operator+(const Matrix4x4<T>& a, T b);
+Matrix2x2<T> operator+(const Matrix2x2<T>& a, const T& b);
 
 //! Returns a' + b, where every element of matrix a' is a.
 template <typename T>
-Matrix4x4<T> operator+(T a, const Matrix4x4<T>& b);
+Matrix2x2<T> operator+(const T& a, const Matrix2x2<T>& b);
 
 //! Returns a - b (element-size).
 template <typename T>
-Matrix4x4<T> operator-(const Matrix4x4<T>& a, const Matrix4x4<T>& b);
+Matrix2x2<T> operator-(const Matrix2x2<T>& a, const Matrix2x2<T>& b);
 
 //! Returns a - b', where every element of matrix b' is b.
 template <typename T>
-Matrix4x4<T> operator-(const Matrix4x4<T>& a, T b);
+Matrix2x2<T> operator-(const Matrix2x2<T>& a, T b);
 
 //! Returns a' - b, where every element of matrix a' is a.
 template <typename T>
-Matrix4x4<T> operator-(T a, const Matrix4x4<T>& b);
+Matrix2x2<T> operator-(T a, const Matrix2x2<T>& b);
 
 //! Returns a * b', where every element of matrix b' is b.
 template <typename T>
-Matrix4x4<T> operator*(const Matrix4x4<T>& a, T b);
+Matrix2x2<T> operator*(const Matrix2x2<T>& a, T b);
 
 //! Returns a' * b, where every element of matrix a' is a.
 template <typename T>
-Matrix4x4<T> operator*(T a, const Matrix4x4<T>& b);
+Matrix2x2<T> operator*(T a, const Matrix2x2<T>& b);
 
 //! Returns a * b.
 template <typename T>
-Vector3<T> operator*(const Matrix4x4<T>& a, const Vector3<T>& b);
+Vector2<T> operator*(const Matrix2x2<T>& a, const Vector2<T>& b);
 
 //! Returns a * b.
 template <typename T>
-Vector4<T> operator*(const Matrix4x4<T>& a, const Vector4<T>& b);
-
-//! Returns a * b.
-template <typename T>
-Matrix4x4<T> operator*(const Matrix4x4<T>& a, const Matrix3x3<T>& b);
-
-//! Returns a * b.
-template <typename T>
-Matrix4x4<T> operator*(const Matrix3x3<T>& a, const Matrix4x4<T>& b);
-
-//! Returns a * b.
-template <typename T>
-Matrix4x4<T> operator*(const Matrix4x4<T>& a, const Matrix4x4<T>& b);
+Matrix2x2<T> operator*(const Matrix2x2<T>& a, const Matrix2x2<T>& b);
 
 //! Returns a' / b, where every element of matrix a' is a.
 template <typename T>
-Matrix4x4<T> operator/(const Matrix4x4<T>& a, T b);
+Matrix2x2<T> operator/(const Matrix2x2<T>& a, T b);
 
 //! Returns a / b', where every element of matrix b' is b.
 template <typename T>
-Matrix4x4<T> operator/(const T& a, const Matrix4x4<T>& b);
+Matrix2x2<T> operator/(const T& a, const Matrix2x2<T>& b);
 
-//! Float-type 4x4 matrix.
-typedef Matrix4x4<float> Matrix4x4F;
+//! Float-type 2x2 matrix.
+typedef Matrix2x2<float> Matrix2x2F;
 
-//! Double-type 4x4 matrix.
-typedef Matrix4x4<double> Matrix4x4D;
+//! Double-type 2x2 matrix.
+typedef Matrix2x2<double> Matrix2x2D;
 
 }  // namespace jet
 
-#include "matrix4x4.inl"
+#include "matrix2x2.inl"
 
-#endif  // INCLUDE_JET_MATRIX4X4_H_
+#endif  // INCLUDE_JET_MATRIX2X2_H_

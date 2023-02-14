@@ -7,9 +7,9 @@
 #ifndef INCLUDE_JET_POINTS_TO_IMPLICIT2_H_
 #define INCLUDE_JET_POINTS_TO_IMPLICIT2_H_
 
+#include "jet/math/vector/vector2.h"
 #include "jet/primitive/array/array_accessor1.h"
 #include "jet/primitive/grid/scalar_grid2.h"
-#include "jet/primitive/vector/vector2.h"
 
 #include <memory>
 

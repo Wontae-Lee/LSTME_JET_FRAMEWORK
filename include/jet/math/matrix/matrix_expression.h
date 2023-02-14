@@ -7,8 +7,8 @@
 #ifndef INCLUDE_JET_MATRIX_EXPRESSION_H_
 #define INCLUDE_JET_MATRIX_EXPRESSION_H_
 
+#include "jet/math/vector/vector_expression.h"
 #include "jet/primitive/size/size2.h"
-#include "jet/primitive/vector/vector_expression.h"
 
 namespace jet {
 

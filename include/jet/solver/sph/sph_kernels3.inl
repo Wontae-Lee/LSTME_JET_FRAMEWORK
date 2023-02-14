@@ -12,7 +12,7 @@
 #ifndef INCLUDE_JET_DETAIL_SPH_KERNELS3_INL_H_
 #define INCLUDE_JET_DETAIL_SPH_KERNELS3_INL_H_
 
-#include "jet/math/constants.h"
+#include "jet/math/constants/constants.h"
 
 namespace jet {
 

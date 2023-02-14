@@ -6,7 +6,7 @@
 
 #include "jet/solver/grid/grid_backward_euler_diffusion_solver3.h"
 #include "jet/helpers/pch.h"
-#include "jet/math/constants.h"
+#include "jet/math/constants/constants.h"
 #include "jet/solver/fdm/fdm_iccg_solver3.h"
 #include "jet/utility/fdm_utils.h"
 #include "jet/utility/level_set_utils.h"

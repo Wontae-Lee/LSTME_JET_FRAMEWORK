@@ -7,7 +7,7 @@
 #ifndef INCLUDE_JET_DETAIL_ARRAY1_INL_H_
 #define INCLUDE_JET_DETAIL_ARRAY1_INL_H_
 
-#include "jet/math/constants.h"
+#include "jet/math/constants/constants.h"
 #include "jet/parallel/parallel.h"
 
 #include <algorithm>

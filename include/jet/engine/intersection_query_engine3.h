@@ -7,7 +7,7 @@
 #ifndef INCLUDE_JET_INTERSECTION_QUERY_ENGINE3_H_
 #define INCLUDE_JET_INTERSECTION_QUERY_ENGINE3_H_
 
-#include "jet/math/constants.h"
+#include "jet/math/constants/constants.h"
 #include "jet/physics/bounding_box/bounding_box3.h"
 
 #include <functional>

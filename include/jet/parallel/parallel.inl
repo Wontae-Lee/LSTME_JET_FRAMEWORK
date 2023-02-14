@@ -8,7 +8,7 @@
 #define INCLUDE_JET_DETAIL_PARALLEL_INL_H_
 
 #include "jet/helpers/macros.h"
-#include "jet/math/constants.h"
+#include "jet/math/constants/constants.h"
 #include "parallel.h"
 
 #include <algorithm>

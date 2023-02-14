@@ -8,9 +8,9 @@
 #define INCLUDE_JET_GRID_PRESSURE_SOLVER3_H_
 
 #include <memory>
-#include "jet/math/constants.h"
-#include "jet/primitive/field/constant_scalar_field3.h"
-#include "jet/primitive/field/constant_vector_field3.h"
+#include "jet/math/constants/constants.h"
+#include "jet/math/field/constant_scalar_field3.h"
+#include "jet/math/field/constant_vector_field3.h"
 #include "jet/primitive/grid/collocated_vector_grid3.h"
 #include "jet/primitive/grid/face_centered_grid3.h"
 #include "jet/primitive/grid/scalar_grid3.h"

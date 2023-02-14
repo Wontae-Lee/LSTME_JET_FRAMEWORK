@@ -7,9 +7,9 @@
 #ifndef INCLUDE_JET_VECTOR_GRID2_H_
 #define INCLUDE_JET_VECTOR_GRID2_H_
 
+#include "jet/math/field/vector_field2.h"
 #include "jet/parallel/parallel.h"
 #include "jet/primitive/array/array_accessor2.h"
-#include "jet/primitive/field/vector_field2.h"
 #include "jet/primitive/grid/grid2.h"
 
 #include <memory>

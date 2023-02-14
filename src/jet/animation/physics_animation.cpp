@@ -7,7 +7,7 @@
 #include "jet/helpers/pch.h"
 
 #include "jet/animation/physics_animation.h"
-#include "jet/math/constants.h"
+#include "jet/math/constants/constants.h"
 #include "jet/timer/timer.h"
 
 #include <limits>

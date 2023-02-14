@@ -4,10 +4,10 @@
 // personal capacity and am not conveying any rights to any intellectual
 // property of any third parties.
 
-#ifndef INCLUDE_JET_MATRIX2X2_H_
-#define INCLUDE_JET_MATRIX2X2_H_
+#ifndef INCLUDE_JET_MATRIX3X3_H_
+#define INCLUDE_JET_MATRIX3X3_H_
 
-#include "jet/primitive/vector/vector2.h"
+#include "jet/math/vector/vector3.h"
 #include "matrix.h"
 
 #include <array>
@@ -16,14 +16,16 @@
 namespace jet {
 
 //!
-//! \brief 2-D matrix class.
+//! \brief 3-D matrix class.
 //!
-//! This class is a row-major 2-D matrix class, which means each element of
-//! the matrix is stored in order of (0, 0), (0, 1), (1, 0) and (1, 1).
+//! This class is a row-major 3-D matrix class, which means each element of
+//! the matrix is stored in order of (0, 0), (0, 1), (0, 2), (1, 0), (1, 1),
+//! (1, 2), (2, 0), (2, 1), and (2, 2).
+//!
 //! \tparam T - Type of the element.
 //!
 template <typename T>
-class Matrix<T, 2, 2> {
+class Matrix<T, 3, 3> {
  public:
     static_assert(std::is_floating_point<T>::value, "Matrix only can be instantiated with floating point types");
 
@@ -37,7 +39,7 @@ class Matrix<T, 2, 2> {
 
     //! Constructs a matrix with input elements.
     //! \warning Ordering of the input elements is row-major.
-    Matrix(T m00, T m01, T m10, T m11);
+    Matrix(T m00, T m01, T m02, T m10, T m11, T m12, T m20, T m21, T m22);
 
     //!
     //! \brief Constructs a matrix with given initializer list \p lst.
@@ -46,13 +48,14 @@ class Matrix<T, 2, 2> {
     //! such as
     //!
     //! \code{.cpp}
-    //! Matrix<float, 2, 2> arr = {
-    //!     {1.f, 2.f},
-    //!     {9.f, 3.f}
+    //! Matrix<float, 3, 3> arr = {
+    //!     {1.f, 2.f, 4.f},
+    //!     {9.f, 3.f, 5.f},
+    //!     {4.f, 8.f, 1.f}
     //! };
     //! \endcode
     //!
-    //! Note the initializer also has 2x2 structure.
+    //! Note the initializer also has 3x3 structure.
     //!
     //! \param lst Initializer list that should be copy to the new matrix.
     //!
@@ -73,25 +76,26 @@ class Matrix<T, 2, 2> {
 
     //! Sets this matrix with input elements.
     //! \warning Ordering of the input elements is row-major.
-    void set(T m00, T m01, T m10, T m11);
+    void set(T m00, T m01, T m02, T m10, T m11, T m12, T m20, T m21, T m22);
 
     //!
-    //! \brief Sets this matrix with given initializer list \p lst.
+    //! \brief Sets a matrix with given initializer list \p lst.
     //!
     //! This function will fill the matrix with given initializer list \p lst
     //! such as
     //!
     //! \code{.cpp}
-    //! Matrix<float, 2, 2> arr;
+    //! Matrix<float, 3, 3> arr;
     //! arr.set({
-    //!     {1, 2},
-    //!     {9, 3}
+    //!     {1.f, 2.f, 4.f},
+    //!     {9.f, 3.f, 5.f},
+    //!     {4.f, 8.f, 1.f}
     //! });
     //! \endcode
     //!
-    //! Note the initializer also has 2x2 structure.
+    //! Note the initializer also has 3x3 structure.
     //!
-    //! \param lst Initializer list that should be copy to the matrix.
+    //! \param lst Initializer list that should be copy to the new matrix.
     //!
     template <typename U>
     void set(const std::initializer_list<std::initializer_list<U>>& lst);
@@ -110,10 +114,10 @@ class Matrix<T, 2, 2> {
     void setOffDiagonal(T s);
 
     //! Sets i-th row with input vector.
-    void setRow(size_t i, const Vector2<T>& row);
+    void setRow(size_t i, const Vector3<T>& row);
 
     //! Sets i-th column with input vector.
-    void setColumn(size_t i, const Vector2<T>& col);
+    void setColumn(size_t i, const Vector3<T>& col);
 
     // MARK: Basic getters
 
@@ -153,7 +157,7 @@ class Matrix<T, 2, 2> {
     Matrix mul(T s) const;
 
     //! Returns this matrix * input vector.
-    Vector2<T> mul(const Vector2<T>& v) const;
+    Vector3<T> mul(const Vector3<T>& v) const;
 
     //! Returns this matrix * input matrix.
     Matrix mul(const Matrix& m) const;
@@ -213,7 +217,6 @@ class Matrix<T, 2, 2> {
     void invert();
 
     // MARK: Complex getters
-
     //! Returns sum of all elements.
     T sum() const;
 
@@ -266,7 +269,7 @@ class Matrix<T, 2, 2> {
     T frobeniusNorm() const;
 
     template <typename U>
-    Matrix<U, 2, 2> castTo() const;
+    Matrix<U, 3, 3> castTo() const;
 
     // MARK: Setter operators
     //! Assigns input matrix.
@@ -320,84 +323,84 @@ class Matrix<T, 2, 2> {
     static Matrix makeIdentity();
 
     //! Makes scale matrix.
-    static Matrix makeScaleMatrix(T sx, T sy);
+    static Matrix makeScaleMatrix(T sx, T sy, T sz);
 
     //! Makes scale matrix.
-    static Matrix makeScaleMatrix(const Vector2<T>& s);
+    static Matrix makeScaleMatrix(const Vector3<T>& s);
 
     //! Makes rotation matrix.
     //! \warning Input angle should be radian.
-    static Matrix makeRotationMatrix(const T& rad);
+    static Matrix makeRotationMatrix(const Vector3<T>& axis, T rad);
 
  private:
-    std::array<T, 4> _elements;
+    std::array<T, 9> _elements;
 };
 
-//! Type alias for 2x2 matrix.
+//! Type alias for 3x3 matrix.
 template <typename T>
-using Matrix2x2 = Matrix<T, 2, 2>;
+using Matrix3x3 = Matrix<T, 3, 3>;
 
-// MARK: Operator overloadings
+// Operator overloadings
 //! Returns a matrix with opposite sign.
 template <typename T>
-Matrix2x2<T> operator-(const Matrix2x2<T>& a);
+Matrix3x3<T> operator-(const Matrix3x3<T>& a);
 
 //! Returns a + b (element-size).
 template <typename T>
-Matrix2x2<T> operator+(const Matrix2x2<T>& a, const Matrix2x2<T>& b);
+Matrix3x3<T> operator+(const Matrix3x3<T>& a, const Matrix3x3<T>& b);
 
 //! Returns a + b', where every element of matrix b' is b.
 template <typename T>
-Matrix2x2<T> operator+(const Matrix2x2<T>& a, const T& b);
+Matrix3x3<T> operator+(const Matrix3x3<T>& a, T b);
 
 //! Returns a' + b, where every element of matrix a' is a.
 template <typename T>
-Matrix2x2<T> operator+(const T& a, const Matrix2x2<T>& b);
+Matrix3x3<T> operator+(T a, const Matrix3x3<T>& b);
 
 //! Returns a - b (element-size).
 template <typename T>
-Matrix2x2<T> operator-(const Matrix2x2<T>& a, const Matrix2x2<T>& b);
+Matrix3x3<T> operator-(const Matrix3x3<T>& a, const Matrix3x3<T>& b);
 
 //! Returns a - b', where every element of matrix b' is b.
 template <typename T>
-Matrix2x2<T> operator-(const Matrix2x2<T>& a, T b);
+Matrix3x3<T> operator-(const Matrix3x3<T>& a, T b);
 
 //! Returns a' - b, where every element of matrix a' is a.
 template <typename T>
-Matrix2x2<T> operator-(T a, const Matrix2x2<T>& b);
+Matrix3x3<T> operator-(T a, const Matrix3x3<T>& b);
 
 //! Returns a * b', where every element of matrix b' is b.
 template <typename T>
-Matrix2x2<T> operator*(const Matrix2x2<T>& a, T b);
+Matrix3x3<T> operator*(const Matrix3x3<T>& a, T b);
 
 //! Returns a' * b, where every element of matrix a' is a.
 template <typename T>
-Matrix2x2<T> operator*(T a, const Matrix2x2<T>& b);
+Matrix3x3<T> operator*(T a, const Matrix3x3<T>& b);
 
 //! Returns a * b.
 template <typename T>
-Vector2<T> operator*(const Matrix2x2<T>& a, const Vector2<T>& b);
+Vector3<T> operator*(const Matrix3x3<T>& a, const Vector3<T>& b);
 
 //! Returns a * b.
 template <typename T>
-Matrix2x2<T> operator*(const Matrix2x2<T>& a, const Matrix2x2<T>& b);
+Matrix3x3<T> operator*(const Matrix3x3<T>& a, const Matrix3x3<T>& b);
 
 //! Returns a' / b, where every element of matrix a' is a.
 template <typename T>
-Matrix2x2<T> operator/(const Matrix2x2<T>& a, T b);
+Matrix3x3<T> operator/(const Matrix3x3<T>& a, T b);
 
 //! Returns a / b', where every element of matrix b' is b.
 template <typename T>
-Matrix2x2<T> operator/(const T& a, const Matrix2x2<T>& b);
+Matrix3x3<T> operator/(T a, const Matrix3x3<T>& b);
 
-//! Float-type 2x2 matrix.
-typedef Matrix2x2<float> Matrix2x2F;
+//! Float-type 3x3 matrix.
+typedef Matrix3x3<float> Matrix3x3F;
 
-//! Double-type 2x2 matrix.
-typedef Matrix2x2<double> Matrix2x2D;
+//! Double-type 3x3 matrix.
+typedef Matrix3x3<double> Matrix3x3D;
 
 }  // namespace jet
 
-#include "matrix2x2.inl"
+#include "matrix3x3.inl"
 
-#endif  // INCLUDE_JET_MATRIX2X2_H_
+#endif  // INCLUDE_JET_MATRIX3X3_H_

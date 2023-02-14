@@ -6,7 +6,7 @@
 
 #include "jet/solver/level_set/upwind_level_set_solver2.h"
 #include "jet/helpers/pch.h"
-#include "jet/math/pde.h"
+#include "jet/math/pde/pde.h"
 
 #include <algorithm>
 

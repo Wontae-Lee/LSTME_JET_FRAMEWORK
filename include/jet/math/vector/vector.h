@@ -4,69 +4,61 @@
 // personal capacity and am not conveying any rights to any intellectual
 // property of any third parties.
 
-#ifndef INCLUDE_JET_VECTOR_N_H_
-#define INCLUDE_JET_VECTOR_N_H_
+#ifndef INCLUDE_JET_VECTOR_H_
+#define INCLUDE_JET_VECTOR_H_
 
+#include "jet/helpers/type_helpers.h"
+#include "jet/math/constants/constants.h"
 #include "jet/primitive/array/array_accessor1.h"
-#include "jet/primitive/vector/vector_expression.h"
+#include "vector_expression.h"
 
-#include <initializer_list>
-#include <limits>
-#include <vector>
+#include <array>
+#include <type_traits>
 
 namespace jet {
 
-// MARK: VectorN
+//!
+//! \brief Generic statically-sized N-D vector class.
+//!
+//! This class defines N-D vector data where its size is determined statically
+//! at compile time.
+//!
+//! \tparam T - Number type.
+//! \tparam N - Dimension.
+//!
 
-//!
-//! \brief General purpose dynamically-sizedN-D vector class.
-//!
-//! This class defines N-D vector data where its size can be defined
-//! dynamically.
-//!
-//! \tparam T Type of the element.
-//!
-template <typename T>
-class VectorN final : public VectorExpression<T, VectorN<T>> {
+template <typename T, size_t N>
+class Vector final : public VectorExpression<T, Vector<T, N>> {
  public:
-    static_assert(std::is_floating_point<T>::value, "VectorN only can be instantiated with floating point types");
+    static_assert(N > 0, "Size of static-sized vector should be greater than zero.");
+    static_assert(std::is_floating_point<T>::value, "Vector only can be instantiated with floating point types");
 
-    typedef std::vector<T> ContainerType;
+    typedef std::array<T, N> ContainerType;
 
-    // MARK: Constructors
+    //! Constructs a vector with zeros.
+    Vector();
 
-    //! Constructs empty vector.
-    VectorN();
-
-    //! Constructs default vector (val, val, ... , val).
-    VectorN(size_t n, const T& val = 0);
-
-    //! Constructs vector with given initializer list.
-    template <typename U>
-    VectorN(const std::initializer_list<U>& lst);
-
-    //! Constructs vector with expression template.
-    template <typename E>
-    VectorN(const VectorExpression<T, E>& other);
-
-    //! Copy constructor.
-    VectorN(const VectorN& other);
-
-    //! Move constructor.
-    VectorN(VectorN&& other);
-
-    // MARK: Basic setters
-
-    //! Resizes to \p n dimensional vector with initial value \p val.
-    void resize(size_t n, const T& val = 0);
-
-    //! Clears the vector and make it zero-dimensional.
-    void clear();
+    //! Constructs vector instance with parameters.
+    template <typename... Params>
+    explicit Vector(Params... params);
 
     //! Sets all elements to \p s.
     void set(const T& s);
 
-    //! Sets all elements with given initializer list.
+    //! Constructs vector instance with initializer list.
+    template <typename U>
+    Vector(const std::initializer_list<U>& lst);
+
+    //! Constructs vector with expression template.
+    template <typename E>
+    Vector(const VectorExpression<T, E>& other);
+
+    //! Copy constructor.
+    Vector(const Vector& other);
+
+    // MARK: Basic setters
+
+    //! Set vector instance with initializer list.
     template <typename U>
     void set(const std::initializer_list<U>& lst);
 
@@ -74,11 +66,8 @@ class VectorN final : public VectorExpression<T, VectorN<T>> {
     template <typename E>
     void set(const VectorExpression<T, E>& other);
 
-    //! Adds an element.
-    void append(const T& val);
-
     //! Swaps the content of the vector with \p other vector.
-    void swap(VectorN& other);
+    void swap(Vector& other);
 
     //! Sets all elements to zero.
     void setZero();
@@ -89,7 +78,7 @@ class VectorN final : public VectorExpression<T, VectorN<T>> {
     // MARK: Basic getters
 
     //! Returns the size of the vector.
-    size_t size() const;
+    constexpr size_t size() const;
 
     //! Returns the raw pointer to the vector data.
     T* data();
@@ -146,7 +135,7 @@ class VectorN final : public VectorExpression<T, VectorN<T>> {
     size_t subminantAxis() const;
 
     //! Returns normalized vector.
-    VectorScalarDiv<T, VectorN> normalized() const;
+    VectorScalarDiv<T, Vector> normalized() const;
 
     //! Returns the length of the vector.
     T length() const;
@@ -164,7 +153,7 @@ class VectorN final : public VectorExpression<T, VectorN<T>> {
 
     //! Returns a vector with different value type.
     template <typename U>
-    VectorTypeCast<U, VectorN<T>, T> castTo() const;
+    VectorTypeCast<U, Vector<T, N>, T> castTo() const;
 
     //! Returns true if \p other is the same as this vector.
     template <typename E>
@@ -178,31 +167,31 @@ class VectorN final : public VectorExpression<T, VectorN<T>> {
 
     //! Computes this + v.
     template <typename E>
-    VectorAdd<T, VectorN, E> add(const E& v) const;
+    VectorAdd<T, Vector, E> add(const E& v) const;
 
     //! Computes this + (s, s, ... , s).
-    VectorScalarAdd<T, VectorN> add(const T& s) const;
+    VectorScalarAdd<T, Vector> add(const T& s) const;
 
     //! Computes this - v.
     template <typename E>
-    VectorSub<T, VectorN, E> sub(const E& v) const;
+    VectorSub<T, Vector, E> sub(const E& v) const;
 
     //! Computes this - (s, s, ... , s).
-    VectorScalarSub<T, VectorN> sub(const T& s) const;
+    VectorScalarSub<T, Vector> sub(const T& s) const;
 
     //! Computes this * v.
     template <typename E>
-    VectorMul<T, VectorN, E> mul(const E& v) const;
+    VectorMul<T, Vector, E> mul(const E& v) const;
 
     //! Computes this * (s, s, ... , s).
-    VectorScalarMul<T, VectorN> mul(const T& s) const;
+    VectorScalarMul<T, Vector> mul(const T& s) const;
 
     //! Computes this / v.
     template <typename E>
-    VectorDiv<T, VectorN, E> div(const E& v) const;
+    VectorDiv<T, Vector, E> div(const E& v) const;
 
     //! Computes this / (s, s, ... , s).
-    VectorScalarDiv<T, VectorN> div(const T& s) const;
+    VectorScalarDiv<T, Vector> div(const T& s) const;
 
     //! Computes dot product.
     template <typename E>
@@ -211,18 +200,18 @@ class VectorN final : public VectorExpression<T, VectorN<T>> {
     // MARK: Binary operations: new instance = v (+) this
 
     //! Computes (s, s, ... , s) - this.
-    VectorScalarRSub<T, VectorN> rsub(const T& s) const;
+    VectorScalarRSub<T, Vector> rsub(const T& s) const;
 
     //! Computes v - this.
     template <typename E>
-    VectorSub<T, VectorN, E> rsub(const E& v) const;
+    VectorSub<T, Vector, E> rsub(const E& v) const;
 
     //! Computes (s, s, ... , s) / this.
-    VectorScalarRDiv<T, VectorN> rdiv(const T& s) const;
+    VectorScalarRDiv<T, Vector> rdiv(const T& s) const;
 
     //! Computes v / this.
     template <typename E>
-    VectorDiv<T, VectorN, E> rdiv(const E& v) const;
+    VectorDiv<T, Vector, E> rdiv(const E& v) const;
 
     // MARK: Augmented operations: this (+)= v
 
@@ -265,7 +254,7 @@ class VectorN final : public VectorExpression<T, VectorN<T>> {
     //! the vector. Below is the sample usage:
     //!
     //! \code{.cpp}
-    //! VectorN<float> vec(10, 4.f);
+    //! Vector<float, 2> vec(10, 4.f);
     //! vec.forEach([](float elem) {
     //!     printf("%d\n", elem);
     //! });
@@ -283,7 +272,7 @@ class VectorN final : public VectorExpression<T, VectorN<T>> {
     //! the size of the array. Below is the sample usage:
     //!
     //! \code{.cpp}
-    //! VectorN<float> vec(10, 4.f);
+    //! Vector<float, 2> vec(10, 4.f);
     //! vec.forEachIndex([&](size_t i) {
     //!     vec[i] = 4.f * i + 1.5f;
     //! });
@@ -292,96 +281,47 @@ class VectorN final : public VectorExpression<T, VectorN<T>> {
     template <typename Callback>
     void forEachIndex(Callback func) const;
 
-    //!
-    //! \brief Iterates the vector and invoke given \p func for each element in
-    //!     parallel using multi-threading.
-    //!
-    //! This function iterates the vector elements and invoke the callback
-    //! function \p func in parallel using multi-threading. The callback
-    //! function takes vector's element as its input. The order of execution
-    //! will be non-deterministic since it runs in parallel.
-    //! Below is the sample usage:
-    //!
-    //! \code{.cpp}
-    //! VectorN<float> vec(1000, 4.f);
-    //! vec.parallelForEach([](float& elem) {
-    //!     elem *= 2;
-    //! });
-    //! \endcode
-    //!
-    //! The parameter type of the callback function doesn't have to be T&, but
-    //! const T& or T can be used as well.
-    //!
-    template <typename Callback>
-    void parallelForEach(Callback func);
-
-    //!
-    //! \brief Iterates the vector and invoke given \p func for each index in
-    //!     parallel using multi-threading.
-    //!
-    //! This function iterates the vector elements and invoke the callback
-    //! function \p func in parallel using multi-threading. The callback
-    //! function takes one parameter which is the index of the vector. The order
-    //! of execution will be non-deterministic since it runs in parallel.
-    //! Below is the sample usage:
-    //!
-    //! \code{.cpp}
-    //! VectorN<float> vec(1000, 4.f);
-    //! vec.parallelForEachIndex([](size_t i) {
-    //!     array[i] *= 2;
-    //! });
-    //! \endcode
-    //!
-    template <typename Callback>
-    void parallelForEachIndex(Callback func) const;
-
-    //! Returns the \p i -th element.
-    T operator[](size_t i) const;
+    //! Returns the const reference to the \p i -th element.
+    const T& operator[](size_t i) const;
 
     //! Returns the reference to the \p i -th element.
-    T& operator[](size_t i);
+    T& operator[](size_t);
 
-    //! Sets vector with given initializer list.
+    //! Set vector instance with initializer list.
     template <typename U>
-    VectorN& operator=(const std::initializer_list<U>& lst);
+    Vector& operator=(const std::initializer_list<U>& lst);
 
     //! Sets vector with expression template.
     template <typename E>
-    VectorN& operator=(const VectorExpression<T, E>& other);
-
-    //! Copy assignment.
-    VectorN& operator=(const VectorN& other);
-
-    //! Move assignment.
-    VectorN& operator=(VectorN&& other);
+    Vector& operator=(const VectorExpression<T, E>& other);
 
     //! Computes this += (s, s, ... , s)
-    VectorN& operator+=(const T& s);
+    Vector& operator+=(const T& s);
 
     //! Computes this += v
     template <typename E>
-    VectorN& operator+=(const E& v);
+    Vector& operator+=(const E& v);
 
     //! Computes this -= (s, s, ... , s)
-    VectorN& operator-=(const T& s);
+    Vector& operator-=(const T& s);
 
     //! Computes this -= v
     template <typename E>
-    VectorN& operator-=(const E& v);
+    Vector& operator-=(const E& v);
 
     //! Computes this *= (s, s, ... , s)
-    VectorN& operator*=(const T& s);
+    Vector& operator*=(const T& s);
 
     //! Computes this *= v
     template <typename E>
-    VectorN& operator*=(const E& v);
+    Vector& operator*=(const E& v);
 
     //! Computes this /= (s, s, ... , s)
-    VectorN& operator/=(const T& s);
+    Vector& operator/=(const T& s);
 
     //! Computes this /= v
     template <typename E>
-    VectorN& operator/=(const E& v);
+    Vector& operator/=(const E& v);
 
     //! Returns true if \p other is the same as this vector.
     template <typename E>
@@ -393,16 +333,20 @@ class VectorN final : public VectorExpression<T, VectorN<T>> {
 
  private:
     ContainerType _elements;
+
+    template <typename... Params>
+    void setAt(size_t i, T v, Params... params);
+    void setAt(size_t i, T v);
 };
 
-//! Float-type N-D vector.
-typedef VectorN<float> VectorNF;
-
-//! Double-type N-D vector.
-typedef VectorN<double> VectorND;
+//! Returns the type of the value.
+template <typename T, size_t N>
+struct ScalarType<Vector<T, N>> {
+    typedef T value;
+};
 
 }  // namespace jet
 
-#include "vector_n.inl"
+#include "vector.inl"
 
-#endif  // INCLUDE_JET_VECTOR_N_H_
+#endif  // INCLUDE_JET_VECTOR_H_

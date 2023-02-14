@@ -6,8 +6,8 @@
 
 #include "jet/helpers/pch.h"
 
-#include "jet/math/constants.h"
-#include "jet/primitive/field/constant_scalar_field3.h"
+#include "jet/math/constants/constants.h"
+#include "jet/math/field/constant_scalar_field3.h"
 #include "jet/solver/advection/cubic_semi_lagrangian3.h"
 #include "jet/solver/grid/grid_backward_euler_diffusion_solver3.h"
 #include "jet/solver/grid/grid_blocked_boundary_condition_solver3.h"

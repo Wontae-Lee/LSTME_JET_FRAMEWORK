@@ -11,8 +11,8 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include "jet/math/vector/vector2.h"
 #include "jet/primitive/array/array_accessor1.h"
-#include "jet/primitive/vector/vector2.h"
 #include "jet/serialization/serialization.h"
 
 namespace jet {
