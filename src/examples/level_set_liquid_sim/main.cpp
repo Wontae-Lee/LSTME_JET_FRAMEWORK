@@ -79,17 +79,13 @@ runExample1(const std::string& rootDir, size_t resX, int numberOfFrames, double 
 {
   // Build solver
   auto solver = LevelSetLiquidSolver3::builder().withResolution({ resX, 2 * resX, resX }).withDomainSizeX(1.0).makeShared();
-
   auto grids = solver->gridSystemData();
   BoundingBox3D domain = grids->boundingBox();
 
   // Build emitter
   auto plane = Plane3::builder().withNormal({ 0, 1, 0 }).withPoint({ 0, 0.25 * domain.height(), 0 }).makeShared();
-
   auto sphere = Sphere3::builder().withCenter(domain.midPoint()).withRadius(0.15 * domain.width()).makeShared();
-
   auto surfaceSet = ImplicitSurfaceSet3::builder().withExplicitSurfaces({ plane, sphere }).makeShared();
-
   auto emitter = VolumeGridEmitter3::builder().withSourceRegion(surfaceSet).makeShared();
 
   solver->setEmitter(emitter);
@@ -117,11 +113,8 @@ runExample2(const std::string& rootDir, size_t resX, int numberOfFrames, double 
 
   // Build emitter
   auto box1 = Box3::builder().withLowerCorner({ -0.5, -0.5, -0.5 * lz }).withUpperCorner({ 0.5, 0.75, 0.75 * lz }).makeShared();
-
   auto box2 = Box3::builder().withLowerCorner({ 2.5, -0.5, 0.25 * lz }).withUpperCorner({ 3.5, 0.75, 1.5 * lz }).makeShared();
-
   auto boxSet = ImplicitSurfaceSet3::builder().withExplicitSurfaces({ box1, box2 }).makeShared();
-
   auto emitter = VolumeGridEmitter3::builder().withSourceRegion(boxSet).makeShared();
 
   solver->setEmitter(emitter);
@@ -129,13 +122,9 @@ runExample2(const std::string& rootDir, size_t resX, int numberOfFrames, double 
 
   // Build collider
   auto cyl1 = Cylinder3::builder().withCenter({ 1, 0.375, 0.375 }).withRadius(0.1).withHeight(0.75).makeShared();
-
   auto cyl2 = Cylinder3::builder().withCenter({ 1.5, 0.375, 0.75 }).withRadius(0.1).withHeight(0.75).makeShared();
-
   auto cyl3 = Cylinder3::builder().withCenter({ 2, 0.375, 1.125 }).withRadius(0.1).withHeight(0.75).makeShared();
-
   auto cylSet = ImplicitSurfaceSet3::builder().withExplicitSurfaces({ cyl1, cyl2, cyl3 }).makeShared();
-
   auto collider = RigidBodyCollider3::builder().withSurface(cylSet).makeShared();
 
   solver->setCollider(collider);
@@ -208,7 +197,6 @@ runExample4(const std::string& rootDir, size_t resX, int numberOfFrames, double 
     exit(EXIT_FAILURE);
   }
   auto bunny = ImplicitTriangleMesh3::builder().withTriangleMesh(bunnyMesh).withResolutionX(resX).makeShared();
-
   auto emitter = VolumeGridEmitter3::builder().withSourceRegion(bunny).makeShared();
 
   solver->setEmitter(emitter);
