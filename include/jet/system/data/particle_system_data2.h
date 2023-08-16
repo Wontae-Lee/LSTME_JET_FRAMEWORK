@@ -10,7 +10,7 @@
 #include "jet/primitive/array/array1.h"
 #include "jet/searcher/point_neighbor_searcher2.h"
 #include "jet/serialization/serialization.h"
-
+#include "flatbuffers/flatbuffers.h"
 #include <memory>
 #include <vector>
 
@@ -18,7 +18,7 @@
 
 namespace flatbuffers {
 
-class FlatBufferBuilder;
+
 template<typename T>
 struct Offset;
 
