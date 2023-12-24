@@ -13,7 +13,7 @@ set(target jet)
 set(root_dir ${CMAKE_CURRENT_SOURCE_DIR}/../..)
 
 # Sources
-file(GLOB_RECURSE header_dir
+file(GLOB header_dir
         ${root_dir}/include/${target})
 
 file(GLOB_RECURSE headers
