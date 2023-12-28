@@ -197,7 +197,7 @@ SphSolver3::accumulatePressureForce(double timeStepInSeconds)
   auto f = particles->forces();
 
   computePressure();
-  accumulatePressureForce(x, d, p, f);
+  accumulatePressureForce(static_cast<ConstArrayAccessor<Vector3D, 1>>(x), static_cast<ConstArrayAccessor<double, 1>>(d), static_cast<ConstArrayAccessor<double, 1>>(p), f);
 }
 
 void

@@ -123,7 +123,7 @@ PciSphSolver3::accumulatePressureForce(double timeIntervalInSeconds)
 
     // Compute pressure gradient force
     _pressureForces.set(Vector3D());
-    SphSolver3::accumulatePressureForce(x, ds.constAccessor(), p, _pressureForces.accessor());
+    SphSolver3::accumulatePressureForce(static_cast<ConstArrayAccessor<Vector3D ,1>>(x), ds.constAccessor(), static_cast<ConstArrayAccessor<double ,1>>(p), _pressureForces.accessor());
 
     // Compute max density error
     maxDensityError = 0.0;

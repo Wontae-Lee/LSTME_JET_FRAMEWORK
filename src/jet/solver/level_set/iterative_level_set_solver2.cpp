@@ -42,11 +42,11 @@ IterativeLevelSetSolver2::reinitialize(const ScalarGrid2& inputSdf, double maxDi
 
   for (unsigned int n = 0; n < numberOfIterations; ++n) {
     inputSdf.parallelForEachDataPointIndex([&](size_t i, size_t j) {
-      double s = sign(outputAcc, gridSpacing, i, j);
+      double s = sign(static_cast<ConstArrayAccessor<double,2>>(outputAcc), gridSpacing, i, j);
 
       std::array<double, 2> dx, dy;
 
-      getDerivatives(outputAcc, gridSpacing, i, j, &dx, &dy);
+      getDerivatives(static_cast<ConstArrayAccessor<double,2>>(outputAcc), gridSpacing, i, j, &dx, &dy);
 
       // Explicit Euler step
       double val =
@@ -157,7 +157,7 @@ IterativeLevelSetSolver2::extrapolate(const ConstArrayAccessor2<double>& input,
         std::array<double, 2> dx, dy;
         Vector2D grad = gradient2(sdf, gridSpacing, i, j);
 
-        getDerivatives(outputAcc, gridSpacing, i, j, &dx, &dy);
+        getDerivatives(static_cast<ConstArrayAccessor<double,2>>(outputAcc), gridSpacing, i, j, &dx, &dy);
 
         tempAcc(i, j) = outputAcc(i, j) - dtau * (std::max(grad.x, 0.0) * dx[0] + std::min(grad.x, 0.0) * dx[1] + std::max(grad.y, 0.0) * dy[0] +
                                                   std::min(grad.y, 0.0) * dy[1]);

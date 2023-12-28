@@ -234,7 +234,7 @@ ParticleSystemData2::buildNeighborSearcher(double maxSearchRadius)
   // Use PointParallelHashGridSearcher2 by default
   _neighborSearcher = std::make_shared<PointParallelHashGridSearcher2>(kDefaultHashGridResolution, kDefaultHashGridResolution, 2.0 * maxSearchRadius);
 
-  _neighborSearcher->build(positions());
+  _neighborSearcher->build(static_cast<ConstArrayAccessor<Vector2D ,1>>(positions()));
 
   JET_INFO << "Building neighbor searcher took: " << timer.durationInSeconds() << " seconds";
 }

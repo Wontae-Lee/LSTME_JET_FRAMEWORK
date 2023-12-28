@@ -114,7 +114,7 @@ VolumeParticleEmitter3::emit(const ParticleSystemData3Ptr& particles, Array1<Vec
     PointHashGridSearcher3 neighborSearcher(Size3(kDefaultHashGridResolution, kDefaultHashGridResolution, kDefaultHashGridResolution),
                                             2.0 * _spacing);
     if (!_allowOverlapping) {
-      neighborSearcher.build(particles->positions());
+      neighborSearcher.build(static_cast<ConstArrayAccessor<Vector3D,1>>(particles->positions()));
     }
 
     _pointsGen->forEachPoint(region, _spacing, [&](const Vector3D& point) {

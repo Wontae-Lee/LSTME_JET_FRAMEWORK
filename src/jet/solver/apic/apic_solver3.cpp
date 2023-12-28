@@ -140,9 +140,9 @@ ApicSolver3::transferFromGridsToParticles()
   auto u = flow->uAccessor();
   auto v = flow->vAccessor();
   auto w = flow->wAccessor();
-  LinearArraySampler3<double, double> uSampler(u, flow->gridSpacing(), flow->uOrigin());
-  LinearArraySampler3<double, double> vSampler(v, flow->gridSpacing(), flow->vOrigin());
-  LinearArraySampler3<double, double> wSampler(w, flow->gridSpacing(), flow->wOrigin());
+  LinearArraySampler3<double, double> uSampler(static_cast<ConstArrayAccessor<double,3>>(u), flow->gridSpacing(), flow->uOrigin());
+  LinearArraySampler3<double, double> vSampler(static_cast<ConstArrayAccessor<double,3>>(v), flow->gridSpacing(), flow->vOrigin());
+  LinearArraySampler3<double, double> wSampler(static_cast<ConstArrayAccessor<double,3>>(w), flow->gridSpacing(), flow->wOrigin());
 
   parallelFor(kZeroSize, numberOfParticles, [&](size_t i) {
     velocities[i] = flow->sample(positions[i]);

@@ -244,7 +244,7 @@ public:
   ArrayAccessor& operator=(const ArrayAccessor<T, 3>& other);
 
   //! Casts type to ConstArrayAccessor.
-  operator ConstArrayAccessor<T, 3>() const;
+  explicit operator ConstArrayAccessor<T, 3>() const;
 
 private:
   Size3 _size;

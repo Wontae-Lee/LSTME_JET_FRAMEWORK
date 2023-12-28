@@ -42,11 +42,11 @@ IterativeLevelSetSolver3::reinitialize(const ScalarGrid3& inputSdf, double maxDi
 
   for (unsigned int n = 0; n < numberOfIterations; ++n) {
     inputSdf.parallelForEachDataPointIndex([&](size_t i, size_t j, size_t k) {
-      double s = sign(outputAcc, gridSpacing, i, j, k);
+      double s = sign(static_cast<ConstArrayAccessor<double,3>>(outputAcc), gridSpacing, i, j, k);
 
       std::array<double, 2> dx, dy, dz;
 
-      getDerivatives(outputAcc, gridSpacing, i, j, k, &dx, &dy, &dz);
+      getDerivatives(static_cast<ConstArrayAccessor<double,3>>(outputAcc), gridSpacing, i, j, k, &dx, &dy, &dz);
 
       // Explicit Euler step
       double val = outputAcc(i, j, k) -
@@ -171,7 +171,7 @@ IterativeLevelSetSolver3::extrapolate(const ConstArrayAccessor3<double>& input,
         std::array<double, 2> dx, dy, dz;
         Vector3D grad = gradient3(sdf, gridSpacing, i, j, k);
 
-        getDerivatives(outputAcc, gridSpacing, i, j, k, &dx, &dy, &dz);
+        getDerivatives(static_cast<ConstArrayAccessor<double,3>>(outputAcc), gridSpacing, i, j, k, &dx, &dy, &dz);
 
         tempAcc(i, j, k) =
           outputAcc(i, j, k) - dtau * (std::max(grad.x, 0.0) * dx[0] + std::min(grad.x, 0.0) * dx[1] + std::max(grad.y, 0.0) * dy[0] +

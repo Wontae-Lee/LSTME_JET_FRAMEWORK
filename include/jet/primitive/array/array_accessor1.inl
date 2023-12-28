@@ -174,7 +174,7 @@ ArrayAccessor<T, 1>::operator=(const ArrayAccessor<T, 1>& other)
 template<typename T>
 ArrayAccessor<T, 1>::operator ConstArrayAccessor<T, 1>() const
 {
-  return ConstArrayAccessor<T, 1>(*this);
+  return static_cast<ConstArrayAccessor<T, 1>>(*this);
 }
 
 template<typename T>
